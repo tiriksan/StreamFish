@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package streamfish;
 
 import java.sql.Connection;
@@ -115,6 +111,8 @@ public class StreamFish {
 			stm = con.createStatement();
 			res = stm.executeQuery("select count(*) antall from customer where customer_name like '" + s.toLowerCase() 
                                 + "%' or customer_name like '" + s.toUpperCase() + "%' or phone like " + Integer.parseInt(s) + "%");
+			res = stm.executeQuery("select count(*) antall from customer where customer_name like '" + s.toLowerCase()
+                                + "%' or customer_name like '" + s.toUpperCase() + "%' or phone like '" + Integer.parseInt(s) + "%'");
 			res.next();
 			int ant = res.getInt("antall");
 			customers = new Customer[ant];
@@ -122,6 +120,8 @@ public class StreamFish {
 			
 			res = stm.executeQuery("select * from customer where customer_name like '" + s.toLowerCase() 
                                 + "%' or customer_name like '" + s.toUpperCase() + "%' or phone like " + Integer.parseInt(s) + "%");
+			res = stm.executeQuery("select * from customer where customer_name like '" + s.toLowerCase()
+                                + "%' or customer_name like '" + s.toUpperCase() + "%' or phone like '" + Integer.parseInt(s) + "%'");
 			
 			while(res.next()){
 				int customerId = res.getInt("customer_id");
