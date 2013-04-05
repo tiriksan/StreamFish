@@ -238,8 +238,8 @@ public class StreamFish {
 
 	public void close() {
 		try {
-			con.close();
-
+                    con.close();
+                    //Opprydder.lukkForbindelse(con);   Kan vi ikke bare bruke denne?
 		} catch (SQLException ex) {
 			Logger.getLogger(StreamFish.class.getName()).log(Level.SEVERE, null, ex);
 		}
