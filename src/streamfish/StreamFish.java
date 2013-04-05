@@ -113,13 +113,13 @@ public class StreamFish {
 		
 		try {
 			stm = con.createStatement();
-			res = stm.executeQuery("select count(*) antall from customer where customer_name like '" + s.toLowerCase() + "%' or customer_name like '" + s.toUpperCase() + "%' or phone like " + Integer.parseInt(s) + "%");
+			res = stm.executeQuery("select count(*) antall from customer where customer_name like '" + s.toLowerCase() + "%' or customer_name like '" + s.toUpperCase() + "%' or phone like '" + Integer.parseInt(s) + "%'");
 			res.next();
 			int ant = res.getInt("antall");
 			customers = new Customer[ant];
 			Opprydder.lukkResSet(res);
 			
-			res = stm.executeQuery("select * from customer where customer_name like '" + s.toLowerCase() + "%' or customer_name like '" + s.toUpperCase() + "%' or phone like " + Integer.parseInt(s) + "%");
+			res = stm.executeQuery("select * from customer where customer_name like '" + s.toLowerCase() + "%' or customer_name like '" + s.toUpperCase() + "%' or phone like '" + Integer.parseInt(s) + "%'");
 			
 			while(res.next()){
 				int customerId = res.getInt("customer_id");
