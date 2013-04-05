@@ -50,8 +50,8 @@ public class GUI extends JFrame implements WindowListener {
 	
 	public boolean registerOrder(Order order){
 		int suc = db.addOrder(order);
-		if(suc>0){
-			return true;
+		if(suc > 0){
+                    return true;
 		}
 		return false;
 	}

@@ -180,7 +180,9 @@ public class StreamFish {
             stm = con.createStatement();
             String[] check = {order.getDeliveryDate(), order.getAddress()};
             check = removeUnwantedSymbols(check);
-            int succ = stm.executeUpdate("insert into orders (DELIVERY_DATE, ADDRESS, NR_PERSONS, EMPL_ID, MENU_ID,CUSTOMER_ID) values('" + check[0] + "' , '" + check[1] + "', " + order.getNrPersons() + ", " + order.getEmplId() + ", " + order.getMenuId() + " , " + order.getCustomerId() + ")");
+            int succ = stm.executeUpdate("insert into orders (DELIVERY_DATE, ADDRESS, NR_PERSONS, EMPL_ID, MENU_ID,CUSTOMER_ID) "
+                    + "values('" + check[0] + "' , '" + check[1] + "', " + order.getNrPersons() + ", " + order.getEmplId() + ", " 
+                    + order.getMenuId() + " , " + order.getCustomerId() + ")");
             Opprydder.lukkSetning(stm);
             return succ;
         } catch (SQLException ex) {
@@ -201,15 +203,27 @@ public class StreamFish {
 
         try {
             stm = con.createStatement();
-            int succ = stm.executeUpdate("insert into customer (CUSTOMER_NAME, PHONE, BUSINESS) values('" + check[0] + "' , '" + customer.getPhoneNumber() + "', '" + isbusiness + "')");
+            int succ = stm.executeUpdate("insert into customer (CUSTOMER_NAME, PHONE, BUSINESS)"
+                    + " values('" + check[0] + "' , '" + customer.getPhoneNumber() + "', '" + isbusiness + "')");
             Opprydder.lukkSetning(stm);
             return succ;
 
         } catch (SQLException ex) {
             System.err.println(ex);
         }
-
-
+        return -1;
+    }
+    
+    public int deleteCustomer(Customer customer) {
+        Statement stm;
+        try {
+            stm = con.createStatement();
+            int succ = stm.executeUpdate("delete from customer where customer_id = " + customer.getCustomerID());
+            Opprydder.lukkSetning(stm);
+            return succ;
+        } catch (SQLException ex) {
+            System.err.println(ex);
+        }
         return -1;
     }
 
