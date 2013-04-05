@@ -105,41 +105,43 @@ public class StreamFish {
         return null;
     }
 
-    public Customer[] getCustomers() {
-        Statement stm;
-        ResultSet res;
-        Customer[] customers;
-        int teller = 0;
-
-        try {
-            stm = con.createStatement();
-            res = stm.executeQuery("select count(*) antall from customer");
-            res.next();
-            int ant = res.getInt("antall");
-            customers = new Customer[ant];
-            Opprydder.lukkResSet(res);
-
-            res = stm.executeQuery("select * from customer");
-
-            while (res.next()) {
-                int customerId = res.getInt("customer_id");
-                String customerName = res.getString("customer_name");
-                int phone = res.getInt("phone");
-                int business = Integer.parseInt(res.getString("business"));
-                boolean busi = false;
-                if (business == 1) {
-                    busi = true;
-                }
-                customers[teller] = new Customer(customerId, customerName, phone, busi);
-                teller++;
-            }
-            return customers;
-        } catch (SQLException ex) {
-            System.err.println(ex);
-            ex.printStackTrace();
-        }
-        return null;
-    }
+    public Customer[] getCustomers(String s){
+		Statement stm;
+		ResultSet res;
+		Customer[] customers;
+		int teller = 0;
+		
+		try {
+			stm = con.createStatement();
+			res = stm.executeQuery("select count(*) antall from customer where customer_name like '" + s.toLowerCase() + "%' or customer_name like '" + s.toUpperCase() + "%'");
+			res.next();
+			int ant = res.getInt("antall");
+			customers = new Customer[ant];
+			Opprydder.lukkResSet(res);
+			
+			res = stm.executeQuery("select * from customer where customer_name like '" + s.toLowerCase() + "%' or customer_name like '" + s.toUpperCase() + "%'");
+			
+			while(res.next()){
+				int customerId = res.getInt("customer_id");
+				String customerName = res.getString("customer_name");
+				int phone = res.getInt("phone");
+				int business = Integer.parseInt(res.getString("business"));
+				boolean busi = false;
+				if(business == 1){
+					busi = true;
+				}
+				customers[teller] = new Customer(customerId, customerName, phone, busi);
+				teller++;
+			}
+			return customers;
+		} catch (SQLException ex) {
+			System.err.println(ex);
+			ex.printStackTrace();
+		}
+		
+		
+		return null;
+	}
 
     public Employee[] getEmployees() {
         Statement stm;
