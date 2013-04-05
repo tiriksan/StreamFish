@@ -139,6 +139,8 @@ public class StreamFish {
 		} catch (SQLException ex) {
 			System.err.println(ex);
 			ex.printStackTrace();
+		} catch (NumberFormatException e2){
+			
 		}
 		
 		
