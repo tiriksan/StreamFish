@@ -27,9 +27,6 @@ public class GUI extends JFrame implements WindowListener {
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setVisible(true);
 		pack();
-		
-
-
 	}
 
 	public void byttVindu(JPanel remove, JPanel add) {
@@ -59,12 +56,22 @@ public class GUI extends JFrame implements WindowListener {
 	public boolean registerCustomer(Customer customer) {
 		int suc = db.addCustomer(customer);
 		if (suc > 0) {
-			MainMenu main = (MainMenu) panels.get(0);
-			main.updt();
-			return true;
+                    MainMenu main = (MainMenu) panels.get(0);
+                    main.updt();
+                    return true;
 		}
 		return false;
 	}
+        
+        public boolean deleteCustomer(Customer customer) {
+            int succ = db.deleteCustomer(customer);
+            if (succ == 1) {
+                MainMenu main = (MainMenu) panels.get(0);
+                main.updt();
+                return true;
+            }
+            return false;
+        }
 	
 
 	public Customer[] getCustomers(String s) {
