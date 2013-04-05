@@ -9,6 +9,7 @@ package streamfish;
  * @author Kristian
  */
 public class Order {
+
 	private int orderId;
 	private int menuId;
 	private int customerId;
@@ -16,22 +17,22 @@ public class Order {
 	private int nrPersons;
 	private String deliveryDate;
 	private String address;
-	
-	public Order(int orderId, int menuId, int customerID, int emplId, int nrPersons, String deliveryDate, String address){
+
+	public Order(int orderId, int menuId, int customerID, int emplId, int nrPersons, String deliveryDate, String address) {
 		this.orderId = orderId;
 		this.menuId = menuId;
 		this.customerId = customerID;
-		this. emplId = emplId;
-		this. nrPersons = nrPersons;
+		this.emplId = emplId;
+		this.nrPersons = nrPersons;
 		this.deliveryDate = deliveryDate;
 		this.address = address;
 	}
-	
-	public Order(int menuId, int customerID, int emplId, int nrPersons, String deliveryDate, String address){
+
+	public Order(int menuId, int customerID, int emplId, int nrPersons, String deliveryDate, String address) {
 		this.menuId = menuId;
 		this.customerId = customerID;
-		this. emplId = emplId;
-		this. nrPersons = nrPersons;
+		this.emplId = emplId;
+		this.nrPersons = nrPersons;
 		this.deliveryDate = deliveryDate;
 		this.address = address;
 	}
@@ -63,6 +64,4 @@ public class Order {
 	public String getAddress() {
 		return address;
 	}
-	
-	
 }

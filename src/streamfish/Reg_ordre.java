@@ -11,9 +11,11 @@ import javax.swing.DefaultListModel;
  * @author Kristian
  */
 public class Reg_ordre extends javax.swing.JPanel {
+
 	private final int KUNDENR;
 	private GUI gui;
 	private Menu[] menu;
+
 	/**
 	 * Creates new form Reg_kunde
 	 */
@@ -23,14 +25,13 @@ public class Reg_ordre extends javax.swing.JPanel {
 		menu = gui.getMenus();
 		initComponents();
 		jLabel1.setText("Kundenr: " + KUNDENR);
-		DefaultListModel model = (DefaultListModel)jList1.getModel(); 
-		for(Menu men : menu){
+		DefaultListModel model = (DefaultListModel) jList1.getModel();
+		for (Menu men : menu) {
 			model.addElement(men);
 		}
-		
+
 	}
 
-	
 	@SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -138,23 +139,22 @@ public class Reg_ordre extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+		// TODO add your handling code here:
 		gui.byttVindu(this, "streamfish.MainMenu");
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-		
-		Menu selMenu = (Menu)jList1.getSelectedValue();
+
+		Menu selMenu = (Menu) jList1.getSelectedValue();
 		int antPers = Integer.parseInt(jSpinner1.getValue().toString());
-		
-		
+
+
 		Order order = new Order(selMenu.getMenuId(), KUNDENR, 5/*TODO?*/, antPers, jTextField1.getText(), jTextField2.getText());
 		gui.registerOrder(order);
 		gui.byttVindu(this, "streamfish.MainMenu");
-		
-		
-    }//GEN-LAST:event_jButton2ActionPerformed
 
+
+    }//GEN-LAST:event_jButton2ActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;

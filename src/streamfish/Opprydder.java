@@ -1,63 +1,66 @@
 /**
  *
- * Opprydder.java  - "Programmering i Java", 4.utgave - 2009-07-01
- * Metoder for � rydde opp etter databasebruk
+ * Opprydder.java - "Programmering i Java", 4.utgave - 2009-07-01 Metoder for �
+ * rydde opp etter databasebruk
  */
 package streamfish;
+
 import java.sql.*;
+
 public class Opprydder {
-  public static void lukkResSet(ResultSet res) {
-    try {
-      if (res != null) {
-        res.close();
-      }
-    } catch (SQLException e) {
-      skrivMelding(e, "lukkResSet()");
-    }
-  }
 
-  public static void lukkSetning(Statement stm) {
-    try {
-      if (stm != null) {
-        stm.close();
-      }
-    } catch (SQLException e) {
-      skrivMelding(e, "lukkSetning()");
-    }
-  }
+	public static void lukkResSet(ResultSet res) {
+		try {
+			if (res != null) {
+				res.close();
+			}
+		} catch (SQLException e) {
+			skrivMelding(e, "lukkResSet()");
+		}
+	}
 
-  public static void lukkForbindelse(Connection forbindelse) {
-    try {
-      if (forbindelse != null) {
-        forbindelse.close();
-      }
-    } catch (SQLException e) {
-      skrivMelding(e, "lukkForbindelse()");
-    }
-  }
+	public static void lukkSetning(Statement stm) {
+		try {
+			if (stm != null) {
+				stm.close();
+			}
+		} catch (SQLException e) {
+			skrivMelding(e, "lukkSetning()");
+		}
+	}
 
-  public static void rullTilbake(Connection forbindelse) {
-    try {
-      if (forbindelse != null && !forbindelse.getAutoCommit()) {
-        forbindelse.rollback();
-      }
-    } catch (SQLException e) {
-      skrivMelding(e, "rollback()");
-    }
-  }
+	public static void lukkForbindelse(Connection forbindelse) {
+		try {
+			if (forbindelse != null) {
+				forbindelse.close();
+			}
+		} catch (SQLException e) {
+			skrivMelding(e, "lukkForbindelse()");
+		}
+	}
 
-  public static void settAutoCommit(Connection forbindelse) {
-    try {
-      if (forbindelse != null && !forbindelse.getAutoCommit()) {
-        forbindelse.setAutoCommit(true);
-      }
-    } catch (SQLException e) {
-      skrivMelding(e, "settAutoCommit()");
-    }
-  }
+	public static void rullTilbake(Connection forbindelse) {
+		try {
+			if (forbindelse != null && !forbindelse.getAutoCommit()) {
+				forbindelse.rollback();
+			}
+		} catch (SQLException e) {
+			skrivMelding(e, "rollback()");
+		}
+	}
 
-  public static void skrivMelding(Exception e, String melding) {
-    System.err.println("*** Feil oppst�tt: " + melding + ". ***");
-    e.printStackTrace(System.err);
-  }
+	public static void settAutoCommit(Connection forbindelse) {
+		try {
+			if (forbindelse != null && !forbindelse.getAutoCommit()) {
+				forbindelse.setAutoCommit(true);
+			}
+		} catch (SQLException e) {
+			skrivMelding(e, "settAutoCommit()");
+		}
+	}
+
+	public static void skrivMelding(Exception e, String melding) {
+		System.err.println("*** Feil oppst�tt: " + melding + ". ***");
+		e.printStackTrace(System.err);
+	}
 }

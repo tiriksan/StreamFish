@@ -9,7 +9,9 @@ package streamfish;
  * @author Kristian
  */
 public class Reg_kunde extends javax.swing.JPanel {
+
 	private GUI gui;
+
 	/**
 	 * Creates new form Reg_ordre
 	 */
@@ -113,7 +115,6 @@ public class Reg_kunde extends javax.swing.JPanel {
 		gui.registerCustomer(newCustomer);
 		gui.byttVindu(this, "streamfish.MainMenu");
     }//GEN-LAST:event_jButton1ActionPerformed
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;

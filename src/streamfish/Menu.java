@@ -13,8 +13,8 @@ public class Menu {
 	private String menuName;
 	private int price;
 	private String description;
-	
-	public Menu(int menuId, String menuName, int price, String description){
+
+	public Menu(int menuId, String menuName, int price, String description) {
 		this.menuId = menuId;
 		this.menuName = menuName;
 		this.price = price;
@@ -36,9 +36,8 @@ public class Menu {
 	public String getDescription() {
 		return description;
 	}
-	
-	public String toString(){
+
+	public String toString() {
 		return "ID: " + menuId + ", navn: " + menuName;
-	}	
-	
+	}
 }
