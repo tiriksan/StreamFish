@@ -58,7 +58,6 @@ public class MainMenu extends javax.swing.JPanel {
 						model.addRow(new Object[]{customers[i].getCustomerID(), customers[i].getCustomerName(), customers[i].getPhoneNumber(), customers[i].isBusiness()});
 					}
 				}
-				System.out.println(jTextField1.getText());
 			}
 
 			@Override
@@ -71,7 +70,6 @@ public class MainMenu extends javax.swing.JPanel {
 						model.addRow(new Object[]{customers[i].getCustomerID(), customers[i].getCustomerName(), customers[i].getPhoneNumber(), customers[i].isBusiness()});
 					}
 				}
-				System.out.println(jTextField1.getText());
 			}
 		});
 

@@ -23,7 +23,6 @@ public class GUI extends JFrame implements WindowListener {
 
 		panels.add(mainMenu);
 		add(mainMenu);
-		System.out.println(mainMenu);
 		mainMenu.setVisible(true);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setVisible(true);
@@ -42,7 +41,6 @@ public class GUI extends JFrame implements WindowListener {
 	public void byttVindu(JPanel remove, String newWindow) {
 		remove(remove);
 		for (JPanel jp : panels) {
-			System.out.println(jp.getClass().getName());
 			if (jp.getClass().getName().equals(newWindow)) {
 				add(jp);
 			}
