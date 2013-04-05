@@ -218,7 +218,6 @@ public class StreamFish {
         for (int i = 0; i < table.length; i++) {
             checkedTable[i] = checkedTable[i].replace("'", "");
             checkedTable[i] = checkedTable[i].replace(";", " ");
-            System.out.println(checkedTable[i]);
         }
         return checkedTable;
     }
