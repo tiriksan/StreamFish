@@ -173,6 +173,52 @@ public class StreamFish {
         }
         return null;
     }
+    
+    public Orderinfo[] getTodaysTasks() {
+        Statement stm;
+        ResultSet res;
+        int count = 0;
+        Orderinfo[] info;
+        
+        try {
+            stm = con.createStatement();
+            res = stm.executeQuery("CREATE VIEW todaysTasks AS SELECT customer_name, address, "
+                            + "phone, menu_name, nr_persons, price, username FROM customer\n" +
+                            "LEFT JOIN orders ON customer.CUSTOMER_ID = orders.CUSTOMER_ID\n" +
+                            "LEFT JOIN menu ON orders.MENU_ID = menu.MENU_ID\n" +
+                            "LEFT JOIN employees ON orders.EMPL_ID = employees.EMPL_ID\n" +
+                            "WHERE delivery_date = CURRENT DATE;");
+            res.next();
+            Opprydder.lukkResSet(res);
+            
+            res = stm.executeQuery("select count(*) count from todaysTasks");
+            res.next();
+            int ant = res.getInt("count");
+            info = new Orderinfo[ant];
+            Opprydder.lukkResSet(res);
+            
+            res = stm.executeQuery("select * from todaysTasks");
+            
+            while (res.next()) {
+                String customerName = res.getString(1);
+                String address = res.getString(2);
+                String phone = res.getString(3);
+                String menu = res.getString(4);
+                int numberOfPersons = res.getInt(5);
+                int price = res.getInt(6);
+                String salesperson = res.getString(7);
+                info[count] = new Orderinfo(customerName, address, phone, menu, numberOfPersons, price, salesperson);
+                count++;
+            }
+            Opprydder.lukkResSet(res);
+            stm.executeQuery("drop view todaysTasks");
+            return info;
+        } catch (SQLException ex) {
+            System.err.println(ex);
+            ex.printStackTrace();
+        }
+        return null;
+    }
 
     public int addOrder(Order order) {
         Statement stm;
