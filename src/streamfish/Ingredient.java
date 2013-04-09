@@ -5,12 +5,22 @@ package streamfish;
  */
 public class Ingredient {
         
+        private String ingredientID;
         private String name;
-        private String description;
+        private double amount;
+        private String expiryDate;
         
-        public Ingredient(String name, String desc){
+        public Ingredient(String ingID, String name, double amount, String expiryDate){
+            this.ingredientID = ingID;
             this.name = name;
-            this.description = desc;
+            this.amount = amount;
+            this.expiryDate = expiryDate;
+        }
+        public String getID(){
+            return ingredientID;
+        }
+        public void setID(String newID){
+            ingredientID = newID;
         }
         public String getName(){
             return name;
@@ -18,11 +28,17 @@ public class Ingredient {
         public void setName(String newName){
             name = newName;
         }
-        public String getDescription(){
-            return description;
+        public String getExpDate(){
+            return expiryDate;
         }
-        public void setDescription(String desc){
-            description = desc;
+        public void setExpDate(String newDate){
+            expiryDate = newDate;
+        }
+        public double getAmount(){
+            return amount;
+        }
+        public void setAmount(double newAmount){
+            amount = newAmount;
         }
 }
 
