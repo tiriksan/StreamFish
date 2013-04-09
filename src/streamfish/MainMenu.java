@@ -79,10 +79,9 @@ public class MainMenu extends javax.swing.JPanel {
 					public void valueChanged(ListSelectionEvent event) {
 						int viewRow = jTable1.getSelectedRow();
 						if (!event.getValueIsAdjusting()) {
-							try{
+							try {
 								kundenr = Integer.parseInt(jTable1.getValueAt(viewRow, 0).toString());
-							} catch (Exception e){
-								
+							} catch (Exception e) {
 							}
 						}
 					}
@@ -156,6 +155,11 @@ public class MainMenu extends javax.swing.JPanel {
         jLabel1.setText("Search:");
 
         jButton3.setText("Edit customer");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jButton4.setText("To do");
 
@@ -203,18 +207,27 @@ public class MainMenu extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-		// TODO add your handling code here:
-                if(kundenr == -1){
-                    showMessageDialog(null, "Ingen kunde er valgt.");
-                }else{
-		gui.byttVindu(this, new Reg_ordre(kundenr, gui));
-                }
+		if (kundenr == -1) {
+			showMessageDialog(null, "Ingen kunde er valgt.");
+		} else {
+			gui.byttVindu(this, new Reg_ordre(kundenr, gui));
+		}
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 		// TODO add your handling code here:
 		gui.byttVindu(this, new Reg_kunde(gui));
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+		// TODO add your handling code here:
+		if (kundenr == -1) {
+			showMessageDialog(null, "Ingen kunde er valgt.");
+		} else {
+			gui.byttVindu(this, new Edit_customer(kundenr, gui));
+		}
+		
+    }//GEN-LAST:event_jButton3ActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
