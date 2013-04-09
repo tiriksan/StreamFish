@@ -9,9 +9,16 @@ public class Dish {
         
         private String name;
         private String description;
+        private String dishID;
         private ArrayList<Ingredient> ingredients = new ArrayList<Ingredient>();
         
         public Dish(String name, String desc, ArrayList<Ingredient> ing){
+            this.name = name;
+            this.description = desc;
+            this.ingredients = ing;
+        }
+        public Dish(String dishID, String name, String desc, ArrayList<Ingredient> ing){
+            this.dishID = dishID;
             this.name = name;
             this.description = desc;
             this.ingredients = ing;
