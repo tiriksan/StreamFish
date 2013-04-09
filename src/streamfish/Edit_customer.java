@@ -51,6 +51,11 @@ public class Edit_customer extends javax.swing.JPanel {
         jLabel1.setText(KUNDENR+"");
 
         jButton1.setText("Delete");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Apply");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -138,6 +143,12 @@ public class Edit_customer extends javax.swing.JPanel {
 		gui.updateCustomer(newCustomer);
 		gui.byttVindu(this, "streamfish.MainMenu");
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+                gui.deleteCustomer(customer);
+                gui.byttVindu(this, "streamfish.MainMenu");
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
