@@ -13,9 +13,9 @@ public class Customer {
 		if (customerName == null || customerName.trim().equals("")) {
 			throw new IllegalArgumentException("Customer's name is required.");
 		}
-		if (phone > 99999999 || phone < 00000000) {
-                    javax.swing.JOptionPane.showMessageDialog(null, "Customer's phone number cannot exceed eight digits.");
-                    throw new NumberFormatException("Customer's phone number cannot exceed eight digits.");
+		if (phone > 99999999 || phone < 9999999) {
+                    javax.swing.JOptionPane.showMessageDialog(null, "Customer's phone number cannot exceed or be less than eight digits.");
+                    throw new NumberFormatException("Customer's phone number cannot exceed or be less than eight digits.");
                         
 		}
 		this.CUSTOMER_ID = customer_id;
@@ -28,8 +28,9 @@ public class Customer {
 		if (customerName == null || customerName.trim().equals("")) {
 			throw new IllegalArgumentException("Customer's name is required.");
 		}
-		if (phone > 99999999 || phone < 00000000) {
-			throw new NumberFormatException("Customer's phone number cannot exceed eight digits.");
+		if (phone > 99999999 || phone < 9999999) {
+                    javax.swing.JOptionPane.showMessageDialog(null, "Customer's phone number cannot exceed or be less than eight digits.");
+                    throw new NumberFormatException("Customer's phone number cannot exceed or be less than eight digits.");
 		}
 		customerName = customerName.replace(";", "");
 		this.customerName = customerName;
@@ -41,8 +42,9 @@ public class Customer {
 		if (customerName == null || customerName.trim().equals("")) {
 			throw new IllegalArgumentException("Customer's name is required.");
 		}
-		if (phone > 99999999 || phone < 00000000) {
-			throw new NumberFormatException("Customer's phone number cannot exceed eight digits.");
+		if (phone > 99999999 || phone < 9999999) {
+                    javax.swing.JOptionPane.showMessageDialog(null, "Customer's phone number cannot exceed or be less than eight digits.");
+                    throw new NumberFormatException("Customer's phone number cannot exceed or be less than eight digits.");
 		}
 		this.CUSTOMER_ID = customer_id;
 		this.customerName = customerName;
