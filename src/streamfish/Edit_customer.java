@@ -4,6 +4,8 @@
  */
 package streamfish;
 
+import javax.swing.DefaultListModel;
+
 /**
  *
  * @author Kristian
@@ -23,6 +25,11 @@ public class Edit_customer extends javax.swing.JPanel {
 		jTextField1.setText(customer.getCustomerName());
 		jTextField2.setText(customer.getPhoneNumber()+"");
 		jCheckBox1.setSelected(customer.isBusiness());
+		Order[] orders = gui.getOrders(customer);
+		DefaultListModel model = (DefaultListModel) jList1.getModel();
+		for (Order order : orders) {
+			model.addElement(order);
+		}
 		
 	}
 
@@ -66,11 +73,7 @@ public class Edit_customer extends javax.swing.JPanel {
 
         jCheckBox1.setText("Business");
 
-        jList1.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
-        });
+        jList1.setModel(new DefaultListModel());
         jScrollPane1.setViewportView(jList1);
 
         jButton3.setText("Delete order");
@@ -87,7 +90,7 @@ public class Edit_customer extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jButton1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)

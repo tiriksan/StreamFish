@@ -90,6 +90,9 @@ public class GUI extends JFrame implements WindowListener {
 		return false;
 	}
 	
+	public Order[] getOrders(Customer customer){
+		return db.getOrderCustomer(customer);
+	}
 
 	public Menu[] getMenus() {
 		return db.getMenus();
