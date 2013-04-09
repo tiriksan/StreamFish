@@ -78,7 +78,11 @@ public class MainMenu extends javax.swing.JPanel {
 					public void valueChanged(ListSelectionEvent event) {
 						int viewRow = jTable1.getSelectedRow();
 						if (!event.getValueIsAdjusting()) {
-							kundenr = Integer.parseInt(jTable1.getValueAt(viewRow, 0).toString());
+							try{
+								kundenr = Integer.parseInt(jTable1.getValueAt(viewRow, 0).toString());
+							} catch (Exception e){
+								
+							}
 						}
 					}
 				});
