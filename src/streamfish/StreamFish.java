@@ -318,6 +318,22 @@ public class StreamFish {
         }
         return -1;
     }
+    
+    public int addMenu(Menu menu){
+         Statement stm;
+        String[] check = {menu.getMenuName(), menu.getDescription()};
+        check = removeUnwantedSymbols(check);
+        try {
+            stm = con.createStatement();
+            int succ = stm.executeUpdate("insert into employee (MANU_NAME, PRICE, DESCRIPTION) "
+                    + "values('" + check[0] + "', '" + menu.getPrice() + "', '" + check[1] + "'");
+            Opprydder.lukkSetning(stm);
+            return succ;
+        } catch (SQLException ex) {
+            System.err.println(ex);
+        }
+        return -1;
+    }
 
     public String[] removeUnwantedSymbols(String[] table) {
         String[] checkedTable = table;
