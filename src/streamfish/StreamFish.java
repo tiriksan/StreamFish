@@ -325,7 +325,7 @@ public class StreamFish {
         check = removeUnwantedSymbols(check);
         try {
             stm = con.createStatement();
-            int succ = stm.executeUpdate("insert into employee (MANU_NAME, PRICE, DESCRIPTION) "
+            int succ = stm.executeUpdate("insert into employee (MENU_NAME, PRICE, DESCRIPTION) "
                     + "values('" + check[0] + "', '" + menu.getPrice() + "', '" + check[1] + "'");
             Opprydder.lukkSetning(stm);
             return succ;
