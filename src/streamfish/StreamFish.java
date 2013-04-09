@@ -328,7 +328,7 @@ public class StreamFish {
         Statement stm;
         String[] check = {customer.getCustomerName()};
         check = removeUnwantedSymbols(check);
-        System.out.println(check[0]);
+
         int isbusiness = 0;
         if (customer.isBusiness()) {
             isbusiness = 1;
@@ -359,6 +359,29 @@ public class StreamFish {
         }
         return -1;
     }
+    public int updateCustomer(Customer customer) {
+        Statement stm;
+        String[] check = {customer.getCustomerName()};
+        check = removeUnwantedSymbols(check);
+
+        int isbusiness = 0;
+        if (customer.isBusiness()) {
+            isbusiness = 1;
+        }
+
+        try {
+            stm = con.createStatement();
+            int succ = stm.executeUpdate("update customer set CUSTOMER_NAME ="+check[0]+", PHONE ="+customer.getPhoneNumber()+
+                    ", BUSINESS =" +isbusiness+" where CUSTOMER_ID ="+customer.getCustomerID());
+            Opprydder.lukkSetning(stm);
+            return succ;
+
+        } catch (SQLException ex) {
+            System.err.println(ex);
+        }
+        return -1;
+    }
+    
     public int addCustomerAdress(CustomerAdress adress, Customer customer) {
         Statement stm;
         String[] check = {adress.getAdress(),adress.getCity()};
