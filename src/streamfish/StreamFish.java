@@ -251,6 +251,18 @@ public class StreamFish {
         }
         return -1;
     }
+    public int deleteDish(Dish dish) {
+        Statement stm;
+        try {
+            stm = con.createStatement();
+            int succ = stm.executeUpdate("delete from dish where DISH_ID = " + dish.getID());
+            Opprydder.lukkSetning(stm);
+            return succ;
+        } catch (SQLException ex) {
+            System.err.println(ex);
+        }
+        return -1;
+    }
     public int addIngredient(Ingredient ingredient) {
         Statement stm;
         try {
@@ -259,6 +271,18 @@ public class StreamFish {
             check = removeUnwantedSymbols(check);
             int succ = stm.executeUpdate("insert into ingredients (INGREDIENT_NAME, AMOUNT, EXPIRY_DATE) "
                     + "values('" + check[0] + "' , '" + ingredient.getAmount()+ "' , '" + check[1] + ")");
+            Opprydder.lukkSetning(stm);
+            return succ;
+        } catch (SQLException ex) {
+            System.err.println(ex);
+        }
+        return -1;
+    }
+    public int deleteIngredient(Ingredient ing) {
+        Statement stm;
+        try {
+            stm = con.createStatement();
+            int succ = stm.executeUpdate("delete from INGREDIENTS where INGREDIENT_ID = " + ing.getID());
             Opprydder.lukkSetning(stm);
             return succ;
         } catch (SQLException ex) {
