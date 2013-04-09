@@ -235,6 +235,37 @@ public class StreamFish {
         }
         return -1;
     }
+    
+    public int addDish(Dish dish) {
+        Statement stm;
+        try {
+            stm = con.createStatement();
+            String[] check = {dish.getName()};
+            check = removeUnwantedSymbols(check);
+            int succ = stm.executeUpdate("insert into dish (DISH_NAME) "
+                    + "values('" + check[0] + ")");
+            Opprydder.lukkSetning(stm);
+            return succ;
+        } catch (SQLException ex) {
+            System.err.println(ex);
+        }
+        return -1;
+    }
+    public int addIngredient(Ingredient ingredient) {
+        Statement stm;
+        try {
+            stm = con.createStatement();
+            String[] check = {ingredient.getName(),ingredient.getExpDate()};
+            check = removeUnwantedSymbols(check);
+            int succ = stm.executeUpdate("insert into ingredients (INGREDIENT_NAME, AMOUNT, EXPIRY_DATE) "
+                    + "values('" + check[0] + "' , '" + ingredient.getAmount()+ "' , '" + check[1] + ")");
+            Opprydder.lukkSetning(stm);
+            return succ;
+        } catch (SQLException ex) {
+            System.err.println(ex);
+        }
+        return -1;
+    }
 
     public int addCustomer(Customer customer) {
         Statement stm;
