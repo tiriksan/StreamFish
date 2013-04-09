@@ -282,7 +282,7 @@ public class StreamFish {
         return checkedTable;
     }
 
-	public void close() {
-           Opprydder.lukkForbindelse(con);
-	}
+    public void close() {
+        Opprydder.lukkForbindelse(con);
+    }
 }
