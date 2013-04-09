@@ -9,6 +9,7 @@ import javax.swing.event.DocumentListener;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
+import static javax.swing.JOptionPane.*;
 
 /**
  *
@@ -182,7 +183,11 @@ public class MainMenu extends javax.swing.JPanel {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
 		// TODO add your handling code here:
+                if(kundenr == -1){
+                    showMessageDialog(null, "Ingen kunde er valgt.");
+                }else{
 		gui.byttVindu(this, new Reg_ordre(kundenr, gui));
+                }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
