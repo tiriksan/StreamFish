@@ -14,7 +14,9 @@ public class Customer {
 			throw new IllegalArgumentException("Customer's name is required.");
 		}
 		if (phone > 99999999 || phone < 00000000) {
-			throw new NumberFormatException("Customer's phone number cannot exceed eight digits.");
+                    javax.swing.JOptionPane.showMessageDialog(null, "Customer's phone number cannot exceed eight digits.");
+                    throw new NumberFormatException("Customer's phone number cannot exceed eight digits.");
+                        
 		}
 		this.CUSTOMER_ID = customer_id;
 		this.customerName = customerName;
