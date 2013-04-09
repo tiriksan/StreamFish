@@ -8,17 +8,14 @@ import java.util.ArrayList;
 public class Dish {
         
         private String name;
-        private String description;
         private String dishID;
         
         public Dish(String name, String desc){
             this.name = name;
-            this.description = desc;
         }
         public Dish(String dishID, String name, String desc, ArrayList<Ingredient> ing){
             this.dishID = dishID;
             this.name = name;
-            this.description = desc;
         }
         public String getName(){
             return name;
@@ -26,10 +23,10 @@ public class Dish {
         public void setName(String newName){
             name = newName;
         }
-        public String getDescription(){
-            return description;
+        public String getID(){
+            return dishID;
         }
-        public void setDescription(String desc){
-            description = desc;
-        }     
+        public void setID(String newID){
+            dishID = newID;
+        }  
 }
