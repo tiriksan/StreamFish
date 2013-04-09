@@ -28,6 +28,9 @@ class Employee {
         this.usertype = usertype;
         this.username = username;
     }
+    public int getEmplID(){
+        return empl_ID;
+    }
     
     public byte getUsertype() {
         return usertype;

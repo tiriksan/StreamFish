@@ -335,7 +335,20 @@ public class StreamFish {
         return -1;
     }
 
-    public String[] removeUnwantedSymbols(String[] table) {
+    public int deleteEmployee(Employee employee) {
+        Statement stm;
+        try {
+            stm = con.createStatement();
+            int succ = stm.executeUpdate("delete from employees where empl_ID = " + employee.getEmplID());
+            Opprydder.lukkSetning(stm);
+            return succ;
+        } catch (SQLException ex) {
+            System.err.println(ex);
+        }
+        return -1;
+    }
+
+public String[] removeUnwantedSymbols(String[] table) {
         String[] checkedTable = table;
         for (int i = 0; i < table.length; i++) {
             checkedTable[i] = checkedTable[i].replace("'", "");
