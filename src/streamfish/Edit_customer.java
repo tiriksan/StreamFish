@@ -13,12 +13,16 @@ public class Edit_customer extends javax.swing.JPanel {
 	
 	private GUI gui;
 	private final int KUNDENR;
+	private Customer customer;
 
 	public Edit_customer(int kundenr, GUI gui) {
 		this.gui = gui;
 		this.KUNDENR = kundenr;
+		this.customer = gui.getCustomer(kundenr);
 		initComponents();
-		jTextField1.setText(gui.get);
+		jTextField1.setText(customer.getCustomerName());
+		jTextField2.setText(customer.getPhoneNumber()+"");
+		jCheckBox1.setSelected(customer.isBusiness());
 		
 	}
 

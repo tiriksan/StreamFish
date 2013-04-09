@@ -79,7 +79,7 @@ public class GUI extends JFrame implements WindowListener {
 	}
 	
 	public Customer getCustomer(int i){
-		return db.getCustomer(int i);
+		return db.getCustomer(i);
 	}
 
 	public Menu[] getMenus() {

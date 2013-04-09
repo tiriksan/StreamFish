@@ -33,6 +33,38 @@ public class StreamFish {
         }
     }
 
+	public Customer getCustomer(int i){
+		Statement stm;
+		ResultSet res;
+		Customer customer;
+		
+		 try {
+            stm = con.createStatement();
+
+            res = stm.executeQuery("select * from customer where customer_id = " + i);
+
+            while (res.next()) {
+                int customer_id = res.getInt("customer_id");
+                String customer_name = res.getString("customer_name");
+                String phone = res.getString("phone");
+                byte business = res.getByte("business");
+				boolean busi;
+				if(business == 0){
+					busi = false;
+				} else {
+					busi = true;
+				}
+                customer = new Customer(customer_id, customer_name, Integer.parseInt(phone), busi);
+				return customer;
+            }
+				
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+		
+		return null;
+	}
+	
     public Menu[] getMenus() {
 
         Statement stm;
