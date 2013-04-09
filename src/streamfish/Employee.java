@@ -35,7 +35,11 @@ class Employee {
     
     public String getUsername() {
         return username;
-    }    
+    }
+    
+    public String getPassword() {
+        return password;
+    }
     
     public boolean okPassword(String passwordIn) {
         return password.equals(passwordIn);
