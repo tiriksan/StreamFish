@@ -151,7 +151,7 @@ public class Reg_ordre extends javax.swing.JPanel {
 		int antPers = Integer.parseInt(jSpinner1.getValue().toString());
 
 
-		Order order = new Order(selMenu.getMenuId(), KUNDENR, 5/*TODO?*/, antPers, jTextField1.getText(), jTextField2.getText());
+		Order order = new Order(selMenu.getMenuId(), KUNDENR, 5/*TODO?*/, antPers, jTextField1.getText(), jComboBox1.(Kristian insert!);
 		gui.registerOrder(order);
 		gui.byttVindu(this, "streamfish.MainMenu");
 
