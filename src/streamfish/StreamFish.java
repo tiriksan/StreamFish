@@ -235,7 +235,7 @@ public class StreamFish {
         }
         return -1;
     }
-    
+
     public int addDish(Dish dish) {
         Statement stm;
         try {
@@ -263,14 +263,15 @@ public class StreamFish {
         }
         return -1;
     }
+
     public int addIngredient(Ingredient ingredient) {
         Statement stm;
         try {
             stm = con.createStatement();
-            String[] check = {ingredient.getName(),ingredient.getExpDate()};
+            String[] check = {ingredient.getName(), ingredient.getExpDate()};
             check = removeUnwantedSymbols(check);
             int succ = stm.executeUpdate("insert into ingredients (INGREDIENT_NAME, AMOUNT, EXPIRY_DATE) "
-                    + "values('" + check[0] + "' , '" + ingredient.getAmount()+ "' , '" + check[1] + ")");
+                    + "values('" + check[0] + "' , '" + ingredient.getAmount() + "' , '" + check[1] + ")");
             Opprydder.lukkSetning(stm);
             return succ;
         } catch (SQLException ex) {
@@ -342,9 +343,9 @@ public class StreamFish {
         }
         return -1;
     }
-    
-    public int addMenu(Menu menu){
-         Statement stm;
+
+    public int addMenu(Menu menu) {
+        Statement stm;
         String[] check = {menu.getMenuName(), menu.getDescription()};
         check = removeUnwantedSymbols(check);
         try {
@@ -357,6 +358,20 @@ public class StreamFish {
             System.err.println(ex);
         }
         return -1;
+    }
+
+    public int deleteMenu(Menu menu) {
+        Statement stm;
+        try {
+            stm = con.createStatement();
+            int succ = stm.executeUpdate("delete from menu where menu_id = " + menu.getMenuId());
+            Opprydder.lukkSetning(stm);
+            return succ;
+        } catch (SQLException ex) {
+            System.err.println(ex);
+        }
+        return -1;
+
     }
 
     public int deleteEmployee(Employee employee) {
@@ -372,7 +387,7 @@ public class StreamFish {
         return -1;
     }
 
-public String[] removeUnwantedSymbols(String[] table) {
+    public String[] removeUnwantedSymbols(String[] table) {
         String[] checkedTable = table;
         for (int i = 0; i < table.length; i++) {
             checkedTable[i] = checkedTable[i].replace("'", "");
