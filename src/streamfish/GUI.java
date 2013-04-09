@@ -44,43 +44,52 @@ public class GUI extends JFrame implements WindowListener {
 		}
 		pack();
 	}
-	
-	public boolean registerOrder(Order order){
+
+	public boolean registerOrder(Order order) {
 		int suc = db.addOrder(order);
-		if(suc > 0){
-                    return true;
+		if (suc > 0) {
+			return true;
 		}
 		return false;
 	}
-	
+
 	public boolean registerCustomer(Customer customer) {
 		int suc = db.addCustomer(customer);
 		if (suc > 0) {
-                    MainMenu main = (MainMenu) panels.get(0);
-                    main.updt();
-                    return true;
+			MainMenu main = (MainMenu) panels.get(0);
+			main.updt();
+			return true;
 		}
 		return false;
 	}
-        
-        public boolean deleteCustomer(Customer customer) {
-            int succ = db.deleteCustomer(customer);
-            if (succ == 1) {
-                MainMenu main = (MainMenu) panels.get(0);
-                main.updt();
-                return true;
-            }
-            return false;
-        }
-	
+
+	public boolean deleteCustomer(Customer customer) {
+		int succ = db.deleteCustomer(customer);
+		if (succ == 1) {
+			MainMenu main = (MainMenu) panels.get(0);
+			main.updt();
+			return true;
+		}
+		return false;
+	}
 
 	public Customer[] getCustomers(String s) {
 		return db.getCustomers(s);
 	}
-	
-	public Customer getCustomer(int i){
+
+	public Customer getCustomer(int i) {
 		return db.getCustomer(i);
 	}
+	public boolean updateCustomer(Customer customer){
+		int succ = db.updateCustomer(customer);
+		if (succ == 1) {
+			MainMenu main = (MainMenu) panels.get(0);
+			main.updt();
+			return true;
+		}
+		return false;
+	}
+	
 
 	public Menu[] getMenus() {
 		return db.getMenus();
