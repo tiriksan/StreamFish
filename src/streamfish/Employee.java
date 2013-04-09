@@ -41,6 +41,7 @@ class Employee {
         return password;
     }
     
+    
     public boolean okPassword(String passwordIn) {
         return password.equals(passwordIn);
     }

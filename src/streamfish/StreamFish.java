@@ -14,25 +14,25 @@ import java.util.logging.Logger;
  */
 public class StreamFish {
 
-	/**
-	 * @param args the command line arguments
-	 */
-	private String databasedriver;
-	private Connection con;
+    /**
+     * @param args the command line arguments
+     */
+    private String databasedriver;
+    private Connection con;
 
-	public StreamFish() {
-		try {
-			databasedriver = "org.apache.derby.jdbc.ClientDriver";
-			Class.forName(databasedriver);  // laster inn driverklassen
-			String databasenavn = "jdbc:derby://db.stud.aitel.hist.no/streamfish;user=sfdb;password=XEnhdPy8";
-			con = DriverManager.getConnection(databasenavn);
-		} catch (SQLException ex) {
-			Logger.getLogger(StreamFish.class.getName()).log(Level.SEVERE, null, ex);
-		} catch (ClassNotFoundException ex) {
-			Logger.getLogger(StreamFish.class.getName()).log(Level.SEVERE, null, ex);
-		}
-	}
-	
+    public StreamFish() {
+        try {
+            databasedriver = "org.apache.derby.jdbc.ClientDriver";
+            Class.forName(databasedriver);  // laster inn driverklassen
+            String databasenavn = "jdbc:derby://db.stud.aitel.hist.no/streamfish;user=sfdb;password=XEnhdPy8";
+            con = DriverManager.getConnection(databasenavn);
+        } catch (SQLException ex) {
+            Logger.getLogger(StreamFish.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(StreamFish.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
     public Menu[] getMenus() {
 
         Statement stm;
@@ -101,47 +101,46 @@ public class StreamFish {
         return null;
     }
 
-    public Customer[] getCustomers(String s){
-		Statement stm;
-		ResultSet res;
-		Customer[] customers;
-                String[] check = {s};
-                check = removeUnwantedSymbols(check);
-		int teller = 0;
-		
-		try {
-			stm = con.createStatement();
-			res = stm.executeQuery("select count(*) antall from customer where upper(customer_name) like '"
-                                + check[0].toUpperCase() + "%' or phone like '" + check[0] + "%'");
-			res.next();
-			int ant = res.getInt("antall");
-			customers = new Customer[ant];
-			Opprydder.lukkResSet(res);
-			
-			res = stm.executeQuery("select * from customer where upper(customer_name) like '" 
-                                + check[0].toUpperCase() + "%' or phone like '" + check[0] + "%'");
-			
-			while(res.next()){
-				int customerId = res.getInt("customer_id");
-				String customerName = res.getString("customer_name");
-				int phone = res.getInt("phone");
-				int business = Integer.parseInt(res.getString("business"));
-				boolean busi = false;
-				if(business == 1){
-					busi = true;
-				}
-				customers[teller] = new Customer(customerId, customerName, phone, busi);
-				teller++;
-			}
-			return customers;
-		} catch (SQLException ex) {
-			System.err.println(ex);
-			ex.printStackTrace();
-		} catch (NumberFormatException e2){
-			
-		}
-		return null;
-	}
+    public Customer[] getCustomers(String s) {
+        Statement stm;
+        ResultSet res;
+        Customer[] customers;
+        String[] check = {s};
+        check = removeUnwantedSymbols(check);
+        int teller = 0;
+
+        try {
+            stm = con.createStatement();
+            res = stm.executeQuery("select count(*) antall from customer where upper(customer_name) like '"
+                    + check[0].toUpperCase() + "%' or phone like '" + check[0] + "%'");
+            res.next();
+            int ant = res.getInt("antall");
+            customers = new Customer[ant];
+            Opprydder.lukkResSet(res);
+
+            res = stm.executeQuery("select * from customer where upper(customer_name) like '"
+                    + check[0].toUpperCase() + "%' or phone like '" + check[0] + "%'");
+
+            while (res.next()) {
+                int customerId = res.getInt("customer_id");
+                String customerName = res.getString("customer_name");
+                int phone = res.getInt("phone");
+                int business = Integer.parseInt(res.getString("business"));
+                boolean busi = false;
+                if (business == 1) {
+                    busi = true;
+                }
+                customers[teller] = new Customer(customerId, customerName, phone, busi);
+                teller++;
+            }
+            return customers;
+        } catch (SQLException ex) {
+            System.err.println(ex);
+            ex.printStackTrace();
+        } catch (NumberFormatException e2) {
+        }
+        return null;
+    }
 
     public Employee[] getEmployees() {
         Statement stm;
@@ -173,32 +172,32 @@ public class StreamFish {
         }
         return null;
     }
-    
+
     public Orderinfo[] getTodaysTasks() {
         Statement stm;
         ResultSet res;
         int count = 0;
         Orderinfo[] info;
-        
+
         try {
             stm = con.createStatement();
             res = stm.executeQuery("CREATE VIEW todaysTasks AS SELECT customer_name, address, "
-                            + "phone, menu_name, nr_persons, price, username FROM customer\n" +
-                            "LEFT JOIN orders ON customer.CUSTOMER_ID = orders.CUSTOMER_ID\n" +
-                            "LEFT JOIN menu ON orders.MENU_ID = menu.MENU_ID\n" +
-                            "LEFT JOIN employees ON orders.EMPL_ID = employees.EMPL_ID\n" +
-                            "WHERE delivery_date = CURRENT DATE;");
+                    + "phone, menu_name, nr_persons, price, username FROM customer\n"
+                    + "LEFT JOIN orders ON customer.CUSTOMER_ID = orders.CUSTOMER_ID\n"
+                    + "LEFT JOIN menu ON orders.MENU_ID = menu.MENU_ID\n"
+                    + "LEFT JOIN employees ON orders.EMPL_ID = employees.EMPL_ID\n"
+                    + "WHERE delivery_date = CURRENT DATE;");
             res.next();
             Opprydder.lukkResSet(res);
-            
+
             res = stm.executeQuery("select count(*) count from todaysTasks");
             res.next();
             int ant = res.getInt("count");
             info = new Orderinfo[ant];
             Opprydder.lukkResSet(res);
-            
+
             res = stm.executeQuery("select * from todaysTasks");
-            
+
             while (res.next()) {
                 String customerName = res.getString(1);
                 String address = res.getString(2);
@@ -227,7 +226,7 @@ public class StreamFish {
             String[] check = {order.getDeliveryDate(), order.getAddress()};
             check = removeUnwantedSymbols(check);
             int succ = stm.executeUpdate("insert into orders (DELIVERY_DATE, ADDRESS, NR_PERSONS, EMPL_ID, MENU_ID,CUSTOMER_ID) "
-                    + "values('" + check[0] + "' , '" + check[1] + "', " + order.getNrPersons() + ", " + order.getEmplId() + ", " 
+                    + "values('" + check[0] + "' , '" + check[1] + "', " + order.getNrPersons() + ", " + order.getEmplId() + ", "
                     + order.getMenuId() + " , " + order.getCustomerId() + ")");
             Opprydder.lukkSetning(stm);
             return succ;
@@ -259,12 +258,28 @@ public class StreamFish {
         }
         return -1;
     }
-    
+
     public int deleteCustomer(Customer customer) {
         Statement stm;
         try {
             stm = con.createStatement();
             int succ = stm.executeUpdate("delete from customer where customer_id = " + customer.getCustomerID());
+            Opprydder.lukkSetning(stm);
+            return succ;
+        } catch (SQLException ex) {
+            System.err.println(ex);
+        }
+        return -1;
+    }
+
+    public int addEmployee(Employee employee) {
+        Statement stm;
+        String[] check = {employee.getUsername(), employee.getPassword()};
+        check = removeUnwantedSymbols(check);
+        try {
+            stm = con.createStatement();
+            int succ = stm.executeUpdate("insert into employee (USER_TYPE, USERNAME, PASSWORD) "
+                    + "values('" + employee.getUsertype() + "', '" + check[0] + "', '" + check[1] + "'");
             Opprydder.lukkSetning(stm);
             return succ;
         } catch (SQLException ex) {
