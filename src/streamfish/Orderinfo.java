@@ -11,6 +11,7 @@ class Orderinfo {
     private int numberOfPersons;
     private int price;
     private String salesperson;
+    private String date;
     
     public Orderinfo(String cn, String ad, String ph, String me, int nr, int pr, String sa) {
         customerName = cn;
@@ -20,6 +21,17 @@ class Orderinfo {
         numberOfPersons = nr;
         price = pr;
         salesperson = sa;
+    }
+    
+        public Orderinfo(String cn, String ad, String ph, String me, int nr, int pr, String sa, String da) {
+        customerName = cn;
+        address = ad;
+        phone = ph;
+        menu = me;
+        numberOfPersons = nr;
+        price = pr;
+        salesperson = sa;
+        date = da;
     }
     
     public String getCustomerName() {
@@ -48,5 +60,9 @@ class Orderinfo {
     
     public String getSalesperson() {
         return salesperson;
+    }
+    
+    public String getDate() {
+        return date;
     }
 }
