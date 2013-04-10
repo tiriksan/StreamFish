@@ -287,14 +287,6 @@ public class StreamFish {
 		
 		try {
 			stm = con.createStatement();
-			res = stm.executeQuery("CREATE VIEW todaysTasks AS SELECT customer_name, address, "
-					+ "phone, menu_name, nr_persons, price, username FROM customer\n"
-					+ "LEFT JOIN orders ON customer.CUSTOMER_ID = orders.CUSTOMER_ID\n"
-					+ "LEFT JOIN menu ON orders.MENU_ID = menu.MENU_ID\n"
-					+ "LEFT JOIN employees ON orders.EMPL_ID = employees.EMPL_ID\n"
-					+ "WHERE delivery_date = CURRENT DATE AND customer.status = '1' AND orders.status = '1';");
-			res.next();
-			Opprydder.lukkResSet(res);
 			
 			res = stm.executeQuery("select count(*) count from todaysTasks");
 			res.next();
@@ -316,7 +308,6 @@ public class StreamFish {
 				count++;
 			}
 			Opprydder.lukkResSet(res);
-			stm.executeQuery("drop view todaysTasks");
 			return info;
 		} catch (SQLException ex) {
 			System.err.println(ex);

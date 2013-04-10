@@ -182,6 +182,11 @@ public class MainMenu extends javax.swing.JPanel {
         });
 
         jButton4.setText("To do");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         jCheckBox1.setText("Show only inactive");
 
@@ -252,6 +257,11 @@ public class MainMenu extends javax.swing.JPanel {
 		}
 		
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+		new Todo(gui);
+    }//GEN-LAST:event_jButton4ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
