@@ -259,7 +259,7 @@ public class StreamFish {
 					+ "LEFT JOIN orders ON customer.CUSTOMER_ID = orders.CUSTOMER_ID\n"
 					+ "LEFT JOIN menu ON orders.MENU_ID = menu.MENU_ID\n"
 					+ "LEFT JOIN employees ON orders.EMPL_ID = employees.EMPL_ID\n"
-					+ "WHERE delivery_date = CURRENT DATE AND customer.status = '1';");
+					+ "WHERE delivery_date = CURRENT DATE AND customer.status = '1' AND orders.status = '1';");
 			res.next();
 			Opprydder.lukkResSet(res);
 			
