@@ -15,6 +15,11 @@ public class CustomerAddress {
                 this.city = city;
                 this.customerID = cusID;
 	}
+        public CustomerAddress(String adress, int zip, String city) {
+		this.adress = adress;
+                this.zipCode = zip;
+                this.city = city;
+	}
 
 	public int getCustomerID() {
 		return customerID;

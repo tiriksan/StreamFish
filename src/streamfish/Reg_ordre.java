@@ -213,7 +213,8 @@ public class Reg_ordre extends javax.swing.JPanel {
 
 		String date = (String) jComboBox2.getSelectedItem() + "-" + (String) jComboBox3.getSelectedItem() + "-" + (String) jComboBox4.getSelectedItem();
                 String time = (String) jComboBox5.getSelectedItem()+ ":" + (String) jComboBox6.getSelectedItem();
-		Order order = new Order(selMenu.getMenuId(), CUSTID, 1/*TODO?*/, antPers, date, time, (String)jComboBox1.getSelectedItem());
+                CustomerAddress orderAddress = (CustomerAddress)jComboBox1.getSelectedItem();
+		Order order = new Order(selMenu.getMenuId(), CUSTID, 1/*TODO?*/, antPers, date, time, orderAddress );
                 gui.registerOrder(order);
 		gui.byttVindu(this, "streamfish.MainMenu");
 

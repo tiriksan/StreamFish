@@ -377,11 +377,11 @@ public class StreamFish {
 		Statement stm;
 		try {
 			stm = con.createStatement();
-			String[] check = {order.getDeliveryDate(), order.getAddress()};
+			String[] check = {order.getDeliveryDate(), order.getAddress().getAdress()};
 			check = removeUnwantedSymbols(check);
-			int succ = stm.executeUpdate("insert into orders (DELIVERY_DATE, ADDRESS, NR_PERSONS, EMPL_ID, MENU_ID,CUSTOMER_ID) "
+			int succ = stm.executeUpdate("insert into orders (DELIVERY_DATE, ADDRESS, NR_PERSONS, EMPL_ID, MENU_ID,CUSTOMER_ID,DELIVER_TIME) "
 					+ "values('" + check[0] + "' , '" + check[1] + "', " + order.getNrPersons() + ", " + order.getEmplId() + ", "
-					+ order.getMenuId() + " , " + order.getCustomerId() + ")");
+					+ order.getMenuId() + " , " + order.getCustomerId() + " , '" + order.getDeliveryTime()+ "')");
 			Opprydder.lukkSetning(stm);
 			return succ;
 		} catch (SQLException ex) {
