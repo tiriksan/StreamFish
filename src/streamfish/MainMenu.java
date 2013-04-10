@@ -4,6 +4,8 @@
  */
 package streamfish;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.event.ListSelectionEvent;
@@ -73,7 +75,20 @@ public class MainMenu extends javax.swing.JPanel {
 				}
 			}
 		});
-
+		jCheckBox1.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				customers = gui.getCustomers(jTextField1.getText());
+				DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+				model.setRowCount(0);
+				if (customers != null && customers.length > 0) {
+					for (int i = 0; i < customers.length; i++) {
+						model.addRow(new Object[]{customers[i].getCustomerID(), customers[i].getCustomerName(), customers[i].getPhoneNumber(), customers[i].isBusiness()});
+					}
+				}
+			}
+			
+		});
 		jTable1.getSelectionModel().addListSelectionListener(
 				new ListSelectionListener() {
 					public void valueChanged(ListSelectionEvent event) {
@@ -117,6 +132,7 @@ public class MainMenu extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
+        jCheckBox1 = new javax.swing.JCheckBox();
 
         jButton1.setText("Register customer");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -163,6 +179,8 @@ public class MainMenu extends javax.swing.JPanel {
 
         jButton4.setText("To do");
 
+        jCheckBox1.setText("Show only inactive");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -181,7 +199,8 @@ public class MainMenu extends javax.swing.JPanel {
                         .addComponent(jButton2)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jCheckBox1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -193,7 +212,8 @@ public class MainMenu extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
+                    .addComponent(jLabel1)
+                    .addComponent(jCheckBox1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 228, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -233,6 +253,7 @@ public class MainMenu extends javax.swing.JPanel {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
