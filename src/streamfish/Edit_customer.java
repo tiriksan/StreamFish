@@ -149,7 +149,7 @@ public class Edit_customer extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-                gui.deleteCustomer(customer);
+                gui.changeCustomerStatus(customer);
                 gui.byttVindu(this, "streamfish.MainMenu");
     }//GEN-LAST:event_jButton1ActionPerformed
 

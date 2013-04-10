@@ -63,8 +63,8 @@ public class GUI extends JFrame implements WindowListener {
 		return false;
 	}
 
-	public boolean deleteCustomer(Customer customer) {
-		int succ = db.deleteCustomer(customer);
+	public boolean changeCustomerStatus(Customer customer) {
+		int succ = db.changeCustomerStatus(customer);
 		if (succ == 1) {
 			MainMenu main = (MainMenu) panels.get(0);
 			main.updt();
