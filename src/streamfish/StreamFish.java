@@ -317,12 +317,22 @@ public class StreamFish {
 		return -1;
 	}
 	
-	public int deleteDish(Dish dish) {
+	public int changeDishStatus(Dish dish) {
 		Statement stm;
+                ResultSet res;
+                int succ;
 		try {
 			stm = con.createStatement();
-			int succ = stm.executeUpdate("delete from dish where DISH_ID = " + dish.getID());
-			Opprydder.lukkSetning(stm);
+                        res = stm.executeQuery("select status from dish where dish_id = " + dish.getID());
+			res.next();
+                        int status = Integer.parseInt(res.getString("status"));
+                        if(status == 1){
+                        succ = stm.executeUpdate("update dish set status ='"+0+"' where dish_id = " + dish.getID());
+                        } else{
+                        succ = stm.executeUpdate("update dish set status ='"+1+"' where dish_id = " + dish.getID());
+                        }
+                        Opprydder.lukkResSet(res);
+                        Opprydder.lukkSetning(stm);
 			return succ;
 		} catch (SQLException ex) {
 			System.err.println(ex);
@@ -478,26 +488,45 @@ public class StreamFish {
 		return -1;
 	}
 	
-	public int deleteMenu(Menu menu) {
+	public int changeMenuStatus(Menu menu) {
 		Statement stm;
+                ResultSet res;
+                int succ;
 		try {
 			stm = con.createStatement();
-			int succ = stm.executeUpdate("delete from menu where menu_id = " + menu.getMenuId());
-			Opprydder.lukkSetning(stm);
+                        res = stm.executeQuery("select status from menu where menu_id = " + menu.getMenuId());
+			res.next();
+                        int status = Integer.parseInt(res.getString("status"));
+                        if(status == 1){
+                        succ = stm.executeUpdate("update menu set status ='"+0+"' where menu_id = " + menu.getMenuId());
+                        } else{
+                        succ = stm.executeUpdate("update menu set status ='"+1+"' where menu_id = " + menu.getMenuId());
+                        }
+                        Opprydder.lukkResSet(res);
+                        Opprydder.lukkSetning(stm);
 			return succ;
 		} catch (SQLException ex) {
 			System.err.println(ex);
 		}
 		return -1;
-		
 	}
 	
-	public int deleteEmployee(Employee employee) {
+	public int changeEmployeeStatus(Employee employee) {
 		Statement stm;
+                ResultSet res;
+                int succ;
 		try {
 			stm = con.createStatement();
-			int succ = stm.executeUpdate("delete from employees where empl_ID = " + employee.getEmplID());
-			Opprydder.lukkSetning(stm);
+                        res = stm.executeQuery("select status from employees where empl_id = " + employee.getEmplID());
+			res.next();
+                        int status = Integer.parseInt(res.getString("status"));
+                        if(status == 1){
+                        succ = stm.executeUpdate("update employees set status ='"+0+"' where empl_id = " + employee.getEmplID());
+                        } else{
+                        succ = stm.executeUpdate("update employees set status ='"+1+"' where empl_id = " + employee.getEmplID());
+                        }
+                        Opprydder.lukkResSet(res);
+                        Opprydder.lukkSetning(stm);
 			return succ;
 		} catch (SQLException ex) {
 			System.err.println(ex);
