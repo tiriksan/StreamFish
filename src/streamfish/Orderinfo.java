@@ -11,7 +11,7 @@ class Orderinfo {
     private int numberOfPersons;
     private int price;
     private String salesperson;
-    private String date;
+    private String date = "";
     
     public Orderinfo(String cn, String ad, String ph, String me, int nr, int pr, String sa) {
         customerName = cn;
