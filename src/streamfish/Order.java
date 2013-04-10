@@ -64,4 +64,11 @@ public class Order {
 	public String getAddress() {
 		return address;
 	}
+	
+	@Override
+	public String toString(){
+		String res = "";
+		res += "Order-id: " + orderId + " | delivery date: " + deliveryDate + ", empl-id:" + emplId;
+		return res;
+	}
 }
