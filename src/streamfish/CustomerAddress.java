@@ -3,13 +3,13 @@ package streamfish;
 /**
  * @author Sindre
  */
-public class CustomerAdress {
+public class CustomerAddress {
 	private String adress;
         private int zipCode;
         private String city;
         private int customerID;
 
-	public CustomerAdress(String adress, int zip, String city, int cusID) {
+	public CustomerAddress(String adress, int zip, String city, int cusID) {
 		this.adress = adress;
                 this.zipCode = zip;
                 this.city = city;
