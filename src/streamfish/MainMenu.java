@@ -167,6 +167,10 @@ public class MainMenu extends javax.swing.JPanel {
         jTable1.setMaximumSize(new java.awt.Dimension(300, 64));
         jTable1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane2.setViewportView(jTable1);
+        jTable1.getColumnModel().getColumn(0).setResizable(false);
+        jTable1.getColumnModel().getColumn(1).setResizable(false);
+        jTable1.getColumnModel().getColumn(2).setResizable(false);
+        jTable1.getColumnModel().getColumn(3).setResizable(false);
 
         jLabel1.setText("Search:");
 
