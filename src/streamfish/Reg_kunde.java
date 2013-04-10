@@ -138,11 +138,15 @@ public class Reg_kunde extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+		
 		String customername = jTextField1.getText().trim();
 		int phone = Integer.parseInt(jTextField2.getText());
 		boolean isBusiness = jCheckBox1.isSelected();
 		Customer newCustomer = new Customer(customername, phone, isBusiness);
 		gui.registerCustomer(newCustomer);
+		
+		CustomerAddress address = new CustomerAddress(jTextField3.getText(), Integer.parseInt(jTextField4.getText()), jTextField5.getText(), gui.getCustomers(customername, false)[0].getCustomerID());
+		gui.addCustomerAddress(address);
 		gui.byttVindu(this, "streamfish.MainMenu");
     }//GEN-LAST:event_jButton1ActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables

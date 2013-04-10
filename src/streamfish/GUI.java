@@ -89,6 +89,15 @@ public class GUI extends JFrame implements WindowListener {
 		}
 		return false;
 	}
+	public boolean addCustomerAddress(CustomerAddress customer){
+		int succ = db.addCustomerAddress(customer);
+		if (succ == 1) {
+			MainMenu main = (MainMenu) panels.get(0);
+			main.updt();
+			return true;
+		}
+		return false;
+	}
 	
 	public Order[] getOrders(Customer customer){
 		return db.getOrderCustomer(customer);
