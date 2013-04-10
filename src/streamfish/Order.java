@@ -68,7 +68,7 @@ public class Order {
 	@Override
 	public String toString(){
 		String res = "";
-		res += "Order-id: " + orderId + " | delivery date: " + deliveryDate + ", empl-id:" + emplId;
+		res += "ID: " + orderId + " | delivery date: " + deliveryDate + ", empl-id:" + emplId;
 		return res;
 	}
 }

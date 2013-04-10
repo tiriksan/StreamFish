@@ -41,7 +41,7 @@ public class StreamFish {
 		try {
 			stm = con.createStatement();
 			
-			res = stm.executeQuery("select * from customer where customer_id = " + i + " and customer.status = '1'");
+			res = stm.executeQuery("select * from customer where customer_id = " + i);
 			
 			while (res.next()) {
 				int customer_id = res.getInt("customer_id");
