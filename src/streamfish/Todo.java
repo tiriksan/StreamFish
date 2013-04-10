@@ -1,5 +1,7 @@
 package streamfish;
 
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
 /*
@@ -13,6 +15,7 @@ import javax.swing.table.DefaultTableModel;
 public class Todo extends javax.swing.JFrame {
 
     private final GUI gui;
+    private int viewRow;
 
     public Todo(final GUI gui) {
         this.gui = gui;
@@ -27,6 +30,16 @@ public class Todo extends javax.swing.JFrame {
 
             }
         }
+        jTable1.getSelectionModel().addListSelectionListener(
+                new ListSelectionListener() {
+                    public void valueChanged(ListSelectionEvent event) {
+
+                        if (!event.getValueIsAdjusting()) {
+                            viewRow = jTable1.getSelectedRow();
+                            System.out.println(viewRow);
+                        }
+                    }
+                });
         this.setVisible(true);
         this.pack();
     }
@@ -66,6 +79,11 @@ public class Todo extends javax.swing.JFrame {
         });
 
         jButton2.setText("Info");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -100,10 +118,14 @@ public class Todo extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        /*
+         info knappen
+         */
+    }//GEN-LAST:event_jButton2ActionPerformed
     /**
      * @param args the command line arguments
      */
-    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
