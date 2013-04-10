@@ -4,6 +4,8 @@
  */
 package streamfish;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 
@@ -17,6 +19,7 @@ public class Reg_ordre extends javax.swing.JPanel {
 	private GUI gui;
 	private Menu[] menu;
 	private CustomerAddress[] address;
+	private Object[] addressPlus1;
 
 	/**
 	 * Creates new form Reg_kunde
@@ -26,6 +29,11 @@ public class Reg_ordre extends javax.swing.JPanel {
 		this.CUSTID = custid;
 		menu = gui.getMenus();
 		address = gui.getAddress(custid);
+		addressPlus1 = new Object[address.length+1];
+		for (int i = 0; i < address.length; i++){
+			addressPlus1[i] = address[i];
+		}
+		addressPlus1[address.length] = new String("Add new address");
 		initComponents();
 		jLabel1.setText("Kundenr: " + CUSTID);
 		DefaultListModel model = (DefaultListModel) jList1.getModel();
@@ -34,10 +42,19 @@ public class Reg_ordre extends javax.swing.JPanel {
 		}
 		
 		DefaultComboBoxModel comboBox = (DefaultComboBoxModel) jComboBox1.getModel();
-		for (CustomerAddress addr : address) {
+		for (Object addr : addressPlus1) {
 			comboBox.addElement(addr);
 		}
-		
+		jComboBox1.addActionListener(new ActionListener(){ 
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				javax.swing.JComboBox box = (javax.swing.JComboBox)e.getSource();
+				if(box.getSelectedItem().getClass().equals(String.class)){
+						}
+			}
+			
+		});
 
 	}
 
