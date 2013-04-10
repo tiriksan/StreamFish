@@ -16,12 +16,13 @@ public class Todo extends javax.swing.JFrame {
 
     private final GUI gui;
     private int viewRow;
+    private Orderinfo[] orderinfo;
 
     public Todo(final GUI gui) {
         this.gui = gui;
         initComponents();
         //  customers = gui.getCustomers(jTextField1.getText(), jCheckBox1.isSelected());
-        Orderinfo[] orderinfo = gui.getTodaysTasks();
+        orderinfo = gui.getTodaysTasks();
 
         if (orderinfo != null && orderinfo.length > 0) {
             for (int i = 0; i < orderinfo.length; i++) {
@@ -119,9 +120,7 @@ public class Todo extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        /*
-         info knappen
-         */
+         new TodaysTasksFrame(orderinfo[viewRow], gui);
     }//GEN-LAST:event_jButton2ActionPerformed
     /**
      * @param args the command line arguments
