@@ -41,7 +41,7 @@ public class StreamFish {
 		try {
 			stm = con.createStatement();
 			
-			res = stm.executeQuery("select * from customer where customer_id = " + i);
+			res = stm.executeQuery("select * from customer where customer_id = " + i + " and customer.status = '1'");
 			
 			while (res.next()) {
 				int customer_id = res.getInt("customer_id");
@@ -74,13 +74,13 @@ public class StreamFish {
 		
 		try {
 			stm = con.createStatement();
-			res = stm.executeQuery("select count(*) antall from menu");
+			res = stm.executeQuery("select count(*) antall from menu where menu.status = '1'");
 			res.next();
 			int ant = res.getInt("antall");
 			menus = new Menu[ant];
 			Opprydder.lukkResSet(res);
 			
-			res = stm.executeQuery("select * from menu");
+			res = stm.executeQuery("select * from menu where menu.status = '1'");
 			
 			while (res.next()) {
 				int menuId = res.getInt("menu_id");
@@ -107,13 +107,13 @@ public class StreamFish {
 		
 		try {
 			stm = con.createStatement();
-			res = stm.executeQuery("select count(*) antall from orders");
+			res = stm.executeQuery("select count(*) antall from orders where orders.status = '1'");
 			res.next();
 			int ant = res.getInt("antall");
 			orders = new Order[ant];
 			Opprydder.lukkResSet(res);
 			
-			res = stm.executeQuery("select * from orders");
+			res = stm.executeQuery("select * from orders where orders.status = '1'");
 			
 			while (res.next()) {
 				int orderID = res.getInt("order_id");
@@ -141,12 +141,14 @@ public class StreamFish {
 		
 		try {
 			stm = con.createStatement();
-			res = stm.executeQuery("SELECT COUNT (*) ORDERCUSTOMER FROM ORDERS WHERE CUSTOMER_ID = " + customer.getCustomerID());
+                        res = stm.executeQuery("SELECT COUNT (*) ordercustomer FROM ORDERS JOIN CUSTOMER ON orders.customer_id = customer.customer_id "
+                                + "WHERE orders.CUSTOMER_ID = " + customer.getCustomerID() + " AND orders.status = '1' AND customer.status = '1'");
 			res.next();
 			orders = new Order[res.getInt("ordercustomer")];
 			Opprydder.lukkResSet(res);
 			
-			res = stm.executeQuery("SELECT * FROM ORDERS WHERE CUSTOMER_ID =" + customer.getCustomerID());
+			res = stm.executeQuery("SELECT * FROM ORDERS JOIN CUSTOMER ON orders.customer_id = customer.customer_id "
+                                + "WHERE orders.CUSTOMER_ID = " + customer.getCustomerID() + " AND orders.status = '1' AND customer.status = '1'");
 			while (res.next()) {
 				int order_id = res.getInt("ORDER_ID");
 				int menu_id = res.getInt("MENU_ID");
@@ -177,14 +179,14 @@ public class StreamFish {
 		try {
 			stm = con.createStatement();
 			res = stm.executeQuery("select count(*) antall from customer where upper(customer_name) like '"
-					+ check[0].toUpperCase() + "%' or phone like '" + check[0] + "%'");
+					+ check[0].toUpperCase() + "%' or phone like '" + check[0] + "%' and customer.status = '1'");
 			res.next();
 			int ant = res.getInt("antall");
 			customers = new Customer[ant];
 			Opprydder.lukkResSet(res);
 			
 			res = stm.executeQuery("select * from customer where upper(customer_name) like '"
-					+ check[0].toUpperCase() + "%' or phone like '" + check[0] + "%'");
+					+ check[0].toUpperCase() + "%' or phone like '" + check[0] + "%' and customer.status = '1'");
 			
 			while (res.next()) {
 				int customerId = res.getInt("customer_id");
@@ -215,13 +217,13 @@ public class StreamFish {
 		
 		try {
 			stm = con.createStatement();
-			res = stm.executeQuery("select count(*) antall from employees");
+			res = stm.executeQuery("select count(*) antall from employees where employees.status = '1'");
 			res.next();
 			int ant = res.getInt("antall");
 			employees = new Employee[ant];
 			Opprydder.lukkResSet(res);
 			
-			res = stm.executeQuery("select empl_id, user_type, username from employees");
+			res = stm.executeQuery("select empl_id, user_type, username from employees where employees.status = '1'");
 			
 			while (res.next()) {
 				int emplID = res.getInt("empl_id");
@@ -251,7 +253,7 @@ public class StreamFish {
 					+ "LEFT JOIN orders ON customer.CUSTOMER_ID = orders.CUSTOMER_ID\n"
 					+ "LEFT JOIN menu ON orders.MENU_ID = menu.MENU_ID\n"
 					+ "LEFT JOIN employees ON orders.EMPL_ID = employees.EMPL_ID\n"
-					+ "WHERE delivery_date = CURRENT DATE;");
+					+ "WHERE delivery_date = CURRENT DATE AND customer.status = '1';");
 			res.next();
 			Opprydder.lukkResSet(res);
 			
