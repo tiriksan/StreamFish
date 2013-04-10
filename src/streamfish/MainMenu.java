@@ -29,7 +29,7 @@ public class MainMenu extends javax.swing.JPanel {
 	public MainMenu(final GUI gui) {
 		this.gui = gui;
 		initComponents();
-		customers = gui.getCustomers(jTextField1.getText());
+		customers = gui.getCustomers(jTextField1.getText(), jCheckBox1.isSelected());
 //		jTable1.setModel();1
 		if (customers != null && customers.length > 0) {
 			for (int i = 0; i < customers.length; i++) {
@@ -41,7 +41,7 @@ public class MainMenu extends javax.swing.JPanel {
 		jTextField1.getDocument().addDocumentListener(new DocumentListener() {
 			@Override
 			public void insertUpdate(DocumentEvent e) {
-				customers = gui.getCustomers(jTextField1.getText());
+				customers = gui.getCustomers(jTextField1.getText(), jCheckBox1.isSelected());
 				DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
 				model.setRowCount(0);
 				if (customers != null && customers.length > 0) {
@@ -53,7 +53,7 @@ public class MainMenu extends javax.swing.JPanel {
 
 			@Override
 			public void removeUpdate(DocumentEvent e) {
-				customers = gui.getCustomers(jTextField1.getText());
+				customers = gui.getCustomers(jTextField1.getText(), jCheckBox1.isSelected());
 				DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
 				model.setRowCount(0);
 				if (customers != null && customers.length > 0) {
@@ -65,7 +65,7 @@ public class MainMenu extends javax.swing.JPanel {
 
 			@Override
 			public void changedUpdate(DocumentEvent e) {
-				customers = gui.getCustomers(jTextField1.getText());
+				customers = gui.getCustomers(jTextField1.getText(), jCheckBox1.isSelected());
 				DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
 				model.setRowCount(0);
 				if (customers != null && customers.length > 0) {
@@ -78,7 +78,7 @@ public class MainMenu extends javax.swing.JPanel {
 		jCheckBox1.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				customers = gui.getCustomers(jTextField1.getText());
+				customers = gui.getCustomers(jTextField1.getText(), jCheckBox1.isSelected());
 				DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
 				model.setRowCount(0);
 				if (customers != null && customers.length > 0) {
@@ -105,7 +105,7 @@ public class MainMenu extends javax.swing.JPanel {
 
 	public void updt() {
 
-		customers = gui.getCustomers(jTextField1.getText());
+		customers = gui.getCustomers(jTextField1.getText(), jCheckBox1.isSelected());
 		DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
 		model.setRowCount(0);
 		if (customers != null && customers.length > 0) {

@@ -177,22 +177,22 @@ public class StreamFish {
 		int teller = 0;
                 String aktiv;
                 if (status) {
-                    aktiv = "1";
-                } else {
                     aktiv = "0";
+                } else {
+                    aktiv = "1";
                 }
 		
 		try {
 			stm = con.createStatement();
 			res = stm.executeQuery("select count(*) antall from customer where (upper(customer_name) like '"
-					+ check[0].toUpperCase() + "%' or phone like '" + check[0] + "%') and customer.status = '" + status + "'");
+					+ check[0].toUpperCase() + "%' or phone like '" + check[0] + "%') and customer.status = '" + aktiv + "'");
 			res.next();
 			int ant = res.getInt("antall");
 			customers = new Customer[ant];
 			Opprydder.lukkResSet(res);
 			
 			res = stm.executeQuery("select * from customer where (upper(customer_name) like '"
-					+ check[0].toUpperCase() + "%' or phone like '" + check[0] + "%') and customer.status = '" + status + "'");
+					+ check[0].toUpperCase() + "%' or phone like '" + check[0] + "%') and customer.status = '" + aktiv + "'");
 			
 			while (res.next()) {
 				int customerId = res.getInt("customer_id");
