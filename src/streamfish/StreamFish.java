@@ -291,6 +291,53 @@ public class StreamFish {
 		}
 		return null;
 	}
+        
+        	public Orderinfo[] getOrderinfo(int orderID) {
+		Statement stm;
+		ResultSet res;
+		int count = 0;
+		Orderinfo[] info;
+		
+		try {
+			stm = con.createStatement();
+			res = stm.executeQuery("CREATE VIEW orderinfo AS SELECT customer_name, address, "
+					+ "phone, menu_name, nr_persons, price, username FROM customer\n"
+					+ "LEFT JOIN orders ON customer.CUSTOMER_ID = orders.CUSTOMER_ID\n"
+					+ "LEFT JOIN menu ON orders.MENU_ID = menu.MENU_ID\n"
+					+ "LEFT JOIN employees ON orders.EMPL_ID = employees.EMPL_ID\n"
+					+ "WHERE orders.order_ID = '" + orderID + "' AND customer.status = '1' "
+                                        + "AND orders.status = '1' ORDER BY delivery_date ASC;");
+			res.next();
+			Opprydder.lukkResSet(res);
+			
+			res = stm.executeQuery("select count(*) count from orderinfo");
+			res.next();
+			int ant = res.getInt("count");
+			info = new Orderinfo[ant];
+			Opprydder.lukkResSet(res);
+			
+			res = stm.executeQuery("select * from orderinfo");
+			
+			while (res.next()) {
+				String customerName = res.getString(1);
+				String address = res.getString(2);
+				String phone = res.getString(3);
+				String menu = res.getString(4);
+				int numberOfPersons = res.getInt(5);
+				int price = res.getInt(6);
+				String salesperson = res.getString(7);
+				info[count] = new Orderinfo(customerName, address, phone, menu, numberOfPersons, price, salesperson);
+				count++;
+			}
+			Opprydder.lukkResSet(res);
+			stm.executeQuery("drop view orderinfo");
+			return info;
+		} catch (SQLException ex) {
+			System.err.println(ex);
+			ex.printStackTrace();
+		}
+		return null;
+	}
 	
 	public int addOrder(Order order) {
 		Statement stm;
