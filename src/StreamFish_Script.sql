@@ -1,4 +1,5 @@
 -- Drop table sentences --
+DROP VIEW todaysTasks; --
 DROP TABLE menu_dish;
 DROP TABLE dish_ingredients;
 DROP TABLE dish_categories;
@@ -133,6 +134,15 @@ REFERENCES menu ON DELETE CASCADE;
 ALTER TABLE menu_dish
 ADD CONSTRAINT menu_dish_fk_2 FOREIGN KEY(dish_id)
 REFERENCES dish ON DELETE CASCADE;
+
+--Create view: todays tasks--
+
+CREATE VIEW todaysTasks AS SELECT customer_name, address, phone, menu_name, nr_persons, price, username 
+FROM customer LEFT JOIN orders ON customer.CUSTOMER_ID = orders.CUSTOMER_ID 
+LEFT JOIN menu ON orders.MENU_ID = menu.MENU_ID
+LEFT JOIN employees ON orders.EMPL_ID = employees.EMPL_ID
+WHERE delivery_date = CURRENT DATE AND customer.status = '1' AND orders.status = '1';
+
 
 -- Insert sentences --
 INSERT INTO employees VALUES(DEFAULT, DEFAULT, 'Admin', 'NoSoup4U', DEFAULT);
