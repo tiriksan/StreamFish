@@ -418,7 +418,7 @@ public class StreamFish {
 		return -1;
 	}
 	
-	public int addCustomerAdress(CustomerAdress adress, Customer customer) {
+	public int addCustomerAdress(CustomerAddress adress, Customer customer) {
 		Statement stm;
 		String[] check = {adress.getAdress(), adress.getCity()};
 		check = removeUnwantedSymbols(check);
