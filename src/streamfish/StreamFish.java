@@ -168,25 +168,31 @@ public class StreamFish {
 		return null;
 	}
 	
-	public Customer[] getCustomers(String s) {
+	public Customer[] getCustomers(String s, boolean status) {
 		Statement stm;
 		ResultSet res;
 		Customer[] customers;
 		String[] check = {s};
 		check = removeUnwantedSymbols(check);
 		int teller = 0;
+                String aktiv;
+                if (status) {
+                    aktiv = "1";
+                } else {
+                    aktiv = "0";
+                }
 		
 		try {
 			stm = con.createStatement();
 			res = stm.executeQuery("select count(*) antall from customer where (upper(customer_name) like '"
-					+ check[0].toUpperCase() + "%' or phone like '" + check[0] + "%') and customer.status = '1'");
+					+ check[0].toUpperCase() + "%' or phone like '" + check[0] + "%') and customer.status = '" + status + "'");
 			res.next();
 			int ant = res.getInt("antall");
 			customers = new Customer[ant];
 			Opprydder.lukkResSet(res);
 			
 			res = stm.executeQuery("select * from customer where (upper(customer_name) like '"
-					+ check[0].toUpperCase() + "%' or phone like '" + check[0] + "%') and customer.status = '1'");
+					+ check[0].toUpperCase() + "%' or phone like '" + check[0] + "%') and customer.status = '" + status + "'");
 			
 			while (res.next()) {
 				int customerId = res.getInt("customer_id");

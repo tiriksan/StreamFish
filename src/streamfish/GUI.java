@@ -73,8 +73,8 @@ public class GUI extends JFrame implements WindowListener {
 		return false;
 	}
 
-	public Customer[] getCustomers(String s) {
-		return db.getCustomers(s);
+	public Customer[] getCustomers(String s, boolean status) {
+		return db.getCustomers(s, status);
 	}
 
 	public Customer getCustomer(int i) {
