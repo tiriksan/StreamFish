@@ -6,9 +6,11 @@ package streamfish;
  */
 public class OrderinfoFrame extends javax.swing.JFrame {
     private Orderinfo info;
+    private GUI gui;
     
-    public OrderinfoFrame(Orderinfo info) {
+    public OrderinfoFrame(Orderinfo info, GUI gui) {
         this.info = info;
+        this.gui = gui;
         initComponents();
         this.setVisible(true);
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -171,11 +173,11 @@ public class OrderinfoFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+        // TODO: DELETE
     }//GEN-LAST:event_jButton2ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

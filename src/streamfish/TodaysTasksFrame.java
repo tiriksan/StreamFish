@@ -6,9 +6,11 @@ package streamfish;
  */
 public class TodaysTasksFrame extends javax.swing.JFrame {
     private Orderinfo info;
+    private GUI gui;
     
-    public TodaysTasksFrame(Orderinfo info) {
+    public TodaysTasksFrame(Orderinfo info, GUI gui) {
         this.info = info;
+        this.gui = gui;
         initComponents();
         this.setVisible(true);
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
