@@ -382,12 +382,22 @@ public class StreamFish {
 		return -1;
 	}
 	
-	public int deleteCustomer(Customer customer) {
+	public int changeCustomerStatus(Customer customer) {
 		Statement stm;
+                ResultSet res;
+                int succ;
 		try {
 			stm = con.createStatement();
-			int succ = stm.executeUpdate("delete from customer where customer_id = " + customer.getCustomerID());
-			Opprydder.lukkSetning(stm);
+                        res = stm.executeQuery("select status from customer where customer_id = " + customer.getCustomerID());
+			res.next();
+                        int status = Integer.parseInt(res.getString("status"));
+                        if(status == 1){
+                        succ = stm.executeUpdate("update customer set status ='"+0+"' where customer_id = " + customer.getCustomerID());
+                        } else{
+                        succ = stm.executeUpdate("update customer set status ='"+1+"' where customer_id = " + customer.getCustomerID());
+                        }
+                        Opprydder.lukkResSet(res);
+                        Opprydder.lukkSetning(stm);
 			return succ;
 		} catch (SQLException ex) {
 			System.err.println(ex);
