@@ -4,6 +4,7 @@
  */
 package streamfish;
 
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 
 /**
@@ -12,23 +13,31 @@ import javax.swing.DefaultListModel;
  */
 public class Reg_ordre extends javax.swing.JPanel {
 
-	private final int KUNDENR;
+	private final int CUSTID;
 	private GUI gui;
 	private Menu[] menu;
+	private CustomerAddress[] address;
 
 	/**
 	 * Creates new form Reg_kunde
 	 */
-	public Reg_ordre(int kundenr, GUI gui) {
+	public Reg_ordre(int custid, GUI gui) {
 		this.gui = gui;
-		this.KUNDENR = kundenr;
+		this.CUSTID = custid;
 		menu = gui.getMenus();
+		address = gui.getAddress(custid);
 		initComponents();
-		jLabel1.setText("Kundenr: " + KUNDENR);
+		jLabel1.setText("Kundenr: " + CUSTID);
 		DefaultListModel model = (DefaultListModel) jList1.getModel();
 		for (Menu men : menu) {
 			model.addElement(men);
 		}
+		
+		DefaultComboBoxModel comboBox = (DefaultComboBoxModel) jComboBox1.getModel();
+		for (CustomerAddress addr : address) {
+			comboBox.addElement(addr);
+		}
+		
 
 	}
 
@@ -68,7 +77,7 @@ public class Reg_ordre extends javax.swing.JPanel {
             }
         });
 
-        jLabel1.setText("Kundenr: " + KUNDENR);
+        jLabel1.setText("Kundenr: " + CUSTID);
 
         jSpinner1.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(1), Integer.valueOf(1), null, Integer.valueOf(1)));
         jSpinner1.setValue(1);
@@ -81,7 +90,7 @@ public class Reg_ordre extends javax.swing.JPanel {
 
         jLabel5.setText("Address");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox1.setModel(new DefaultComboBoxModel());
 
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020" }));
 
@@ -164,7 +173,7 @@ public class Reg_ordre extends javax.swing.JPanel {
 		int antPers = Integer.parseInt(jSpinner1.getValue().toString());
 
 		String date = (String) jComboBox2.getSelectedItem() + "-" + (String) jComboBox3.getSelectedItem() + "-" + (String) jComboBox4.getSelectedItem(); 
-		Order order = new Order(selMenu.getMenuId(), KUNDENR, 1/*TODO?*/, antPers, date, (String)jComboBox1.getSelectedItem());
+		Order order = new Order(selMenu.getMenuId(), CUSTID, 1/*TODO?*/, antPers, date, (String)jComboBox1.getSelectedItem());
 		gui.registerOrder(order);
 		gui.byttVindu(this, "streamfish.MainMenu");
 

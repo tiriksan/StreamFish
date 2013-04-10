@@ -98,6 +98,37 @@ public class StreamFish {
 		return null;
 	}
 	
+	public CustomerAddress[] getAddress(int custid) {
+		
+		Statement stm;
+		ResultSet res;
+		CustomerAddress[] address;
+		int teller = 0;
+		
+		try {
+			stm = con.createStatement();
+			res = stm.executeQuery("select count(*) antall from customer_address where customer_id = " + custid);
+			res.next();
+			int ant = res.getInt("antall");
+			address = new CustomerAddress[ant];
+			Opprydder.lukkResSet(res);
+			
+			res = stm.executeQuery("select * from customer_address where customer_id = " + custid);
+			
+			while (res.next()) {
+				String address1 = res.getString("address");
+				int zipCode = res.getInt("zip_code");
+				String city = res.getString("city");
+				address[teller] = new CustomerAddress(address1, zipCode, city, custid);
+				teller++;
+			}
+			return address;
+		} catch (SQLException ex) {
+			ex.printStackTrace();
+		}
+		return null;
+	}
+	
 	public Order[] getOrders() {
 		
 		Statement stm;
