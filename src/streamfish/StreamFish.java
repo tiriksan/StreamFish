@@ -493,15 +493,15 @@ public class StreamFish {
 		return -1;
 	}
 	
-	public int addCustomerAdress(CustomerAddress adress, Customer customer) {
+	public int addCustomerAddress(CustomerAddress address, Customer customer) {
 		Statement stm;
-		String[] check = {adress.getAdress(), adress.getCity()};
+		String[] check = {address.getAdress(), address.getCity()};
 		check = removeUnwantedSymbols(check);
 		
 		try {
 			stm = con.createStatement();
 			int succ = stm.executeUpdate("insert into CUSTOMER_ADRESS (ADRESS,ZIP_CODE,CITY,CUSTOMER_ID)"
-					+ " values('" + check[0] + "' , '" + adress.getZipCode() + "', '" + check[1] + "', '" + adress.getCustomerID() + "')");
+					+ " values('" + check[0] + "' , '" + address.getZipCode() + "', '" + check[1] + "', '" + address.getCustomerID() + "')");
 			Opprydder.lukkSetning(stm);
 			return succ;
 			
