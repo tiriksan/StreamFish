@@ -16,9 +16,10 @@ public class Order {
 	private int emplId;
 	private int nrPersons;
 	private String deliveryDate;
+        private String deliveryTime;
 	private String address;
 
-	public Order(int orderId, int menuId, int customerID, int emplId, int nrPersons, String deliveryDate, String address) {
+	public Order(int orderId, int menuId, int customerID, int emplId, int nrPersons, String deliveryDate, String deliveryTime, String address) {
 		this.orderId = orderId;
 		this.menuId = menuId;
 		this.customerId = customerID;
@@ -26,14 +27,16 @@ public class Order {
 		this.nrPersons = nrPersons;
 		this.deliveryDate = deliveryDate;
 		this.address = address;
+                this.deliveryTime = deliveryTime;
 	}
 
-	public Order(int menuId, int customerID, int emplId, int nrPersons, String deliveryDate, String address) {
+	public Order(int menuId, int customerID, int emplId, int nrPersons, String deliveryDate, String deliveryTime, String address) {
 		this.menuId = menuId;
 		this.customerId = customerID;
 		this.emplId = emplId;
 		this.nrPersons = nrPersons;
 		this.deliveryDate = deliveryDate;
+                this.deliveryTime = deliveryTime;
 		this.address = address;
 	}
 
@@ -59,6 +62,9 @@ public class Order {
 
 	public String getDeliveryDate() {
 		return deliveryDate;
+	}
+        public String getDeliveryTime() {
+		return deliveryTime;
 	}
 
 	public String getAddress() {

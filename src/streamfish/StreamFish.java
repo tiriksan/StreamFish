@@ -153,8 +153,9 @@ public class StreamFish {
 				int emplID = res.getInt("empl_id");
 				int nrPersons = res.getInt("nr_persons");
 				String deliveryDate = res.getString("delivery_date");
+                                String deliveryTime = res.getString("deliver_time");
 				String address = res.getString("address");
-				orders[teller] = new Order(orderID, menuID, customerID, emplID, nrPersons, deliveryDate, address);
+				orders[teller] = new Order(orderID, menuID, customerID, emplID, nrPersons, deliveryDate, deliveryTime, address);
 				teller++;
 			}
 			return orders;
@@ -187,9 +188,10 @@ public class StreamFish {
 				int empl_id = res.getInt("EMPL_ID");
 				int num_persons = res.getInt("NR_PERSONS");
 				String date = res.getString("DELIVERY_DATE");
+                                String time = res.getString("DELIVER_TIME");
 				String address = res.getString("ADDRESS");
 				
-				orders[counter] = new Order(order_id, menu_id, customer_id, empl_id, num_persons, date, address);
+				orders[counter] = new Order(order_id, menu_id, customer_id, empl_id, num_persons, date,time, address);
 				counter++;
 			}
 			return orders;
