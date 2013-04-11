@@ -5,6 +5,8 @@
 package streamfish;
 
 import javax.swing.DefaultListModel;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 /**
  *
@@ -15,6 +17,9 @@ public class Edit_customer extends javax.swing.JPanel {
 	private GUI gui;
 	private final int KUNDENR;
 	private Customer customer;
+        private Order[] orders;
+        private Order ordre;
+        private DefaultListModel model;
 
 	public Edit_customer(int kundenr, GUI gui) {
 		this.gui = gui;
@@ -24,13 +29,22 @@ public class Edit_customer extends javax.swing.JPanel {
 		jTextField1.setText(customer.getCustomerName());
 		jTextField2.setText(customer.getPhoneNumber() + "");
 		jCheckBox1.setSelected(customer.isBusiness());
-		Order[] orders = gui.getOrders(customer);
-		DefaultListModel model = (DefaultListModel) jList1.getModel();
+		orders = gui.getOrders(customer);
+		model = (DefaultListModel) jList1.getModel();
 		for (Order order : orders) {
 			model.addElement(order);
 		}
 
 	}
+        
+        public void update() {
+            orders = gui.getOrders(customer);
+            model = (DefaultListModel) jList1.getModel();
+            model.clear();
+            for (Order order : orders) {
+                model.addElement(order);
+            }
+        }
 
 	/**
 	 * This method is called from within the constructor to initialize the form.
@@ -77,9 +91,19 @@ public class Edit_customer extends javax.swing.JPanel {
         jCheckBox1.setText("Business");
 
         jList1.setModel(new DefaultListModel());
+        jList1.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                jList1ValueChanged(evt);
+            }
+        });
         jScrollPane1.setViewportView(jList1);
 
         jButton3.setText("Delete order");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("Name:");
 
@@ -121,9 +145,6 @@ public class Edit_customer extends javax.swing.JPanel {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel1)
                                 .addGap(0, 0, Short.MAX_VALUE))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel5)
-                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jCheckBox1))
@@ -132,7 +153,9 @@ public class Edit_customer extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton2))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton4)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel5)
+                            .addComponent(jButton4))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -190,6 +213,19 @@ public class Edit_customer extends javax.swing.JPanel {
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
 		gui.byttVindu(this, "streamfish.MainMenu");
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        if(gui.changeOrderStatus(ordre.getOrderId())) {
+            this.update();
+        } else {
+            System.err.println("Kunne ikke slette ordre: se Edit_customer.java");
+        }
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jList1ValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jList1ValueChanged
+        ordre = (Order) jList1.getSelectedValue();
+    }//GEN-LAST:event_jList1ValueChanged
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
