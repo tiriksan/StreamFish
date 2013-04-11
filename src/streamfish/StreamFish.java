@@ -297,15 +297,16 @@ public class StreamFish {
 			res = stm.executeQuery("select * from todaysTasks");
 			
 			while (res.next()) {
-				String customerName = res.getString(1);
-				String address = res.getString(2);
-				String phone = res.getString(3);
-				String menu = res.getString(4);
-				int numberOfPersons = res.getInt(5);
-				int price = res.getInt(6);
-				String salesperson = res.getString(7);
-				info[count] = new Orderinfo(customerName, address, phone, menu, numberOfPersons, price, salesperson);
-				count++;
+                            int orderID = res.getInt(1);
+                            String customerName = res.getString(2);
+                            String address = res.getString(3);
+                            String phone = res.getString(4);
+                            String menu = res.getString(5);
+                            int numberOfPersons = res.getInt(6);
+                            int price = res.getInt(7);
+                            String salesperson = res.getString(8);
+                            info[count] = new Orderinfo(orderID, customerName, address, phone, menu, numberOfPersons, price, salesperson);
+                            count++;
 			}
 			Opprydder.lukkResSet(res);
 			return info;
@@ -325,7 +326,7 @@ public class StreamFish {
 		try {
 			stm = con.createStatement();
 			res = stm.executeQuery("CREATE VIEW orderinfo AS SELECT orders.delivery_date, customer_name, address, "
-					+ "phone, menu_name, nr_persons, price, username FROM customer\n"
+					+ "phone, menu_name, nr_persons, price*nr_persons " + "Total" + ", username FROM customer\n"
 					+ "LEFT JOIN orders ON customer.CUSTOMER_ID = orders.CUSTOMER_ID\n"
 					+ "LEFT JOIN menu ON orders.MENU_ID = menu.MENU_ID\n"
 					+ "LEFT JOIN employees ON orders.EMPL_ID = employees.EMPL_ID\n"
@@ -351,7 +352,7 @@ public class StreamFish {
 				int numberOfPersons = res.getInt(6);
 				int price = res.getInt(7);
 				String salesperson = res.getString(8);
-				info[count] = new Orderinfo(customerName, address, phone, menu, numberOfPersons, price, salesperson, date);
+				info[count] = new Orderinfo(orderID, customerName, address, phone, menu, numberOfPersons, price, salesperson, date);
 				count++;
 			}
 			Opprydder.lukkResSet(res);
@@ -581,6 +582,29 @@ public class StreamFish {
                         succ = stm.executeUpdate("update menu set status ='"+0+"' where menu_id = " + menu.getMenuId());
                         } else{
                         succ = stm.executeUpdate("update menu set status ='"+1+"' where menu_id = " + menu.getMenuId());
+                        }
+                        Opprydder.lukkResSet(res);
+                        Opprydder.lukkSetning(stm);
+			return succ;
+		} catch (SQLException ex) {
+			System.err.println(ex);
+		}
+		return -1;
+	}
+        
+        	public int changeOrderStatus(int orderID) {
+		Statement stm;
+                ResultSet res;
+                int succ;
+		try {
+			stm = con.createStatement();
+                        res = stm.executeQuery("select status from orders where order_id = " + orderID);
+			res.next();
+                        int status = Integer.parseInt(res.getString("status"));
+                        if(status == 1){
+                        succ = stm.executeUpdate("update orders set status ='"+0+"' where order_id = " + orderID);
+                        } else{
+                        succ = stm.executeUpdate("update orders set status ='"+1+"' where order_id = " + orderID);
                         }
                         Opprydder.lukkResSet(res);
                         Opprydder.lukkSetning(stm);

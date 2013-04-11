@@ -4,6 +4,7 @@ package streamfish;
  * @author HJ
  */
 class Orderinfo {
+    private final int orderID;
     private String customerName;
     private String address;
     private String phone;
@@ -13,7 +14,8 @@ class Orderinfo {
     private String salesperson;
     private String date = "";
     
-    public Orderinfo(String cn, String ad, String ph, String me, int nr, int pr, String sa) {
+    public Orderinfo(int id, String cn, String ad, String ph, String me, int nr, int pr, String sa) {
+        orderID = id;
         customerName = cn;
         address = ad;
         phone = ph;
@@ -23,7 +25,8 @@ class Orderinfo {
         salesperson = sa;
     }
     
-        public Orderinfo(String cn, String ad, String ph, String me, int nr, int pr, String sa, String da) {
+    public Orderinfo(int id, String cn, String ad, String ph, String me, int nr, int pr, String sa, String da) {
+        orderID = id;
         customerName = cn;
         address = ad;
         phone = ph;
@@ -32,6 +35,10 @@ class Orderinfo {
         price = pr;
         salesperson = sa;
         date = da;
+    }
+    
+    public int getOrderID() {
+        return orderID;
     }
     
     public String getCustomerName() {

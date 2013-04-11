@@ -137,7 +137,7 @@ REFERENCES dish ON DELETE CASCADE;
 
 --Create view: todays tasks--
 
-CREATE VIEW todaysTasks AS SELECT customer_name, address, phone, menu_name, nr_persons, price, username 
+CREATE VIEW todaysTasks AS SELECT orders.order_id, customer_name, address, phone, menu_name, nr_persons, price*nr_persons "Total price", username 
 FROM customer LEFT JOIN orders ON customer.CUSTOMER_ID = orders.CUSTOMER_ID 
 LEFT JOIN menu ON orders.MENU_ID = menu.MENU_ID
 LEFT JOIN employees ON orders.EMPL_ID = employees.EMPL_ID
