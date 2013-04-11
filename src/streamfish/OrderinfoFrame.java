@@ -65,7 +65,7 @@ public class OrderinfoFrame extends javax.swing.JFrame {
 
         jLabel5.setText("Persons:");
 
-        jLabel6.setText("Price:");
+        jLabel6.setText("Total:");
 
         jLabel7.setText("Salesperson:");
 
@@ -121,9 +121,7 @@ public class OrderinfoFrame extends javax.swing.JFrame {
                                 .addComponent(jLabel14)
                                 .addComponent(jLabel15)
                                 .addComponent(jLabel16))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel9)
-                                .addGap(0, 0, 0)))))
+                            .addComponent(jLabel9))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -177,7 +175,11 @@ public class OrderinfoFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO: DELETE
+        if(gui.changeOrderStatus(info.getOrderID())) {
+            this.dispose();
+        } else {
+            System.err.println("Kunne ikke slette ordre: se OrderInfoFrame.java");
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
