@@ -6,6 +6,10 @@ package streamfish;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 
@@ -20,17 +24,20 @@ public class Reg_ordre extends javax.swing.JPanel {
 	private Menu[] menu;
 	private CustomerAddress[] address;
 	private Object[] addressPlus1;
+	private Reg_ordre order = this;
+	private DefaultComboBoxModel comboBox;
 
 	/**
 	 * Creates new form Reg_kunde
 	 */
-	public Reg_ordre(int custid, GUI gui) {
+	public Reg_ordre(int custid, final GUI gui) {
+
 		this.gui = gui;
 		this.CUSTID = custid;
 		menu = gui.getMenus();
-		address = gui.getAddress(custid);
-		addressPlus1 = new Object[address.length+1];
-		for (int i = 0; i < address.length; i++){
+		address = gui.getAddress(CUSTID);
+		addressPlus1 = new Object[address.length + 1];
+		for (int i = 0; i < address.length; i++) {
 			addressPlus1[i] = address[i];
 		}
 		addressPlus1[address.length] = new String("Add new address");
@@ -40,22 +47,60 @@ public class Reg_ordre extends javax.swing.JPanel {
 		for (Menu men : menu) {
 			model.addElement(men);
 		}
-		
-		DefaultComboBoxModel comboBox = (DefaultComboBoxModel) jComboBox1.getModel();
+
+		comboBox = (DefaultComboBoxModel) jComboBox1.getModel();
 		for (Object addr : addressPlus1) {
 			comboBox.addElement(addr);
 		}
-		jComboBox1.addActionListener(new ActionListener(){ 
-
+		jComboBox1.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				javax.swing.JComboBox box = (javax.swing.JComboBox)e.getSource();
-				if(box.getSelectedItem().getClass().equals(String.class)){
+				javax.swing.JComboBox box = (javax.swing.JComboBox) e.getSource();
+				if (box.getSelectedItem().getClass().equals(String.class)) {
+					AddAddress address = new AddAddress(gui, CUSTID);
+					address.addWindowListener(new WindowListener(){
+						@Override
+						public void windowOpened(WindowEvent e) {
 						}
+						@Override
+						public void windowClosing(WindowEvent e) {
+						}
+						@Override
+						public void windowClosed(WindowEvent e) {
+							order.update();
+						}
+						@Override
+						public void windowIconified(WindowEvent e) {
+						}
+						@Override
+						public void windowDeiconified(WindowEvent e) {
+						}
+						@Override
+						public void windowActivated(WindowEvent e) {
+						}
+						@Override
+						public void windowDeactivated(WindowEvent e) {
+						}
+					});
+				}
 			}
-			
 		});
 
+	}
+
+	private void update() {
+		address = gui.getAddress(CUSTID);
+		addressPlus1 = new Object[address.length + 1];
+		for (int i = 0; i < address.length; i++) {
+			addressPlus1[i] = address[i];
+		}
+		addressPlus1[address.length] = new String("Add new address");
+		comboBox.removeAllElements();
+		comboBox = (DefaultComboBoxModel) jComboBox1.getModel();
+		
+		for (Object addr : addressPlus1) {
+			comboBox.addElement(addr);
+		}
 	}
 
 	@SuppressWarnings("unchecked")
@@ -212,15 +257,14 @@ public class Reg_ordre extends javax.swing.JPanel {
 		int antPers = Integer.parseInt(jSpinner1.getValue().toString());
 
 		String date = (String) jComboBox2.getSelectedItem() + "-" + (String) jComboBox3.getSelectedItem() + "-" + (String) jComboBox4.getSelectedItem();
-                String time = (String) jComboBox5.getSelectedItem()+ ":" + (String) jComboBox6.getSelectedItem();
-                CustomerAddress orderAddress = (CustomerAddress)jComboBox1.getSelectedItem();
-		Order order = new Order(selMenu.getMenuId(), CUSTID, 1/*TODO?*/, antPers, date, time, orderAddress );
-                gui.registerOrder(order);
+		String time = (String) jComboBox5.getSelectedItem() + ":" + (String) jComboBox6.getSelectedItem();
+		CustomerAddress orderAddress = (CustomerAddress) jComboBox1.getSelectedItem();
+		Order order = new Order(selMenu.getMenuId(), CUSTID, 1/*TODO?*/, antPers, date, time, orderAddress);
+		gui.registerOrder(order);
 		gui.byttVindu(this, "streamfish.MainMenu");
 
 
     }//GEN-LAST:event_jButton2ActionPerformed
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;

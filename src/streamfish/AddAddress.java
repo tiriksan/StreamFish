@@ -1,20 +1,26 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package streamfish;
 
 /**
  *
  * @author Kristian
  */
+import javax.swing.JOptionPane;
+
 public class AddAddress extends javax.swing.JFrame {
 
 	/**
 	 * Creates new form AddAddress
 	 */
-	public AddAddress() {
+	
+	private final GUI gui;
+	private int cust_id;
+	
+	public AddAddress(final GUI gui, int cust_id) {
+		this.gui = gui;
+		this.cust_id = cust_id;
 		initComponents();
+		this.setVisible(true);
+		this.pack();
 	}
 
 	/**
@@ -38,8 +44,18 @@ public class AddAddress extends javax.swing.JFrame {
         setTitle("Add address");
 
         jButton1.setText("Add");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Cancel");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("Address");
 
@@ -92,40 +108,33 @@ public class AddAddress extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-	/**
-	 * @param args the command line arguments
-	 */
-	public static void main(String args[]) {
-		/* Set the Nimbus look and feel */
-		//<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-		 * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-		 */
-		try {
-			for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-				if ("Nimbus".equals(info.getName())) {
-					javax.swing.UIManager.setLookAndFeel(info.getClassName());
-					break;
-				}
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+		try{
+			if(jTextField1.getText().length()==0 || jTextField2.getText().length()==0 || jTextField3.getText().length() == 0){
+				throw new IllegalArgumentException();
 			}
-		} catch (ClassNotFoundException ex) {
-			java.util.logging.Logger.getLogger(AddAddress.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-		} catch (InstantiationException ex) {
-			java.util.logging.Logger.getLogger(AddAddress.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-		} catch (IllegalAccessException ex) {
-			java.util.logging.Logger.getLogger(AddAddress.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-		} catch (javax.swing.UnsupportedLookAndFeelException ex) {
-			java.util.logging.Logger.getLogger(AddAddress.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+			if(jTextField3.getText().length()!=4){
+				throw new NumberFormatException();
+				
+			}
+			int zip = Integer.parseInt(jTextField3.getText());
+			
+			gui.addCustomerAddress(new CustomerAddress(jTextField1.getText(), zip, jTextField2.getText(), cust_id));
+			this.dispose();
+		}catch (NumberFormatException e){
+			JOptionPane.showMessageDialog(null,"The zip-code must contain 4 numbers");
+		} catch (IllegalArgumentException e2){
+			JOptionPane.showMessageDialog(null, "Fill in all the text fields");
 		}
-		//</editor-fold>
+		
+    }//GEN-LAST:event_jButton1ActionPerformed
 
-		/* Create and display the form */
-		java.awt.EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				new AddAddress().setVisible(true);
-			}
-		});
-	}
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+		this.dispose();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
