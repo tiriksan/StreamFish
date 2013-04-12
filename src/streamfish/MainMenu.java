@@ -40,7 +40,7 @@ public class MainMenu extends javax.swing.JPanel {
                 model.addRow(new Object[]{customers[i].getCustomerID(), customers[i].getCustomerName(), customers[i].getPhoneNumber(), customers[i].isBusiness()});
             }
         }
-
+        // from here tab2 NorC
         orderinfo = gui.getTodaysTasks();
 
         if (orderinfo != null && orderinfo.length > 0) {
@@ -50,7 +50,17 @@ public class MainMenu extends javax.swing.JPanel {
 
             }
         }
+        
+        jTable1.getSelectionModel().addListSelectionListener(
+                new ListSelectionListener() {
+                    public void valueChanged(ListSelectionEvent event) {
 
+                        if (!event.getValueIsAdjusting()) {
+                            viewRow = jTable1.getSelectedRow();
+                        }
+                    }
+                });
+        //to here tab2 Norc
         jTextField1.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
@@ -88,6 +98,8 @@ public class MainMenu extends javax.swing.JPanel {
                 }
             }
         });
+        
+        
         jCheckBox1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -126,6 +138,8 @@ public class MainMenu extends javax.swing.JPanel {
             }
         }
     }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -353,7 +367,7 @@ public class MainMenu extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        new Todo(gui);
+        new TodaysTasksFrame(orderinfo[viewRow], gui);
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
