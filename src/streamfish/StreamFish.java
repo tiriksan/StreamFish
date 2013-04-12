@@ -284,6 +284,18 @@ public class StreamFish {
 		return null;
 	}
 	
+	public Employee userAuthorization(String username, String password) {
+        for (Employee emp : getEmployees()) {
+            if (username.equals(emp.getUsername())) {
+                if (password.equals(emp.getPassword())) {
+                    System.out.println("Login successfull");
+                    return emp;
+                }
+            }
+        }
+        return null;
+    }
+	
 	public Employee[] getEmployees() {
 		Statement stm;
 		ResultSet res;

@@ -96,7 +96,7 @@ public class Reg_ordre extends javax.swing.JPanel {
 
 	}
 	private double updatePrice(){
-		double price = selMenu.getPrice() * antPers;
+		double price = selMenu.getPrice() * antPers * priceReduction;
 		return 0.0;
 	}
 	private void update() {
