@@ -50,7 +50,7 @@ public class MainMenu extends javax.swing.JPanel {
 
             }
         }
-        
+
         jTable1.getSelectionModel().addListSelectionListener(
                 new ListSelectionListener() {
                     public void valueChanged(ListSelectionEvent event) {
@@ -98,8 +98,8 @@ public class MainMenu extends javax.swing.JPanel {
                 }
             }
         });
-        
-        
+
+
         jCheckBox1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -138,8 +138,6 @@ public class MainMenu extends javax.swing.JPanel {
             }
         }
     }
-    
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -154,7 +152,6 @@ public class MainMenu extends javax.swing.JPanel {
         jButton2 = new javax.swing.JButton();
         jTextField1 = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jCheckBox1 = new javax.swing.JCheckBox();
         jButton5 = new javax.swing.JButton();
@@ -184,13 +181,6 @@ public class MainMenu extends javax.swing.JPanel {
         });
 
         jLabel1.setText("Search:");
-
-        jButton3.setText("Edit customer");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
 
         jButton4.setText("Get info");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
@@ -241,7 +231,7 @@ public class MainMenu extends javax.swing.JPanel {
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 173, Short.MAX_VALUE)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Customers", jPanel1);
@@ -291,7 +281,7 @@ public class MainMenu extends javax.swing.JPanel {
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 173, Short.MAX_VALUE)
+            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Subscriptions", jPanel3);
@@ -305,11 +295,9 @@ public class MainMenu extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jButton1)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton3)
-                        .addGap(18, 18, 18)
+                        .addGap(76, 76, 76)
                         .addComponent(jButton4)
-                        .addGap(18, 18, 18)
+                        .addGap(77, 77, 77)
                         .addComponent(jButton2))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jCheckBox1)
@@ -337,7 +325,6 @@ public class MainMenu extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2)
                     .addComponent(jButton1)
-                    .addComponent(jButton3)
                     .addComponent(jButton4))
                 .addContainerGap())
         );
@@ -356,22 +343,16 @@ public class MainMenu extends javax.swing.JPanel {
         gui.byttVindu(this, new Reg_kunde(gui));
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-        if (kundenr == -1) {
-            showMessageDialog(null, "Ingen kunde er valgt.");
-        } else {
-            gui.byttVindu(this, new Edit_customer(kundenr, gui));
-        }
-
-    }//GEN-LAST:event_jButton3ActionPerformed
-
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        if(jTabbedPane1.getSelectedIndex() == 0){
-            System.out.println("pane1 works");
-        }else if(jTabbedPane1.getSelectedIndex() == 1){
+        if (jTabbedPane1.getSelectedIndex() == 0) {
+            if (kundenr == -1) {
+                showMessageDialog(null, "Ingen kunde er valgt.");
+            } else {
+                gui.byttVindu(this, new Edit_customer(kundenr, gui));
+            }
+        } else if (jTabbedPane1.getSelectedIndex() == 1) {
             new TodaysTasksFrame(orderinfo[viewRow], gui);
-        }else{
+        } else {
             System.out.println("panel3 works!");
         }
     }//GEN-LAST:event_jButton4ActionPerformed
@@ -383,7 +364,6 @@ public class MainMenu extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JCheckBox jCheckBox1;
