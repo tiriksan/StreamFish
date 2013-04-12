@@ -286,16 +286,12 @@ public class StreamFish {
 	
 	public Employee userAuthorization(String username, String password) {
         for (Employee emp : getEmployees()) {
-            System.out.println(password);
             if (username.equals(emp.getUsername())) {
-                System.out.println(password + " " + emp.getPassword());
                 if (password.equals(emp.getPassword())) {
-                    System.out.println("Login successfull");
                     return emp;
                 }
             }
         }
-        System.out.println("feil!!");
         return null;
     }
 	
