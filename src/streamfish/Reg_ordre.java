@@ -12,6 +12,12 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+import javax.swing.event.ListDataEvent;
+import javax.swing.event.ListDataListener;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 /**
  *
@@ -44,18 +50,35 @@ public class Reg_ordre extends javax.swing.JPanel {
 		address = gui.getAddress(CUSTID);
 		addressPlus1 = new Object[address.length + 1];
 		priceReduction = customer.getPriceReduction();
+		
 		for (int i = 0; i < address.length; i++) {
 			addressPlus1[i] = address[i];
 		}
 		addressPlus1[address.length] = new String("Add new address");
 		initComponents();
+		antPers = Integer.parseInt(jSpinner1.getValue().toString());
 		jLabel10.setText(priceReduction + " %");
-		jLabel9.setText(updatePrice() + ",-");
+		jLabel7.setText(updatePrice() + ",-");
 		jLabel1.setText("Kundenr: " + CUSTID);
 		DefaultListModel model = (DefaultListModel) jList1.getModel();
 		for (Menu men : menu) {
 			model.addElement(men);
 		}
+		jSpinner1.addChangeListener(new ChangeListener(){
+			@Override
+			public void stateChanged(ChangeEvent e) {
+				antPers = Integer.parseInt(jSpinner1.getValue().toString());
+				jLabel7.setText(updatePrice() + ",-");
+			}
+		});
+		
+		jList1.addListSelectionListener(new ListSelectionListener(){
+			@Override
+			public void valueChanged(ListSelectionEvent e) {
+				selMenu = (Menu) jList1.getSelectedValue();
+				jLabel7.setText(updatePrice() + ",-");
+			}
+		});
 
 		comboBox = (DefaultComboBoxModel) jComboBox1.getModel();
 		for (Object addr : addressPlus1) {
