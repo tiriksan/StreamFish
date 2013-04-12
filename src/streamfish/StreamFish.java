@@ -110,14 +110,14 @@ public class StreamFish {
 		try {
 			stm = con.createStatement();
 			res = stm.executeQuery("select count(*) antall from ingredients where (upper(ingredient_name) like '"
-					+ check[0].toUpperCase() + "%'");
+					+ check[0].toUpperCase() + "%')");
 			res.next();
 			int ant = res.getInt("antall");
 			ingredients = new Ingredient[ant];
 			Opprydder.lukkResSet(res);
 			
 			res = stm.executeQuery("select * from ingredients where (upper(ingredient_name) like '"
-					+ check[0].toUpperCase() + "%'");
+					+ check[0].toUpperCase() + "%')");
 			
 			while (res.next()) {
 				int ingredientID = res.getInt("ingredient_ID");
