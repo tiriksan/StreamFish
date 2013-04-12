@@ -123,6 +123,17 @@ public class GUI extends JFrame implements WindowListener {
 	public Menu[] getMenus() {
 		return db.getMenus();
 	}
+        
+        public Ingredient[] getIngredients(String name) {
+            return db.getIngredients(name);
+        }
+        
+        public boolean addIngredient(Ingredient ing) {
+            if (db.addIngredient(ing) == 1) {
+                return true;
+            }
+            return false;
+        }
 
 	public static void main(String[] args) {
 		new GUI();

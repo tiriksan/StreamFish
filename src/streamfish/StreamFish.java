@@ -97,6 +97,42 @@ public class StreamFish {
 		}
 		return null;
 	}
+        
+        	public Ingredient[] getIngredients(String name) {
+		
+		Statement stm;
+		ResultSet res;
+		Ingredient[] ingredients;
+                String[] check = {name};
+                check = removeUnwantedSymbols(check);
+		int teller = 0;
+		
+		try {
+			stm = con.createStatement();
+			res = stm.executeQuery("select count(*) antall from ingredients where (upper(ingredient_name) like '"
+					+ check[0].toUpperCase() + "%'");
+			res.next();
+			int ant = res.getInt("antall");
+			ingredients = new Ingredient[ant];
+			Opprydder.lukkResSet(res);
+			
+			res = stm.executeQuery("select * from ingredients where (upper(ingredient_name) like '"
+					+ check[0].toUpperCase() + "%'");
+			
+			while (res.next()) {
+				int ingredientID = res.getInt("ingredient_ID");
+				String ingredientName = res.getString("ingredient_name");
+				int amount = res.getInt("amount");
+				String expiryDate = res.getString("expiry_date");
+				ingredients[teller] = new Ingredient(ingredientID, ingredientName, amount, expiryDate);
+				teller++;
+			}
+			return ingredients;
+		} catch (SQLException ex) {
+			ex.printStackTrace();
+		}
+		return null;
+	}
 	
 	public CustomerAddress[] getAddress(int custid) {
 		
