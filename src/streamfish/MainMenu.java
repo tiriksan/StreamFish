@@ -367,7 +367,11 @@ public class MainMenu extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        new TodaysTasksFrame(orderinfo[viewRow], gui);
+        if(jPanel1.hasFocus()){
+            System.out.println("pane1 works");
+        }else if(jPanel2.hasFocus()){
+            new TodaysTasksFrame(orderinfo[viewRow], gui);
+        }
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
