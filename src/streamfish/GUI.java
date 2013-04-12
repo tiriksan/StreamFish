@@ -80,7 +80,8 @@ public class GUI extends JFrame implements WindowListener {
 	public Customer getCustomer(int i) {
 		return db.getCustomer(i);
 	}
-	public boolean updateCustomer(Customer customer){
+
+	public boolean updateCustomer(Customer customer) {
 		int succ = db.updateCustomer(customer);
 		if (succ == 1) {
 			MainMenu main = (MainMenu) panels.get(0);
@@ -89,7 +90,8 @@ public class GUI extends JFrame implements WindowListener {
 		}
 		return false;
 	}
-	public boolean addCustomerAddress(CustomerAddress customer){
+
+	public boolean addCustomerAddress(CustomerAddress customer) {
 		int succ = db.addCustomerAddress(customer);
 		if (succ == 1) {
 			MainMenu main = (MainMenu) panels.get(0);
@@ -98,43 +100,49 @@ public class GUI extends JFrame implements WindowListener {
 		}
 		return false;
 	}
-        
-        public Orderinfo[] getTodaysTasks() {
-            return db.getTodaysTasks();
-        }
-	
-	public Order[] getOrders(Customer customer){
+
+	public Orderinfo[] getTodaysTasks() {
+		return db.getTodaysTasks();
+	}
+
+	public Order[] getOrders(Customer customer) {
 		return db.getOrderCustomer(customer);
 	}
-        public boolean changeOrderStatus(int orderID) {
-            int succ = db.changeOrderStatus(orderID);
-            if (succ == 1) {
-                MainMenu main = (MainMenu) panels.get(0);
-                main.updt();
-                return true;
-            }
-            return false;
-        }
-	
-	public CustomerAddress[] getAddress(int custid){
+
+	public boolean changeOrderStatus(int orderID) {
+		int succ = db.changeOrderStatus(orderID);
+		if (succ == 1) {
+			MainMenu main = (MainMenu) panels.get(0);
+			main.updt();
+			return true;
+		}
+		return false;
+	}
+
+	public CustomerAddress[] getAddress(int custid) {
 		return db.getAddress(custid);
 	}
 
 	public Menu[] getMenus() {
 		return db.getMenus();
 	}
-        
-        public Ingredient[] getIngredients(String name) {
-            return db.getIngredients(name);
-        }
-        
-        public boolean addIngredient(Ingredient ing) {
-            if (db.addIngredient(ing) == 1) {
-                return true;
-            }
-            return false;
-        }
-        public boolean updateIngredient(Ingredient ingToUpdate, Ingredient ing){
+
+	public Employee getUserAuthorization(String username, String password) {
+		return db.userAuthorization(username, password);
+	}
+
+	public Ingredient[] getIngredients(String name) {
+		return db.getIngredients(name);
+	}
+
+	public boolean addIngredient(Ingredient ing) {
+		if (db.addIngredient(ing) == 1) {
+			return true;
+		}
+		return false;
+	}
+
+	public boolean updateIngredient(Ingredient ingToUpdate, Ingredient ing) {
 		int succ = db.updateIngredient(ingToUpdate, ing);
 		if (succ == 1) {
 			MainMenu main = (MainMenu) panels.get(0);
@@ -143,6 +151,7 @@ public class GUI extends JFrame implements WindowListener {
 		}
 		return false;
 	}
+
 	public static void main(String[] args) {
 		new GUI();
 	}

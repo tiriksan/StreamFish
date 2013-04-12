@@ -96,7 +96,7 @@ public class Login_screen extends javax.swing.JPanel {
         String username = jTextField1.getText().trim();
         String password = jPasswordField1.getPassword().toString().trim();
 
-        Employee emp = gui.userAuthorization(username, password);
+        Employee emp = gui.getUserAuthorization(username, password);
         if(emp != null){
             switch(emp.getUsertype()){
                 case 0 :
