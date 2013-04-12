@@ -286,13 +286,16 @@ public class StreamFish {
 	
 	public Employee userAuthorization(String username, String password) {
         for (Employee emp : getEmployees()) {
+            System.out.println(password);
             if (username.equals(emp.getUsername())) {
+                System.out.println(password + " " + emp.getPassword());
                 if (password.equals(emp.getPassword())) {
                     System.out.println("Login successfull");
                     return emp;
                 }
             }
         }
+        System.out.println("feil!!");
         return null;
     }
 	
@@ -310,13 +313,14 @@ public class StreamFish {
 			employees = new Employee[ant];
 			Opprydder.lukkResSet(res);
 			
-			res = stm.executeQuery("select empl_id, user_type, username from employees where employees.status = '1'");
+			res = stm.executeQuery("select empl_id, user_type, username, password from employees where employees.status = '1'");
 			
 			while (res.next()) {
 				int emplID = res.getInt("empl_id");
 				byte userType = res.getByte("user_type");
 				String username = res.getString("username");
-				employees[teller] = new Employee(emplID, userType, username);
+                                String password = res.getString("password");
+				employees[teller] = new Employee(emplID, userType, username, password);
 				teller++;
 			}
 			return employees;

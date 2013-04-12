@@ -14,6 +14,7 @@ public class Login_screen extends javax.swing.JPanel {
     
     public Login_screen(GUI gui) {
         this.gui = gui;
+        gui.setTitle("Login");
         initComponents();
     }
 
@@ -94,13 +95,19 @@ public class Login_screen extends javax.swing.JPanel {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         String username = jTextField1.getText().trim();
-        String password = jPasswordField1.getPassword().toString().trim();
+        String password = new String(jPasswordField1.getPassword());
+        password = password.trim();
 
         Employee emp = gui.getUserAuthorization(username, password);
         if(emp != null){
             switch(emp.getUsertype()){
                 case 0 :
-                gui.byttVindu(this, "streamfish.MainMenu");
+                    gui.byttVindu(this, new MainMenu(gui));
+                break;
+                    
+                case 1 : 
+                    gui.byttVindu(this, new MainMenu(gui));
+                break;
             }
         }
     }//GEN-LAST:event_jButton2ActionPerformed

@@ -23,10 +23,11 @@ class Employee {
         this.password = password;
     }
     
-    public Employee(int empl_ID, byte usertype, String username) {
+    public Employee(int empl_ID, byte usertype, String username, String password) {
         this.empl_ID = empl_ID;
         this.usertype = usertype;
         this.username = username;
+        this.password = password;
     }
     public int getEmplID(){
         return empl_ID;

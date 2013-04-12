@@ -28,6 +28,7 @@ public class MainMenu extends javax.swing.JPanel {
 	 */
 	public MainMenu(final GUI gui) {
 		this.gui = gui;
+                gui.setTitle("Main Menu");
 		initComponents();
 		customers = gui.getCustomers(jTextField1.getText(), jCheckBox1.isSelected());
 //		jTable1.setModel();1
