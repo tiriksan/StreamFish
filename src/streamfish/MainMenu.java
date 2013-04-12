@@ -264,7 +264,7 @@ public class MainMenu extends javax.swing.JPanel {
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
@@ -367,10 +367,12 @@ public class MainMenu extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        if(jPanel1.hasFocus()){
+        if(jTabbedPane1.getSelectedIndex() == 0){
             System.out.println("pane1 works");
-        }else if(jPanel2.hasFocus()){
+        }else if(jTabbedPane1.getSelectedIndex() == 1){
             new TodaysTasksFrame(orderinfo[viewRow], gui);
+        }else{
+            System.out.println("panel3 works!");
         }
     }//GEN-LAST:event_jButton4ActionPerformed
 
