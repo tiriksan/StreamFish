@@ -34,13 +34,9 @@ public class MainMenu extends javax.swing.JPanel {
         initComponents();
         customers = gui.getCustomers(jTextField1.getText(), jCheckBox1.isSelected());
 //		jTable1.setModel();1
-        if (customers != null && customers.length > 0) {
-            for (int i = 0; i < customers.length; i++) {
-                DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-                model.addRow(new Object[]{customers[i].getCustomerID(), customers[i].getCustomerName(), customers[i].getPhoneNumber(), customers[i].isBusiness()});
-            }
-        }
+        
         // from here tab2 NorC
+        tab1setup();
         tab2setup();
         //to here tab2 Norc
         jTextField1.getDocument().addDocumentListener(new DocumentListener() {
@@ -95,6 +91,18 @@ public class MainMenu extends javax.swing.JPanel {
                 }
             }
         });
+        
+        
+    }
+	
+        private void tab1setup(){
+            if (customers != null && customers.length > 0) {
+            for (int i = 0; i < customers.length; i++) {
+                DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+                model.addRow(new Object[]{customers[i].getCustomerID(), customers[i].getCustomerName(), customers[i].getPhoneNumber(), customers[i].isBusiness()});
+            }
+        }
+        
         jTable1.getSelectionModel().addListSelectionListener(
                 new ListSelectionListener() {
                     public void valueChanged(ListSelectionEvent event) {
@@ -107,8 +115,8 @@ public class MainMenu extends javax.swing.JPanel {
                         }
                     }
                 });
-    }
-	
+        }
+    
 	private void tab2setup(){
 		 orderinfo = gui.getTodaysTasks();
 
@@ -130,6 +138,8 @@ public class MainMenu extends javax.swing.JPanel {
                     }
                 });
 	}
+        
+        
 	
     public void updt() {
 
@@ -162,6 +172,7 @@ public class MainMenu extends javax.swing.JPanel {
         jTable1 = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
@@ -169,6 +180,7 @@ public class MainMenu extends javax.swing.JPanel {
         jPanel3 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTable3 = new javax.swing.JTable();
+        jButton6 = new javax.swing.JButton();
 
         jLabel1.setText("Search:");
 
@@ -220,6 +232,13 @@ public class MainMenu extends javax.swing.JPanel {
             }
         });
 
+        jButton3.setText("Edit customer");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -228,7 +247,9 @@ public class MainMenu extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jButton1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 148, Short.MAX_VALUE)
+                        .addGap(24, 24, 24)
+                        .addComponent(jButton3)
+                        .addGap(25, 25, 25)
                         .addComponent(jButton2))
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addGap(0, 0, 0))
@@ -241,7 +262,8 @@ public class MainMenu extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(jButton2)
+                    .addComponent(jButton3))
                 .addGap(0, 0, 0))
         );
 
@@ -309,6 +331,13 @@ public class MainMenu extends javax.swing.JPanel {
 
         jTabbedPane1.addTab("Subscriptions", jPanel3);
 
+        jButton6.setText("Exit");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -324,7 +353,10 @@ public class MainMenu extends javax.swing.JPanel {
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButton6)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -337,8 +369,10 @@ public class MainMenu extends javax.swing.JPanel {
                     .addComponent(jCheckBox1)
                     .addComponent(jButton5))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTabbedPane1)
-                .addContainerGap())
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton6)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -356,28 +390,34 @@ public class MainMenu extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        if (jTabbedPane1.getSelectedIndex() == 0) {
-            if (kundenr == -1) {
-                showMessageDialog(null, "Ingen kunde er valgt.");
-            } else {
-                gui.byttVindu(this, new Edit_customer(kundenr, gui));
-            }
-        } else if (jTabbedPane1.getSelectedIndex() == 1) {
+    // 0,1,2    if (jTabbedPane1.getSelectedIndex() == 0) {
             new TodaysTasksFrame(orderinfo[viewRow], gui);
-        } else {
-            System.out.println("panel3 works!");
-        }
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
         gui.byttVindu(this, new Storage(gui));
     }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        if (kundenr == -1) {
+                showMessageDialog(null, "Ingen kunde er valgt.");
+            } else {
+                gui.byttVindu(this, new Edit_customer(kundenr, gui));
+            }
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_jButton6ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
