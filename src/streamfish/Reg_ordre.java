@@ -56,7 +56,7 @@ public class Reg_ordre extends javax.swing.JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				javax.swing.JComboBox box = (javax.swing.JComboBox) e.getSource();
-				if (box.getSelectedItem().getClass().equals(String.class)) {
+				if (box.getSelectedItem() != null && box.getSelectedItem().getClass().equals(String.class)) {
 					AddAddress address = new AddAddress(gui, CUSTID);
 					address.addWindowListener(new WindowListener(){
 						@Override
