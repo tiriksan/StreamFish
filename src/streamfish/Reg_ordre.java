@@ -43,13 +43,13 @@ public class Reg_ordre extends javax.swing.JPanel {
 		address = gui.getAddress(CUSTID);
 		addressPlus1 = new Object[address.length + 1];
 		priceReduction = customer.getPriceReduction();
-		jLabel10.setText(priceReduction+ " %");
-		jLabel9.setText(updatePrice() + ",-");
 		for (int i = 0; i < address.length; i++) {
 			addressPlus1[i] = address[i];
 		}
 		addressPlus1[address.length] = new String("Add new address");
 		initComponents();
+		jLabel10.setText(priceReduction + " %");
+		jLabel9.setText(updatePrice() + ",-");
 		jLabel1.setText("Kundenr: " + CUSTID);
 		DefaultListModel model = (DefaultListModel) jList1.getModel();
 		for (Menu men : menu) {
@@ -97,7 +97,7 @@ public class Reg_ordre extends javax.swing.JPanel {
 	}
 	private double updatePrice(){
 		double price = selMenu.getPrice() * antPers * priceReduction;
-		return 0.0;
+		return price;
 	}
 	private void update() {
 		address = gui.getAddress(CUSTID);
