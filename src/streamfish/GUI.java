@@ -134,7 +134,15 @@ public class GUI extends JFrame implements WindowListener {
             }
             return false;
         }
-
+        public boolean updateIngredient(Ingredient ingToUpdate, Ingredient ing){
+		int succ = db.updateIngredient(ingToUpdate, ing);
+		if (succ == 1) {
+			MainMenu main = (MainMenu) panels.get(0);
+			main.updt();
+			return true;
+		}
+		return false;
+	}
 	public static void main(String[] args) {
 		new GUI();
 	}

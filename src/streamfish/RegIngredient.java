@@ -14,10 +14,24 @@ public class RegIngredient extends javax.swing.JFrame {
      * Creates new form RegIngredient
      */
     private static GUI gui;
+    private String buttonName;
+    private Ingredient ingEdit;
     
-    public RegIngredient(GUI gui) {
+    public RegIngredient(GUI gui, String buttonName) {
         this.gui = gui;
+        this.buttonName = buttonName;
         initComponents();
+        this.setVisible(true);
+        this.pack();
+    }
+    public RegIngredient(GUI gui, String buttonName, Ingredient ing) {
+        this.gui = gui;
+        this.buttonName = buttonName;
+        this.ingEdit = ing;
+        initComponents();
+        jTextField1.setText(ing.getName());
+        jTextField2.setText(""+ing.getAmount());
+        jTextField3.setText(ing.getExpDate());
         this.setVisible(true);
         this.pack();
     }
@@ -42,7 +56,7 @@ public class RegIngredient extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jButton1.setText("Add");
+        jButton1.setText(buttonName);
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -111,12 +125,21 @@ public class RegIngredient extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        String ingredientName = jTextField1.getText().trim();
-        int amount = Integer.parseInt(jTextField2.getText());
-        String expiryDate = jTextField3.getText().trim();
-        Ingredient newIngredient = new Ingredient(ingredientName, amount, expiryDate);
-        gui.addIngredient(newIngredient);
-        this.dispose();
+        if(buttonName.equals("Add")){
+            String ingredientName = jTextField1.getText().trim();
+            int amount = Integer.parseInt(jTextField2.getText());
+            String expiryDate = jTextField3.getText().trim();
+            Ingredient newIngredient = new Ingredient(ingredientName, amount, expiryDate);
+            gui.addIngredient(newIngredient);
+            this.dispose();
+        }else{
+            String ingredientName = jTextField1.getText().trim();
+            int amount = Integer.parseInt(jTextField2.getText());
+            String expiryDate = jTextField3.getText().trim();
+            Ingredient newIngredient = new Ingredient(ingredientName, amount, expiryDate);
+            gui.updateIngredient(ingEdit, newIngredient);
+            this.dispose();
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed

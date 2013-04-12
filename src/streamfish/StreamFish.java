@@ -464,9 +464,26 @@ public class StreamFish {
 			String[] check = {ingredient.getName(), ingredient.getExpDate()};
 			check = removeUnwantedSymbols(check);
 			int succ = stm.executeUpdate("insert into ingredients (INGREDIENT_NAME, AMOUNT, EXPIRY_DATE) "
-					+ "values('" + check[0] + "' , '" + ingredient.getAmount() + "' , '" + check[1] + ")");
+					+ "values('" + check[0] + "' ," + ingredient.getAmount() + ", '" + check[1] + "')");
 			Opprydder.lukkSetning(stm);
 			return succ;
+		} catch (SQLException ex) {
+			System.err.println(ex);
+		}
+		return -1;
+	}
+        public int updateIngredient(Ingredient ingToUpdate, Ingredient ing) {
+		Statement stm;
+		String[] check = {ing.getName(), ing.getExpDate()};
+		check = removeUnwantedSymbols(check);
+		
+		try {
+			stm = con.createStatement();
+			int succ = stm.executeUpdate("update ingredients set INGREDIENT_NAME ='" + check[0] + "', AMOUNT =" + ing.getAmount()
+					+ ", EXPIRY_DATE ='" + check[1] + "' where INGREDIENT_ID =" + ingToUpdate.getID());
+			Opprydder.lukkSetning(stm);
+			return succ;
+			
 		} catch (SQLException ex) {
 			System.err.println(ex);
 		}
