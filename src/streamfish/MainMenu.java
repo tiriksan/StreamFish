@@ -41,25 +41,7 @@ public class MainMenu extends javax.swing.JPanel {
             }
         }
         // from here tab2 NorC
-        orderinfo = gui.getTodaysTasks();
-
-        if (orderinfo != null && orderinfo.length > 0) {
-            for (int i = 0; i < orderinfo.length; i++) {
-                DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
-                model.addRow(new Object[]{orderinfo[i].getAddress(), orderinfo[i].getCustomerName(), orderinfo[i].getPhone()});
-
-            }
-        }
-
-        jTable1.getSelectionModel().addListSelectionListener(
-                new ListSelectionListener() {
-                    public void valueChanged(ListSelectionEvent event) {
-
-                        if (!event.getValueIsAdjusting()) {
-                            viewRow = jTable1.getSelectedRow();
-                        }
-                    }
-                });
+        tab2setup();
         //to here tab2 Norc
         jTextField1.getDocument().addDocumentListener(new DocumentListener() {
             @Override
@@ -126,7 +108,29 @@ public class MainMenu extends javax.swing.JPanel {
                     }
                 });
     }
+	
+	private void tab2setup(){
+		 orderinfo = gui.getTodaysTasks();
 
+        if (orderinfo != null && orderinfo.length > 0) {
+            for (int i = 0; i < orderinfo.length; i++) {
+                DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
+                model.addRow(new Object[]{orderinfo[i].getAddress(), orderinfo[i].getCustomerName(), orderinfo[i].getPhone()});
+
+            }
+        }
+
+        jTable1.getSelectionModel().addListSelectionListener(
+                new ListSelectionListener() {
+                    public void valueChanged(ListSelectionEvent event) {
+
+                        if (!event.getValueIsAdjusting()) {
+                            viewRow = jTable1.getSelectedRow();
+                        }
+                    }
+                });
+	}
+	
     public void updt() {
 
         customers = gui.getCustomers(jTextField1.getText(), jCheckBox1.isSelected());
