@@ -19,10 +19,11 @@ public class GUI extends JFrame implements WindowListener {
 		db = new StreamFish();
 		addWindowListener(this);
 
-                Login_screen login = new Login_screen(this);
+        Login_screen login = new Login_screen(this);
 		//MainMenu mainMenu = new MainMenu(this);
 
 		panels.add(login);
+		panels.add(new MainMenu(this));
 		add(login);
 		login.setVisible(true);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
