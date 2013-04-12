@@ -37,6 +37,7 @@ public class Reg_ordre extends javax.swing.JPanel {
 	public Reg_ordre(int custid, final GUI gui) {
 
 		this.gui = gui;
+		
 		this.CUSTID = custid;
 		this.customer = gui.getCustomer(CUSTID);
 		menu = gui.getMenus();

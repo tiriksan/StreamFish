@@ -16,6 +16,7 @@ public class Login_screen extends javax.swing.JPanel {
         this.gui = gui;
         gui.setTitle("Login");
         initComponents();
+		gui.getRootPane().setDefaultButton(jButton2);
     }
 
     /**
