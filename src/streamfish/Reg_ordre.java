@@ -26,6 +26,10 @@ public class Reg_ordre extends javax.swing.JPanel {
 	private Object[] addressPlus1;
 	private Reg_ordre order = this;
 	private DefaultComboBoxModel comboBox;
+	private Customer customer;
+	private Menu selMenu;
+	private int antPers;
+	private double priceReduction = 0;
 
 	/**
 	 * Creates new form Reg_kunde
@@ -34,9 +38,13 @@ public class Reg_ordre extends javax.swing.JPanel {
 
 		this.gui = gui;
 		this.CUSTID = custid;
+		this.customer = gui.getCustomer(CUSTID);
 		menu = gui.getMenus();
 		address = gui.getAddress(CUSTID);
 		addressPlus1 = new Object[address.length + 1];
+		priceReduction = customer.getPriceReduction();
+		jLabel10.setText(priceReduction+ " %");
+		jLabel9.setText(updatePrice() + ",-");
 		for (int i = 0; i < address.length; i++) {
 			addressPlus1[i] = address[i];
 		}
@@ -87,7 +95,10 @@ public class Reg_ordre extends javax.swing.JPanel {
 		});
 
 	}
-
+	private double updatePrice(){
+		double price = selMenu.getPrice() * antPers;
+		return 0.0;
+	}
 	private void update() {
 		address = gui.getAddress(CUSTID);
 		addressPlus1 = new Object[address.length + 1];
@@ -124,6 +135,10 @@ public class Reg_ordre extends javax.swing.JPanel {
         jComboBox5 = new javax.swing.JComboBox();
         jComboBox6 = new javax.swing.JComboBox();
         jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
 
         jList1.setModel(new DefaultListModel());
         jScrollPane1.setViewportView(jList1);
@@ -171,6 +186,14 @@ public class Reg_ordre extends javax.swing.JPanel {
         jLabel6.setText("Time: (hh-mm)");
         jLabel6.setToolTipText("");
 
+        jLabel7.setText("TODO" + ",-");
+
+        jLabel8.setText("Price:");
+
+        jLabel9.setText("Price reduction");
+
+        jLabel10.setText("TODO" + " %");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -209,7 +232,16 @@ public class Reg_ordre extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jSpinner1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING))))
+                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel9)
+                            .addComponent(jLabel8))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.TRAILING))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -238,7 +270,15 @@ public class Reg_ordre extends javax.swing.JPanel {
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel9)
+                    .addComponent(jLabel10))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(jLabel8))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2))
@@ -253,8 +293,8 @@ public class Reg_ordre extends javax.swing.JPanel {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
 
-		Menu selMenu = (Menu) jList1.getSelectedValue();
-		int antPers = Integer.parseInt(jSpinner1.getValue().toString());
+		selMenu = (Menu) jList1.getSelectedValue();
+		antPers = Integer.parseInt(jSpinner1.getValue().toString());
 
 		String date = (String) jComboBox2.getSelectedItem() + "-" + (String) jComboBox3.getSelectedItem() + "-" + (String) jComboBox4.getSelectedItem();
 		String time = (String) jComboBox5.getSelectedItem() + ":" + (String) jComboBox6.getSelectedItem();
@@ -275,11 +315,15 @@ public class Reg_ordre extends javax.swing.JPanel {
     private javax.swing.JComboBox jComboBox5;
     private javax.swing.JComboBox jComboBox6;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JList jList1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSpinner jSpinner1;
