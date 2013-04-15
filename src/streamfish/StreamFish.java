@@ -718,7 +718,9 @@ public class StreamFish {
                     if(subscription.getDays().charAt(i) == '1'){
                         succ = stm.executeUpdate("INSERT INTO ORDERS");
                     }
-            }
+                }
+            } catch (SQLException exc) {
+                System.err.println(exc);
             }
             return -1;
         }
