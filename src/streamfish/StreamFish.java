@@ -715,6 +715,8 @@ public class StreamFish {
             }
             return -1;
         }
+        
+        
 	
 	public String[] removeUnwantedSymbols(String[] table) {
 		String[] checkedTable = table;
