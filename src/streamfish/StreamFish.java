@@ -224,7 +224,7 @@ public class StreamFish {
 				int empl_id = res.getInt("EMPL_ID");
 				int num_persons = res.getInt("NR_PERSONS");
 				String date = res.getString("DELIVERY_DATE");
-                                String time = res.getString("DELIVER_TIME");
+                                String time = res.getString("DELIVERY_TIME");
 				String address = res.getString("ADDRESS");
 				
 				orders[counter] = new Order(order_id, menu_id, customer_id, empl_id, num_persons, date,time, address);
