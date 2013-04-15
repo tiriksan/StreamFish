@@ -12,7 +12,7 @@ DROP TABLE menu;
 DROP TABLE customer_address;
 DROP TABLE customer;
 DROP TABLE employees;
-/*DROP VIEW todaystasks;*/
+DROP VIEW todaystasks;
 /*DROP VIEW orderinfo;*/
 
 -- Create table sentences --
@@ -64,7 +64,7 @@ status CHAR(1) NOT NULL DEFAULT '1'
 CREATE TABLE orders(
 order_id INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
 delivery_date DATE NOT NULL,
-deliver_time TIME,
+delivery_time TIME,
 address VARCHAR(255),
 nr_persons INTEGER DEFAULT 1,
 empl_id INTEGER,

@@ -224,7 +224,7 @@ public class StreamFish {
 				int empl_id = res.getInt("EMPL_ID");
 				int num_persons = res.getInt("NR_PERSONS");
 				String date = res.getString("DELIVERY_DATE");
-                                String time = res.getString("DELIVER_TIME");
+                                String time = res.getString("DELIVERY_TIME");
 				String address = res.getString("ADDRESS");
 				
 				orders[counter] = new Order(order_id, menu_id, customer_id, empl_id, num_persons, date,time, address);
@@ -417,7 +417,7 @@ public class StreamFish {
 			stm = con.createStatement();
 			String[] check = {order.getDeliveryDate(), order.getAddress().getAdress()};
 			check = removeUnwantedSymbols(check);
-			int succ = stm.executeUpdate("insert into orders (DELIVERY_DATE, ADDRESS, NR_PERSONS, EMPL_ID, MENU_ID,CUSTOMER_ID,DELIVER_TIME) "
+			int succ = stm.executeUpdate("insert into orders (DELIVERY_DATE, ADDRESS, NR_PERSONS, EMPL_ID, MENU_ID,CUSTOMER_ID,DELIVERY_TIME) "
 					+ "values('" + check[0] + "' , '" + check[1] + "', " + order.getNrPersons() + ", " + order.getEmplId() + ", "
 					+ order.getMenuId() + " , " + order.getCustomerId() + " , '" + order.getDeliveryTime()+ "')");
 			Opprydder.lukkSetning(stm);
