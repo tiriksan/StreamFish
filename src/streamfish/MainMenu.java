@@ -22,7 +22,7 @@ public class MainMenu extends javax.swing.JPanel {
     private int kundenr = -1;
     private final GUI gui;
     private Customer[] customers;
-    private int viewRow;
+    private int viewRow = -1;
     private Orderinfo[] orderinfo;
 
     /**
@@ -412,7 +412,10 @@ public class MainMenu extends javax.swing.JPanel {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
     // 0,1,2    if (jTabbedPane1.getSelectedIndex() == 0) {
-            new TodaysTasksFrame(orderinfo[viewRow], gui);
+           if(viewRow>=0)
+			   new TodaysTasksFrame(orderinfo[viewRow], gui);
+		   else
+			   showMessageDialog(null, "Ingen valgt");
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
