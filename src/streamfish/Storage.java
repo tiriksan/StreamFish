@@ -21,6 +21,7 @@ public class Storage extends javax.swing.JPanel {
 
 	public Storage(final GUI gui) {
 		this.gui = gui;
+		gui.setTitle("Storage");
 		initComponents();
 		ingredients = gui.getIngredients(jTextField1.getText());
 		if (ingredients != null && ingredients.length > 0) {
