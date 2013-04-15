@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package streamfish;
 
 import java.awt.event.ActionEvent;
@@ -34,7 +30,7 @@ public class MainMenu extends javax.swing.JPanel {
         initComponents();
         customers = gui.getCustomers(jTextField1.getText(), jCheckBox1.isSelected());
 //		jTable1.setModel();1
-        
+
         // from here tab2 NorC
         tab1setup();
         tab2setup();
@@ -91,18 +87,18 @@ public class MainMenu extends javax.swing.JPanel {
                 }
             }
         });
-        
-        
+
+
     }
-	
-        private void tab1setup(){
-            if (customers != null && customers.length > 0) {
+
+    private void tab1setup() {
+        if (customers != null && customers.length > 0) {
             for (int i = 0; i < customers.length; i++) {
                 DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
                 model.addRow(new Object[]{customers[i].getCustomerID(), customers[i].getCustomerName(), customers[i].getPhoneNumber(), customers[i].isBusiness()});
             }
         }
-        
+
         jTable1.getSelectionModel().addListSelectionListener(
                 new ListSelectionListener() {
                     public void valueChanged(ListSelectionEvent event) {
@@ -115,10 +111,10 @@ public class MainMenu extends javax.swing.JPanel {
                         }
                     }
                 });
-        }
-    
-	private void tab2setup(){
-		 orderinfo = gui.getTodaysTasks();
+    }
+
+    private void tab2setup() {
+        orderinfo = gui.getTodaysTasks();
 
         if (orderinfo != null && orderinfo.length > 0) {
             for (int i = 0; i < orderinfo.length; i++) {
@@ -137,10 +133,8 @@ public class MainMenu extends javax.swing.JPanel {
                         }
                     }
                 });
-	}
-        
-        
-	
+    }
+
     public void updt() {
 
         customers = gui.getCustomers(jTextField1.getText(), jCheckBox1.isSelected());
@@ -411,11 +405,12 @@ public class MainMenu extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-    // 0,1,2    if (jTabbedPane1.getSelectedIndex() == 0) {
-           if(viewRow>=0)
-			   new TodaysTasksFrame(orderinfo[viewRow], gui);
-		   else
-			   showMessageDialog(null, "Ingen valgt");
+        // 0,1,2    if (jTabbedPane1.getSelectedIndex() == 0) {
+        if (viewRow >= 0) {
+            new TodaysTasksFrame(orderinfo[viewRow], gui);
+        } else {
+            showMessageDialog(null, "Ingen valgt");
+        }
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
@@ -425,10 +420,10 @@ public class MainMenu extends javax.swing.JPanel {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         if (kundenr == -1) {
-                showMessageDialog(null, "Ingen kunde er valgt.");
-            } else {
-                gui.byttVindu(this, new Edit_customer(kundenr, gui));
-            }
+            showMessageDialog(null, "Ingen kunde er valgt.");
+        } else {
+            gui.byttVindu(this, new Edit_customer(kundenr, gui));
+        }
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
@@ -438,7 +433,6 @@ public class MainMenu extends javax.swing.JPanel {
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton7ActionPerformed
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
