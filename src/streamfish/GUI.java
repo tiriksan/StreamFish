@@ -37,15 +37,6 @@ public class GUI extends JFrame implements WindowListener {
 		pack();
 	}
 
-	public void byttVindu(JPanel remove, String newWindow) {
-		remove(remove);
-		for (JPanel jp : panels) {
-			if (jp.getClass().getName().equals(newWindow)) {
-				add(jp);
-			}
-		}
-		pack();
-	}
 
 	public boolean registerOrder(Order order) {
 		int suc = db.addOrder(order);
