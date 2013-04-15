@@ -58,8 +58,6 @@ public class GUI extends JFrame implements WindowListener {
 	public boolean registerCustomer(Customer customer) {
 		int suc = db.addCustomer(customer);
 		if (suc > 0) {
-			MainMenu main = (MainMenu) panels.get(0);
-			main.updt();
 			return true;
 		}
 		return false;
@@ -68,8 +66,6 @@ public class GUI extends JFrame implements WindowListener {
 	public boolean changeCustomerStatus(Customer customer) {
 		int succ = db.changeCustomerStatus(customer);
 		if (succ == 1) {
-			MainMenu main = (MainMenu) panels.get(0);
-			main.updt();
 			return true;
 		}
 		return false;
@@ -86,8 +82,6 @@ public class GUI extends JFrame implements WindowListener {
 	public boolean updateCustomer(Customer customer) {
 		int succ = db.updateCustomer(customer);
 		if (succ == 1) {
-			MainMenu main = (MainMenu) panels.get(0);
-			main.updt();
 			return true;
 		}
 		return false;
@@ -96,8 +90,6 @@ public class GUI extends JFrame implements WindowListener {
 	public boolean addCustomerAddress(CustomerAddress customer) {
 		int succ = db.addCustomerAddress(customer);
 		if (succ == 1) {
-			MainMenu main = (MainMenu) panels.get(0);
-			main.updt();
 			return true;
 		}
 		return false;
@@ -114,8 +106,6 @@ public class GUI extends JFrame implements WindowListener {
 	public boolean changeOrderStatus(int orderID) {
 		int succ = db.changeOrderStatus(orderID);
 		if (succ == 1) {
-			MainMenu main = (MainMenu) panels.get(0);
-			main.updt();
 			return true;
 		}
 		return false;
