@@ -712,6 +712,13 @@ public class StreamFish {
                 
             }catch ( SQLException ex) {
                 System.err.println(ex);
+            }try{
+                stm = con.createStatement();
+                for (int i = 0; i < 6; i++) {
+                    if(subscription.getDays().charAt(i) == '1'){
+                        succ = stm.executeUpdate("INSERT INTO ORDERS");
+                    }
+            }
             }
             return -1;
         }
