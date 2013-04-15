@@ -12,7 +12,7 @@ DROP TABLE menu;
 DROP TABLE customer_address;
 DROP TABLE customer;
 DROP TABLE employees;
-/*DROP VIEW todaystasks;*/
+DROP VIEW todaystasks;
 /*DROP VIEW orderinfo;*/
 
 -- Create table sentences --
