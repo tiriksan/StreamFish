@@ -145,6 +145,7 @@ public class Reg_ordre extends javax.swing.JPanel {
 						if (!event.getValueIsAdjusting()) {
 							try {
 								selMenu = menu[viewRow];
+								jLabel7.setText(updatePrice() + ",-");
 							} catch (Exception e) {
 							}
 						}
