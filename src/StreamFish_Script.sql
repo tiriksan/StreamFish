@@ -78,6 +78,7 @@ subscription_id INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
 duration INTEGER,
 from_date DATE,
 to_date DATE,
+days CHAR(7),
 status CHAR(1) NOT NULL DEFAULT '1'
 );
 
