@@ -700,6 +700,21 @@ public class StreamFish {
 		}
 		return -1;
 	}
+        
+        public int registerSubscription(Subscription subscription){
+            Statement stm;
+            ResultSet res;
+            int succ;
+            
+            try{
+                stm = con.createStatement();
+                succ = stm.executeUpdate("INSERT INTO SUBSCRIPTION VALUES(DEFAULT, DURATION, FROM_DATE, TO_DATE, DEFAULT");
+                
+            }catch ( SQLException ex) {
+                System.err.println(ex);
+            }
+            return -1;
+        }
 	
 	public String[] removeUnwantedSymbols(String[] table) {
 		String[] checkedTable = table;
