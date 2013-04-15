@@ -411,7 +411,7 @@ public class Reg_ordre extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 		// TODO add your handling code here:
-		gui.byttVindu(this, "streamfish.MainMenu");
+		gui.byttVindu(this, new MainMenu(gui));
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -424,7 +424,7 @@ public class Reg_ordre extends javax.swing.JPanel {
 		CustomerAddress orderAddress = (CustomerAddress) jComboBox1.getSelectedItem();
 		Order order = new Order(selMenu.getMenuId(), CUSTID, 1/*TODO?*/, antPers, date, time, orderAddress);
 		gui.registerOrder(order);
-		gui.byttVindu(this, "streamfish.MainMenu");
+		gui.byttVindu(this, new MainMenu(gui));
 
 
     }//GEN-LAST:event_jButton2ActionPerformed

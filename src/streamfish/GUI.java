@@ -12,7 +12,6 @@ import javax.swing.JPanel;
  */
 public class GUI extends JFrame implements WindowListener {
 
-	private ArrayList<JPanel> panels = new ArrayList<JPanel>();
 	private StreamFish db;
 
 	public GUI() {
@@ -22,8 +21,6 @@ public class GUI extends JFrame implements WindowListener {
         Login_screen login = new Login_screen(this);
 		//MainMenu mainMenu = new MainMenu(this);
 
-		panels.add(login);
-		panels.add(new MainMenu(this));
 		add(login);
 		login.setVisible(true);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -37,15 +34,6 @@ public class GUI extends JFrame implements WindowListener {
 		pack();
 	}
 
-	public void byttVindu(JPanel remove, String newWindow) {
-		remove(remove);
-		for (JPanel jp : panels) {
-			if (jp.getClass().getName().equals(newWindow)) {
-				add(jp);
-			}
-		}
-		pack();
-	}
 
 	public boolean registerOrder(Order order) {
 		int suc = db.addOrder(order);
@@ -58,8 +46,6 @@ public class GUI extends JFrame implements WindowListener {
 	public boolean registerCustomer(Customer customer) {
 		int suc = db.addCustomer(customer);
 		if (suc > 0) {
-			MainMenu main = (MainMenu) panels.get(0);
-			main.updt();
 			return true;
 		}
 		return false;
@@ -68,8 +54,6 @@ public class GUI extends JFrame implements WindowListener {
 	public boolean changeCustomerStatus(Customer customer) {
 		int succ = db.changeCustomerStatus(customer);
 		if (succ == 1) {
-			MainMenu main = (MainMenu) panels.get(0);
-			main.updt();
 			return true;
 		}
 		return false;
@@ -86,8 +70,6 @@ public class GUI extends JFrame implements WindowListener {
 	public boolean updateCustomer(Customer customer) {
 		int succ = db.updateCustomer(customer);
 		if (succ == 1) {
-			MainMenu main = (MainMenu) panels.get(0);
-			main.updt();
 			return true;
 		}
 		return false;
@@ -96,8 +78,6 @@ public class GUI extends JFrame implements WindowListener {
 	public boolean addCustomerAddress(CustomerAddress customer) {
 		int succ = db.addCustomerAddress(customer);
 		if (succ == 1) {
-			MainMenu main = (MainMenu) panels.get(0);
-			main.updt();
 			return true;
 		}
 		return false;
@@ -114,8 +94,6 @@ public class GUI extends JFrame implements WindowListener {
 	public boolean changeOrderStatus(int orderID) {
 		int succ = db.changeOrderStatus(orderID);
 		if (succ == 1) {
-			MainMenu main = (MainMenu) panels.get(0);
-			main.updt();
 			return true;
 		}
 		return false;
@@ -147,8 +125,6 @@ public class GUI extends JFrame implements WindowListener {
 	public boolean updateIngredient(Ingredient ingToUpdate, Ingredient ing) {
 		int succ = db.updateIngredient(ingToUpdate, ing);
 		if (succ == 1) {
-			MainMenu main = (MainMenu) panels.get(1);
-			main.updt();
 			return true;
 		}
 		return false;
