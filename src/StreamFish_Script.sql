@@ -64,6 +64,7 @@ status CHAR(1) NOT NULL DEFAULT '1'
 CREATE TABLE orders(
 order_id INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
 delivery_date DATE NOT NULL,
+deliver_time TIME,
 address VARCHAR(255),
 nr_persons INTEGER DEFAULT 1,
 empl_id INTEGER,
