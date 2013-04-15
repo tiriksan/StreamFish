@@ -37,7 +37,8 @@ public class Menu {
 		return description;
 	}
 
+    @Override
 	public String toString() {
-		return "ID: " + menuId + ", navn: " + menuName;
+		return "Name: " + menuName + "\tPrice: " + price + "\t" + description;
 	}
 }
