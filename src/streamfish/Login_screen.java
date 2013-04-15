@@ -1,8 +1,6 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package streamfish;
+
+import static javax.swing.JOptionPane.*;
 
 /**
  *
@@ -102,6 +100,9 @@ public class Login_screen extends javax.swing.JPanel {
         password = password.trim();
 
         Employee emp = gui.getUserAuthorization(username, password);
+        if (emp == null) {
+            showMessageDialog(null, "Invalid username and/or password.\nTry again.", "Login", ERROR_MESSAGE);
+        }
         if(emp != null){
             switch(emp.getUsertype()){
                 case 0 :
