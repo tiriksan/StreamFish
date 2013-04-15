@@ -147,7 +147,7 @@ public class GUI extends JFrame implements WindowListener {
 	public boolean updateIngredient(Ingredient ingToUpdate, Ingredient ing) {
 		int succ = db.updateIngredient(ingToUpdate, ing);
 		if (succ == 1) {
-			MainMenu main = (MainMenu) panels.get(0);
+			MainMenu main = (MainMenu) panels.get(1);
 			main.updt();
 			return true;
 		}
