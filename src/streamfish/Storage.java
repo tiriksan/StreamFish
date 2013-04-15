@@ -30,6 +30,13 @@ public class Storage extends javax.swing.JPanel {
 				model.addRow(new Object[]{ingredients[i].getID(), ingredients[i].getName(), ingredients[i].getAmount(), ingredients[i].getExpDate()});
 			}
 		}
+		
+		addListSelectListener();
+		addDocumentListener();
+		
+	}
+	
+	private void addListSelectListener(){
 		jTable1.getSelectionModel().addListSelectionListener(
 				new ListSelectionListener() {
 					public void valueChanged(ListSelectionEvent event) {
@@ -42,7 +49,8 @@ public class Storage extends javax.swing.JPanel {
 						}
 					}
 				});
-
+	}
+	private void addDocumentListener(){
 		jTextField1.getDocument().addDocumentListener(new DocumentListener() {
 			@Override
 			public void insertUpdate(DocumentEvent e) {
@@ -81,7 +89,7 @@ public class Storage extends javax.swing.JPanel {
 			}
 		});
 	}
-
+	
 	public void update() {
 		ingredients = gui.getIngredients(jTextField1.getText());
 		DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
