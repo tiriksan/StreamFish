@@ -89,7 +89,7 @@ public class Reg_ingredient extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-		gui.byttVindu(this, new MainMenu(gui));
+		gui.byttVindu(this, "streamfish.MainMenu");
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -98,7 +98,7 @@ public class Reg_ingredient extends javax.swing.JPanel {
                 String expiryDate = jTextField3.getText().trim();
 		Ingredient newIngredient = new Ingredient(ingredientName, amount, expiryDate);
 		gui.addIngredient(newIngredient);
-		gui.byttVindu(this, new Storage(gui));
+		gui.byttVindu(this, "streamfish.Storage");
     }//GEN-LAST:event_jButton1ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
