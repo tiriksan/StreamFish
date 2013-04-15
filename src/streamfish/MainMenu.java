@@ -150,6 +150,18 @@ public class MainMenu extends javax.swing.JPanel {
 			}
 		}
 	}
+        
+        public void updtTodaysTasks() {
+
+		orderinfo = gui.getTodaysTasks();
+		DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
+		model.setRowCount(0);
+		if (orderinfo != null && orderinfo.length > 0) {
+			for (int i = 0; i < orderinfo.length; i++) {
+				model.addRow(new Object[]{orderinfo[i].getAddress(), orderinfo[i].getCustomerName(), orderinfo[i].getPhone()});
+			}
+		}
+	}
 
 	/**
 	 * This method is called from within the constructor to initialize the form.
