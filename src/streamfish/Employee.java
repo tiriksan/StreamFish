@@ -45,9 +45,19 @@ class Employee {
         return password;
     }
     
+    public boolean okUsername(String usernameIn) {
+        return username.equals(usernameIn);
+    }
     
     public boolean okPassword(String passwordIn) {
         return password.equals(passwordIn);
+    }
+    
+    public boolean login(String username, String password) {
+        if (okUsername(username) && okPassword(password)) {
+            return true;
+        }
+        return false;
     }
 
     public boolean changePassword(String oldPass, String newPass) {

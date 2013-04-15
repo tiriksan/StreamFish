@@ -264,7 +264,7 @@ public class Storage extends javax.swing.JPanel {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
 		// TODO add your handling code here:
-		gui.byttVindu(this, new MainMenu(gui));
+		gui.byttVindu(this, "streamfish.MainMenu");
     }//GEN-LAST:event_jButton3ActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

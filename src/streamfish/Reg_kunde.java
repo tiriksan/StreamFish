@@ -134,7 +134,7 @@ public class Reg_kunde extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-		gui.byttVindu(this, new MainMenu(gui));
+		gui.byttVindu(this, "streamfish.MainMenu");
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -147,7 +147,7 @@ public class Reg_kunde extends javax.swing.JPanel {
 		
 		CustomerAddress address = new CustomerAddress(jTextField3.getText(), Integer.parseInt(jTextField4.getText()), jTextField5.getText(), gui.getCustomers(customername, false)[0].getCustomerID());
 		gui.addCustomerAddress(address);
-		gui.byttVindu(this, new MainMenu(gui));
+		gui.byttVindu(this, "streamfish.MainMenu");
     }//GEN-LAST:event_jButton1ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

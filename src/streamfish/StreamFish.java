@@ -286,10 +286,8 @@ public class StreamFish {
 	
 	public Employee userAuthorization(String username, String password) {
         for (Employee emp : getEmployees()) {
-            if (username.equals(emp.getUsername())) {
-                if (emp.okPassword(password)) {
-                    return emp;
-                }
+            if (emp.login(username, password)) {
+                return emp;
             }
         }
         return null;
