@@ -17,7 +17,7 @@ public class TodaysDate {
     public static String getDate() {
         TimeZone tz = TimeZone.getTimeZone("Europe/Oslo");
         Calendar currentDate = Calendar.getInstance(tz, Locale.ENGLISH); //Get the current date
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MMM-dd"); //format it as per your requirement
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd"); //format it as per your requirement
         String dateNow = formatter.format(currentDate.getTime());
 
         return dateNow;
@@ -26,7 +26,7 @@ public class TodaysDate {
 	public static String getADate(int days){
 		TimeZone tz = TimeZone.getTimeZone("Europe/Oslo");
         Calendar currentDate = Calendar.getInstance(tz, Locale.ENGLISH); //Get the current date
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MMM-dd"); //format it as per your requirement
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd"); //format it as per your requirement
         currentDate.add(Calendar.DATE, days);
 		String date = formatter.format(currentDate.getTime());
 
@@ -45,7 +45,7 @@ public class TodaysDate {
 	public static String getADateAddMonth(int month){
 		TimeZone tz = TimeZone.getTimeZone("Europe/Oslo");
         Calendar currentDate = Calendar.getInstance(tz, Locale.ENGLISH); //Get the current date
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MMM-dd"); //format it as per your requirement
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd"); //format it as per your requirement
         currentDate.add(Calendar.MONTH, month);
 		String date = formatter.format(currentDate.getTime());
 

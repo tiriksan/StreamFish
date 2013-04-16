@@ -422,7 +422,8 @@ public class StreamFish {
 		try {
 			stm = con.createStatement();
 			String[] check = {order.getDeliveryDate(), order.getAddress().getAdress()};
-			check = removeUnwantedSymbols(check);
+ 			check = removeUnwantedSymbols(check);
+			System.out.println(check[0]);
 			int succ = stm.executeUpdate("insert into orders (DELIVERY_DATE, ADDRESS, NR_PERSONS, EMPL_ID, MENU_ID,CUSTOMER_ID,DELIVERY_TIME) "
 					+ "values('" + check[0] + "' , '" + check[1] + "', " + order.getNrPersons() + ", " + order.getEmplId() + ", "
 					+ order.getMenuId() + " , " + order.getCustomerId() + " , '" + order.getDeliveryTime() + "')");
@@ -442,6 +443,7 @@ public class StreamFish {
 
 		try {
 			stm = con.createStatement();
+			System.out.println(subscription.toString());
 			succ = stm.executeUpdate("INSERT INTO SUBSCRIPTION VALUES(DEFAULT, " 
 					+ subscription.getDuration() +", '" 
 					+ subscription.getFrom_date() + "', '" 
@@ -452,7 +454,7 @@ public class StreamFish {
 			res.next();
 			subId = res.getInt("subscription_id");
 		} catch (SQLException ex) {
-			System.err.println(ex);
+			System.out.println(ex);
 		}
 		try {
 			stm = con.createStatement();
@@ -460,13 +462,12 @@ public class StreamFish {
 			//     subscription.getDays().compareTo(TodaysDate.getDay());
 			int day = TodaysDate.getDay();
 			int duration = subscription.getDuration() * 4;
-
+			System.out.println(order.getDeliveryTime());
 			for (int i = 0; i < duration; i++) {
 				if (i == 0) {
 					for (int y = day; y < 7; y++) {
 						if (subscription.getDays().charAt(y) == '1') {
 							String date = TodaysDate.getADate(y - day);
-							System.out.println(date);
 							addOrder(new Order(order.getMenuId(), order.getCustomerId(), order.getEmplId(), order.getNrPersons(), date, order.getDeliveryTime(), order.getAddress(), subId));
 						}
 					}
@@ -474,7 +475,6 @@ public class StreamFish {
 					for (int k = 0; k <= day; k++) {
 						if (subscription.getDays().charAt(k) == '1') {
 							String date = TodaysDate.getADate(i * 7 - day + k);
-							System.out.println(date);
 							addOrder(new Order(order.getMenuId(), order.getCustomerId(), order.getEmplId(), order.getNrPersons(), date, order.getDeliveryTime(), order.getAddress(), subId));
 						}
 					}
@@ -489,24 +489,8 @@ public class StreamFish {
 				}
 			}
 
-			for (int i = 0; i < 6; i++) {
-				if (subscription.getDays().charAt(i) == '0') {
-					succ = stm.executeUpdate("INSERT INTO ORDERS VALUES (FROM_DATE, TO_DATE, DURATION)" + TodaysDate.getDate());
-				}
-				if (subscription.getDays().charAt(i) == '1') {
-				}
-				if (subscription.getDays().charAt(i) == '2') {
-				}
-				if (subscription.getDays().charAt(i) == '3') {
-				}
-				if (subscription.getDays().charAt(i) == '4') {
-				}
-				if (subscription.getDays().charAt(i) == '5') {
-				}
-
-			}
 		} catch (SQLException exc) {
-			System.err.println(exc);
+			System.out.println(exc);
 		}
 		return -1;
 	}

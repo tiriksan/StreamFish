@@ -568,7 +568,7 @@ public class Reg_ordre extends javax.swing.JPanel {
             antPers = Integer.parseInt(jSpinner2.getValue().toString());
             String time = (String) jComboBox9.getSelectedItem() + ":" + (String) jComboBox8.getSelectedItem();
             CustomerAddress orderAddress = (CustomerAddress) jComboBox1.getSelectedItem();
-            Order order = new Order(selMenu.getMenuId(), CUSTID, gui.employee_id, antPers, orderAddress);
+            Order order = new Order(selMenu.getMenuId(), CUSTID, gui.employee_id, antPers, time, orderAddress);
             String durr = (String) jComboBox7.getSelectedItem();
             String days = getDays();
             int duration = Integer.parseInt(durr.substring(0, 2).trim());
