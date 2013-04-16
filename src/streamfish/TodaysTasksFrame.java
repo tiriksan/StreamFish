@@ -89,7 +89,7 @@ public class TodaysTasksFrame extends javax.swing.JFrame {
 
         jLabel9.setText("City:");
 
-        jLabel17.setText((String) "" + info.getzipcode());
+        jLabel17.setText((String) "" + info.getZipcode());
 
         jLabel18.setText(info.getCity());
 

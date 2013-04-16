@@ -55,7 +55,7 @@ class Orderinfo {
         return address;
     }
     
-    public int getzipcode() {
+    public int getZipcode() {
         return zipcode;
     }
     
