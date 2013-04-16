@@ -433,6 +433,67 @@ public class StreamFish {
         }
         return -1;
     }
+    
+     public int registerSubscription(Subscription subscription){
+            Statement stm;
+            ResultSet res;
+            int succ;
+            
+            try{
+                stm = con.createStatement();
+                succ = stm.executeUpdate("INSERT INTO SUBSCRIPTION VALUES(DEFAULT, DURATION, FROM_DATE, TO_DATE, DEFAULT");
+                
+            }catch ( SQLException ex) {
+                System.err.println(ex);
+            }try{
+                stm = con.createStatement();
+                
+           //     subscription.getDays().compareTo(TodaysDate.getDay());
+                int day = TodaysDate.getDay();
+                int duration = subscription.getDuration() * 4;
+                
+                for(int i = 0; i < duration; i++){
+                    if(i == 0){
+                        for(int y = day; y < 7; y++){
+                            
+                        }
+                    }else if(i == (duration -1)){
+                        for(int k = 0; k <= day; k++){
+                            
+                        }
+                    }else{
+                        for(int x = 0; x < 7; x++){
+                            
+                        }
+                    }
+                }
+                
+                for (int i = 0; i < 6; i++) {
+                    if(subscription.getDays().charAt(i) == '0'){
+                        succ = stm.executeUpdate("INSERT INTO ORDERS VALUES (FROM_DATE, TO_DATE, DURATION)" + TodaysDate.getDate()) ;
+                    }
+                    if(subscription.getDays().charAt(i) == '1'){
+                        
+                    }
+                    if(subscription.getDays().charAt(i) == '2'){
+                        
+                    }
+                    if(subscription.getDays().charAt(i) == '3'){
+                        
+                    }
+                    if(subscription.getDays().charAt(i) == '4'){
+                        
+                    }
+                    if(subscription.getDays().charAt(i) == '5'){
+                        
+                    }
+                        
+                }
+            } catch (SQLException exc) {
+                System.err.println(exc);
+            }
+            return -1;
+        }
 
     public int addDish(Dish dish) {
         Statement stm;

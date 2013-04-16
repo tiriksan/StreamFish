@@ -32,7 +32,7 @@ public class TodaysDate {
         return dateNow;
     }
 
-    public int getDay() {
+    public static int getDay() {
         Calendar currentDate = Calendar.getInstance(Locale.ENGLISH);
         SimpleDateFormat formatter = new SimpleDateFormat("EEE");
         String day = formatter.format(currentDate.getTime());
