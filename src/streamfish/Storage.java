@@ -244,7 +244,7 @@ public class Storage extends javax.swing.JPanel {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
 		if (ingToBeEdited != null) {
-			RegIngredient ing = new RegIngredient(gui, "Edit", ingToBeEdited);
+			RegIngredient ing = new RegIngredient(gui, "Apply", ingToBeEdited);
 			ing.addWindowListener(new WindowListener() {
 				@Override
 				public void windowOpened(WindowEvent e) {
