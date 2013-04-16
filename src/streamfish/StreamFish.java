@@ -718,6 +718,21 @@ public class StreamFish {
                     if(subscription.getDays().charAt(i) == '1'){
                         succ = stm.executeUpdate("INSERT INTO ORDERS");
                     }
+                    if(subscription.getDays().charAt(i) == '2'){
+                        
+                    }
+                    if(subscription.getDays().charAt(i) == '3'){
+                        
+                    }
+                    if(subscription.getDays().charAt(i) == '4'){
+                        
+                    }
+                    if(subscription.getDays().charAt(i) == '5'){
+                        
+                    }
+                    if(subscription.getDays().charAt(i) == '6'){
+                        
+                    }
                 }
             } catch (SQLException exc) {
                 System.err.println(exc);
