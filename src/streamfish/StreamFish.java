@@ -721,8 +721,11 @@ public class StreamFish {
             }try{
                 stm = con.createStatement();
                 for (int i = 0; i < 6; i++) {
+                    if(subscription.getDays().charAt(i) == '0'){
+                        succ = stm.executeUpdate("INSERT INTO ORDERS VALUES (FROM_DATE, TO_DATE, DURATION)" + TodaysDate.getDate()) ;
+                    }
                     if(subscription.getDays().charAt(i) == '1'){
-                        succ = stm.executeUpdate("INSERT INTO ORDERS");
+                        
                     }
                     if(subscription.getDays().charAt(i) == '2'){
                         
@@ -736,9 +739,7 @@ public class StreamFish {
                     if(subscription.getDays().charAt(i) == '5'){
                         
                     }
-                    if(subscription.getDays().charAt(i) == '6'){
                         
-                    }
                 }
             } catch (SQLException exc) {
                 System.err.println(exc);
