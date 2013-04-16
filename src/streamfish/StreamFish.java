@@ -442,9 +442,13 @@ public class StreamFish {
 
 		try {
 			stm = con.createStatement();
-			succ = stm.executeUpdate("INSERT INTO SUBSCRIPTION VALUES(DEFAULT, DURATION, FROM_DATE, TO_DATE, DEFAULT");
-			res = stm.executeQuery("select * from subscription where customer_id = "
-					+ order.getCustomerId() + " and from_date = '" + subscription.getFrom_date() + "'");
+			succ = stm.executeUpdate("INSERT INTO SUBSCRIPTION VALUES(DEFAULT, " 
+					+ subscription.getDuration() +", '" 
+					+ subscription.getFrom_date() + "', '" 
+					+ subscription.getTo_date() + "', '" 
+					+ subscription.getStatus() + "', "
+					+ order.getCustomerId()+ ")" );
+			res = stm.executeQuery("select * from subscription where from_date = '" + subscription.getFrom_date() + "'");
 			res.next();
 			subId = res.getInt("subscription_id");
 		} catch (SQLException ex) {
