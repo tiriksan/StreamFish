@@ -26,177 +26,205 @@ import javax.swing.table.DefaultTableModel;
  */
 public class Reg_ordre extends javax.swing.JPanel {
 
-	private final int CUSTID;
-	private GUI gui;
-	private Menu[] menu;
-	private CustomerAddress[] address;
-	private Object[] addressPlus1;
-	private Reg_ordre order = this;
-	private DefaultComboBoxModel comboBox;
-	private Customer customer;
-	private Menu selMenu;
-	private int antPers;
-	private double priceReduction = 0;
+    private final int CUSTID;
+    private GUI gui;
+    private Menu[] menu;
+    private CustomerAddress[] address;
+    private Object[] addressPlus1;
+    private Reg_ordre order = this;
+    private DefaultComboBoxModel comboBox;
+    private Customer customer;
+    private Menu selMenu;
+    private int antPers;
+    private double priceReduction = 0;
 
-	/**
-	 * Creates new form Reg_kunde
-	 */
-	public Reg_ordre(int custid, final GUI gui) {
+    /**
+     * Creates new form Reg_kunde
+     */
+    public Reg_ordre(int custid, final GUI gui) {
 
-		this.gui = gui;
-		
-		this.CUSTID = custid;
-		this.customer = gui.getCustomer(CUSTID);
-		menu = gui.getMenus();
-		address = gui.getAddress(CUSTID);
-		addressPlus1 = new Object[address.length + 1];
-		priceReduction = customer.getPriceReduction();
-		
-		for (int i = 0; i < address.length; i++) {
-			addressPlus1[i] = address[i];
-		}
-		addressPlus1[address.length] = new String("Add new address");
-		initComponents();
-		antPers = Integer.parseInt(jSpinner1.getValue().toString());
-		jLabel10.setText(customer.getPercentageReduction() + " %");
-		jLabel7.setText(updatePrice() + ",-");
-		jLabel1.setText("Kundenr: " + CUSTID);
-		updateMenu();
-		jSpinner1.addChangeListener(new ChangeListener(){
-			@Override
-			public void stateChanged(ChangeEvent e) {
-				antPers = Integer.parseInt(jSpinner1.getValue().toString());
-				jLabel7.setText(updatePrice() + ",-");
-			}
-		});
-		
+        this.gui = gui;
 
-		comboBox = (DefaultComboBoxModel) jComboBox1.getModel();
-		for (Object addr : addressPlus1) {
-			comboBox.addElement(addr);
-		}
-		jComboBox1.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				javax.swing.JComboBox box = (javax.swing.JComboBox) e.getSource();
-				if (box.getSelectedItem() != null && box.getSelectedItem().getClass().equals(String.class)) {
-					AddAddress address = new AddAddress(gui, CUSTID);
-					address.addWindowListener(new WindowListener(){
-						@Override
-						public void windowOpened(WindowEvent e) {
-						}
-						@Override
-						public void windowClosing(WindowEvent e) {
-						}
-						@Override
-						public void windowClosed(WindowEvent e) {
-							order.updateAddress();
-						}
-						@Override
-						public void windowIconified(WindowEvent e) {
-						}
-						@Override
-						public void windowDeiconified(WindowEvent e) {
-						}
-						@Override
-						public void windowActivated(WindowEvent e) {
-						}
-						@Override
-						public void windowDeactivated(WindowEvent e) {
-						}
-					});
-				}
-			}
-		});
+        this.CUSTID = custid;
+        this.customer = gui.getCustomer(CUSTID);
+        menu = gui.getMenus();
+        address = gui.getAddress(CUSTID);
+        addressPlus1 = new Object[address.length + 1];
+        priceReduction = customer.getPriceReduction();
 
-	}
-	private double updatePrice(){
-		if(selMenu != null){
-			double price = selMenu.getPrice() * antPers * priceReduction;
-			return price;
-		}
-		return 0;
-	}
-	private void updateAddress() {
-		address = gui.getAddress(CUSTID);
-		addressPlus1 = new Object[address.length + 1];
-		for (int i = 0; i < address.length; i++) {
-			addressPlus1[i] = address[i];
-		}
-		addressPlus1[address.length] = new String("Add new address");
-		comboBox.removeAllElements();
-		comboBox = (DefaultComboBoxModel) jComboBox1.getModel();
-		
-		for (Object addr : addressPlus1) {
-			comboBox.addElement(addr);
-		}
-	}
-	private void updateMenu(){
-		menu = gui.getMenus();
-		if(menu!=null && menu.length > 0){
-			for (int i = 0; i < menu.length; i++) {
-				DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-				model.addRow(new Object[]{menu[i].getMenuName(), menu[i].getPrice(), menu[i].getDescription()});
-			}
-		}
-		jTable1.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
-			public void valueChanged(ListSelectionEvent event) {
-						int viewRow = jTable1.getSelectedRow();
-						if (!event.getValueIsAdjusting()) {
-							try {
-								selMenu = menu[viewRow];
-								jLabel7.setText(updatePrice() + ",-");
-							} catch (Exception e) {
-							}
-						}
-					}
-	});
-		
-	}
-	
-	private String getDays(){
-		String res = "";
-		if (jToggleButton1.isSelected()) {
-			res += '1';
-		} else {
-			res += '0';
-		}
-		if (jToggleButton2.isSelected()) {
-			res += '1';
-		} else {
-			res += '0';
-		}
-		if (jToggleButton3.isSelected()) {
-			res += '1';
-		} else {
-			res += '0';
-		}
-		if (jToggleButton4.isSelected()) {
-			res += '1';
-		} else {
-			res += '0';
-		}
-		if (jToggleButton5.isSelected()) {
-			res += '1';
-		} else {
-			res += '0';
-		}
-		if (jToggleButton6.isSelected()) {
-			res += '1';
-		} else {
-			res += '0';
-		}
-		if (jToggleButton7.isSelected()) {
-			res += '1';
-		} else {
-			res += '0';
-		}
-		
-		
-		return res;
-	}
+        for (int i = 0; i < address.length; i++) {
+            addressPlus1[i] = address[i];
+        }
+        addressPlus1[address.length] = new String("Add new address");
+        initComponents();
+        antPers = Integer.parseInt(jSpinner1.getValue().toString());
+        jLabel10.setText(customer.getPercentageReduction() + " %");
+        jLabel7.setText(updatePrice() + ",-");
+        jLabel1.setText("Kundenr: " + CUSTID);
+        updateMenu();
+        jSpinner1.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                antPers = Integer.parseInt(jSpinner1.getValue().toString());
+                jLabel7.setText(updatePrice() + ",-");
+            }
+        });
 
-	@SuppressWarnings("unchecked")
+
+        comboBox = (DefaultComboBoxModel) jComboBox1.getModel();
+        for (Object addr : addressPlus1) {
+            comboBox.addElement(addr);
+        }
+        jComboBox1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                javax.swing.JComboBox box = (javax.swing.JComboBox) e.getSource();
+                if (box.getSelectedItem() != null && box.getSelectedItem().getClass().equals(String.class)) {
+                    AddAddress address = new AddAddress(gui, CUSTID);
+                    address.addWindowListener(new WindowListener() {
+                        @Override
+                        public void windowOpened(WindowEvent e) {
+                        }
+
+                        @Override
+                        public void windowClosing(WindowEvent e) {
+                        }
+
+                        @Override
+                        public void windowClosed(WindowEvent e) {
+                            order.updateAddress();
+                        }
+
+                        @Override
+                        public void windowIconified(WindowEvent e) {
+                        }
+
+                        @Override
+                        public void windowDeiconified(WindowEvent e) {
+                        }
+
+                        @Override
+                        public void windowActivated(WindowEvent e) {
+                        }
+
+                        @Override
+                        public void windowDeactivated(WindowEvent e) {
+                        }
+                    });
+                }
+            }
+        });
+    }
+
+    private int updateReduction(int i) {
+        if (selMenu != null) {
+            switch (i) {
+                case 1:
+                    priceReduction = 5;
+                    break;
+                case 3:
+                    priceReduction = 10;
+                    break;
+                case 6:
+                    priceReduction = 20;
+                    break;
+                case 12:
+                    priceReduction = 30;
+                    break;
+            }
+        }
+        return -1;
+    }
+
+    private double updatePrice() {
+        if (selMenu != null) {
+            double price = selMenu.getPrice() * antPers * priceReduction;
+            return price;
+        }
+        return 0;
+    }
+
+    private void updateAddress() {
+        address = gui.getAddress(CUSTID);
+        addressPlus1 = new Object[address.length + 1];
+        for (int i = 0; i < address.length; i++) {
+            addressPlus1[i] = address[i];
+        }
+        addressPlus1[address.length] = new String("Add new address");
+        comboBox.removeAllElements();
+        comboBox = (DefaultComboBoxModel) jComboBox1.getModel();
+
+        for (Object addr : addressPlus1) {
+            comboBox.addElement(addr);
+        }
+    }
+
+    private void updateMenu() {
+        menu = gui.getMenus();
+        if (menu != null && menu.length > 0) {
+            for (int i = 0; i < menu.length; i++) {
+                DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+                model.addRow(new Object[]{menu[i].getMenuName(), menu[i].getPrice(), menu[i].getDescription()});
+            }
+        }
+        jTable1.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+            public void valueChanged(ListSelectionEvent event) {
+                int viewRow = jTable1.getSelectedRow();
+                if (!event.getValueIsAdjusting()) {
+                    try {
+                        selMenu = menu[viewRow];
+                        jLabel7.setText(updatePrice() + ",-");
+                    } catch (Exception e) {
+                    }
+                }
+            }
+        });
+
+    }
+
+    private String getDays() {
+        String res = "";
+        if (jToggleButton1.isSelected()) {
+            res += '1';
+        } else {
+            res += '0';
+        }
+        if (jToggleButton2.isSelected()) {
+            res += '1';
+        } else {
+            res += '0';
+        }
+        if (jToggleButton3.isSelected()) {
+            res += '1';
+        } else {
+            res += '0';
+        }
+        if (jToggleButton4.isSelected()) {
+            res += '1';
+        } else {
+            res += '0';
+        }
+        if (jToggleButton5.isSelected()) {
+            res += '1';
+        } else {
+            res += '0';
+        }
+        if (jToggleButton6.isSelected()) {
+            res += '1';
+        } else {
+            res += '0';
+        }
+        if (jToggleButton7.isSelected()) {
+            res += '1';
+        } else {
+            res += '0';
+        }
+
+
+        return res;
+    }
+
+    @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -522,36 +550,35 @@ public class Reg_ordre extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-		// TODO add your handling code here:
-		gui.byttVindu(this, new MainMenu(gui));
+        // TODO add your handling code here:
+        gui.byttVindu(this, new MainMenu(gui));
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-		if (jTabbedPane1.getSelectedIndex() == 0) {
-			antPers = Integer.parseInt(jSpinner1.getValue().toString());
+        if (jTabbedPane1.getSelectedIndex() == 0) {
+            antPers = Integer.parseInt(jSpinner1.getValue().toString());
 
-			String date = (String) jComboBox2.getSelectedItem() + "-" + (String) jComboBox3.getSelectedItem() + "-" + (String) jComboBox4.getSelectedItem();
-			String time = (String) jComboBox5.getSelectedItem() + ":" + (String) jComboBox6.getSelectedItem();
-			CustomerAddress orderAddress = (CustomerAddress) jComboBox1.getSelectedItem();
-			Order order = new Order(selMenu.getMenuId(), CUSTID, gui.employee_id, antPers, date, time, orderAddress);
-			gui.registerOrder(order);
-			gui.byttVindu(this, new MainMenu(gui));
-		} else {
-			antPers = Integer.parseInt(jSpinner2.getValue().toString());
-			String time = (String) jComboBox9.getSelectedItem() + ":" + (String) jComboBox8.getSelectedItem();
-			CustomerAddress orderAddress = (CustomerAddress) jComboBox1.getSelectedItem();
-			Order order = new Order(selMenu.getMenuId(), CUSTID, gui.employee_id, antPers, orderAddress);
-			String durr = (String) jComboBox7.getSelectedItem();
-			String days = getDays();
-			int duration = Integer.parseInt(durr.substring(0, 2).trim());
-			gui.registrerSubscription(new Subscription(duration, TodaysDate.getDate(), TodaysDate.getADateAddMonth(duration), days, '1'), order);
-			gui.byttVindu(this, new MainMenu(gui));
-		}
+            String date = (String) jComboBox2.getSelectedItem() + "-" + (String) jComboBox3.getSelectedItem() + "-" + (String) jComboBox4.getSelectedItem();
+            String time = (String) jComboBox5.getSelectedItem() + ":" + (String) jComboBox6.getSelectedItem();
+            CustomerAddress orderAddress = (CustomerAddress) jComboBox1.getSelectedItem();
+            Order order = new Order(selMenu.getMenuId(), CUSTID, gui.employee_id, antPers, date, time, orderAddress);
+            gui.registerOrder(order);
+            gui.byttVindu(this, new MainMenu(gui));
+        } else {
+            antPers = Integer.parseInt(jSpinner2.getValue().toString());
+            String time = (String) jComboBox9.getSelectedItem() + ":" + (String) jComboBox8.getSelectedItem();
+            CustomerAddress orderAddress = (CustomerAddress) jComboBox1.getSelectedItem();
+            Order order = new Order(selMenu.getMenuId(), CUSTID, gui.employee_id, antPers, orderAddress);
+            String durr = (String) jComboBox7.getSelectedItem();
+            String days = getDays();
+            int duration = Integer.parseInt(durr.substring(0, 2).trim());
+            gui.registrerSubscription(new Subscription(duration, TodaysDate.getDate(), TodaysDate.getADateAddMonth(duration), days, '1'), order);
+            gui.byttVindu(this, new MainMenu(gui));
+        }
 
-                //jtoggle
+        //jtoggle
 
     }//GEN-LAST:event_jButton2ActionPerformed
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;

@@ -57,19 +57,19 @@ public class TodaysDate {
         SimpleDateFormat formatter = new SimpleDateFormat("EEE");
         String day = formatter.format(currentDate.getTime());
         int today;
-        if (day.equals("ma")) {
+        if (day.equals("ma") || (day.equals("mo"))) {
             today = 0;
-        } else if (day.equals("ti")) {
+        } else if (day.equals("ti") || (day.equals("ty") || day.equals("tu"))) {
             today = 1;
-        } else if (day.equals("on")) {
+        } else if (day.equals("on") || (day.equals("we"))) {
             today = 2;
-        } else if (day.equals("to")) {
+        } else if (day.equals("to") || (day.equals("th"))) {
             today = 3;
         } else if (day.equals("fr")) {
             today = 4;
-        } else if (day.equals("lø")) {
+        } else if (day.equals("lø") || (day.equals("la") || day.equals("sa"))) {
             today = 5;
-        } else if (day.equals("sø")) {
+        } else if (day.equals("sø") || (day.equals("su"))) {
             today = 6;
         } else {
             return -1;
@@ -83,6 +83,7 @@ public class TodaysDate {
 //            System.out.println(tz);
 //        }
         TodaysDate td = new TodaysDate();
+        System.out.println(Calendar.DAY_OF_WEEK_IN_MONTH);
         System.out.println(td.getDateDB());
         Calendar cal = Calendar.getInstance();
         System.out.println(cal.getTime());
