@@ -1,5 +1,7 @@
 package streamfish;
 
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.util.ArrayList;
@@ -29,12 +31,22 @@ public class GUI extends JFrame implements WindowListener {
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setVisible(true);
 		pack();
+		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+		double width = screenSize.getWidth();
+		double heigth = screenSize.getHeight();
+		Dimension frameSize = getSize();
+		setLocation((int)width/2-(int)frameSize.getWidth()/2,(int) heigth/2-(int)frameSize.getHeight()/2);
 	}
 
 	public void byttVindu(JPanel remove, JPanel add) {
 		remove(remove);
 		add(add);
 		pack();
+		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+		double width = screenSize.getWidth();
+		double heigth = screenSize.getHeight();
+		Dimension frameSize = getSize();
+		setLocation((int)width/2-(int)frameSize.getWidth()/2,(int) heigth/2-(int)frameSize.getHeight()/2);
 	}
 
 
