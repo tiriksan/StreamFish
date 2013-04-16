@@ -31,7 +31,7 @@ public class TodaysDate {
         
         return dateNow;
     }
-    
+        
     public static void main(String[] args) {
 //        String[] timezones = TimeZone.getAvailableIDs();
 //        for (String tz : timezones) {
@@ -39,5 +39,8 @@ public class TodaysDate {
 //        }
         TodaysDate td = new TodaysDate();
         System.out.println(td.getDateDB());
+        Calendar cal = Calendar.getInstance();
+        System.out.println(cal.getTime());
+        System.out.println(cal.get(Calendar.DAY_OF_WEEK_IN_MONTH));
     }
 }

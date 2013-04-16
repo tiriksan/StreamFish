@@ -153,11 +153,14 @@ REFERENCES dish ON DELETE CASCADE;
 
 --Create view: todays tasks--
 
-CREATE VIEW todaysTasks AS SELECT orders.order_id, customer_name, address, phone, menu_name, nr_persons, price*nr_persons "Total price", username 
-FROM customer LEFT JOIN orders ON customer.CUSTOMER_ID = orders.CUSTOMER_ID 
+CREATE VIEW todaysTasks AS
+SELECT order_id, customer_name, orders.address, zip_code, city, phone, menu_name, nr_persons, price*nr_persons "Total", username
+FROM customer
+LEFT JOIN orders ON customer.CUSTOMER_ID = orders.CUSTOMER_ID
 LEFT JOIN menu ON orders.MENU_ID = menu.MENU_ID
 LEFT JOIN employees ON orders.EMPL_ID = employees.EMPL_ID
-WHERE delivery_date = CURRENT DATE AND customer.status = '1' AND orders.status = '1';
+LEFT JOIN customer_address ON orders.address = customer_address.address AND orders.CUSTOMER_ID = customer_address.CUSTOMER_ID
+WHERE delivery_date = CURRENT DATE AND customer.status = '1';
 
 
 -- Insert sentences --

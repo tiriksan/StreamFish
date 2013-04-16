@@ -346,12 +346,15 @@ public class StreamFish {
                             int orderID = res.getInt(1);
                             String customerName = res.getString(2);
                             String address = res.getString(3);
-                            String phone = res.getString(4);
-                            String menu = res.getString(5);
-                            int numberOfPersons = res.getInt(6);
-                            int price = res.getInt(7);
-                            String salesperson = res.getString(8);
-                            info[count] = new Orderinfo(orderID, customerName, address, phone, menu, numberOfPersons, price, salesperson);
+                            int zipcode = res.getInt(4);
+                            String city = res.getString(5);
+                            String phone = res.getString(6);
+                            String menu = res.getString(7);
+                            int numberOfPersons = res.getInt(8);
+                            int price = res.getInt(9);
+                            String salesperson = res.getString(10);
+                            info[count] = new Orderinfo(orderID, customerName, address, zipcode, 
+                                    city, phone, menu, numberOfPersons, price, salesperson);
                             count++;
 			}
 			Opprydder.lukkResSet(res);
@@ -372,10 +375,11 @@ public class StreamFish {
 		try {
 			stm = con.createStatement();
 			res = stm.executeQuery("CREATE VIEW orderinfo AS SELECT orders.delivery_date, customer_name, address, "
-					+ "phone, menu_name, nr_persons, price*nr_persons " + "Total" + ", username FROM customer\n"
+					+ "zip_code, city, phone, menu_name, nr_persons, price*nr_persons " + "Total" + ", username FROM customer\n"
 					+ "LEFT JOIN orders ON customer.CUSTOMER_ID = orders.CUSTOMER_ID\n"
 					+ "LEFT JOIN menu ON orders.MENU_ID = menu.MENU_ID\n"
 					+ "LEFT JOIN employees ON orders.EMPL_ID = employees.EMPL_ID\n"
+                                        + "LEFT JOIN customer_address ON orders.address = customer_address.address AND orders.CUSTOMER_ID = customer_address.CUSTOMER_ID"
 					+ "WHERE orders.order_ID = '" + orderID + "' AND customer.status = '1' "
                                         + "AND orders.status = '1' ORDER BY delivery_date ASC;");
 			res.next();
@@ -393,12 +397,14 @@ public class StreamFish {
                                 String date = res.getString(1);
 				String customerName = res.getString(2);
 				String address = res.getString(3);
-				String phone = res.getString(4);
-				String menu = res.getString(5);
-				int numberOfPersons = res.getInt(6);
-				int price = res.getInt(7);
-				String salesperson = res.getString(8);
-				info[count] = new Orderinfo(orderID, customerName, address, phone, menu, numberOfPersons, price, salesperson, date);
+                                int zipcode = res.getInt(4);
+                                String city = res.getString(5);
+				String phone = res.getString(6);
+				String menu = res.getString(7);
+				int numberOfPersons = res.getInt(8);
+				int price = res.getInt(9);
+				String salesperson = res.getString(10);
+				info[count] = new Orderinfo(orderID, customerName, address, zipcode, city, phone, menu, numberOfPersons, price, salesperson, date);
 				count++;
 			}
 			Opprydder.lukkResSet(res);

@@ -7,6 +7,8 @@ class Orderinfo {
     private final int orderID;
     private String customerName;
     private String address;
+    private int zipcode;
+    private String city;
     private String phone;
     private String menu;
     private int numberOfPersons;
@@ -14,10 +16,12 @@ class Orderinfo {
     private String salesperson;
     private String date = "";
     
-    public Orderinfo(int id, String cn, String ad, String ph, String me, int nr, int pr, String sa) {
+    public Orderinfo(int id, String cn, String ad, int zi, String ci, String ph, String me, int nr, int pr, String sa) {
         orderID = id;
         customerName = cn;
         address = ad;
+        zipcode = zi;
+        city = ci;
         phone = ph;
         menu = me;
         numberOfPersons = nr;
@@ -25,10 +29,12 @@ class Orderinfo {
         salesperson = sa;
     }
     
-    public Orderinfo(int id, String cn, String ad, String ph, String me, int nr, int pr, String sa, String da) {
+    public Orderinfo(int id, String cn, String ad, int zi, String ci, String ph, String me, int nr, int pr, String sa, String da) {
         orderID = id;
         customerName = cn;
         address = ad;
+        zipcode = zi;
+        city = ci;
         phone = ph;
         menu = me;
         numberOfPersons = nr;
@@ -47,6 +53,14 @@ class Orderinfo {
     
     public String getAddress() {
         return address;
+    }
+    
+    public int getzipcode() {
+        return zipcode;
+    }
+    
+    public String getCity() {
+        return city;
     }
     
     public String getPhone() {
