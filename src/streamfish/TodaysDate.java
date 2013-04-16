@@ -41,6 +41,16 @@ public class TodaysDate {
 
         return dateNow;
     }
+	
+	public static String getADateAddMonth(int month){
+		TimeZone tz = TimeZone.getTimeZone("Europe/Oslo");
+        Calendar currentDate = Calendar.getInstance(tz, Locale.ENGLISH); //Get the current date
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MMM/dd"); //format it as per your requirement
+        currentDate.add(Calendar.MONTH, month);
+		String date = formatter.format(currentDate.getTime());
+
+        return date;
+	}
 
     public static int getDay() {
         Calendar currentDate = Calendar.getInstance(Locale.ENGLISH);

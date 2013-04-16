@@ -98,6 +98,13 @@ public class GUI extends JFrame implements WindowListener {
 		}
 		return false;
 	}
+	
+	public boolean registrerSubscription(Subscription subscription, Order order) {
+		if(db.registerSubscription(subscription, order) == 1){
+			return true;
+		} 
+		return false;
+	}
 
 	public Orderinfo[] getTodaysTasks() {
 		return db.getTodaysTasks();
