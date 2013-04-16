@@ -83,13 +83,12 @@ public class Order {
 	}
 
 	//Order som brukes når man skal registrere en subscription(for å få info om customer, menu og address
-	public Order(int menuId, int customerID, int emplId, int nrPersons, CustomerAddress address, int subId) {
+	public Order(int menuId, int customerID, int emplId, int nrPersons, CustomerAddress address) {
 		this.menuId = menuId;
 		this.customerId = customerID;
 		this.emplId = emplId;
 		this.nrPersons = nrPersons;
 		this.address = address;
-		this.subId = subId;
 	}
 
 	public int getOrderId() {

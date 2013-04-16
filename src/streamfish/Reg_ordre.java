@@ -153,6 +153,48 @@ public class Reg_ordre extends javax.swing.JPanel {
 	});
 		
 	}
+	
+	private String getDays(){
+		String res = "";
+		if (jToggleButton1.isSelected()) {
+			res += '1';
+		} else {
+			res += '0';
+		}
+		if (jToggleButton2.isSelected()) {
+			res += '1';
+		} else {
+			res += '0';
+		}
+		if (jToggleButton3.isSelected()) {
+			res += '1';
+		} else {
+			res += '0';
+		}
+		if (jToggleButton4.isSelected()) {
+			res += '1';
+		} else {
+			res += '0';
+		}
+		if (jToggleButton5.isSelected()) {
+			res += '1';
+		} else {
+			res += '0';
+		}
+		if (jToggleButton6.isSelected()) {
+			res += '1';
+		} else {
+			res += '0';
+		}
+		if (jToggleButton7.isSelected()) {
+			res += '1';
+		} else {
+			res += '0';
+		}
+		
+		
+		return res;
+	}
 
 	@SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -289,7 +331,7 @@ public class Reg_ordre extends javax.swing.JPanel {
                     .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jComboBox5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jComboBox6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 49, Short.MAX_VALUE))
+                .addGap(0, 48, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Normal order", jPanel1);
@@ -308,13 +350,13 @@ public class Reg_ordre extends javax.swing.JPanel {
 
         jToggleButton7.setText("Sun");
 
-        jComboBox7.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1 Month", "3 Months", "6 Months", "1 Year" }));
+        jComboBox7.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1 Month", "3 Months", "6 Months", "12 Months" }));
 
         jLabel11.setText("Duration");
 
-        jComboBox8.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox8.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00", "15", "30", "45" }));
 
-        jComboBox9.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox9.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23" }));
 
         jLabel12.setText("Time: (hh-mm)");
 
@@ -340,9 +382,9 @@ public class Reg_ordre extends javax.swing.JPanel {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jComboBox8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jLabel12))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
+                .addGap(0, 0, 0)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                    .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jToggleButton4)
                         .addGap(0, 0, 0)
                         .addComponent(jToggleButton5)
@@ -354,7 +396,7 @@ public class Reg_ordre extends javax.swing.JPanel {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel11)
                             .addComponent(jComboBox7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(86, 86, 86)
+                        .addGap(82, 82, 82)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jSpinner2)
                             .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
@@ -485,15 +527,26 @@ public class Reg_ordre extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+		if (jTabbedPane1.getSelectedIndex() == 0) {
+			antPers = Integer.parseInt(jSpinner1.getValue().toString());
 
-		antPers = Integer.parseInt(jSpinner1.getValue().toString());
-
-		String date = (String) jComboBox2.getSelectedItem() + "-" + (String) jComboBox3.getSelectedItem() + "-" + (String) jComboBox4.getSelectedItem();
-		String time = (String) jComboBox5.getSelectedItem() + ":" + (String) jComboBox6.getSelectedItem();
-		CustomerAddress orderAddress = (CustomerAddress) jComboBox1.getSelectedItem();
-		Order order = new Order(selMenu.getMenuId(), CUSTID, gui.employee_id, antPers, date, time, orderAddress);
-		gui.registerOrder(order);
-		gui.byttVindu(this, new MainMenu(gui));
+			String date = (String) jComboBox2.getSelectedItem() + "-" + (String) jComboBox3.getSelectedItem() + "-" + (String) jComboBox4.getSelectedItem();
+			String time = (String) jComboBox5.getSelectedItem() + ":" + (String) jComboBox6.getSelectedItem();
+			CustomerAddress orderAddress = (CustomerAddress) jComboBox1.getSelectedItem();
+			Order order = new Order(selMenu.getMenuId(), CUSTID, gui.employee_id, antPers, date, time, orderAddress);
+			gui.registerOrder(order);
+			gui.byttVindu(this, new MainMenu(gui));
+		} else {
+			antPers = Integer.parseInt(jSpinner2.getValue().toString());
+			String time = (String) jComboBox9.getSelectedItem() + ":" + (String) jComboBox8.getSelectedItem();
+			CustomerAddress orderAddress = (CustomerAddress) jComboBox1.getSelectedItem();
+			Order order = new Order(selMenu.getMenuId(), CUSTID, gui.employee_id, antPers, orderAddress);
+			String durr = (String) jComboBox7.getSelectedItem();
+			String days = getDays();
+			int duration = Integer.parseInt(durr.substring(0, 2).trim());
+			gui.registrerSubscription(new Subscription(duration, TodaysDate.getDate(), TodaysDate.getADateAddMonth(duration), days, '1'), order);
+			gui.byttVindu(this, new MainMenu(gui));
+		}
 
                 //jtoggle
 
