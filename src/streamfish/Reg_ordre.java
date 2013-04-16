@@ -6,6 +6,8 @@ package streamfish;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.util.logging.Level;
@@ -62,6 +64,18 @@ public class Reg_ordre extends javax.swing.JPanel {
         jLabel7.setText(updatePrice() + ",-");
         jLabel1.setText("Kundenr: " + CUSTID);
         updateMenu();
+        
+         jComboBox7.addItemListener(new ItemListener(){
+
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+                String durr = (String) jComboBox7.getSelectedItem();
+                int duration = Integer.parseInt(durr.substring(0, 2).trim());
+                jLabel10.setText(updateReduction(duration)+"%");
+            }
+        
+         });
+           
         jSpinner1.addChangeListener(new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent e) {
@@ -69,7 +83,8 @@ public class Reg_ordre extends javax.swing.JPanel {
                 jLabel7.setText(updatePrice() + ",-");
             }
         });
-
+        
+          
 
         comboBox = (DefaultComboBoxModel) jComboBox1.getModel();
         for (Object addr : addressPlus1) {
@@ -116,24 +131,22 @@ public class Reg_ordre extends javax.swing.JPanel {
         });
     }
 
-    private int updateReduction(int i) {
-        if (selMenu != null) {
+    private double updateReduction(int i) {
             switch (i) {
                 case 1:
                     priceReduction = 5;
                     break;
                 case 3:
                     priceReduction = 10;
-                    break;
+                    break; 
                 case 6:
                     priceReduction = 20;
                     break;
                 case 12:
                     priceReduction = 30;
                     break;
-            }
         }
-        return -1;
+        return priceReduction;
     }
 
     private double updatePrice() {
@@ -359,7 +372,7 @@ public class Reg_ordre extends javax.swing.JPanel {
                     .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jComboBox5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jComboBox6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 48, Short.MAX_VALUE))
+                .addGap(0, 49, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Normal order", jPanel1);
@@ -379,6 +392,11 @@ public class Reg_ordre extends javax.swing.JPanel {
         jToggleButton7.setText("Sun");
 
         jComboBox7.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1 Month", "3 Months", "6 Months", "12 Months" }));
+        jComboBox7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox7ActionPerformed(evt);
+            }
+        });
 
         jLabel11.setText("Duration");
 
@@ -579,6 +597,11 @@ public class Reg_ordre extends javax.swing.JPanel {
         //jtoggle
 
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jComboBox7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox7ActionPerformed
+        
+    }//GEN-LAST:event_jComboBox7ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
