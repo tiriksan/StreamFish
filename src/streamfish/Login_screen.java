@@ -104,6 +104,7 @@ public class Login_screen extends javax.swing.JPanel {
             showMessageDialog(null, "Invalid username and/or password.\nTry again.", "Login", ERROR_MESSAGE);
         }
         if(emp != null){
+			gui.employee_id = emp.getEmplID();
             switch(emp.getUsertype()){
                 case 0 :
                     gui.byttVindu(this, new MainMenu(gui));

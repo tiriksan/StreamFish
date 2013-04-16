@@ -16,6 +16,7 @@ public class GUI extends JFrame implements WindowListener {
 
 	private ArrayList<JPanel> panels = new ArrayList<JPanel>();
 	private StreamFish db;
+	public int employee_id;
 
 	public GUI() {
 		db = new StreamFish();
