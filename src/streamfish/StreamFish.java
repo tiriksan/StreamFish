@@ -494,6 +494,39 @@ public class StreamFish {
             }
             return -1;
         }
+     public Dish[] getDishes(String name) {
+
+        Statement stm;
+        ResultSet res;
+        Dish[] dishes;
+        String[] check = {name};
+        check = removeUnwantedSymbols(check);
+        int teller = 0;
+
+        try {
+            stm = con.createStatement();
+            res = stm.executeQuery("select count(*) antall from dish where (upper(dish_name) like '"
+                    + check[0].toUpperCase() + "%')");
+            res.next();
+            int ant = res.getInt("antall");
+            dishes = new Dish[ant];
+            Opprydder.lukkResSet(res);
+
+            res = stm.executeQuery("select * from dish where (upper(dish_name) like '"
+                    + check[0].toUpperCase() + "%')");
+
+            while (res.next()) {
+                int dishID = res.getInt("DISH_ID");
+                String dishName = res.getString("dish_name");
+                dishes[teller] = new Dish(dishName, dishID);
+                teller++;
+            }
+            return dishes;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
 
     public int addDish(Dish dish) {
         Statement stm;
@@ -532,6 +565,67 @@ public class StreamFish {
             System.err.println(ex);
         }
         return -1;
+    }
+    public String checkIngForDish(Dish dish) {
+        String result ="";
+        Statement stm;
+        ResultSet res;
+        int[] ingInStock;
+        int[] ingNeeded;
+        int[] ingDiff;
+        boolean inStock = true;
+
+        int teller = 0;
+
+        try {
+            stm = con.createStatement();
+            res = stm.executeQuery("select count(*) antall from dish_ingredients where dish_id = "+dish.getID());
+            res.next();
+            int ant = res.getInt("antall");
+            ingNeeded = new int[ant];
+            ingInStock = new int[ant];
+            ingDiff = new int[ant];
+            Opprydder.lukkResSet(res);
+
+            res = stm.executeQuery("select ingredients.amount from ingredients,dish_ingredients where ingredients.ingredient_id = dish_ingredients.ingredient_id");
+
+            while (res.next()) {
+                int amount = res.getInt("amount");
+                ingInStock[teller] = amount;
+                teller++;
+            }
+            Opprydder.lukkResSet(res);
+            teller = 0;
+            
+            res = stm.executeQuery("select dish_ingredients.amount from dish_ingredients, ingredients where ingredients.ingredient_id = dish_ingredients.ingredient_id");
+
+            while (res.next()) {
+                int amount = res.getInt("amount");
+                ingNeeded[teller] = amount;
+                teller++;
+            }
+            Opprydder.lukkResSet(res);
+            
+            for (int i = 0; i < ant; i++) {
+                ingDiff[i] = ingInStock[i] - ingNeeded[i];
+            }
+            for (int i = 0; i < ant; i++) {
+                if(ingDiff[i] < 0){
+                    inStock = false;
+                }
+            }
+            if(inStock){
+                result="All ingredients are in stock.";
+            }else{
+                result="Some of the needed ingredients are not in stock, check storage.";
+            }
+            Opprydder.lukkSetning(stm);
+            return result;
+        } catch (SQLException ex) {
+            System.err.println(ex);
+            ex.printStackTrace();
+        }
+        return "feilfeil";
     }
 
     public int addIngredient(Ingredient ingredient) {
