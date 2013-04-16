@@ -149,7 +149,7 @@ public class Storage extends javax.swing.JPanel {
             }
         });
 
-        jButton3.setText("Back");
+        jButton3.setText("Exit");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
@@ -273,7 +273,7 @@ public class Storage extends javax.swing.JPanel {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
 		// TODO add your handling code here:
-		gui.byttVindu(this, new MainMenu(gui));
+		System.exit(0);
     }//GEN-LAST:event_jButton3ActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

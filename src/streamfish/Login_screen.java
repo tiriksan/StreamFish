@@ -112,6 +112,11 @@ public class Login_screen extends javax.swing.JPanel {
                 case 1 : 
                     gui.byttVindu(this, new MainMenu(gui));
                 break;
+                case 2:
+                    gui.byttVindu(this, new Storage(gui));
+                break;
+                default:
+                break;
             }
         }
     }//GEN-LAST:event_jButton2ActionPerformed
