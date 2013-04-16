@@ -58,7 +58,7 @@ public class Reg_ordre extends javax.swing.JPanel {
 		addressPlus1[address.length] = new String("Add new address");
 		initComponents();
 		antPers = Integer.parseInt(jSpinner1.getValue().toString());
-		jLabel10.setText(priceReduction + " %");
+		jLabel10.setText(customer.getPercentageReduction() + " %");
 		jLabel7.setText(updatePrice() + ",-");
 		jLabel1.setText("Kundenr: " + CUSTID);
 		updateMenu();
