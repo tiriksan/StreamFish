@@ -21,6 +21,7 @@ public class Order {
 	private CustomerAddress address;
 	private String address1;
 
+	//Order med id,dato og CustomerAddress adresse
 	public Order(int orderId, int menuId, int customerID, int emplId, int nrPersons, String deliveryDate, String deliveryTime, CustomerAddress address) {
 		this.orderId = orderId;
 		this.menuId = menuId;
@@ -32,6 +33,7 @@ public class Order {
 		this.deliveryTime = deliveryTime;
 	}
 
+	//Order med id, dato og String adresse
 	public Order(int orderId, int menuId, int customerID, int emplId, int nrPersons, String deliveryDate, String deliveryTime, String address) {
 		this.orderId = orderId;
 		this.menuId = menuId;
@@ -41,32 +43,35 @@ public class Order {
 		this.deliveryDate = deliveryDate;
 		this.address1 = address;
 		this.deliveryTime = deliveryTime;
-		
+
 	}
-	
-	public Order(int menuId, int customerID, int emplId, int nrPersons, String deliveryDate, String deliveryTime, String address, int subId) {
+
+	//Order uten id, med dato og subscription
+	public Order(int menuId, int customerID, int emplId, int nrPersons, String deliveryDate, String deliveryTime, CustomerAddress address, int subId) {
 		this.menuId = menuId;
 		this.customerId = customerID;
 		this.emplId = emplId;
 		this.nrPersons = nrPersons;
 		this.deliveryDate = deliveryDate;
-		this.address1 = address;
+		this.address = address;
 		this.deliveryTime = deliveryTime;
 		this.subId = subId;
 	}
-	
-	public Order(int orderId, int menuId, int customerID, int emplId, int nrPersons, String deliveryDate, String deliveryTime, String address, int subId) {
+
+	//Order med id, dato og subId
+	public Order(int orderId, int menuId, int customerID, int emplId, int nrPersons, String deliveryDate, String deliveryTime, CustomerAddress address, int subId) {
 		this.orderId = orderId;
 		this.menuId = menuId;
 		this.customerId = customerID;
 		this.emplId = emplId;
 		this.nrPersons = nrPersons;
 		this.deliveryDate = deliveryDate;
-		this.address1 = address;
+		this.address = address;
 		this.deliveryTime = deliveryTime;
 		this.subId = subId;
 	}
 
+	//Order uten id og sub, med dato og CustomerAddress
 	public Order(int menuId, int customerID, int emplId, int nrPersons, String deliveryDate, String deliveryTime, CustomerAddress address) {
 		this.menuId = menuId;
 		this.customerId = customerID;
@@ -75,6 +80,16 @@ public class Order {
 		this.deliveryDate = deliveryDate;
 		this.deliveryTime = deliveryTime;
 		this.address = address;
+	}
+
+	//Order som brukes når man skal registrere en subscription(for å få info om customer, menu og address
+	public Order(int menuId, int customerID, int emplId, int nrPersons, CustomerAddress address, int subId) {
+		this.menuId = menuId;
+		this.customerId = customerID;
+		this.emplId = emplId;
+		this.nrPersons = nrPersons;
+		this.address = address;
+		this.subId = subId;
 	}
 
 	public int getOrderId() {
