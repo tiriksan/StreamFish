@@ -71,6 +71,11 @@ public class Customer {
 		priceReduction = (business) ? percentageReduction : 1.0;
 		return priceReduction;
 	}
+        
+        public double getPercentageReduction() {
+            double reduction = (100 - (100 * getPriceReduction()));
+            return reduction;
+        }
 
 	public void setCustomerName(String newName) {
 		if (newName == null || newName.trim().equals("")) {
@@ -93,8 +98,9 @@ public class Customer {
 	}
 
 	public void setPercentageReduction(double newPercentage) {
-		if (newPercentage > 0.0 && newPercentage < 1.0) {
-			percentageReduction = newPercentage;
+                double percentage = 1 - (newPercentage / 100);
+		if (percentage > 0.0 && percentage < 1.0) {
+			percentageReduction = percentage;
 		}
 	}
 
@@ -103,7 +109,7 @@ public class Customer {
 		String info = "Customer ID: " + CUSTOMER_ID + ", name: " + customerName
 				+ ", phonenumber: " + phone;
 		info += (business) ? ", bedrift med "
-				+ (100 - (100 * getPriceReduction())) + "% rabatt" : "";
+				+ getPercentageReduction() + "% rabatt" : "";
 		return info;
 	}
 
@@ -116,7 +122,8 @@ public class Customer {
 		System.out.println(bedr1);
 		System.out.println(priv2);
 
-		bedr1.setPercentageReduction(0.85);
+		bedr1.setPercentageReduction(15.0);
+                System.out.println(bedr1.getPercentageReduction() + "%");
 		System.out.println(bedr1);
 	}
 }
