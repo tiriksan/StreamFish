@@ -10,6 +10,9 @@ public class Dish {
         private String name;
         private int dishID;
         
+        public Dish(String name){
+            this.name = name;
+        }
         public Dish(String name, int dishID){
             this.name = name;
             this.dishID = dishID;

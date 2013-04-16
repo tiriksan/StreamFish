@@ -547,8 +547,8 @@ public class StreamFish {
 			stm = con.createStatement();
 			String[] check = {dish.getName()};
 			check = removeUnwantedSymbols(check);
-			int succ = stm.executeUpdate("insert into dish (DISH_NAME) "
-					+ "values('" + check[0] + ")");
+			int succ = stm.executeUpdate("insert into dish (DISH_NAME, STATUS) "
+					+ "values('" + check[0] + "', '1')");
 			Opprydder.lukkSetning(stm);
 			return succ;
 		} catch (SQLException ex) {
@@ -657,7 +657,7 @@ public class StreamFish {
 		}
 		return -1;
 	}
-
+    
 	public int updateIngredient(Ingredient ingToUpdate, Ingredient ing) {
 		Statement stm;
 		String[] check = {ing.getName(), ing.getExpDate()};

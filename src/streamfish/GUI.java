@@ -132,6 +132,12 @@ public class GUI extends JFrame implements WindowListener {
         public String checkIngForDish(Dish dish){
             return db.checkIngForDish(dish);
         }
+        public boolean addDish(Dish dish){
+            if(db.addDish(dish) == 1){
+                return true;
+            }
+            return false ;
+        }
 
 	public Ingredient[] getIngredients(String name) {
 		return db.getIngredients(name);

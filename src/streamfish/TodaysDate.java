@@ -77,6 +77,6 @@ public class TodaysDate {
         Calendar cal = Calendar.getInstance();
         System.out.println(cal.getTime());
         System.out.println(cal.get(Calendar.DAY_OF_WEEK_IN_MONTH));
-        System.out.print(td.getDay());
+        System.out.println(td.getDay());
     }
 }
