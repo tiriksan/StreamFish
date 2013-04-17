@@ -107,6 +107,16 @@ public class Order {
 	public int getEmplId() {
 		return emplId;
 	}
+        
+        public String getEmpName(GUI gui){
+            Employee [] employee = gui.getEmployee();
+            for (Employee emp : employee) {
+                if(emp.getEmplID() == getEmplId()){
+                    return emp.getUsername();
+                }
+            }
+            return gui.getEmployee();
+        }
 
 	public int getNrPersons() {
 		return nrPersons;
