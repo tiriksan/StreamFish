@@ -81,7 +81,7 @@ public class TodaysTasksFrame extends javax.swing.JFrame {
 
         jLabel14.setText((String) "" + info.getNumberOfPersons());
 
-        jLabel15.setText((String) "" + info.getPrice());
+        jLabel15.setText((String) "" + info.getPrice() + " NOK");
 
         jLabel16.setText(info.getSalesperson());
 
