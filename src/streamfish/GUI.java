@@ -116,6 +116,9 @@ public class GUI extends JFrame implements WindowListener {
 	public Subscription[] getSubscriptions(String text) {
 		return db.getSubscriptions(text);
 	}
+	public Employee[] getEmployee(){
+		return db.getEmployees();
+	}
 
 	public boolean changeOrderStatus(int orderID) {
 		int succ = db.changeOrderStatus(orderID);
