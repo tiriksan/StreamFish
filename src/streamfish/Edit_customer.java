@@ -35,9 +35,10 @@ public class Edit_customer extends javax.swing.JPanel {
 		jCheckBox1.setSelected(customer.isBusiness());
 		orders = gui.getOrders(customer);
 		model = (DefaultListModel) jTable1.getModel();
-	//	for (Order order : order) {
-	//		model.addElement(order);
-	//	}
+                tab1setup();
+		for (Order order : orders) {
+			model.addElement(order);
+		}
 
 	}
         
@@ -47,7 +48,7 @@ public class Edit_customer extends javax.swing.JPanel {
 		if (orders != null && orders.length > 0) {
 			for (int i = 0; i < orders.length; i++) {
 				DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-				model.addRow(new Object[]{orders[i].getDeliveryDate(), orders[i].getDeliveryTime(), orders[i].getMenuId(), orders[i].getEmplId()});
+				model.addRow(new Object[]{orders[i].getDeliveryDate(), orders[i].getDeliveryTime(), orders[i].getMenuName(gui), orders[i].getEmpName(gui)});
 
 			}
 		}
@@ -56,9 +57,9 @@ public class Edit_customer extends javax.swing.JPanel {
 				new ListSelectionListener() {
 					public void valueChanged(ListSelectionEvent event) {
 
-						if (!event.getValueIsAdjusting()) {
+					/*	if (!event.getValueIsAdjusting()) {
 							viewRow = jTable1.getSelectedRow();
-						}
+						}   */
 					}
 				});
 	}
