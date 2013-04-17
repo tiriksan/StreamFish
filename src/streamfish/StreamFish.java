@@ -539,7 +539,21 @@ public class StreamFish {
 		}
 		return -1;
 	}
-
+        
+        public int deleteSubscription(int subscription_id){
+            Statement stm;
+		try {
+			stm = con.createStatement();
+			int succ = stm.executeUpdate("delete from subscription where subscription_id = " + subscription_id);
+			Opprydder.lukkSetning(stm);
+			return succ;
+		} catch (SQLException ex) {
+			System.err.println(ex);
+		}
+		return -1;
+        }
+        
+        
 	public Dish[] getDishes(String name) {
 
 		Statement stm;
