@@ -1,5 +1,8 @@
 package streamfish;
 
+import java.awt.Dimension;
+import java.awt.Toolkit;
+
 /**
  *
  * @author HJ
@@ -14,6 +17,11 @@ public class TodaysTasksFrame extends javax.swing.JFrame {
         initComponents();
         this.setVisible(true);
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+		double width = screenSize.getWidth();
+		double heigth = screenSize.getHeight();
+		Dimension frameSize = getSize();
+		setLocation((int)width/2-(int)frameSize.getWidth()/2,(int) heigth/2-(int)frameSize.getHeight()/2);
     }
 
     @SuppressWarnings("unchecked")
