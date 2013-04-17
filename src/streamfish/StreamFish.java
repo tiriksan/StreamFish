@@ -462,7 +462,6 @@ public class StreamFish {
 			//     subscription.getDays().compareTo(TodaysDate.getDay());
 			int day = TodaysDate.getDay();
 			int duration = subscription.getDuration() * 4;
-			System.out.println(order.getDeliveryTime());
 			for (int i = 0; i < duration; i++) {
 				if (i == 0) {
 					for (int y = day; y < 7; y++) {
@@ -482,7 +481,6 @@ public class StreamFish {
 					for (int x = 0; x < 7; x++) {
 						if (subscription.getDays().charAt(x) == '1') {
 							String date = TodaysDate.getADate(i * 7 - day + x);
-							System.out.println(date);
 							addOrder(new Order(order.getMenuId(), order.getCustomerId(), order.getEmplId(), order.getNrPersons(), date, order.getDeliveryTime(), order.getAddress(), subId));
 						}
 					}
