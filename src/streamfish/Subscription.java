@@ -57,6 +57,32 @@ public class Subscription {
         return days;
     }
     
+    public String getDayofWeek(){
+        String dayofWeek = "";
+        for(int i = 0; i < 7; i++){
+            if(days.charAt(i) == '1'){
+                switch(i){
+                    case 0:
+                    dayofWeek += "Monday ";   
+                    case 1:
+                    dayofWeek += "Tuesday ";   
+                    case 2:
+                    dayofWeek += "Wednesday ";   
+                    case 3:
+                    dayofWeek += "Thursday ";   
+                    case 4:
+                    dayofWeek += "Friday ";   
+                    case 5:
+                    dayofWeek += "Saturday ";   
+                    case 6:
+                    dayofWeek += "Sunday ";   
+                    break;
+                }
+            }
+        }
+        return dayofWeek;
+    }
+    
     public String toString(){
         String text = "subscription_id:" + subscription_id + "\nduration " + duration + "\nfrom_date " + from_date + "\nto_date " + to_date + "\nstatus " + status;
         return text;

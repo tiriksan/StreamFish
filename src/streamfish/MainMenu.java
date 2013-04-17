@@ -19,161 +19,179 @@ import static javax.swing.JOptionPane.*;
  */
 public class MainMenu extends javax.swing.JPanel {
 
-	private int kundenr = -1;
-	private final GUI gui;
-	private Customer[] customers;
-	private int viewRow = -1;
-	private Orderinfo[] orderinfo;
-	private Subscription[] subscriptions;
+    private int kundenr = -1;
+    private final GUI gui;
+    private Customer[] customers;
+    private int viewRow = -1;
+    private Orderinfo[] orderinfo;
+    private Subscription[] subscriptions;
 
-	/**
-	 * Creates new form MainMenu
-	 */
-	public MainMenu(final GUI gui) {
-		this.gui = gui;
-		gui.setTitle("Main Menu");
-		initComponents();
-		customers = gui.getCustomers(jTextField1.getText(), jCheckBox1.isSelected());
+    /**
+     * Creates new form MainMenu
+     */
+    public MainMenu(final GUI gui) {
+        this.gui = gui;
+        gui.setTitle("Main Menu");
+        initComponents();
+        customers = gui.getCustomers(jTextField1.getText(), jCheckBox1.isSelected());
 //		jTable1.setModel();1
 
-		// from here tab2 NorC
-		tab1setup();
-		tab2setup();
-		tab3setup();
-		//to here tab2 Norc
-		jTextField1.getDocument().addDocumentListener(new DocumentListener() {
-			@Override
-			public void insertUpdate(DocumentEvent e) {
-				customers = gui.getCustomers(jTextField1.getText(), jCheckBox1.isSelected());
-				DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-				model.setRowCount(0);
-				if (customers != null && customers.length > 0) {
-					for (int i = 0; i < customers.length; i++) {
-						model.addRow(new Object[]{customers[i].getCustomerID(), customers[i].getCustomerName(), customers[i].getPhoneNumber(), customers[i].isBusiness()});
-					}
-				}
-			}
+        // from here tab2 NorC
+        tab1setup();
+        tab2setup();
+        tab3setup();
+        //to here tab2 Norc
+        jTextField1.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                customers = gui.getCustomers(jTextField1.getText(), jCheckBox1.isSelected());
+                DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+                model.setRowCount(0);
+                if (customers != null && customers.length > 0) {
+                    for (int i = 0; i < customers.length; i++) {
+                        model.addRow(new Object[]{customers[i].getCustomerID(), customers[i].getCustomerName(), customers[i].getPhoneNumber(), customers[i].isBusiness()});
+                    }
+                }
+            }
 
-			@Override
-			public void removeUpdate(DocumentEvent e) {
-				customers = gui.getCustomers(jTextField1.getText(), jCheckBox1.isSelected());
-				DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-				model.setRowCount(0);
-				if (customers != null && customers.length > 0) {
-					for (int i = 0; i < customers.length; i++) {
-						model.addRow(new Object[]{customers[i].getCustomerID(), customers[i].getCustomerName(), customers[i].getPhoneNumber(), customers[i].isBusiness()});
-					}
-				}
-			}
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                customers = gui.getCustomers(jTextField1.getText(), jCheckBox1.isSelected());
+                DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+                model.setRowCount(0);
+                if (customers != null && customers.length > 0) {
+                    for (int i = 0; i < customers.length; i++) {
+                        model.addRow(new Object[]{customers[i].getCustomerID(), customers[i].getCustomerName(), customers[i].getPhoneNumber(), customers[i].isBusiness()});
+                    }
+                }
+            }
 
-			@Override
-			public void changedUpdate(DocumentEvent e) {
-				customers = gui.getCustomers(jTextField1.getText(), jCheckBox1.isSelected());
-				DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-				model.setRowCount(0);
-				if (customers != null && customers.length > 0) {
-					for (int i = 0; i < customers.length; i++) {
-						model.addRow(new Object[]{customers[i].getCustomerID(), customers[i].getCustomerName(), customers[i].getPhoneNumber(), customers[i].isBusiness()});
-					}
-				}
-			}
-		});
-
-
-		jCheckBox1.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				customers = gui.getCustomers(jTextField1.getText(), jCheckBox1.isSelected());
-				DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-				model.setRowCount(0);
-				if (customers != null && customers.length > 0) {
-					for (int i = 0; i < customers.length; i++) {
-						model.addRow(new Object[]{customers[i].getCustomerID(), customers[i].getCustomerName(), customers[i].getPhoneNumber(), customers[i].isBusiness()});
-					}
-				}
-			}
-		});
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                customers = gui.getCustomers(jTextField1.getText(), jCheckBox1.isSelected());
+                DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+                model.setRowCount(0);
+                if (customers != null && customers.length > 0) {
+                    for (int i = 0; i < customers.length; i++) {
+                        model.addRow(new Object[]{customers[i].getCustomerID(), customers[i].getCustomerName(), customers[i].getPhoneNumber(), customers[i].isBusiness()});
+                    }
+                }
+            }
+        });
 
 
-	}
+        jCheckBox1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                customers = gui.getCustomers(jTextField1.getText(), jCheckBox1.isSelected());
+                DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+                model.setRowCount(0);
+                if (customers != null && customers.length > 0) {
+                    for (int i = 0; i < customers.length; i++) {
+                        model.addRow(new Object[]{customers[i].getCustomerID(), customers[i].getCustomerName(), customers[i].getPhoneNumber(), customers[i].isBusiness()});
+                    }
+                }
+            }
+        });
 
-	private void tab1setup() {
-		if (customers != null && customers.length > 0) {
-			for (int i = 0; i < customers.length; i++) {
-				DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-				model.addRow(new Object[]{customers[i].getCustomerID(), customers[i].getCustomerName(), customers[i].getPhoneNumber(), customers[i].isBusiness()});
-			}
-		}
 
-		jTable1.getSelectionModel().addListSelectionListener(
-				new ListSelectionListener() {
-					public void valueChanged(ListSelectionEvent event) {
-						int viewRow = jTable1.getSelectedRow();
-						if (!event.getValueIsAdjusting()) {
-							try {
-								kundenr = Integer.parseInt(jTable1.getValueAt(viewRow, 0).toString());
-							} catch (Exception e) {
-							}
-						}
-					}
-				});
-	}
+    }
 
-	private void tab2setup() {
-		orderinfo = gui.getTodaysTasks();
+    private void tab1setup() {
+        if (customers != null && customers.length > 0) {
+            for (int i = 0; i < customers.length; i++) {
+                DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+                model.addRow(new Object[]{customers[i].getCustomerID(), customers[i].getCustomerName(), customers[i].getPhoneNumber(), customers[i].isBusiness()});
+            }
+        }
 
-		if (orderinfo != null && orderinfo.length > 0) {
-			for (int i = 0; i < orderinfo.length; i++) {
-				DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
-				model.addRow(new Object[]{orderinfo[i].getAddress(), orderinfo[i].getCustomerName(), orderinfo[i].getPhone()});
+        jTable1.getSelectionModel().addListSelectionListener(
+                new ListSelectionListener() {
+                    public void valueChanged(ListSelectionEvent event) {
+                        int viewRow = jTable1.getSelectedRow();
+                        if (!event.getValueIsAdjusting()) {
+                            try {
+                                kundenr = Integer.parseInt(jTable1.getValueAt(viewRow, 0).toString());
+                            } catch (Exception e) {
+                            }
+                        }
+                    }
+                });
+    }
 
-			}
-		}
+    private void tab2setup() {
+        orderinfo = gui.getTodaysTasks();
 
-		jTable2.getSelectionModel().addListSelectionListener(
-				new ListSelectionListener() {
-					public void valueChanged(ListSelectionEvent event) {
+        if (orderinfo != null && orderinfo.length > 0) {
+            for (int i = 0; i < orderinfo.length; i++) {
+                DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
+                model.addRow(new Object[]{orderinfo[i].getAddress(), orderinfo[i].getCustomerName(), orderinfo[i].getPhone()});
 
-						if (!event.getValueIsAdjusting()) {
-							viewRow = jTable2.getSelectedRow();
-						}
-					}
-				});
-	}
-	public void tab3setup(){
-		subscriptions = gui.getSubscriptions(jTextField1.getText());
-	}
+            }
+        }
 
-	public void updt() {
+        jTable2.getSelectionModel().addListSelectionListener(
+                new ListSelectionListener() {
+                    public void valueChanged(ListSelectionEvent event) {
 
-		customers = gui.getCustomers(jTextField1.getText(), jCheckBox1.isSelected());
-		DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-		model.setRowCount(0);
-		if (customers != null && customers.length > 0) {
-			for (int i = 0; i < customers.length; i++) {
-				model.addRow(new Object[]{customers[i].getCustomerID(), customers[i].getCustomerName(), customers[i].getPhoneNumber(), customers[i].isBusiness()});
-			}
-		}
-	}
-        
-        public void updtTodaysTasks() {
+                        if (!event.getValueIsAdjusting()) {
+                            viewRow = jTable2.getSelectedRow();
+                        }
+                    }
+                });
+    }
 
-		orderinfo = gui.getTodaysTasks();
-		DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
-		model.setRowCount(0);
-		if (orderinfo != null && orderinfo.length > 0) {
-			for (int i = 0; i < orderinfo.length; i++) {
-				model.addRow(new Object[]{orderinfo[i].getAddress(), orderinfo[i].getCustomerName(), orderinfo[i].getPhone()});
-			}
-		}
-	}
+    public void tab3setup() {
+        subscriptions = gui.getSubscriptions(jTextField1.getText());
 
-	/**
-	 * This method is called from within the constructor to initialize the form.
-	 * WARNING: Do NOT modify this code. The content of this method is always
-	 * regenerated by the Form Editor.
-	 */
-	@SuppressWarnings("unchecked")
+        if (subscriptions != null && subscriptions.length > 0) {
+            for (int i = 0; i < subscriptions.length; i++) {
+                DefaultTableModel model = (DefaultTableModel) jTable3.getModel();
+                model.addRow(new Object[]{subscriptions[i].getFrom_date(), subscriptions[i].getTo_date(), subscriptions[i].getDuration(), subscriptions[i].getDayofWeek()});
+
+            }
+        }
+
+        jTable3.getSelectionModel().addListSelectionListener(
+                new ListSelectionListener() {
+                    public void valueChanged(ListSelectionEvent event) {
+                        if (!event.getValueIsAdjusting()) {
+                            viewRow = jTable3.getSelectedRow();
+                        }
+                    }
+                });
+    }
+
+    public void updt() {
+
+        customers = gui.getCustomers(jTextField1.getText(), jCheckBox1.isSelected());
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        model.setRowCount(0);
+        if (customers != null && customers.length > 0) {
+            for (int i = 0; i < customers.length; i++) {
+                model.addRow(new Object[]{customers[i].getCustomerID(), customers[i].getCustomerName(), customers[i].getPhoneNumber(), customers[i].isBusiness()});
+            }
+        }
+    }
+
+    public void updtTodaysTasks() {
+
+        orderinfo = gui.getTodaysTasks();
+        DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
+        model.setRowCount(0);
+        if (orderinfo != null && orderinfo.length > 0) {
+            for (int i = 0; i < orderinfo.length; i++) {
+                model.addRow(new Object[]{orderinfo[i].getAddress(), orderinfo[i].getCustomerName(), orderinfo[i].getPhone()});
+            }
+        }
+    }
+
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
+     */
+    @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -338,7 +356,7 @@ public class MainMenu extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Customer", "Start date", "End date", "Duration"
+                "Customer", "Start date", "End date", "Duration", "Day", "Menu name"
             }
         ));
         jScrollPane3.setViewportView(jTable3);
@@ -421,46 +439,46 @@ public class MainMenu extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-		if (kundenr == -1) {
-			showMessageDialog(null, "Ingen kunde er valgt.");
-		} else {
-			gui.byttVindu(this, new Reg_ordre(kundenr, gui));
-		}
+        if (kundenr == -1) {
+            showMessageDialog(null, "Ingen kunde er valgt.");
+        } else {
+            gui.byttVindu(this, new Reg_ordre(kundenr, gui));
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-		// TODO add your handling code here:
-		gui.byttVindu(this, new Reg_kunde(gui));
+        // TODO add your handling code here:
+        gui.byttVindu(this, new Reg_kunde(gui));
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-		// 0,1,2    if (jTabbedPane1.getSelectedIndex() == 0) {
-		if (viewRow >= 0) {
-			new TodaysTasksFrame(orderinfo[viewRow], gui);
-		} else {
-			showMessageDialog(null, "Ingen valgt");
-		}
+        // 0,1,2    if (jTabbedPane1.getSelectedIndex() == 0) {
+        if (viewRow >= 0) {
+            new TodaysTasksFrame(orderinfo[viewRow], gui);
+        } else {
+            showMessageDialog(null, "Ingen valgt");
+        }
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-		// TODO add your handling code here:
-		gui.byttVindu(this, new Storage(gui));
+        // TODO add your handling code here:
+        gui.byttVindu(this, new Storage(gui));
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-		if (kundenr == -1) {
-			showMessageDialog(null, "Ingen kunde er valgt.");
-		} else {
-			gui.byttVindu(this, new Edit_customer(kundenr, gui));
-		}
+        if (kundenr == -1) {
+            showMessageDialog(null, "Ingen kunde er valgt.");
+        } else {
+            gui.byttVindu(this, new Edit_customer(kundenr, gui));
+        }
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-		System.exit(0);
+        System.exit(0);
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-		// TODO add your handling code here:
+        // TODO add your handling code here:
     }//GEN-LAST:event_jButton7ActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
