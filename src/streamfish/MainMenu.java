@@ -24,6 +24,7 @@ public class MainMenu extends javax.swing.JPanel {
 	private Customer[] customers;
 	private int viewRow = -1;
 	private Orderinfo[] orderinfo;
+	private Subscription[] subscriptions;
 
 	/**
 	 * Creates new form MainMenu
@@ -38,6 +39,7 @@ public class MainMenu extends javax.swing.JPanel {
 		// from here tab2 NorC
 		tab1setup();
 		tab2setup();
+		tab3setup();
 		//to here tab2 Norc
 		jTextField1.getDocument().addDocumentListener(new DocumentListener() {
 			@Override
@@ -137,6 +139,9 @@ public class MainMenu extends javax.swing.JPanel {
 						}
 					}
 				});
+	}
+	public void tab3setup(){
+		subscriptions = gui.getSubscriptions(jTextField1.getText());
 	}
 
 	public void updt() {

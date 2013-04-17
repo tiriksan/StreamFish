@@ -434,6 +434,53 @@ public class StreamFish {
 		}
 		return -1;
 	}
+	
+	public Subscription[] getSubscriptions(String sok){
+		Statement stm;
+		ResultSet res;
+		Subscription[] subscriptions;
+		String[] check = {sok};
+		check = removeUnwantedSymbols(check);
+		int teller = 0;
+
+		try {
+			stm = con.createStatement();
+			res = stm.executeQuery("select count(*) antall from subscription "
+					+ "join customer on subscription.customer_id = customer.customer_id"
+					+ "where (upper(customer_name) like '"
+					+ check[0].toUpperCase() + "%' or phone like '" + check[0] + "%')");
+			res.next();
+			int ant = res.getInt("antall");
+			subscriptions = new Subscription[ant];
+			Opprydder.lukkResSet(res);
+
+			res = stm.executeQuery("select * from customer where (upper(customer_name) like '"
+					+ check[0].toUpperCase() + "%' or phone like '" + check[0] + "%')");
+
+			while (res.next()) {
+				int customerId = res.getInt("customer_id");
+				String customerName = res.getString("customer_name");
+				int phone = res.getInt("phone");
+				int business = Integer.parseInt(res.getString("business"));
+				char status = res.getString("status").charAt(0);
+				boolean busi = false;
+				
+				if (business == 1) {
+					busi = true;
+				}
+				subscriptions[teller] = new Subscription(business, business, customerName, sok, sok, status);
+				teller++;
+			}
+			return subscriptions;
+		} catch (SQLException ex) {
+			System.err.println(ex);
+			ex.printStackTrace();
+		} catch (NumberFormatException e2) {
+		}
+		
+		
+		return null;
+	}
 
 	public int registerSubscription(Subscription subscription, Order order) {
 		Statement stm;

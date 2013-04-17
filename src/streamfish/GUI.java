@@ -113,6 +113,9 @@ public class GUI extends JFrame implements WindowListener {
 	public Order[] getOrders(Customer customer) {
 		return db.getOrderCustomer(customer);
 	}
+	public Subscription[] getSubscriptions(String text) {
+		return db.getSubscriptions(text);
+	}
 
 	public boolean changeOrderStatus(int orderID) {
 		int succ = db.changeOrderStatus(orderID);
@@ -199,4 +202,6 @@ public class GUI extends JFrame implements WindowListener {
 	@Override
 	public void windowDeactivated(WindowEvent e) {
 	}
+
+	
 }
