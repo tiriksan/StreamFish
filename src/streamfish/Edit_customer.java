@@ -51,7 +51,11 @@ public class Edit_customer extends javax.swing.JPanel {
         jTable1.getSelectionModel().addListSelectionListener(
                 new ListSelectionListener() {
                     public void valueChanged(ListSelectionEvent event) {
-                        ordre = orders[jTable1.getSelectedRow()].getOrderId();
+                        try{
+							ordre = orders[jTable1.getSelectedRow()].getOrderId();
+						} catch(ArrayIndexOutOfBoundsException ex){
+							ordre = -1;
+						}
                     }
                 });
     }
