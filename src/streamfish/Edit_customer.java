@@ -22,13 +22,13 @@ public class Edit_customer extends javax.swing.JPanel {
         private Order ordre;
         private DefaultListModel model;
         
-        private int viewrow = -1;
 
 	public Edit_customer(int kundenr, GUI gui) {
 		this.gui = gui;
 		this.KUNDENR = kundenr;
 		this.customer = gui.getCustomer(kundenr);
                 gui.setTitle("Edit customer");
+                
 		initComponents();
 		jTextField1.setText(customer.getCustomerName());
 		jTextField2.setText(customer.getPhoneNumber() + "");
@@ -57,9 +57,7 @@ public class Edit_customer extends javax.swing.JPanel {
 				new ListSelectionListener() {
 					public void valueChanged(ListSelectionEvent event) {
 
-					/*	if (!event.getValueIsAdjusting()) {
-							viewRow = jTable1.getSelectedRow();
-						}   */
+					
 					}
 				});
 	}
@@ -159,7 +157,7 @@ public class Edit_customer extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
@@ -168,7 +166,7 @@ public class Edit_customer extends javax.swing.JPanel {
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(0, 390, Short.MAX_VALUE)
+                                .addGap(0, 231, Short.MAX_VALUE)
                                 .addComponent(jButton3))
                             .addComponent(jTextField1)
                             .addComponent(jTextField2)
@@ -213,8 +211,8 @@ public class Edit_customer extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 30, Short.MAX_VALUE)
                 .addComponent(jButton3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
