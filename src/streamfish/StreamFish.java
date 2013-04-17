@@ -454,21 +454,21 @@ public class StreamFish {
 			subscriptions = new Subscription[ant];
 			Opprydder.lukkResSet(res);
 
-			res = stm.executeQuery("select * from customer where (upper(customer_name) like '"
+			res = stm.executeQuery("select * from subscription "
+					+ "join customer on subscription.customer_id = customer.customer_id"
+					+ "where (upper(customer_name) like '"
 					+ check[0].toUpperCase() + "%' or phone like '" + check[0] + "%')");
 
 			while (res.next()) {
-				int customerId = res.getInt("customer_id");
-				String customerName = res.getString("customer_name");
-				int phone = res.getInt("phone");
-				int business = Integer.parseInt(res.getString("business"));
+				int subscription_id = res.getInt("subscription_id");
+				int duration = res.getInt("duration");
+				String from_date = res.getString("from_date");
+				String to_date = res.getString("to_date");
+				String days = res.getString("days");
 				char status = res.getString("status").charAt(0);
-				boolean busi = false;
 				
-				if (business == 1) {
-					busi = true;
-				}
-				subscriptions[teller] = new Subscription(business, business, customerName, sok, sok, status);
+				
+				subscriptions[teller] = new Subscription(subscription_id, duration, from_date, to_date, days, status);
 				teller++;
 			}
 			return subscriptions;
@@ -496,7 +496,7 @@ public class StreamFish {
 					+ subscription.getFrom_date() + "', '" 
 					+ subscription.getTo_date() + "', '" 
 					+ subscription.getStatus() + "', "
-					+ order.getCustomerId()+ ")" );
+					+ order.getCustomerId()+ ", '" + subscription.getDays() + "')" );
 			res = stm.executeQuery("select * from subscription where from_date = '" + subscription.getFrom_date() + "'");
 			res.next();
 			subId = res.getInt("subscription_id");
