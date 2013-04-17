@@ -19,7 +19,7 @@ public class Edit_customer extends javax.swing.JPanel {
     private final int KUNDENR;
     private Customer customer;
     private Order[] orders;
-    private Order ordre;
+    private int ordre = -1;
     private DefaultTableModel model;
 
     public Edit_customer(int kundenr, GUI gui) {
@@ -51,6 +51,7 @@ public class Edit_customer extends javax.swing.JPanel {
         jTable1.getSelectionModel().addListSelectionListener(
                 new ListSelectionListener() {
                     public void valueChanged(ListSelectionEvent event) {
+                        ordre = orders[jTable1.getSelectedRow()].getOrderId();
                     }
                 });
     }
@@ -140,7 +141,7 @@ public class Edit_customer extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Delivery Date", "Delivery Hour", "Menu name", "Salesperson"
             }
         ));
         jScrollPane2.setViewportView(jTable1);
@@ -240,7 +241,7 @@ public class Edit_customer extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        if (gui.changeOrderStatus(ordre.getOrderId())) {
+        if (gui.changeOrderStatus(ordre)) {
             this.update();
         } else {
             System.err.println("Kunne ikke slette ordre: se Edit_customer.java");
