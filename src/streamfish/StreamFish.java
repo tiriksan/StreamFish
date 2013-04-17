@@ -445,8 +445,8 @@ public class StreamFish {
 
 		try {
 			stm = con.createStatement();
-			res = stm.executeQuery("select count(*) antall from subscription "
-					+ "join customer on subscription.customer_id = customer.customer_id"
+			res = stm.executeQuery("select count(*) antall from sfdb.subscription "
+					+ "join sfdb.customer on subscription.customer_id = customer.customer_id "
 					+ "where (upper(customer_name) like '"
 					+ check[0].toUpperCase() + "%' or phone like '" + check[0] + "%')");
 			res.next();
@@ -454,8 +454,8 @@ public class StreamFish {
 			subscriptions = new Subscription[ant];
 			Opprydder.lukkResSet(res);
 
-			res = stm.executeQuery("select * from subscription "
-					+ "join customer on subscription.customer_id = customer.customer_id"
+			res = stm.executeQuery("select * from sfdb.subscription "
+					+ "join sfdb.customer on subscription.customer_id = customer.customer_id "
 					+ "where (upper(customer_name) like '"
 					+ check[0].toUpperCase() + "%' or phone like '" + check[0] + "%')");
 
