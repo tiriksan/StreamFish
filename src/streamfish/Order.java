@@ -91,6 +91,12 @@ public class Order {
 		this.deliveryTime = deliveryTime;
 		this.address = address;
 	}
+        
+        //Order som brukes når man skal finne Order by subscription
+        public Order(int menuId, int customerId){
+            this.menuId = menuId;
+            this.customerId = customerId;
+        }
 
 	public int getOrderId() {
 		return orderId;
@@ -127,6 +133,16 @@ public class Order {
             }
             return null;
         }
+        
+    /*    public String getCustomerName(GUI gui){
+            Order [] order = gui.getOrderfromSub();
+            for Order ordr : order){
+                if(ordr.getCustomerId() == getCustomer_Id()){
+                    return ordr.getCustomerName();
+                }
+            }
+            return null;
+        }   */ // stahhhp, cant touch this!!
 
 	public int getNrPersons() {
 		return nrPersons;

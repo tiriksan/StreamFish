@@ -781,6 +781,27 @@ public class StreamFish {
 		}
 		return -1;
 	}
+        
+        public Order getOrderfromSub(Subscription subscription){
+            Statement stm;
+            ResultSet res;
+            try{
+                stm = con.createStatement();
+                res = stm.executeQuery("SELECT * FROM ORDERS JOIN SUBSCRIPTION WHERE ORDERS.SUBSCRIPTION_ID = " + subscription.getSubscription_id());
+                res.next();
+              //      Order lineCID = res.getRow("SELECT (*) FROM ORDERS");
+                int c_id = res.getInt("customer_id");
+                int m_id = res.getInt("menu_id");
+                
+                Order orderFsub = new Order(c_id, m_id);
+                Opprydder.lukkResSet(res);
+                Opprydder.lukkSetning(stm);
+                return orderFsub;
+            }catch ( SQLException ex){
+                System.err.println(ex);
+            }
+            return null;
+        }
 
 	public int updateCustomer(Customer customer) {
 		Statement stm;

@@ -147,7 +147,7 @@ public class MainMenu extends javax.swing.JPanel {
         if (subscriptions != null && subscriptions.length > 0) {
             for (int i = 0; i < subscriptions.length; i++) {
                 DefaultTableModel model = (DefaultTableModel) jTable3.getModel();
-                model.addRow(new Object[]{subscriptions[i].getFrom_date(), subscriptions[i].getTo_date(), subscriptions[i].getDuration(), subscriptions[i].getDayofWeek()});
+                model.addRow(new Object[]{subscriptions[i].getDuration(), subscriptions[i].getDayofWeek()});
 
             }
         }
@@ -356,7 +356,7 @@ public class MainMenu extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Customer", "Start date", "End date", "Duration", "Day", "Menu name"
+                "Customer", "Duration", "Day", "Menu name"
             }
         ));
         jScrollPane3.setViewportView(jTable3);
