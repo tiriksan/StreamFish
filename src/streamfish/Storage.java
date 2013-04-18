@@ -165,12 +165,23 @@ public class Storage extends javax.swing.JPanel {
     }
 
     public void update() {
-        ingredients = gui.getIngredients(jTextField1.getText());
-        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-        model.setRowCount(0);
-        if (ingredients != null && ingredients.length > 0) {
-            for (int i = 0; i < ingredients.length; i++) {
-                model.addRow(new Object[]{ingredients[i].getID(), ingredients[i].getName(), ingredients[i].getAmount(), ingredients[i].getExpDate()});
+        if (jTabbedPane1.getSelectedIndex() == 0) {
+            ingredients = gui.getIngredients(jTextField1.getText());
+            DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+            model.setRowCount(0);
+            if (ingredients != null && ingredients.length > 0) {
+                for (int i = 0; i < ingredients.length; i++) {
+                    model.addRow(new Object[]{ingredients[i].getID(), ingredients[i].getName(), ingredients[i].getAmount(), ingredients[i].getExpDate()});
+                }
+            }
+        } else if (jTabbedPane1.getSelectedIndex() == 1) {
+            orderinfo = gui.getTodaysTasks(jTextField1.getText());
+            DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+            model.setRowCount(0);
+            if (orderinfo != null && orderinfo.length > 0) {
+                for (int i = 0; i < orderinfo.length; i++) {
+                    model.addRow(new Object[]{orderinfo[i].getMenu(), orderinfo[i].getNumberOfPersons(), orderinfo[i].getAddress()});
+                }
             }
         }
     }
