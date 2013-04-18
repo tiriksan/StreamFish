@@ -44,14 +44,20 @@ public class MainMenu extends javax.swing.JPanel {
         jTextField1.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
-                customers = gui.getCustomers(jTextField1.getText(), jCheckBox1.isSelected());
-                DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-                model.setRowCount(0);
-                if (customers != null && customers.length > 0) {
-                    for (int i = 0; i < customers.length; i++) {
-                        model.addRow(new Object[]{customers[i].getCustomerID(), customers[i].getCustomerName(), customers[i].getPhoneNumber(), customers[i].isBusiness()});
+                if (jTabbedPane1.getSelectedIndex() == 0) {
+                    customers = gui.getCustomers(jTextField1.getText(), jCheckBox1.isSelected());
+                    DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+                    model.setRowCount(0);
+                    if (customers != null && customers.length > 0) {
+                        for (int i = 0; i < customers.length; i++) {
+                            model.addRow(new Object[]{customers[i].getCustomerID(), customers[i].getCustomerName(), customers[i].getPhoneNumber(), customers[i].isBusiness()});
+                        }
                     }
+                } else if (jTabbedPane1.getSelectedIndex() == 1) {
+                    DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
+                    model.setRowCount(0);
                 }
+
             }
 
             @Override
@@ -147,7 +153,7 @@ public class MainMenu extends javax.swing.JPanel {
         if (subscriptions != null && subscriptions.length > 0) {
             for (int i = 0; i < subscriptions.length; i++) {
                 DefaultTableModel model = (DefaultTableModel) jTable3.getModel();
-                model.addRow(new Object[]{subscriptions[i].getCustomerName(gui.getOrderfromSub(subscriptions[i]), gui),subscriptions[i].getDuration(), subscriptions[i].getDayofWeek(), subscriptions[i].getMenuName(gui.getOrderfromSub(subscriptions[i]), gui)});
+                model.addRow(new Object[]{subscriptions[i].getCustomerName(gui.getOrderfromSub(subscriptions[i]), gui), subscriptions[i].getDuration(), subscriptions[i].getDayofWeek(), subscriptions[i].getMenuName(gui.getOrderfromSub(subscriptions[i]), gui)});
 
             }
         }
