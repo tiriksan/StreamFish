@@ -334,7 +334,7 @@ public class StreamFish {
 		try {
 			stm = con.createStatement();
 
-			res = stm.executeQuery("select count(*) count from todaysTasks WHERE (UPPER(CUSTOMER_NAME LIKE) '" + sok.toUpperCase() +"%')");
+			res = stm.executeQuery("select count(*) count from todaysTasks WHERE (UPPER(CUSTOMER_NAME) LIKE '" + sok.toUpperCase() +"%')");
 			res.next();
 			int ant = res.getInt("count");
 			info = new Orderinfo[ant];
@@ -802,7 +802,7 @@ public class StreamFish {
 			int m_id =0;
             try{
                 stm = con.createStatement();
-                res = stm.executeQuery("SELECT * FROM SUBSCRIPTION JOIN ORDERS ON ORDERS.SUBSCRIPTION_ID = " + subscription.getSubscription_id());
+                res = stm.executeQuery("SELECT * FROM SUBSCRIPTION JOIN ORDERS ON ORDERS.SUBSCRIPTION_ID = SUBSCRIPTION.SUBSCRIPTION_ID where subscription.subscription_id = " + subscription.getSubscription_id());
                 while(res.next()){
 					c_id = res.getInt("customer_id");
 					m_id =  res.getInt("menu_id");

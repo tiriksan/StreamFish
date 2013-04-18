@@ -22,7 +22,7 @@ public class Todo extends javax.swing.JFrame {
         this.gui = gui;
         initComponents();
         //  customers = gui.getCustomers(jTextField1.getText(), jCheckBox1.isSelected());
-        orderinfo = gui.getTodaysTasks();
+        orderinfo = gui.getTodaysTasks("");
 
         if (orderinfo != null && orderinfo.length > 0) {
             for (int i = 0; i < orderinfo.length; i++) {

@@ -125,8 +125,9 @@ public class Order {
         }
         
         public String getMenuName(GUI gui){
-            Menu [] menu = gui.getMenus();
+            Menu[] menu = gui.getMenus();
             for(Menu mnu : menu){
+				System.out.println(menuId + ", " + mnu.getMenuId());
                 if(mnu.getMenuId() == getMenuId()){
                     return mnu.getMenuName();
                 }
@@ -135,7 +136,7 @@ public class Order {
         }
         
         public String getCustomerName(GUI gui){
-			Customer[] customers = gui.getCustomers("", true);
+			Customer[] customers = gui.getCustomers("", false);
 			for(Customer customer : customers){
 				if(customer.getCustomerID() == getCustomerId()){
 					return customer.getCustomerName();
