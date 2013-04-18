@@ -424,14 +424,18 @@ public class StreamFish {
 			String[] check = {order.getDeliveryDate(), order.getAddress().getAdress()};
  			check = removeUnwantedSymbols(check);
 			System.out.println(check[0]);
-                        String subid = null;
-                        if(order.getSubId() > 0) {
-                            subid = order.getSubId() + "";
-                        }
-			int succ = stm.executeUpdate("insert into orders (DELIVERY_DATE, ADDRESS, NR_PERSONS, EMPL_ID, MENU_ID,CUSTOMER_ID,DELIVERY_TIME,SUBSCRIPTION_ID) "
+			int succ;
+			if (order.getSubId() > 0) {
+				succ = stm.executeUpdate("insert into orders (DELIVERY_DATE, ADDRESS, NR_PERSONS, EMPL_ID, MENU_ID,CUSTOMER_ID,DELIVERY_TIME,SUBSCRIPTION_ID) "
 					+ "values('" + check[0] + "' , '" + check[1] + "', " + order.getNrPersons() + ", " + order.getEmplId() + ", "
-					+ order.getMenuId() + " , " + order.getCustomerId() + " , '" + order.getDeliveryTime() + "', " + subid + ")");
+					+ order.getMenuId() + " , " + order.getCustomerId() + " , '" + order.getDeliveryTime() + "', " + order.getSubId() + ")");
+			} else {
+				succ = stm.executeUpdate("insert into orders (DELIVERY_DATE, ADDRESS, NR_PERSONS, EMPL_ID, MENU_ID,CUSTOMER_ID,DELIVERY_TIME) "
+						+ "values('" + check[0] + "' , '" + check[1] + "', " + order.getNrPersons() + ", " + order.getEmplId() + ", "
+						+ order.getMenuId() + " , " + order.getCustomerId() + " , '" + order.getDeliveryTime() + "')");
+			}
 			Opprydder.lukkSetning(stm);
+			System.out.println(order);
 			return succ;
 		} catch (SQLException ex) {
 			System.err.println(ex);
@@ -494,16 +498,17 @@ public class StreamFish {
 
 		try {
 			stm = con.createStatement();
-			System.out.println(subscription.toString());
 			succ = stm.executeUpdate("INSERT INTO SUBSCRIPTION VALUES(DEFAULT, " 
 					+ subscription.getDuration() +", '" 
 					+ subscription.getFrom_date() + "', '" 
 					+ subscription.getTo_date() + "', '" 
 					+ subscription.getStatus() + "', "
 					+ order.getCustomerId()+ ", '" + subscription.getDays() + "')" );
-			res = stm.executeQuery("select * from subscription where from_date = '" + subscription.getFrom_date() + "'");
+			res = stm.executeQuery("select * from subscription order by subscription_ID desc");
 			res.next();
 			subId = res.getInt("subscription_id");
+			System.out.println(subId);
+			order.setSubId(subId);
 		} catch (SQLException ex) {
 			System.out.println(ex);
 		}
@@ -518,21 +523,25 @@ public class StreamFish {
 					for (int y = day; y < 7; y++) {
 						if (subscription.getDays().charAt(y) == '1') {
 							String date = TodaysDate.getADate(y - day);
-							addOrder(new Order(order.getMenuId(), order.getCustomerId(), order.getEmplId(), order.getNrPersons(), date, order.getDeliveryTime(), order.getAddress(), subId));
+							order.setDate(date);
+							addOrder(order);
+							
 						}
 					}
 				} else if (i == (duration - 1)) {
 					for (int k = 0; k <= day; k++) {
 						if (subscription.getDays().charAt(k) == '1') {
 							String date = TodaysDate.getADate(i * 7 - day + k);
-							addOrder(new Order(order.getMenuId(), order.getCustomerId(), order.getEmplId(), order.getNrPersons(), date, order.getDeliveryTime(), order.getAddress(), subId));
+							order.setDate(date);
+							addOrder(order);
 						}
 					}
 				} else {
 					for (int x = 0; x < 7; x++) {
 						if (subscription.getDays().charAt(x) == '1') {
 							String date = TodaysDate.getADate(i * 7 - day + x);
-							addOrder(new Order(order.getMenuId(), order.getCustomerId(), order.getEmplId(), order.getNrPersons(), date, order.getDeliveryTime(), order.getAddress(), subId));
+							order.setDate(date);
+							addOrder(order);
 						}
 					}
 				}
@@ -789,19 +798,23 @@ public class StreamFish {
         public Order getOrderfromSub(Subscription subscription){
             Statement stm;
             ResultSet res;
+			int c_id =0;
+			int m_id =0;
             try{
                 stm = con.createStatement();
-                res = stm.executeQuery("SELECT * FROM ORDERS JOIN SUBSCRIPTION ON ORDERS.SUBSCRIPTION_ID = " + subscription.getSubscription_id());
-                res.next();
-                int c_id = res.getInt("customer_id");
-                int m_id = res.getInt("menu_id");
+                res = stm.executeQuery("SELECT * FROM SUBSCRIPTION JOIN ORDERS ON ORDERS.SUBSCRIPTION_ID = " + subscription.getSubscription_id());
+                while(res.next()){
+					c_id = res.getInt("customer_id");
+					m_id =  res.getInt("menu_id");
+				}
+                 
                 
                 Order orderFsub = new Order(c_id, m_id);
                 Opprydder.lukkResSet(res);
                 Opprydder.lukkSetning(stm);
                 return orderFsub;
             }catch ( SQLException ex){
-                System.err.println(ex);
+                System.out.println(ex);
             }
             return null;
         }

@@ -167,11 +167,19 @@ public class Order {
 	public CustomerAddress getAddress() {
 		return address;
 	}
+	
+	public void setSubId(int subId){
+		this.subId = subId;
+	}
 
 	@Override
 	public String toString() {
 		String res = "";
-		res += "ID: " + orderId + " | Delivery date and time: " + deliveryDate + ", " + deliveryTime + " | Menu: " + menuId + ", Empl-ID:" + emplId;
+		res += "ID: " + orderId + " | Delivery date and time: " + deliveryDate + ", " + deliveryTime + " | Menu: " + menuId + ", Empl-ID:" + emplId + ", Sub_id: " + subId;
 		return res;
+	}
+
+	void setDate(String date) {
+		this.deliveryDate = date;
 	}
 }
