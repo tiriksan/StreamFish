@@ -106,8 +106,8 @@ public class GUI extends JFrame implements WindowListener {
 		return false;
 	}
 
-	public Orderinfo[] getTodaysTasks() {
-		return db.getTodaysTasks();
+	public Orderinfo[] getTodaysTasks(String sok) {
+		return db.getTodaysTasks(sok);
 	}
         
         public Order getOrderfromSub(Subscription subscription){

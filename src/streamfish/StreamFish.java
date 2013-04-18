@@ -325,7 +325,7 @@ public class StreamFish {
 		return null;
 	}
 
-	public Orderinfo[] getTodaysTasks() {
+	public Orderinfo[] getTodaysTasks(String sok) {
 		Statement stm;
 		ResultSet res;
 		int count = 0;
@@ -334,13 +334,13 @@ public class StreamFish {
 		try {
 			stm = con.createStatement();
 
-			res = stm.executeQuery("select count(*) count from todaysTasks");
+			res = stm.executeQuery("select count(*) count from todaysTasks WHERE CUSTOMER_NAME LIKE '" + sok +"%'");
 			res.next();
 			int ant = res.getInt("count");
 			info = new Orderinfo[ant];
 			Opprydder.lukkResSet(res);
 
-			res = stm.executeQuery("select * from todaysTasks");
+			res = stm.executeQuery("select * from todaysTasks WHERE CUSTOMER_NAME LIKE '" + sok +"%'");
 
 			while (res.next()) {
 				int orderID = res.getInt(1);
