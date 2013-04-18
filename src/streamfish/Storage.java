@@ -15,90 +15,124 @@ import static javax.swing.JOptionPane.*;
  */
 public class Storage extends javax.swing.JPanel {
 
-	private int ingredientID = -1;
-	private final GUI gui;
-	private Ingredient[] ingredients;
-	private Ingredient ingToBeEdited;
-        private Orderinfo[] orderinfo;
-        private int viewRow = -1;
+    private int ingredientID = -1;
+    private final GUI gui;
+    private Ingredient[] ingredients;
+    private Ingredient ingToBeEdited;
+    private Orderinfo[] orderinfo;
+    private int viewRow = -1;
 
-	public Storage(final GUI gui) {
-		this.gui = gui;
-		gui.setTitle("Storage");
-		initComponents();
-		
-		tab1setup();
-                tab2setup();
-                
-		addListSelectListener();
-		addDocumentListener();
-		
-	}
-        
-	private void addListSelectListener(){
-		jTable1.getSelectionModel().addListSelectionListener(
-				new ListSelectionListener() {
-					public void valueChanged(ListSelectionEvent event) {
-						int viewRow = jTable1.getSelectedRow();
-						if (!event.getValueIsAdjusting()) {
-							try {
-								ingToBeEdited = ingredients[viewRow];
-							} catch (Exception e) {
-							}
-						}
-					}
-				});
-	}
-	private void addDocumentListener(){
-		jTextField1.getDocument().addDocumentListener(new DocumentListener() {
-			@Override
-			public void insertUpdate(DocumentEvent e) {
-				ingredients = gui.getIngredients(jTextField1.getText());
-				DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-				model.setRowCount(0);
-				if (ingredients != null && ingredients.length > 0) {
-					for (int i = 0; i < ingredients.length; i++) {
-						model.addRow(new Object[]{ingredients[i].getID(), ingredients[i].getName(), ingredients[i].getAmount(), ingredients[i].getExpDate()});
-					}
-				}
-			}
+    public Storage(final GUI gui) {
+        this.gui = gui;
+        gui.setTitle("Storage");
+        initComponents();
 
-			@Override
-			public void removeUpdate(DocumentEvent e) {
-				ingredients = gui.getIngredients(jTextField1.getText());
-				DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-				model.setRowCount(0);
-				if (ingredients != null && ingredients.length > 0) {
-					for (int i = 0; i < ingredients.length; i++) {
-						model.addRow(new Object[]{ingredients[i].getID(), ingredients[i].getName(), ingredients[i].getAmount(), ingredients[i].getExpDate()});
-					}
-				}
-			}
+        tab1setup();
+        tab2setup();
 
-			@Override
-			public void changedUpdate(DocumentEvent e) {
-				ingredients = gui.getIngredients(jTextField1.getText());
-				DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-				model.setRowCount(0);
-				if (ingredients != null && ingredients.length > 0) {
-					for (int i = 0; i < ingredients.length; i++) {
-						model.addRow(new Object[]{ingredients[i].getID(), ingredients[i].getName(), ingredients[i].getAmount(), ingredients[i].getExpDate()});
-					}
-				}
-			}
-		});
-	}
-        
-             private void tab1setup() {
-            ingredients = gui.getIngredients(jTextField1.getText());
-		if (ingredients != null && ingredients.length > 0) {
-			for (int i = 0; i < ingredients.length; i++) {
-				DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-				model.addRow(new Object[]{ingredients[i].getID(), ingredients[i].getName(), ingredients[i].getAmount(), ingredients[i].getExpDate()});
-			}
-		}
-                
-                jTable1.getSelectionModel().addListSelectionListener(
+        addListSelectListener();
+        addDocumentListener();
+
+    }
+
+    private void addListSelectListener() {
+        jTable1.getSelectionModel().addListSelectionListener(
+                new ListSelectionListener() {
+                    public void valueChanged(ListSelectionEvent event) {
+                        int viewRow = jTable1.getSelectedRow();
+                        if (!event.getValueIsAdjusting()) {
+                            try {
+                                ingToBeEdited = ingredients[viewRow];
+                            } catch (Exception e) {
+                            }
+                        }
+                    }
+                });
+    }
+
+    private void addDocumentListener() {
+        jTextField1.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                if (jTabbedPane1.getSelectedIndex() == 0) {
+                    ingredients = gui.getIngredients(jTextField1.getText());
+                    DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+                    model.setRowCount(0);
+                    if (ingredients != null && ingredients.length > 0) {
+                        for (int i = 0; i < ingredients.length; i++) {
+                            model.addRow(new Object[]{ingredients[i].getID(), ingredients[i].getName(), ingredients[i].getAmount(), ingredients[i].getExpDate()});
+                        }
+                    }
+                } else if (jTabbedPane1.getSelectedIndex() == 1) {
+                    orderinfo = gui.getTodaysTasks(jTextField1.getText());;
+                    DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
+                    model.setRowCount(0);
+                    if (orderinfo != null && orderinfo.length > 0) {
+                        for (int i = 0; i < orderinfo.length; i++) {
+                            model.addRow(new Object[]{orderinfo[i].getMenu(), orderinfo[i].getNumberOfPersons(), orderinfo[i].getAddress()});
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                ingredients = gui.getIngredients(jTextField1.getText());
+                if (jTabbedPane1.getSelectedIndex() == 0) {
+                    DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+                    model.setRowCount(0);
+                    if (ingredients != null && ingredients.length > 0) {
+                        for (int i = 0; i < ingredients.length; i++) {
+                            model.addRow(new Object[]{ingredients[i].getID(), ingredients[i].getName(), ingredients[i].getAmount(), ingredients[i].getExpDate()});
+                        }
+                    }
+                } else if (jTabbedPane1.getSelectedIndex() == 1) {
+                    orderinfo = gui.getTodaysTasks(jTextField1.getText());;
+                    DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
+                    model.setRowCount(0);
+                    if (orderinfo != null && orderinfo.length > 0) {
+                        for (int i = 0; i < orderinfo.length; i++) {
+                            model.addRow(new Object[]{orderinfo[i].getMenu(), orderinfo[i].getNumberOfPersons(), orderinfo[i].getAddress()});
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                if (jTabbedPane1.getSelectedIndex() == 0) {
+                    ingredients = gui.getIngredients(jTextField1.getText());
+                    DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+                    model.setRowCount(0);
+                    if (ingredients != null && ingredients.length > 0) {
+                        for (int i = 0; i < ingredients.length; i++) {
+                            model.addRow(new Object[]{ingredients[i].getID(), ingredients[i].getName(), ingredients[i].getAmount(), ingredients[i].getExpDate()});
+                        }
+                    }
+                } else if (jTabbedPane1.getSelectedIndex() == 1) {
+                    orderinfo = gui.getTodaysTasks(jTextField1.getText());;
+                    DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
+                    model.setRowCount(0);
+                    if (orderinfo != null && orderinfo.length > 0) {
+                        for (int i = 0; i < orderinfo.length; i++) {
+                            model.addRow(new Object[]{orderinfo[i].getMenu(), orderinfo[i].getNumberOfPersons(), orderinfo[i].getAddress()});
+                        }
+                    }
+                }
+            }
+        });
+    }
+
+    private void tab1setup() {
+        ingredients = gui.getIngredients(jTextField1.getText());
+        if (ingredients != null && ingredients.length > 0) {
+            for (int i = 0; i < ingredients.length; i++) {
+                DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+                model.addRow(new Object[]{ingredients[i].getID(), ingredients[i].getName(), ingredients[i].getAmount(), ingredients[i].getExpDate()});
+            }
+        }
+
+        jTable1.getSelectionModel().addListSelectionListener(
                 new ListSelectionListener() {
                     public void valueChanged(ListSelectionEvent event) {
                         if (!event.getValueIsAdjusting()) {
@@ -106,9 +140,9 @@ public class Storage extends javax.swing.JPanel {
                         }
                     }
                 });
-        }
-        
-        private void tab2setup() {
+    }
+
+    private void tab2setup() {
         orderinfo = gui.getTodaysTasks("");
 
         if (orderinfo != null && orderinfo.length > 0) {
@@ -129,21 +163,19 @@ public class Storage extends javax.swing.JPanel {
                     }
                 });
     }
-	
-	public void update() {
-		ingredients = gui.getIngredients(jTextField1.getText());
-		DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-		model.setRowCount(0);
-		if (ingredients != null && ingredients.length > 0) {
-			for (int i = 0; i < ingredients.length; i++) {
-				model.addRow(new Object[]{ingredients[i].getID(), ingredients[i].getName(), ingredients[i].getAmount(), ingredients[i].getExpDate()});
-			}
-		}
-	}
-        
-     
 
-	@SuppressWarnings("unchecked")
+    public void update() {
+        ingredients = gui.getIngredients(jTextField1.getText());
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        model.setRowCount(0);
+        if (ingredients != null && ingredients.length > 0) {
+            for (int i = 0; i < ingredients.length; i++) {
+                model.addRow(new Object[]{ingredients[i].getID(), ingredients[i].getName(), ingredients[i].getAmount(), ingredients[i].getExpDate()});
+            }
+        }
+    }
+
+    @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -297,85 +329,85 @@ public class Storage extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-		// TODO add your handling code here:
-		RegIngredient ing = new RegIngredient(gui, "Add");
-		ing.addWindowListener(new WindowListener() {
-			@Override
-			public void windowOpened(WindowEvent e) {
-			}
+        // TODO add your handling code here:
+        RegIngredient ing = new RegIngredient(gui, "Add");
+        ing.addWindowListener(new WindowListener() {
+            @Override
+            public void windowOpened(WindowEvent e) {
+            }
 
-			@Override
-			public void windowClosing(WindowEvent e) {
-				update();
-			}
+            @Override
+            public void windowClosing(WindowEvent e) {
+                update();
+            }
 
-			@Override
-			public void windowClosed(WindowEvent e) {
-				update();
-			}
+            @Override
+            public void windowClosed(WindowEvent e) {
+                update();
+            }
 
-			@Override
-			public void windowIconified(WindowEvent e) {
-			}
+            @Override
+            public void windowIconified(WindowEvent e) {
+            }
 
-			@Override
-			public void windowDeiconified(WindowEvent e) {
-			}
+            @Override
+            public void windowDeiconified(WindowEvent e) {
+            }
 
-			@Override
-			public void windowActivated(WindowEvent e) {
-			}
+            @Override
+            public void windowActivated(WindowEvent e) {
+            }
 
-			@Override
-			public void windowDeactivated(WindowEvent e) {
-			}
-		});
+            @Override
+            public void windowDeactivated(WindowEvent e) {
+            }
+        });
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-		if (ingToBeEdited != null) {
-			RegIngredient ing = new RegIngredient(gui, "Apply", ingToBeEdited);
-			ing.addWindowListener(new WindowListener() {
-				@Override
-				public void windowOpened(WindowEvent e) {
-				}
+        if (ingToBeEdited != null) {
+            RegIngredient ing = new RegIngredient(gui, "Apply", ingToBeEdited);
+            ing.addWindowListener(new WindowListener() {
+                @Override
+                public void windowOpened(WindowEvent e) {
+                }
 
-				@Override
-				public void windowClosing(WindowEvent e) {
-					update();
-				}
+                @Override
+                public void windowClosing(WindowEvent e) {
+                    update();
+                }
 
-				@Override
-				public void windowClosed(WindowEvent e) {
-					update();
-				}
+                @Override
+                public void windowClosed(WindowEvent e) {
+                    update();
+                }
 
-				@Override
-				public void windowIconified(WindowEvent e) {
-				}
+                @Override
+                public void windowIconified(WindowEvent e) {
+                }
 
-				@Override
-				public void windowDeiconified(WindowEvent e) {
-				}
+                @Override
+                public void windowDeiconified(WindowEvent e) {
+                }
 
-				@Override
-				public void windowActivated(WindowEvent e) {
-				}
+                @Override
+                public void windowActivated(WindowEvent e) {
+                }
 
-				@Override
-				public void windowDeactivated(WindowEvent e) {
-				}
-			});
+                @Override
+                public void windowDeactivated(WindowEvent e) {
+                }
+            });
 
-		} else {
-			javax.swing.JOptionPane.showMessageDialog(null, "No ingredient is selected.");
-		}
+        } else {
+            javax.swing.JOptionPane.showMessageDialog(null, "No ingredient is selected.");
+        }
 
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-		// TODO add your handling code here:
-		System.exit(0);
+        // TODO add your handling code here:
+        System.exit(0);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -389,9 +421,8 @@ public class Storage extends javax.swing.JPanel {
         } else {
             showMessageDialog(null, "Ingen valgt");
         }
-       
-    }//GEN-LAST:event_jButton5ActionPerformed
 
+    }//GEN-LAST:event_jButton5ActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
