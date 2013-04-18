@@ -134,15 +134,15 @@ public class Order {
             return null;
         }
         
-    /*    public String getCustomerName(GUI gui){
-            Order [] order = gui.getOrderfromSub();
-            for Order ordr : order){
-                if(ordr.getCustomerId() == getCustomer_Id()){
-                    return ordr.getCustomerName();
-                }
-            }
+        public String getCustomerName(GUI gui){
+			Customer[] customers = gui.getCustomers("", true);
+			for(Customer customer : customers){
+				if(customer.getCustomerID() == getCustomerId()){
+					return customer.getCustomerName();
+				}
+			}
             return null;
-        }   */ // stahhhp, cant touch this!!
+        }    // stahhhp, cant touch this!!
 
 	public int getNrPersons() {
 		return nrPersons;
