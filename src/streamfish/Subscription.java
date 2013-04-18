@@ -83,15 +83,21 @@ public class Subscription {
         return dayofWeek;
     }
     
-    /*public String getMenuName(Order order){
-        menuName = order.getMenuName(GUI gui);
+    public String getMenuName(Order order, GUI gui){
+        if(order != null) {
+        String menuName = order.getMenuName(gui);
         return menuName;
+        }
+        return null;
     }
     
-    public String getCustomerName(Order order){
-        String customerName = order.getCustomerName(GUI gui);
+    public String getCustomerName(Order order, GUI gui){
+        if(order != null){
+        String customerName = order.getCustomerName(gui);
         return customerName;
-    }*/ // stahhhp, cant touch dis!!
+        }
+        return null;
+    }
     
     public String toString(){
         String text = "subscription_id:" + subscription_id + "\nduration " + duration + "\nfrom_date " + from_date + "\nto_date " + to_date + "\nstatus " + status;

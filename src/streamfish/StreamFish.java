@@ -424,9 +424,13 @@ public class StreamFish {
 			String[] check = {order.getDeliveryDate(), order.getAddress().getAdress()};
  			check = removeUnwantedSymbols(check);
 			System.out.println(check[0]);
-			int succ = stm.executeUpdate("insert into orders (DELIVERY_DATE, ADDRESS, NR_PERSONS, EMPL_ID, MENU_ID,CUSTOMER_ID,DELIVERY_TIME) "
+                        String subid = null;
+                        if(order.getSubId() > 0) {
+                            subid = order.getSubId() + "";
+                        }
+			int succ = stm.executeUpdate("insert into orders (DELIVERY_DATE, ADDRESS, NR_PERSONS, EMPL_ID, MENU_ID,CUSTOMER_ID,DELIVERY_TIME,SUBSCRIPTION_ID) "
 					+ "values('" + check[0] + "' , '" + check[1] + "', " + order.getNrPersons() + ", " + order.getEmplId() + ", "
-					+ order.getMenuId() + " , " + order.getCustomerId() + " , '" + order.getDeliveryTime() + "')");
+					+ order.getMenuId() + " , " + order.getCustomerId() + " , '" + order.getDeliveryTime() + "', " + subid + ")");
 			Opprydder.lukkSetning(stm);
 			return succ;
 		} catch (SQLException ex) {
@@ -787,9 +791,8 @@ public class StreamFish {
             ResultSet res;
             try{
                 stm = con.createStatement();
-                res = stm.executeQuery("SELECT * FROM ORDERS JOIN SUBSCRIPTION WHERE ORDERS.SUBSCRIPTION_ID = " + subscription.getSubscription_id());
+                res = stm.executeQuery("SELECT * FROM ORDERS JOIN SUBSCRIPTION ON ORDERS.SUBSCRIPTION_ID = " + subscription.getSubscription_id());
                 res.next();
-              //      Order lineCID = res.getRow("SELECT (*) FROM ORDERS");
                 int c_id = res.getInt("customer_id");
                 int m_id = res.getInt("menu_id");
                 

@@ -147,7 +147,7 @@ public class MainMenu extends javax.swing.JPanel {
         if (subscriptions != null && subscriptions.length > 0) {
             for (int i = 0; i < subscriptions.length; i++) {
                 DefaultTableModel model = (DefaultTableModel) jTable3.getModel();
-                model.addRow(new Object[]{subscriptions[i].getDuration(), subscriptions[i].getDayofWeek()});
+                model.addRow(new Object[]{subscriptions[i].getCustomerName(gui.getOrderfromSub(subscriptions[i]), gui),subscriptions[i].getDuration(), subscriptions[i].getDayofWeek(), subscriptions[i].getMenuName(gui.getOrderfromSub(subscriptions[i]), gui)});
 
             }
         }

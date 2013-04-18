@@ -109,6 +109,10 @@ public class GUI extends JFrame implements WindowListener {
 	public Orderinfo[] getTodaysTasks() {
 		return db.getTodaysTasks();
 	}
+        
+        public Order getOrderfromSub(Subscription subscription){
+            return db.getOrderfromSub(subscription);
+        }
 
 	public Order[] getOrders(Customer customer) {
 		return db.getOrderCustomer(customer);
@@ -135,7 +139,7 @@ public class GUI extends JFrame implements WindowListener {
 	public Menu[] getMenus() {
 		return db.getMenus();
 	}
-
+        
 	public Employee getUserAuthorization(String username, String password) {
 		return db.userAuthorization(username, password);
 	}
