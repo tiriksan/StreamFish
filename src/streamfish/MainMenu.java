@@ -54,32 +54,60 @@ public class MainMenu extends javax.swing.JPanel {
                         }
                     }
                 } else if (jTabbedPane1.getSelectedIndex() == 1) {
+                    orderinfo = gui.getTodaysTasks(jTextField1.getText());
                     DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
                     model.setRowCount(0);
+                    if (orderinfo != null && orderinfo.length > 0) {
+                        for (int i = 0; i < orderinfo.length; i++) {
+                            model.addRow(new Object[]{orderinfo[i].getAddress(), orderinfo[i].getCustomerName(), orderinfo[i].getPhone()});
+                        }
+                    }
                 }
 
             }
 
             @Override
             public void removeUpdate(DocumentEvent e) {
-                customers = gui.getCustomers(jTextField1.getText(), jCheckBox1.isSelected());
-                DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-                model.setRowCount(0);
-                if (customers != null && customers.length > 0) {
-                    for (int i = 0; i < customers.length; i++) {
-                        model.addRow(new Object[]{customers[i].getCustomerID(), customers[i].getCustomerName(), customers[i].getPhoneNumber(), customers[i].isBusiness()});
+                if (jTabbedPane1.getSelectedIndex() == 0) {
+                    customers = gui.getCustomers(jTextField1.getText(), jCheckBox1.isSelected());
+                    DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+                    model.setRowCount(0);
+                    if (customers != null && customers.length > 0) {
+                        for (int i = 0; i < customers.length; i++) {
+                            model.addRow(new Object[]{customers[i].getCustomerID(), customers[i].getCustomerName(), customers[i].getPhoneNumber(), customers[i].isBusiness()});
+                        }
+                    }
+                } else if (jTabbedPane1.getSelectedIndex() == 1) {
+                    orderinfo = gui.getTodaysTasks(jTextField1.getText());
+                    DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
+                    model.setRowCount(0);
+                    if (orderinfo != null && orderinfo.length > 0) {
+                        for (int i = 0; i < orderinfo.length; i++) {
+                            model.addRow(new Object[]{orderinfo[i].getAddress(), orderinfo[i].getCustomerName(), orderinfo[i].getPhone()});
+                        }
                     }
                 }
             }
 
             @Override
             public void changedUpdate(DocumentEvent e) {
-                customers = gui.getCustomers(jTextField1.getText(), jCheckBox1.isSelected());
-                DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-                model.setRowCount(0);
-                if (customers != null && customers.length > 0) {
-                    for (int i = 0; i < customers.length; i++) {
-                        model.addRow(new Object[]{customers[i].getCustomerID(), customers[i].getCustomerName(), customers[i].getPhoneNumber(), customers[i].isBusiness()});
+                if (jTabbedPane1.getSelectedIndex() == 0) {
+                    customers = gui.getCustomers(jTextField1.getText(), jCheckBox1.isSelected());
+                    DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+                    model.setRowCount(0);
+                    if (customers != null && customers.length > 0) {
+                        for (int i = 0; i < customers.length; i++) {
+                            model.addRow(new Object[]{customers[i].getCustomerID(), customers[i].getCustomerName(), customers[i].getPhoneNumber(), customers[i].isBusiness()});
+                        }
+                    }
+                } else if (jTabbedPane1.getSelectedIndex() == 1) {
+                    orderinfo = gui.getTodaysTasks(jTextField1.getText());
+                    DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
+                    model.setRowCount(0);
+                    if (orderinfo != null && orderinfo.length > 0) {
+                        for (int i = 0; i < orderinfo.length; i++) {
+                            model.addRow(new Object[]{orderinfo[i].getAddress(), orderinfo[i].getCustomerName(), orderinfo[i].getPhone()});
+                        }
                     }
                 }
             }
@@ -89,12 +117,23 @@ public class MainMenu extends javax.swing.JPanel {
         jCheckBox1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                customers = gui.getCustomers(jTextField1.getText(), jCheckBox1.isSelected());
-                DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-                model.setRowCount(0);
-                if (customers != null && customers.length > 0) {
-                    for (int i = 0; i < customers.length; i++) {
-                        model.addRow(new Object[]{customers[i].getCustomerID(), customers[i].getCustomerName(), customers[i].getPhoneNumber(), customers[i].isBusiness()});
+                if (jTabbedPane1.getSelectedIndex() == 0) {
+                    customers = gui.getCustomers(jTextField1.getText(), jCheckBox1.isSelected());
+                    DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+                    model.setRowCount(0);
+                    if (customers != null && customers.length > 0) {
+                        for (int i = 0; i < customers.length; i++) {
+                            model.addRow(new Object[]{customers[i].getCustomerID(), customers[i].getCustomerName(), customers[i].getPhoneNumber(), customers[i].isBusiness()});
+                        }
+                    }
+                } else if (jTabbedPane1.getSelectedIndex() == 1) {
+                    orderinfo = gui.getTodaysTasks(jTextField1.getText());
+                    DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+                    model.setRowCount(0);
+                    if (orderinfo != null && orderinfo.length > 0) {
+                        for (int i = 0; i < orderinfo.length; i++) {
+                            model.addRow(new Object[]{orderinfo[i].getAddress(), orderinfo[i].getCustomerName(), orderinfo[i].getPhone()});
+                        }
                     }
                 }
             }
@@ -126,7 +165,7 @@ public class MainMenu extends javax.swing.JPanel {
     }
 
     private void tab2setup() {
-        orderinfo = gui.getTodaysTasks();
+        orderinfo = gui.getTodaysTasks("");
 
         if (orderinfo != null && orderinfo.length > 0) {
             for (int i = 0; i < orderinfo.length; i++) {
@@ -182,7 +221,7 @@ public class MainMenu extends javax.swing.JPanel {
 
     public void updtTodaysTasks() {
 
-        orderinfo = gui.getTodaysTasks();
+        orderinfo = gui.getTodaysTasks("");
         DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
         model.setRowCount(0);
         if (orderinfo != null && orderinfo.length > 0) {

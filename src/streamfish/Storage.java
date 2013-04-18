@@ -109,7 +109,7 @@ public class Storage extends javax.swing.JPanel {
         }
         
         private void tab2setup() {
-        orderinfo = gui.getTodaysTasks();
+        orderinfo = gui.getTodaysTasks("");
 
         if (orderinfo != null && orderinfo.length > 0) {
             for (int i = 0; i < orderinfo.length; i++) {
