@@ -334,13 +334,13 @@ public class StreamFish {
 		try {
 			stm = con.createStatement();
 
-			res = stm.executeQuery("select count(*) count from todaysTasks WHERE CUSTOMER_NAME LIKE '" + sok +"%'");
+			res = stm.executeQuery("select count(*) count from todaysTasks WHERE (UPPER(CUSTOMER_NAME LIKE) '" + sok.toUpperCase() +"%')");
 			res.next();
 			int ant = res.getInt("count");
 			info = new Orderinfo[ant];
 			Opprydder.lukkResSet(res);
 
-			res = stm.executeQuery("select * from todaysTasks WHERE CUSTOMER_NAME LIKE '" + sok +"%'");
+			res = stm.executeQuery("select * from todaysTasks WHERE (upper(CUSTOMER_NAME) LIKE '" + sok.toUpperCase() +"%')");
 
 			while (res.next()) {
 				int orderID = res.getInt(1);

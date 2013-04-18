@@ -63,19 +63,19 @@ public class Subscription {
             if(days.charAt(i) == '1'){
                 switch(i){
                     case 0:
-                    dayofWeek += "Monday ";   
+                    dayofWeek += "Mon ";   
                     case 1:
-                    dayofWeek += "Tuesday ";   
+                    dayofWeek += "Tue ";   
                     case 2:
-                    dayofWeek += "Wednesday ";   
+                    dayofWeek += "Wed ";   
                     case 3:
-                    dayofWeek += "Thursday ";   
+                    dayofWeek += "Thu ";   
                     case 4:
-                    dayofWeek += "Friday ";   
+                    dayofWeek += "Fri ";   
                     case 5:
-                    dayofWeek += "Saturday ";   
+                    dayofWeek += "Sat ";   
                     case 6:
-                    dayofWeek += "Sunday ";   
+                    dayofWeek += "Sun ";   
                     break;
                 }
             }
