@@ -20,8 +20,8 @@ CREATE TABLE customer(
 customer_id INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
 customer_name VARCHAR(70) NOT NULL,
 phone CHAR(8) NOT NULL,
-business CHAR(1) NOT NULL,
-status CHAR(1) NOT NULL DEFAULT '1'
+business SMALLINT NOT NULL DEFAULT 0,
+status SMALLINT NOT NULL DEFAULT 1
 );
 
 CREATE TABLE customer_address(
@@ -37,7 +37,7 @@ empl_id INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
 user_type SMALLINT DEFAULT 0,
 username VARCHAR(20) NOT NULL,
 password VARCHAR(20) NOT NULL,
-status CHAR(1) NOT NULL DEFAULT '1'
+status SMALLINT NOT NULL DEFAULT 1
 );
 
 CREATE TABLE ingredients(
@@ -50,7 +50,7 @@ expiry_date DATE
 CREATE TABLE dish(
 dish_id INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
 dish_name VARCHAR(100),
-status CHAR(1) NOT NULL DEFAULT '1'
+status SMALLINT NOT NULL DEFAULT 1
 );
 
 CREATE TABLE menu(
@@ -58,7 +58,7 @@ menu_id INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
 menu_name VARCHAR(255) NOT NULL,
 price INTEGER DEFAULT 0,
 description VARCHAR(2000) DEFAULT 'No description',
-status CHAR(1) NOT NULL DEFAULT '1'
+status SMALLINT NOT NULL DEFAULT 1
 );
 
 CREATE TABLE orders(
@@ -71,7 +71,8 @@ empl_id INTEGER,
 menu_id INTEGER,
 customer_id INTEGER,
 subscription_id INTEGER,
-status CHAR(1) NOT NULL DEFAULT '1'
+status SMALLINT NOT NULL DEFAULT 1,
+delivered SMALLINT NOT NULL DEFAULT 0
 );
 
 CREATE TABLE subscription(
@@ -80,7 +81,7 @@ duration INTEGER,
 from_date DATE,
 to_date DATE,
 days CHAR(7),
-status CHAR(1) NOT NULL DEFAULT '1'
+status SMALLINT NOT NULL DEFAULT 1
 );
 
 CREATE TABLE special_categories(
@@ -165,8 +166,8 @@ WHERE delivery_date = CURRENT DATE AND customer.status = '1';
 
 -- Insert sentences --
 INSERT INTO employees VALUES(DEFAULT, DEFAULT, 'Admin', 'NoSoup4U', DEFAULT);
-INSERT INTO SFDB.EMPLOYEES (USER_TYPE, USERNAME, PASSWORD, STATUS) VALUES (0, 'norc', 'passord', '1');
+INSERT INTO SFDB.EMPLOYEES (USER_TYPE, USERNAME, PASSWORD, STATUS) VALUES (0, 'norc', 'passord', 1);
 INSERT INTO menu VALUES(DEFAULT, 'NorCs Delicious Tapas', 400, 'Test-menu', DEFAULT);
-INSERT INTO SFDB.MENU (MENU_NAME, PRICE, DESCRIPTION, STATUS) VALUES ('TirikSans Pizza Speciale', 404, 'Price not found', '1');
-INSERT INTO SFDB.MENU (MENU_NAME, PRICE, DESCRIPTION, STATUS) VALUES ('Prebens Nugatti Extraordinale', 75, 'En spesiell forrett med en gratis "Nuggati no igjen!?" fra Preben selv', '1');
-INSERT INTO SFDB.MENU (MENU_NAME, PRICE, DESCRIPTION, STATUS) VALUES ('Sindres Frittflyvende Flyndre', 220, 'Fire flytedyktige, frittflyvende, flate flyndrer fra Fosen', '1');
+INSERT INTO SFDB.MENU (MENU_NAME, PRICE, DESCRIPTION, STATUS) VALUES ('TirikSans Pizza Speciale', 404, 'Price not found', 1);
+INSERT INTO SFDB.MENU (MENU_NAME, PRICE, DESCRIPTION, STATUS) VALUES ('Prebens Nugatti Extraordinale', 75, 'En spesiell forrett med en gratis "Nuggati no igjen!?" fra Preben selv', 1);
+INSERT INTO SFDB.MENU (MENU_NAME, PRICE, DESCRIPTION, STATUS) VALUES ('Sindres Frittflyvende Flyndre', 220, 'Fire flytedyktige, frittflyvende, flate flyndrer fra Fosen', 1);
