@@ -499,9 +499,10 @@ public class StreamFish {
 			succ = stm.executeUpdate("INSERT INTO SUBSCRIPTION VALUES(DEFAULT, " 
 					+ subscription.getDuration() +", '" 
 					+ subscription.getFrom_date() + "', '" 
-					+ subscription.getTo_date() + "', '" 
+					+ subscription.getTo_date() + "', '"
+					+ subscription.getDays() + "', '"
 					+ subscription.getStatus() + "', "
-					+ order.getCustomerId()+ ", '" + subscription.getDays() + "')" );
+					+ order.getCustomerId()+ ")" );
 			res = stm.executeQuery("select * from subscription order by subscription_ID desc");
 			res.next();
 			subId = res.getInt("subscription_id");
