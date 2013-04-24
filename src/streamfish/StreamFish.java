@@ -380,8 +380,8 @@ public class StreamFish {
 					+ "LEFT JOIN menu ON orders.MENU_ID = menu.MENU_ID\n"
 					+ "LEFT JOIN employees ON orders.EMPL_ID = employees.EMPL_ID\n"
 					+ "LEFT JOIN customer_address ON orders.address = customer_address.address AND orders.CUSTOMER_ID = customer_address.CUSTOMER_ID"
-					+ "WHERE orders.order_ID = '" + orderID + "' AND customer.status = '1' "
-					+ "AND orders.status = '1' ORDER BY delivery_date ASC;");
+					+ "WHERE orders.order_ID = '" + orderID + "' AND customer.status = 1 "
+					+ "AND orders.status = 1 ORDER BY delivery_date ASC;");
 			res.next();
 			Opprydder.lukkResSet(res);
 
@@ -605,7 +605,7 @@ public class StreamFish {
 			String[] check = {dish.getName()};
 			check = removeUnwantedSymbols(check);
 			int succ = stm.executeUpdate("insert into dish (DISH_NAME, STATUS) "
-					+ "values('" + check[0] + "', '1')");
+					+ "values('" + check[0] + "', 1)");
 			Opprydder.lukkSetning(stm);
 			return succ;
 		} catch (SQLException ex) {
@@ -622,11 +622,11 @@ public class StreamFish {
 			stm = con.createStatement();
 			res = stm.executeQuery("select status from dish where dish_id = " + dish.getID());
 			res.next();
-			int status = Integer.parseInt(res.getString("status"));
+			short status = res.getShort("status");
 			if (status == 1) {
-				succ = stm.executeUpdate("update dish set status ='" + 0 + "' where dish_id = " + dish.getID());
+				succ = stm.executeUpdate("update dish set status =" + 0 + " where dish_id = " + dish.getID());
 			} else {
-				succ = stm.executeUpdate("update dish set status ='" + 1 + "' where dish_id = " + dish.getID());
+				succ = stm.executeUpdate("update dish set status =" + 1 + " where dish_id = " + dish.getID());
 			}
 			Opprydder.lukkResSet(res);
 			Opprydder.lukkSetning(stm);
@@ -751,7 +751,7 @@ public class StreamFish {
 		String[] check = {customer.getCustomerName()};
 		check = removeUnwantedSymbols(check);
 
-		int isbusiness = 0;
+		short isbusiness = 0;
 		if (customer.isBusiness()) {
 			isbusiness = 1;
 		}
@@ -759,7 +759,7 @@ public class StreamFish {
 		try {
 			stm = con.createStatement();
 			int succ = stm.executeUpdate("insert into customer (CUSTOMER_NAME, PHONE, BUSINESS)"
-					+ " values('" + check[0] + "' , '" + customer.getPhoneNumber() + "', '" + isbusiness + "')");
+					+ " values('" + check[0] + "' , '" + customer.getPhoneNumber() + "', " + isbusiness + ")");
 			Opprydder.lukkSetning(stm);
 			return succ;
 
@@ -777,11 +777,11 @@ public class StreamFish {
 			stm = con.createStatement();
 			res = stm.executeQuery("select status from customer where customer_id = " + customer.getCustomerID());
 			res.next();
-			int status = Integer.parseInt(res.getString("status"));
+			short status = res.getShort("status");
 			if (status == 1) {
-				succ = stm.executeUpdate("update customer set status ='" + 0 + "' where customer_id = " + customer.getCustomerID());
+				succ = stm.executeUpdate("update customer set status =" + 0 + " where customer_id = " + customer.getCustomerID());
 			} else {
-				succ = stm.executeUpdate("update customer set status ='" + 1 + "' where customer_id = " + customer.getCustomerID());
+				succ = stm.executeUpdate("update customer set status =" + 1 + " where customer_id = " + customer.getCustomerID());
 			}
 			Opprydder.lukkResSet(res);
 			Opprydder.lukkSetning(stm);
@@ -821,7 +821,7 @@ public class StreamFish {
 		String[] check = {customer.getCustomerName()};
 		check = removeUnwantedSymbols(check);
 
-		int isbusiness = 0;
+		short isbusiness = 0;
 		if (customer.isBusiness()) {
 			isbusiness = 1;
 		}
@@ -829,7 +829,7 @@ public class StreamFish {
 		try {
 			stm = con.createStatement();
 			int succ = stm.executeUpdate("update customer set CUSTOMER_NAME ='" + check[0] + "', PHONE ='" + customer.getPhoneNumber()
-					+ "', BUSINESS ='" + isbusiness + "' where CUSTOMER_ID =" + customer.getCustomerID());
+					+ "', BUSINESS =" + isbusiness + " where CUSTOMER_ID =" + customer.getCustomerID());
 			Opprydder.lukkSetning(stm);
 			return succ;
 
