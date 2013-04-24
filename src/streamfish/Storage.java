@@ -143,7 +143,7 @@ public class Storage extends javax.swing.JPanel {
     }
 
     private void tab2setup() {
-        orderinfo = gui.getTodaysTasks("");
+        orderinfo = gui.getTodaysTasks2("");
 
         if (orderinfo != null && orderinfo.length > 0) {
             for (int i = 0; i < orderinfo.length; i++) {
@@ -175,7 +175,7 @@ public class Storage extends javax.swing.JPanel {
                 }
             }
         } else if (jTabbedPane1.getSelectedIndex() == 1) {
-            orderinfo = gui.getTodaysTasks(jTextField1.getText());
+            orderinfo = gui.getTodaysTasks2(jTextField1.getText());
             DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
             model.setRowCount(0);
             if (orderinfo != null && orderinfo.length > 0) {

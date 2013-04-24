@@ -365,6 +365,47 @@ public class StreamFish {
 		}
 		return null;
 	}
+        
+        public Orderinfo[] getTodaysTasks2(String sok) {
+		Statement stm;
+		ResultSet res;
+		int count = 0;
+		Orderinfo[] info;
+
+		try {
+			stm = con.createStatement();
+
+			res = stm.executeQuery("select count(*) count from todaysTasks WHERE (UPPER(MENU_NAME) LIKE '" + sok.toUpperCase() +"%')");
+			res.next();
+			int ant = res.getInt("count");
+			info = new Orderinfo[ant];
+			Opprydder.lukkResSet(res);
+
+			res = stm.executeQuery("select * from todaysTasks WHERE (upper(MENU_NAME) LIKE '" + sok.toUpperCase() +"%')");
+
+			while (res.next()) {
+				int orderID = res.getInt(1);
+				String customerName = res.getString(2);
+				String address = res.getString(3);
+				String zipcode = res.getString(4);
+				String city = res.getString(5);
+				String phone = res.getString(6);
+				String menu = res.getString(7);
+				int numberOfPersons = res.getInt(8);
+				int price = res.getInt(9);
+				String salesperson = res.getString(10);
+				info[count] = new Orderinfo(orderID, customerName, address, zipcode,
+						city, phone, menu, numberOfPersons, price, salesperson);
+				count++;
+			}
+			Opprydder.lukkResSet(res);
+			return info;
+		} catch (SQLException ex) {
+			System.err.println(ex);
+			ex.printStackTrace();
+		}
+		return null;
+	}
 
 	public Orderinfo[] getOrderinfo(int orderID) {
 		Statement stm;
