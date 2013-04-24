@@ -80,7 +80,8 @@ duration INTEGER NOT NULL,
 from_date DATE NOT NULL,
 to_date DATE NOT NULL,
 days CHAR(7) NOT NULL,
-status SMALLINT NOT NULL DEFAULT 1
+status SMALLINT NOT NULL DEFAULT 1,
+customer_id INTEGER
 );
 
 CREATE TABLE special_categories(
@@ -114,11 +115,11 @@ REFERENCES menu ON DELETE SET NULL;
 
 ALTER TABLE orders
 ADD CONSTRAINT orders_fk_3 FOREIGN KEY(customer_id)
-REFERENCES customer ON DELETE CASCADE;
+REFERENCES customer ON DELETE SET NULL;
 
 ALTER TABLE orders
 ADD CONSTRAINT orders_fk4 FOREIGN KEY(subscription_id)
-REFERENCES subscription ON DELETE CASCADE;
+REFERENCES subscription ON DELETE SET NULL;
 
 ALTER TABLE customer
 ADD CONSTRAINT unique_name_phone UNIQUE(customer_name, phone);
@@ -150,6 +151,10 @@ REFERENCES menu ON DELETE CASCADE;
 ALTER TABLE menu_dish
 ADD CONSTRAINT menu_dish_fk_2 FOREIGN KEY(dish_id)
 REFERENCES dish ON DELETE CASCADE;
+
+ALTER TABLE subscription
+ADD CONSTRAINT sub_orders_fk_1 FOREIGN KEY(customer_id)
+REFERENCES orders;
 
 --Create view: todays tasks--
 
