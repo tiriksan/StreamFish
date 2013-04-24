@@ -74,13 +74,13 @@ public class StreamFish {
 
 		try {
 			stm = con.createStatement();
-			res = stm.executeQuery("select count(*) antall from menu where menu.status = '1'");
+			res = stm.executeQuery("select count(*) antall from menu where menu.status = 1");
 			res.next();
 			int ant = res.getInt("antall");
 			menus = new Menu[ant];
 			Opprydder.lukkResSet(res);
 
-			res = stm.executeQuery("select * from menu where menu.status = '1'");
+			res = stm.executeQuery("select * from menu where menu.status = 1");
 
 			while (res.next()) {
 				int menuId = res.getInt("menu_id");
@@ -982,7 +982,7 @@ public class StreamFish {
 		int succ;
 		try {
 			stm = con.createStatement();
-			succ = stm.executeUpdate("UPDATE orders SET status = '0' "
+			succ = stm.executeUpdate("UPDATE orders SET status = 0 "
 					+ "WHERE delivery_date < CURRENT DATE;\n");
 			return succ;
 		} catch (SQLException ex) {
@@ -999,11 +999,11 @@ public class StreamFish {
 			stm = con.createStatement();
 			res = stm.executeQuery("select status from employees where empl_id = " + employee.getEmplID());
 			res.next();
-			int status = Integer.parseInt(res.getString("status"));
+			short status = res.getShort("status");
 			if (status == 1) {
-				succ = stm.executeUpdate("update employees set status ='" + 0 + "' where empl_id = " + employee.getEmplID());
+				succ = stm.executeUpdate("update employees set status =" + 0 + " where empl_id = " + employee.getEmplID());
 			} else {
-				succ = stm.executeUpdate("update employees set status ='" + 1 + "' where empl_id = " + employee.getEmplID());
+				succ = stm.executeUpdate("update employees set status =" + 1 + " where empl_id = " + employee.getEmplID());
 			}
 			Opprydder.lukkResSet(res);
 			Opprydder.lukkSetning(stm);
