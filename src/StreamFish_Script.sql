@@ -156,6 +156,9 @@ ALTER TABLE subscription
 ADD CONSTRAINT sub_orders_fk_1 FOREIGN KEY(customer_id)
 REFERENCES orders;
 
+ALTER TABLE employees
+ADD CONSTRAINT unique_emplID_username UNIQUE(empl_id, username);
+
 --Create view: todays tasks--
 
 CREATE VIEW todaysTasks AS

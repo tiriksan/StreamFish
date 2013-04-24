@@ -228,7 +228,7 @@ public class Edit_customer extends javax.swing.JPanel {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        Customer newCustomer = new Customer(KUNDENR, jTextField1.getText(), Integer.parseInt(jTextField2.getText()), jCheckBox1.isSelected());
+        Customer newCustomer = new Customer(KUNDENR, jTextField1.getText(), jTextField2.getText(), jCheckBox1.isSelected());
 
         gui.updateCustomer(newCustomer);
         gui.byttVindu(this, new MainMenu(gui));

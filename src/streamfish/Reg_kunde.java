@@ -167,7 +167,7 @@ public class Reg_kunde extends javax.swing.JPanel {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 		
 		String customername = jTextField1.getText().trim();
-		int phone = Integer.parseInt(jTextField2.getText());
+		String phone = jTextField2.getText();
 		boolean isBusiness = jCheckBox1.isSelected();
 		Customer newCustomer = new Customer(customername, phone, isBusiness);
 		gui.registerCustomer(newCustomer);

@@ -54,7 +54,7 @@ public class StreamFish {
 				} else {
 					busi = true;
 				}
-				customer = new Customer(customer_id, customer_name, Integer.parseInt(phone), busi);
+				customer = new Customer(customer_id, customer_name, phone, busi);
 				return customer;
 			}
 
@@ -244,10 +244,8 @@ public class StreamFish {
 		String[] check = {s};
 		check = removeUnwantedSymbols(check);
 		int teller = 0;
-                short aktiv;
+                short aktiv = 1;
                 if (status) {
-                    aktiv = 1;
-                } else {
                     aktiv = 0;
                 }
 
@@ -266,7 +264,7 @@ public class StreamFish {
 			while (res.next()) {
 				int customerId = res.getInt("customer_id");
 				String customerName = res.getString("customer_name");
-				int phone = res.getInt("phone");
+				String phone = res.getString("phone");
 				int business = Integer.parseInt(res.getString("business"));
 				boolean busi = false;
 				if (business == 1) {
@@ -870,8 +868,8 @@ public class StreamFish {
 
 		try {
 			stm = con.createStatement();
-			int succ = stm.executeUpdate("update customer set CUSTOMER_NAME ='" + check[0] + "', PHONE ='" + customer.getPhoneNumber()
-					+ "', BUSINESS =" + isbusiness + " where CUSTOMER_ID =" + customer.getCustomerID());
+			int succ = stm.executeUpdate("update customer set CUSTOMER_NAME ='" + check[0] + "', PHONE =" + customer.getPhoneNumber()
+					+ ", BUSINESS =" + isbusiness + " where CUSTOMER_ID =" + customer.getCustomerID());
 			Opprydder.lukkSetning(stm);
 			return succ;
 
@@ -889,7 +887,7 @@ public class StreamFish {
 		try {
 			stm = con.createStatement();
 			int succ = stm.executeUpdate("insert into CUSTOMER_ADDRESS (ADDRESS,ZIP_CODE,CITY,CUSTOMER_ID)"
-					+ " values('" + check[0] + "' , " + address.getZipCode() + " , '" + check[1] + "', " + address.getCustomerID() + ")");
+					+ " values('" + check[0] + "' , '" + address.getZipCode() + "' , '" + check[1] + "', " + address.getCustomerID() + ")");
 			Opprydder.lukkSetning(stm);
 			return succ;
 
