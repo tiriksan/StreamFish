@@ -7,7 +7,7 @@ class Orderinfo {
     private final int orderID;
     private String customerName;
     private String address;
-    private int zipcode;
+    private String zipcode;
     private String city;
     private String phone;
     private String menu;
@@ -16,7 +16,7 @@ class Orderinfo {
     private String salesperson;
     private String date = "";
     
-    public Orderinfo(int id, String cn, String ad, int zi, String ci, String ph, String me, int nr, int pr, String sa) {
+    public Orderinfo(int id, String cn, String ad, String zi, String ci, String ph, String me, int nr, int pr, String sa) {
         orderID = id;
         customerName = cn;
         address = ad;
@@ -29,7 +29,7 @@ class Orderinfo {
         salesperson = sa;
     }
     
-    public Orderinfo(int id, String cn, String ad, int zi, String ci, String ph, String me, int nr, int pr, String sa, String da) {
+    public Orderinfo(int id, String cn, String ad, String zi, String ci, String ph, String me, int nr, int pr, String sa, String da) {
         orderID = id;
         customerName = cn;
         address = ad;
@@ -55,7 +55,7 @@ class Orderinfo {
         return address;
     }
     
-    public int getZipcode() {
+    public String getZipcode() {
         return zipcode;
     }
     

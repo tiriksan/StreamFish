@@ -174,13 +174,13 @@ public class StreamFish {
 
 		try {
 			stm = con.createStatement();
-			res = stm.executeQuery("select count(*) antall from orders where orders.status = '1'");
+			res = stm.executeQuery("select count(*) antall from orders where orders.status = 1");
 			res.next();
 			int ant = res.getInt("antall");
 			orders = new Order[ant];
 			Opprydder.lukkResSet(res);
 
-			res = stm.executeQuery("select * from orders where orders.status = '1'");
+			res = stm.executeQuery("select * from orders where orders.status = 1");
 
 			while (res.next()) {
 				int orderID = res.getInt("order_id");
@@ -210,13 +210,13 @@ public class StreamFish {
 		try {
 			stm = con.createStatement();
 			res = stm.executeQuery("SELECT COUNT (*) ordercustomer FROM ORDERS JOIN CUSTOMER ON orders.customer_id = customer.customer_id "
-					+ "WHERE orders.CUSTOMER_ID = " + customer.getCustomerID() + " AND orders.status = '1' AND customer.status = '1'");
+					+ "WHERE orders.CUSTOMER_ID = " + customer.getCustomerID() + " AND orders.status = 1 AND customer.status = 1");
 			res.next();
 			orders = new Order[res.getInt("ordercustomer")];
 			Opprydder.lukkResSet(res);
 
 			res = stm.executeQuery("SELECT * FROM ORDERS JOIN CUSTOMER ON orders.customer_id = customer.customer_id "
-					+ "WHERE orders.CUSTOMER_ID = " + customer.getCustomerID() + " AND orders.status = '1' AND customer.status = '1'");
+					+ "WHERE orders.CUSTOMER_ID = " + customer.getCustomerID() + " AND orders.status = 1 AND customer.status = 1");
 			while (res.next()) {
 				int order_id = res.getInt("ORDER_ID");
 				int menu_id = res.getInt("MENU_ID");
@@ -244,24 +244,24 @@ public class StreamFish {
 		String[] check = {s};
 		check = removeUnwantedSymbols(check);
 		int teller = 0;
-		String aktiv;
-		if (status) {
-			aktiv = "0";
-		} else {
-			aktiv = "1";
-		}
+                short aktiv;
+                if (status) {
+                    aktiv = 1;
+                } else {
+                    aktiv = 0;
+                }
 
 		try {
 			stm = con.createStatement();
 			res = stm.executeQuery("select count(*) antall from customer where (upper(customer_name) like '"
-					+ check[0].toUpperCase() + "%' or phone like '" + check[0] + "%') and customer.status = '" + aktiv + "'");
+					+ check[0].toUpperCase() + "%' or phone like '" + check[0] + "%') and customer.status = " + aktiv);
 			res.next();
 			int ant = res.getInt("antall");
 			customers = new Customer[ant];
 			Opprydder.lukkResSet(res);
 
 			res = stm.executeQuery("select * from customer where (upper(customer_name) like '"
-					+ check[0].toUpperCase() + "%' or phone like '" + check[0] + "%') and customer.status = '" + aktiv + "'");
+					+ check[0].toUpperCase() + "%' or phone like '" + check[0] + "%') and customer.status = " + aktiv);
 
 			while (res.next()) {
 				int customerId = res.getInt("customer_id");
@@ -301,13 +301,13 @@ public class StreamFish {
 
 		try {
 			stm = con.createStatement();
-			res = stm.executeQuery("select count(*) antall from employees where employees.status = '1'");
+			res = stm.executeQuery("select count(*) antall from employees where employees.status = 1");
 			res.next();
 			int ant = res.getInt("antall");
 			employees = new Employee[ant];
 			Opprydder.lukkResSet(res);
 
-			res = stm.executeQuery("select empl_id, user_type, username, password from employees where employees.status = '1'");
+			res = stm.executeQuery("select empl_id, user_type, username, password from employees where employees.status = 1");
 
 			while (res.next()) {
 				int emplID = res.getInt("empl_id");
@@ -346,7 +346,7 @@ public class StreamFish {
 				int orderID = res.getInt(1);
 				String customerName = res.getString(2);
 				String address = res.getString(3);
-				int zipcode = res.getInt(4);
+				String zipcode = res.getString(4);
 				String city = res.getString(5);
 				String phone = res.getString(6);
 				String menu = res.getString(7);
@@ -397,7 +397,7 @@ public class StreamFish {
 				String date = res.getString(1);
 				String customerName = res.getString(2);
 				String address = res.getString(3);
-				int zipcode = res.getInt(4);
+				String zipcode = res.getString(4);
 				String city = res.getString(5);
 				String phone = res.getString(6);
 				String menu = res.getString(7);

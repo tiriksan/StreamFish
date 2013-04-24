@@ -25,7 +25,7 @@ status SMALLINT NOT NULL DEFAULT 1
 
 CREATE TABLE customer_address(
 address VARCHAR(50),
-zip_code INTEGER,
+zip_code CHAR(4) NOT NULL,
 city VARCHAR(50),
 customer_id INTEGER,
 CONSTRAINT address_pk PRIMARY KEY (address, customer_id)
@@ -76,10 +76,10 @@ delivered SMALLINT NOT NULL DEFAULT 0
 
 CREATE TABLE subscription(
 subscription_id INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-duration INTEGER,
-from_date DATE,
-to_date DATE,
-days CHAR(7),
+duration INTEGER NOT NULL,
+from_date DATE NOT NULL,
+to_date DATE NOT NULL,
+days CHAR(7) NOT NULL,
 status SMALLINT NOT NULL DEFAULT 1
 );
 
