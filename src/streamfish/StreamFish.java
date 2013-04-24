@@ -868,8 +868,8 @@ public class StreamFish {
 
 		try {
 			stm = con.createStatement();
-			int succ = stm.executeUpdate("update customer set CUSTOMER_NAME ='" + check[0] + "', PHONE =" + customer.getPhoneNumber()
-					+ ", BUSINESS =" + isbusiness + " where CUSTOMER_ID =" + customer.getCustomerID());
+			int succ = stm.executeUpdate("update customer set CUSTOMER_NAME ='" + check[0] + "', PHONE ='" + customer.getPhoneNumber()
+					+ "', BUSINESS =" + isbusiness + " where CUSTOMER_ID =" + customer.getCustomerID());
 			Opprydder.lukkSetning(stm);
 			return succ;
 
