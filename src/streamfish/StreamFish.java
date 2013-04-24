@@ -423,7 +423,6 @@ public class StreamFish {
 			stm = con.createStatement();
 			String[] check = {order.getDeliveryDate(), order.getAddress().getAdress()};
  			check = removeUnwantedSymbols(check);
-			System.out.println(check[0]);
 			int succ;
 			if (order.getSubId() > 0) {
 				succ = stm.executeUpdate("insert into orders (DELIVERY_DATE, ADDRESS, NR_PERSONS, EMPL_ID, MENU_ID,CUSTOMER_ID,DELIVERY_TIME,SUBSCRIPTION_ID) "
@@ -435,7 +434,6 @@ public class StreamFish {
 						+ order.getMenuId() + " , " + order.getCustomerId() + " , '" + order.getDeliveryTime() + "')");
 			}
 			Opprydder.lukkSetning(stm);
-			System.out.println(order);
 			return succ;
 		} catch (SQLException ex) {
 			System.err.println(ex);
@@ -507,7 +505,6 @@ public class StreamFish {
 			res = stm.executeQuery("select * from subscription order by subscription_ID desc");
 			res.next();
 			subId = res.getInt("subscription_id");
-			System.out.println(subId);
 			order.setSubId(subId);
 		} catch (SQLException ex) {
 			System.out.println(ex);

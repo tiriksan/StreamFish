@@ -127,7 +127,6 @@ public class Order {
         public String getMenuName(GUI gui){
             Menu[] menu = gui.getMenus();
             for(Menu mnu : menu){
-				System.out.println(menuId + ", " + mnu.getMenuId());
                 if(mnu.getMenuId() == getMenuId()){
                     return mnu.getMenuName();
                 }
