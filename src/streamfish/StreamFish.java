@@ -153,7 +153,7 @@ public class StreamFish {
 
 			while (res.next()) {
 				String address1 = res.getString("address");
-				int zipCode = res.getInt("zip_code");
+				String zipCode = res.getString("zip_code");
 				String city = res.getString("city");
 				address[teller] = new CustomerAddress(address1, zipCode, city, custid);
 				teller++;

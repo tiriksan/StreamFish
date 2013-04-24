@@ -5,17 +5,17 @@ package streamfish;
  */
 public class CustomerAddress {
 	private String adress;
-        private int zipCode;
+        private String zipCode;
         private String city;
         private int customerID;
 
-	public CustomerAddress(String adress, int zip, String city, int cusID) {
+	public CustomerAddress(String adress, String zip, String city, int cusID) {
 		this.adress = adress;
                 this.zipCode = zip;
                 this.city = city;
                 this.customerID = cusID;
 	}
-        public CustomerAddress(String adress, int zip, String city) {
+        public CustomerAddress(String adress, String zip, String city) {
 		this.adress = adress;
                 this.zipCode = zip;
                 this.city = city;
@@ -29,7 +29,7 @@ public class CustomerAddress {
 
 		return adress;
 	}
-	public int getZipCode() {
+	public String getZipCode() {
 		return zipCode;
 	}
 

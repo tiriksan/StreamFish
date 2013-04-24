@@ -172,7 +172,7 @@ public class Reg_kunde extends javax.swing.JPanel {
 		Customer newCustomer = new Customer(customername, phone, isBusiness);
 		gui.registerCustomer(newCustomer);
 		
-		CustomerAddress address = new CustomerAddress(jTextField3.getText(), Integer.parseInt(jTextField4.getText()), jTextField5.getText(), gui.getCustomers(customername, false)[0].getCustomerID());
+		CustomerAddress address = new CustomerAddress(jTextField3.getText(), jTextField4.getText(), jTextField5.getText(), gui.getCustomers(customername, false)[0].getCustomerID());
 		gui.addCustomerAddress(address);
 		gui.byttVindu(this, new MainMenu(gui));
     }//GEN-LAST:event_jButton1ActionPerformed

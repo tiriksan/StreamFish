@@ -118,9 +118,8 @@ public class AddAddress extends javax.swing.JFrame {
 				throw new NumberFormatException();
 				
 			}
-			int zip = Integer.parseInt(jTextField3.getText());
 			
-			gui.addCustomerAddress(new CustomerAddress(jTextField1.getText(), zip, jTextField2.getText(), cust_id));
+			gui.addCustomerAddress(new CustomerAddress(jTextField1.getText(), jTextField3.getText(), jTextField2.getText(), cust_id));
 			this.dispose();
 		}catch (NumberFormatException e){
 			JOptionPane.showMessageDialog(null,"The zip-code must contain 4 numbers");
