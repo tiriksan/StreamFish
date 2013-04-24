@@ -48,7 +48,7 @@ expiry_date DATE
 
 CREATE TABLE dish(
 dish_id INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-dish_name VARCHAR(100),
+dish_name VARCHAR(100) NOT NULL,
 status SMALLINT NOT NULL DEFAULT 1
 );
 
@@ -152,12 +152,20 @@ ALTER TABLE menu_dish
 ADD CONSTRAINT menu_dish_fk_2 FOREIGN KEY(dish_id)
 REFERENCES dish ON DELETE CASCADE;
 
-ALTER TABLE subscription
-ADD CONSTRAINT sub_orders_fk_1 FOREIGN KEY(customer_id)
-REFERENCES orders;
+-- ALTER TABLE subscription
+-- DROP FOREIGN KEY sub_orders_fk_1;
 
 ALTER TABLE employees
 ADD CONSTRAINT unique_emplID_username UNIQUE(empl_id, username);
+
+ALTER TABLE ingredients
+ADD CONSTRAINT unique_ingID_name UNIQUE(ingredient_id, ingredient_name);
+
+ALTER TABLE menu
+ADD CONSTRAINT unique_menuID_name UNIQUE(menu_id, menu_name);
+
+ALTER TABLE dish
+ADD CONSTRAINT unique_dishID_name UNIQUE(dish_id, dish_name);
 
 --Create view: todays tasks--
 
@@ -173,6 +181,7 @@ WHERE delivery_date = CURRENT DATE AND customer.status = 1;
 
 -- Insert sentences --
 INSERT INTO employees VALUES(DEFAULT, DEFAULT, 'Admin', 'NoSoup4U', DEFAULT);
+INSERT INTO employees VALUES(DEFAULT,2,'Chef','matmat',DEFAULT);
 INSERT INTO SFDB.EMPLOYEES (USER_TYPE, USERNAME, PASSWORD, STATUS) VALUES (0, 'norc', 'passord', 1);
 INSERT INTO menu VALUES(DEFAULT, 'NorCs Delicious Tapas', 400, 'Test-menu', DEFAULT);
 INSERT INTO SFDB.MENU (MENU_NAME, PRICE, DESCRIPTION, STATUS) VALUES ('TirikSans Pizza Speciale', 404, 'Price not found', 1);
