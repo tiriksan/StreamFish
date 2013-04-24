@@ -1,5 +1,5 @@
 -- Drop table sentences --
-DROP VIEW todaysTasks; --
+DROP VIEW todaysTasks;
 DROP TABLE menu_dish;
 DROP TABLE dish_ingredients;
 DROP TABLE dish_categories;
@@ -12,7 +12,6 @@ DROP TABLE menu;
 DROP TABLE customer_address;
 DROP TABLE customer;
 DROP TABLE employees;
-DROP VIEW todaystasks;
 /*DROP VIEW orderinfo;*/
 
 -- Create table sentences --
@@ -161,7 +160,7 @@ LEFT JOIN orders ON customer.CUSTOMER_ID = orders.CUSTOMER_ID
 LEFT JOIN menu ON orders.MENU_ID = menu.MENU_ID
 LEFT JOIN employees ON orders.EMPL_ID = employees.EMPL_ID
 LEFT JOIN customer_address ON orders.address = customer_address.address AND orders.CUSTOMER_ID = customer_address.CUSTOMER_ID
-WHERE delivery_date = CURRENT DATE AND customer.status = '1';
+WHERE delivery_date = CURRENT DATE AND customer.status = 1;
 
 
 -- Insert sentences --
