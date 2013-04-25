@@ -115,7 +115,7 @@ public class GUI extends JFrame implements WindowListener {
         }
         
         public Order getOrderfromSub(Subscription subscription){
-            return db.getOrderfromSub(subscription);
+            return db.getOrder(subscription);
         }
 
 	public Order[] getOrders(Customer customer) {
@@ -180,6 +180,14 @@ public class GUI extends JFrame implements WindowListener {
 		}
 		return false;
 	}
+        
+        public boolean setDeliveredOrders() {
+            int succ = db.setDeliveredOrders();
+            if (succ != -1) {
+                return true;
+            }
+            return false;
+        }
 
 	public static void main(String[] args) {
 		new GUI();

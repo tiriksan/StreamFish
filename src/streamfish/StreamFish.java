@@ -832,7 +832,7 @@ public class StreamFish {
 		return -1;
 	}
         
-        public Order getOrderfromSub(Subscription subscription){
+        public Order getOrder(Subscription subscription){
             Statement stm;
             ResultSet res;
 			int c_id =0;

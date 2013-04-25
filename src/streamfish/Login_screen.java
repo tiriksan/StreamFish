@@ -13,6 +13,7 @@ public class Login_screen extends javax.swing.JPanel {
     public Login_screen(GUI gui) {
         this.gui = gui;
         gui.setTitle("Login");
+        gui.setDeliveredOrders();
         initComponents();
         jTextField1.setText("norc");
         jPasswordField1.setText("passord");
