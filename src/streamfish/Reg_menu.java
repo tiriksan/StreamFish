@@ -255,6 +255,7 @@ public class Reg_menu extends javax.swing.JPanel {
 			}
 			Menu menu = new Menu(menuName, price, description);
 			gui.registerMenu(menu, dishID);
+			gui.byttVindu(this, new Storage(gui));
 		} catch (Exception e){
 			JOptionPane.showMessageDialog(null, e.getMessage());
 		}

@@ -543,7 +543,8 @@ public class StreamFish {
 			}
 			if(menuId != -1){
 				for(Integer i : dishID){
-					succ = stm.executeUpdate("INSERT INTO MENU_DISH VALUES(" + menuId +", "+ i);
+					System.out.println(menuId + ", " + i);
+					succ = stm.executeUpdate("INSERT INTO MENU_DISH VALUES(" + menuId +", "+ i + ")");
 				}
 			}else{
 				throw new Exception("The menu ID does not excist");
