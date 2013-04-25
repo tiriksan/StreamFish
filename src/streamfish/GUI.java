@@ -119,7 +119,7 @@ public class GUI extends JFrame implements WindowListener {
         }
 
 	public Order[] getOrders(Customer customer) {
-		return db.getOrderCustomer(customer);
+		return db.getOrder(customer);
 	}
 	public Subscription[] getSubscriptions(String text) {
 		return db.getSubscriptions(text);

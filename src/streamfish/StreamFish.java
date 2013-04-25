@@ -201,7 +201,7 @@ public class StreamFish {
 		return null;
 	}
 
-	public Order[] getOrderCustomer(Customer customer) {
+	public Order[] getOrder(Customer customer) {
 		Statement stm;
 		ResultSet res;
 		Order[] orders;
@@ -420,7 +420,7 @@ public class StreamFish {
 					+ "LEFT JOIN employees ON orders.EMPL_ID = employees.EMPL_ID\n"
 					+ "LEFT JOIN customer_address ON orders.address = customer_address.address AND orders.CUSTOMER_ID = customer_address.CUSTOMER_ID"
 					+ "WHERE orders.order_ID = '" + orderID + "' AND customer.status = 1 "
-					+ "AND orders.status = 1 ORDER BY delivery_date ASC;");
+					+ "AND orders.status = 1 AND orders.delivered = 0 ORDER BY delivery_date ASC;");
 			res.next();
 			Opprydder.lukkResSet(res);
 
@@ -999,14 +999,14 @@ public class StreamFish {
                 res = stm.executeQuery("SELECT COUNT(*) \"Revenue pr. salesperson\", username FROM menu\n" +
                     "JOIN orders ON menu.MENU_ID = orders.MENU_ID\n" +
                     "JOIN employees ON orders.EMPL_ID = employees.EMPL_ID\n" +
-                    "WHERE orders.DELIVERED = 1 GROUP BY username ORDER BY \"Revenue pr. salesperson\", username");
+                    "WHERE orders.DELIVERED = 1 GROUP BY username ORDER BY \"Revenue pr. salesperson\" DESC, username ASC");
 		res.next();
 		int ant = res.getInt("count");
 		obj = new Object[ant];
                 res = stm.executeQuery("SELECT SUM(price) \"Revenue pr. salesperson\", username FROM menu\n" +
                     "JOIN orders ON menu.MENU_ID = orders.MENU_ID\n" +
                     "JOIN employees ON orders.EMPL_ID = employees.EMPL_ID\n" +
-                    "WHERE orders.DELIVERED = 1 GROUP BY username ORDER BY \"Revenue pr. salesperson\", username");
+                    "WHERE orders.DELIVERED = 1 GROUP BY username ORDER BY \"Revenue pr. salesperson\" DESC, username ASC");
                 while (res.next()) {
                     int revenue = res.getInt(0);
                     String salesperson = res.getString(1);
@@ -1031,7 +1031,7 @@ public class StreamFish {
                     "JOIN orders ON menu.MENU_ID = orders.MENU_ID\n" +
                     "JOIN employees ON orders.EMPL_ID = employees.EMPL_ID\n" +
                     "WHERE orders.DELIVERED = 0 AND YEAR(delivery_date) = " + year +
-                    "GROUP BY username ORDER BY \"Revenue pr. salesperson\", username");
+                    "GROUP BY username ORDER BY \"Revenue pr. salesperson\" DESC, username ASC");
 		res.next();
 		int ant = res.getInt("count");
 		obj = new Object[ant];
@@ -1039,7 +1039,7 @@ public class StreamFish {
                     "JOIN orders ON menu.MENU_ID = orders.MENU_ID\n" +
                     "JOIN employees ON orders.EMPL_ID = employees.EMPL_ID\n" +
                     "WHERE orders.DELIVERED = 0 AND YEAR(delivery_date) = " + year +
-                    "GROUP BY username ORDER BY \"Revenue pr. salesperson\", username;");
+                    "GROUP BY username ORDER BY \"Revenue pr. salesperson\" DESC, username ASC");
                 while (res.next()) {
                     int revenue = res.getInt(0);
                     String salesperson = res.getString(1);
