@@ -1055,10 +1055,10 @@ public class StreamFish {
             return null;
         }
         
-        public ArrayList<String> getMenuSalesStats(String fromDate, String toDate, int ant, boolean top) {
+        public ArrayList<String[]> getMenuSalesStats(String fromDate, String toDate, int ant, boolean top) {
             Statement stm;
             ResultSet res;
-            ArrayList<String> obj = new ArrayList<String>();
+            ArrayList<String[]> obj = new ArrayList<String[]>();
             String[] check = {fromDate, toDate};
             check = removeUnwantedSymbols(check);
             try {
@@ -1071,7 +1071,7 @@ public class StreamFish {
                     while (res.next()) {
                         String menuName = res.getString(1);
                         int sold = res.getInt(2);
-                        obj.add("Menu: " + menuName + ", Sold: " + sold);
+                        obj.add(new String[] {menuName, ("" + sold)});
                     }
                     return obj;
                 } else {
@@ -1082,7 +1082,7 @@ public class StreamFish {
                     while (res.next()) {
                         String menuName = res.getString(1);
                         int sold = res.getInt(2);
-                        obj.add("Menu: " + menuName + ", Sold: " + sold);
+                        obj.add(new String[] {menuName, ("" + sold)});
                     }
                     return obj;
                 }
