@@ -4,8 +4,10 @@
  */
 package streamfish;
 
+import java.util.ArrayList;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -16,18 +18,18 @@ public class Reg_menu extends javax.swing.JPanel {
 	/**
 	 * Creates new form Reg_menu
 	 */
-	
-	
-	public Reg_menu() {
+	private GUI gui;
+	private ArrayList<Dish> dish = new ArrayList<Dish>();
+
+	public Reg_menu(GUI gui) {
+		this.gui = gui;
 		initComponents();
 		updateTable();
 		setupSearch();
 	}
 
-	
-	public void setupSearch(){
+	public void setupSearch() {
 		jTextField3.getDocument().addDocumentListener(new DocumentListener() {
-
 			@Override
 			public void insertUpdate(DocumentEvent e) {
 				throw new UnsupportedOperationException("Not supported yet.");
@@ -44,10 +46,18 @@ public class Reg_menu extends javax.swing.JPanel {
 			}
 		});
 	}
-	
-	public void updateTable(){
+
+	public void updateTable() {
+		DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+		model.setRowCount(0);
+		for (Dish ob : gui.getDishes(jTextField3.getText())) {
+			dish.add((Dish) ob);
+			model.addRow(new Object[]{ob.getName(), Boolean.FALSE});
+		}
 		
+
 	}
+
 	/**
 	 * This method is called from within the constructor to initialize the form.
 	 * WARNING: Do NOT modify this code. The content of this method is always
@@ -187,13 +197,12 @@ public class Reg_menu extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+		// TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+		// TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
