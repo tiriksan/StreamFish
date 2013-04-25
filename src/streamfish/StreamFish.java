@@ -859,6 +859,7 @@ public class StreamFish {
 		}
 		return -1;
 	}
+        
 
 	public int changeCustomerStatus(Customer customer) {
 		Statement stm;
@@ -954,8 +955,8 @@ public class StreamFish {
 		check = removeUnwantedSymbols(check);
 		try {
 			stm = con.createStatement();
-			int succ = stm.executeUpdate("insert into employee (USER_TYPE, USERNAME, PASSWORD) "
-					+ "values('" + employee.getUsertype() + "', '" + check[0] + "', '" + check[1] + "'");
+			int succ = stm.executeUpdate("insert into employees (USER_TYPE, USERNAME, PASSWORD, STATUS) "
+					+ "values('" + employee.getUsertype() + "', '" + check[0] + "', '" + check[1] + "', '" + 1 + "'");
 			Opprydder.lukkSetning(stm);
 			return succ;
 		} catch (SQLException ex) {

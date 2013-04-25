@@ -133,19 +133,19 @@ public class reg_employee extends javax.swing.JPanel {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         try {
 			String username = jTextField1.getText().trim();
-			String password = jTextField2.getText();
-                        byte usertype = (byte)jComboBox1.getSelectedItem();
-			
-			if(password.length() <= 4){
-				throw new IllegalArgumentException();
-			}
+			String password = jTextField2.getText().trim();
+                        byte usertype = Byte.valueOf((String)jComboBox1.getSelectedItem());
+	//		System.out.println(username);
+	//		if(password.length() == 0){
+	//			throw new IllegalArgumentException();
+	//		}
 			
 			Employee newEmp = new Employee(usertype, username, password);
 			gui.registerEmployee(newEmp);
 			
 			gui.byttVindu(this, new MainMenu(gui));
 		} catch (IllegalArgumentException e) {
-			JOptionPane.showMessageDialog(null, "password must contain atleast 4 characters.");
+	//		JOptionPane.showMessageDialog(null, "password must contain atleast 4 characters.");
 		}
     }//GEN-LAST:event_jButton1ActionPerformed
 

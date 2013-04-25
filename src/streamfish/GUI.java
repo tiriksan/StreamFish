@@ -131,6 +131,7 @@ public class GUI extends JFrame implements WindowListener {
         
         public boolean registerEmployee(Employee employee) {
             int suc = db.addEmployee(employee);
+            System.out.println(suc);
             if (suc > 0 ) {
                 return true;
             }
