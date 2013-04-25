@@ -1092,7 +1092,7 @@ public class StreamFish {
             return null;
         }
         
-        public ArrayList<String> getMostSpendingCustomers() {
+        public ArrayList<String> getMostSpendingCustomers(int ant) {
             Statement stm;
             ResultSet res;
             ArrayList<String> obj = new ArrayList<String>();
@@ -1102,7 +1102,7 @@ public class StreamFish {
                     "JOIN orders ON customer.CUSTOMER_ID = orders.CUSTOMER_ID\n" +
                     "JOIN menu ON orders.MENU_ID = menu.MENU_ID\n" +
                     "WHERE customer.status = 1 AND orders.DELIVERED = 1 AND \n" +
-                    "GROUP BY customer_name ORDER BY \"Spent\" DESC");
+                    "GROUP BY customer_name ORDER BY \"Spent\" DESC FETCH FIRST " + ant + " ROWS ONLY");
                 while (res.next()) {
                     String customerName = res.getString(1);
                     int spent = res.getInt(2);
