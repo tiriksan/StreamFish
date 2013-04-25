@@ -188,6 +188,10 @@ public class GUI extends JFrame implements WindowListener {
             }
             return false;
         }
+        
+        public ArrayList<String[]> getMenuSalesStats(String fromDate, String toDate, int ant, boolean top) {
+            return db.getMenuSalesStats(fromDate, toDate, ant, top);
+        }
 
 	public static void main(String[] args) {
 		new GUI();

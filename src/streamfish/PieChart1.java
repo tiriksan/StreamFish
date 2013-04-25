@@ -53,8 +53,8 @@ public class PieChart1 extends JFrame {
     public PieDataset createDataset() {
         DefaultPieDataset result = new DefaultPieDataset();
         for (String[] s : tab) {
-            int sold = Integer.parseInt(s[0]);
-            String menuName = s[1];
+            int sold = Integer.parseInt(s[1]);
+            String menuName = s[0];
             result.setValue(menuName, sold);
         }
         return result;
@@ -80,5 +80,8 @@ public class PieChart1 extends JFrame {
         plot.setForegroundAlpha(0.5f);
         return chart;
         
+    }
+    
+    public static void main(String[] args) {
     }
 } 
