@@ -1043,7 +1043,7 @@ public class StreamFish {
                 stm = con.createStatement();
                 res = stm.executeQuery("SELECT SUM(price) \"Revenue\" FROM orders\n" +
                     "JOIN menu ON menu.MENU_ID = orders.MENU_ID\n" +
-                    "WHERE orders.DELIVERED = 0 AND YEAR(delivery_date) = " + year);
+                    "WHERE orders.DELIVERED = 1 AND YEAR(delivery_date) = " + year);
                 while (res.next()) {
                     int revenue = res.getInt(1);
                     obj.add("Year: " + year + ", Revenue; " + revenue);
@@ -1055,7 +1055,7 @@ public class StreamFish {
             return null;
         }
         
-        public ArrayList<String> getMostSelling(String fromDate, String toDate) {
+        public ArrayList<String> getMenuSalesStats(String fromDate, String toDate, int ant, boolean top) {
             Statement stm;
             ResultSet res;
             ArrayList<String> obj = new ArrayList<String>();
@@ -1063,13 +1063,50 @@ public class StreamFish {
             check = removeUnwantedSymbols(check);
             try {
                 stm = con.createStatement();
-                res = stm.executeQuery("SELECT menu_name, SUM(nr_persons) \"Sold\" FROM orders\n" +
+                if (top) {
+                    res = stm.executeQuery("SELECT menu_name, SUM(nr_persons) \"Sold\" FROM orders\n" +
                     "JOIN menu ON menu.MENU_ID = orders.MENU_ID WHERE delivery_date >= '" + check[0] + "'\n" +
-                    "AND delivery_date <= '" + check[1] + "' GROUP BY menu_name ORDER BY \"Sold\" DESC");
+                    "AND delivery_date <= '" + check[1] + "' AND orders.delivered = 1 GROUP BY menu_name ORDER BY \"Sold\" DESC"
+                    + " FETCH FIRST " + ant + " ROWS ONLY");
+                    while (res.next()) {
+                        String menuName = res.getString(1);
+                        int sold = res.getInt(2);
+                        obj.add("Menu: " + menuName + ", Sold: " + sold);
+                    }
+                    return obj;
+                } else {
+                    res = stm.executeQuery("SELECT menu_name, SUM(nr_persons) \"Sold\" FROM orders\n" +
+                        "JOIN menu ON menu.MENU_ID = orders.MENU_ID WHERE delivery_date >= '" + check[0] + "'\n" +
+                        "AND delivery_date <= '" + check[1] + "' AND orders.delivered = 1 GROUP BY menu_name ORDER BY \"Sold\" ASC"
+                        + " FETCH FIRST " + ant + " ROWS ONLY");
+                    while (res.next()) {
+                        String menuName = res.getString(1);
+                        int sold = res.getInt(2);
+                        obj.add("Menu: " + menuName + ", Sold: " + sold);
+                    }
+                    return obj;
+                }
+            } catch (SQLException e) {
+                System.err.println(e);
+            }
+            return null;
+        }
+        
+        public ArrayList<String> getMostSpendingCustomers() {
+            Statement stm;
+            ResultSet res;
+            ArrayList<String> obj = new ArrayList<String>();
+            try {
+                stm = con.createStatement();
+                res = stm.executeQuery("SELECT customer_name, SUM(price) \"Spent\" FROM customer\n" +
+                    "JOIN orders ON customer.CUSTOMER_ID = orders.CUSTOMER_ID\n" +
+                    "JOIN menu ON orders.MENU_ID = menu.MENU_ID\n" +
+                    "WHERE customer.status = 1 AND orders.DELIVERED = 1 AND \n" +
+                    "GROUP BY customer_name ORDER BY \"Spent\" DESC");
                 while (res.next()) {
-                    String menuName = res.getString(1);
-                    int sold = res.getInt(2);
-                    obj.add("Menu: " + menuName + ", Sold: " + sold);
+                    String customerName = res.getString(1);
+                    int spent = res.getInt(2);
+                    obj.add("Name: " + customerName + ", Spent: " + spent);
                 }
                 return obj;
             } catch (SQLException e) {
