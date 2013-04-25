@@ -4,6 +4,8 @@
  */
 package streamfish;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author NorC
@@ -36,14 +38,11 @@ public class reg_employee extends javax.swing.JPanel {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
-        jTextField1.setText("jTextField1");
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField1ActionPerformed(evt);
             }
         });
-
-        jTextField2.setText("jTextField2");
 
         jLabel1.setText("Username");
 
@@ -51,9 +50,19 @@ public class reg_employee extends javax.swing.JPanel {
 
         jLabel3.setText("Password");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "0", "1", "2" }));
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
 
         jButton1.setText("Apply");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Back");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -120,6 +129,29 @@ public class reg_employee extends javax.swing.JPanel {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         gui.byttVindu(this, new MainMenu(gui));
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        try {
+			String username = jTextField1.getText().trim();
+			String password = jTextField2.getText();
+                        byte usertype = (byte)jComboBox1.getSelectedItem();
+			
+			if(password.length() <= 4){
+				throw new IllegalArgumentException();
+			}
+			
+			Employee newEmp = new Employee(usertype, username, password);
+			gui.registerEmployee(newEmp);
+			
+			gui.byttVindu(this, new MainMenu(gui));
+		} catch (IllegalArgumentException e) {
+			JOptionPane.showMessageDialog(null, "password must contain atleast 4 characters.");
+		}
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox1ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

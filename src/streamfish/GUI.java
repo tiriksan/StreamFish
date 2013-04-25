@@ -58,6 +58,7 @@ public class GUI extends JFrame implements WindowListener {
 		}
 		return false;
 	}
+        
 
 	public boolean registerCustomer(Customer customer) {
 		int suc = db.addCustomer(customer);
@@ -127,6 +128,15 @@ public class GUI extends JFrame implements WindowListener {
 	public Subscription[] getSubscriptions(String text) {
 		return db.getSubscriptions(text);
 	}
+        
+        public boolean registerEmployee(Employee employee) {
+            int suc = db.addEmployee(employee);
+            if (suc > 0 ) {
+                return true;
+            }
+            return false;
+        }
+        
 	public Employee[] getEmployee(){
 		return db.getEmployees();
 	}
