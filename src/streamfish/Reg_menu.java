@@ -60,6 +60,7 @@ public class Reg_menu extends javax.swing.JPanel {
 			@Override
 			public void tableChanged(TableModelEvent e) {
 				if(e.getColumn() != -1){
+					updatePrice();
 					int idSelected = (int) jTable1.getValueAt(jTable1.getSelectedRow(), 0);
 					boolean boxCheckd = (boolean)jTable1.getValueAt(jTable1.getSelectedRow(), 2);
 					if(boxCheckd && !dishID.contains(idSelected)){
@@ -82,6 +83,7 @@ public class Reg_menu extends javax.swing.JPanel {
 		price = 0;
 		for(Integer in : dishID){
 			price += gui.getDish(in).getPrice();
+			System.out.println(gui.getDish(in));
 		}
 		System.out.println(price);
 		jLabel4.setText(price + " NOK");

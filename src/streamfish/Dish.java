@@ -42,4 +42,11 @@ public class Dish {
 		public int getPrice(){
 			return price;
 		}
+		
+		@Override
+		public String toString(){
+			String res = "";
+			res += "ID: " + dishID + ", name: " + name + ", price:" + price;
+			return res;
+		}
 }

@@ -644,11 +644,10 @@ public class StreamFish {
 		try{
 			stm = con.createStatement();
 			res = stm.executeQuery("Select * from DISH where dish_id = " + id);
-			int dishId = res.getInt("dish_id");
 			String dish_name = res.getString("dish_name");
 			int status = res.getInt("status");	//not in use yet?
 			int price = res.getInt("dish_price");
-			dish = new Dish(dish_name, dishId, price);
+			dish = new Dish(dish_name, id, price);
 			return dish;
 		} catch(SQLException e){
 			e.printStackTrace();
