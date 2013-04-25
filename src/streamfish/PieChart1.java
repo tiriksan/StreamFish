@@ -10,6 +10,7 @@ package streamfish;
  * @author NorC
  */
 
+import java.util.ArrayList;
 import javax.swing.JFrame;
 
 import org.jfree.chart.ChartFactory;
@@ -24,9 +25,13 @@ import org.jfree.util.Rotation;
 public class PieChart1 extends JFrame {
 
   private static final long serialVersionUID = 1L;
+  private GUI gui;
+  private ArrayList<String[]> tab;
 
-  public PieChart1(String applicationTitle, String chartTitle) {
+  public PieChart1(String applicationTitle, String chartTitle, GUI gui, ArrayList<String[]> tab) {
         super(applicationTitle);
+        this.gui = gui;
+        this.tab = tab;
         // This will create the dataset 
         PieDataset dataset = createDataset();
         // based on the dataset we create the chart
@@ -45,9 +50,14 @@ public class PieChart1 extends JFrame {
      * Creates a sample dataset 
      */
 
-    private  PieDataset createDataset() {
+    public PieDataset createDataset() {
         DefaultPieDataset result = new DefaultPieDataset();
-        result.setValue("Linux", 29);
+        for (String[] s : tab) {
+            int sold = Integer.parseInt(s[0]);
+            String menuName = s[1];
+            result.setValue(menuName, sold);
+        }
+        result.setValue("Linux", 30);
         result.setValue("Mac", 20);
         result.setValue("Windows", 51);
         return result;
