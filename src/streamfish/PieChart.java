@@ -22,13 +22,13 @@ import org.jfree.data.general.PieDataset;
 import org.jfree.util.Rotation;
 
 
-public class PieChart1 extends JFrame {
+public class PieChart extends JFrame {
 
   private static final long serialVersionUID = 1L;
   private GUI gui;
   private ArrayList<String[]> tab;
 
-  public PieChart1(String applicationTitle, String chartTitle, GUI gui, ArrayList<String[]> tab) {
+  public PieChart(String applicationTitle, String chartTitle, GUI gui, ArrayList<String[]> tab) {
         super(applicationTitle);
         this.gui = gui;
         this.tab = tab;
@@ -85,7 +85,7 @@ public class PieChart1 extends JFrame {
     public static void main(String[] args) {
         GUI gui = new GUI();
         ArrayList<String[]> tab = gui.getMenuSalesStats("2013-01-01", "2013-04-30", 5, true);
-        PieChart1 pi = new PieChart1("StreamFish™", "Top 5 selling menus for interval 2013-01-01 - 2013-04-30", gui, tab);
+        PieChart pi = new PieChart("StreamFish™", "Top 5 selling menus for interval 2013-01-01 - 2013-04-30", gui, tab);
         PieDataset dataset = pi.createDataset();
         JFreeChart chart = pi.createChart(dataset, "title");
         pi.pack();
