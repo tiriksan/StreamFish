@@ -1,5 +1,9 @@
 package streamfish;
 
+import java.util.ArrayList;
+import org.jfree.chart.JFreeChart;
+import org.jfree.data.general.PieDataset;
+
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
@@ -10,13 +14,13 @@ package streamfish;
  * @author NorC
  */
 public class Statistics extends javax.swing.JPanel {
-
+    private ArrayList<String[]> tab;
     private GUI gui;
-    
     /**
      * Creates new form Statistics
      */
-    public Statistics(GUI gui) {
+    public Statistics(GUI gui, ArrayList<String[]> tab) {
+        this.tab = gui.getMenuSalesStats("2013", "2013", 5, true);
         this.gui = gui;
         initComponents();
     }
@@ -192,7 +196,8 @@ public class Statistics extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        gui.byttVindu(this, new PieChart1(gui));
+        
+     //   gui.byttVindu(this, PieChart1("streamfish", "stats", gui, /*ArrayList<String[]>*/ tab));
     }//GEN-LAST:event_jButton1ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
