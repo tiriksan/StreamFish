@@ -19,7 +19,6 @@ public class Reg_menu extends javax.swing.JPanel {
 	 * Creates new form Reg_menu
 	 */
 	private GUI gui;
-	private ArrayList<Dish> dish = new ArrayList<Dish>();
 
 	public Reg_menu(GUI gui) {
 		this.gui = gui;
@@ -51,7 +50,6 @@ public class Reg_menu extends javax.swing.JPanel {
 		DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
 		model.setRowCount(0);
 		for (Dish ob : gui.getDishes(jTextField3.getText())) {
-			dish.add((Dish) ob);
 			model.addRow(new Object[]{ob.getName(), Boolean.FALSE});
 		}
 		
