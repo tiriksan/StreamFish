@@ -1040,10 +1040,10 @@ public class StreamFish {
 		return -1;
 	}
         
-        public ArrayList<String> getTotalRevenuePrEmployee() {
+        public ArrayList<String[]> getTotalRevenuePrEmployee() {
             Statement stm;
             ResultSet res;
-            ArrayList<String> obj = new ArrayList<String>();
+            ArrayList<String[]> obj = new ArrayList<String[]>();
             try {
                 stm = con.createStatement();
                 res = stm.executeQuery("SELECT SUM(price) \"Revenue pr. salesperson\", username FROM menu\n" +
@@ -1053,7 +1053,7 @@ public class StreamFish {
                 while (res.next()) {
                     int revenue = res.getInt(1);
                     String salesperson = res.getString(2);
-                    obj.add("Revenue; " + revenue + ", Salesperson: " + salesperson);
+                    obj.add(new String[] {salesperson, "" + revenue});
                 }
                 return obj;
             } catch (SQLException e) {
@@ -1062,10 +1062,10 @@ public class StreamFish {
             return null;
         }
         
-        public ArrayList<String> getMonthlyRevenuePrEmployee(int month) {
+        public ArrayList<String[]> getMonthlyRevenuePrEmployee(int month) {
             Statement stm;
             ResultSet res;
-            ArrayList<String> obj = new ArrayList<String>();
+            ArrayList<String[]> obj = new ArrayList<String[]>();
             try {
                 stm = con.createStatement();
                 res = stm.executeQuery("SELECT SUM(price) \"Revenue pr. salesperson\", username FROM menu\n" +
@@ -1076,7 +1076,7 @@ public class StreamFish {
                 while (res.next()) {
                     int revenue = res.getInt(1);
                     String salesperson = res.getString(2);
-                    obj.add("Month: " + month + ", Revenue; " + revenue + ", Salesperson: " + salesperson);
+                    obj.add(new String[] {salesperson, ("" + revenue)});
                 }
                 return obj;
             } catch (SQLException e) {
@@ -1142,10 +1142,10 @@ public class StreamFish {
             return null;
         }
         
-        public ArrayList<String> getMostSpendingCustomers(int ant) {
+        public ArrayList<String[]> getMostSpendingCustomers(int ant) {
             Statement stm;
             ResultSet res;
-            ArrayList<String> obj = new ArrayList<String>();
+            ArrayList<String[]> obj = new ArrayList<String[]>();
             try {
                 stm = con.createStatement();
                 res = stm.executeQuery("SELECT customer_name, SUM(price) \"Spent\" FROM customer\n" +
@@ -1156,7 +1156,7 @@ public class StreamFish {
                 while (res.next()) {
                     String customerName = res.getString(1);
                     int spent = res.getInt(2);
-                    obj.add("Name: " + customerName + ", Spent: " + spent);
+                    obj.add(new String[] {customerName, ("" + spent)});
                 }
                 return obj;
             } catch (SQLException e) {

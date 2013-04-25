@@ -199,6 +199,18 @@ public class GUI extends JFrame implements WindowListener {
         public ArrayList<String[]> getMenuSalesStats(String fromDate, String toDate, int ant, boolean top) {
             return db.getMenuSalesStats(fromDate, toDate, ant, top);
         }
+        
+        public ArrayList<String[]> getMonthlyRevenuePrEmployee(int month) {
+            return db.getMonthlyRevenuePrEmployee(month);
+        }
+        
+        public ArrayList<String[]> getTotalRevenuePrEmployee() {
+            return db.getTotalRevenuePrEmployee();
+        }
+        
+        public ArrayList<String[]> getMostSpendingCustomers(int ant) {
+            return db.getMostSpendingCustomers(ant);
+        }
 
 	public static void main(String[] args) {
 		new GUI();
