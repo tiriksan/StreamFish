@@ -4,6 +4,8 @@
  */
 package streamfish;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Kristian
@@ -166,15 +168,24 @@ public class Reg_kunde extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 		
-		String customername = jTextField1.getText().trim();
-		String phone = jTextField2.getText();
-		boolean isBusiness = jCheckBox1.isSelected();
-		Customer newCustomer = new Customer(customername, phone, isBusiness);
-		gui.registerCustomer(newCustomer);
-		
-		CustomerAddress address = new CustomerAddress(jTextField3.getText(), jTextField4.getText(), jTextField5.getText(), gui.getCustomers(customername, false)[0].getCustomerID());
-		gui.addCustomerAddress(address);
-		gui.byttVindu(this, new MainMenu(gui));
+		try {
+			String customername = jTextField1.getText().trim();
+			String phone = jTextField2.getText();
+			boolean isBusiness = jCheckBox1.isSelected();
+			
+			if(phone.length() != 8){
+				throw new IllegalArgumentException();
+			}
+			
+			Customer newCustomer = new Customer(customername, phone, isBusiness);
+			gui.registerCustomer(newCustomer);
+			
+			CustomerAddress address = new CustomerAddress(jTextField3.getText(), jTextField4.getText(), jTextField5.getText(), gui.getCustomers(customername, false)[0].getCustomerID());
+			gui.addCustomerAddress(address);
+			gui.byttVindu(this, new MainMenu(gui));
+		} catch (IllegalArgumentException e) {
+			JOptionPane.showMessageDialog(null, "The phone number must contain 8 numbers.");
+		}
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
