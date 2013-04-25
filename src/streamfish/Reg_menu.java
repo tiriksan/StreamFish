@@ -5,8 +5,12 @@
 package streamfish;
 
 import java.util.ArrayList;
+import java.util.Iterator;
+import javax.swing.JOptionPane;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -19,10 +23,14 @@ public class Reg_menu extends javax.swing.JPanel {
 	 * Creates new form Reg_menu
 	 */
 	private GUI gui;
-
+	private ArrayList<Integer> dishID = new ArrayList<Integer>();
+	private int price = 0;
+	
 	public Reg_menu(GUI gui) {
 		this.gui = gui;
 		initComponents();
+		jLabel4.setText(price + " NOK");
+		tableCheckboxListener();
 		updateTable();
 		setupSearch();
 	}
@@ -45,12 +53,45 @@ public class Reg_menu extends javax.swing.JPanel {
 			}
 		});
 	}
-
+	
+	public void tableCheckboxListener(){
+		jTable1.getModel().addTableModelListener(new TableModelListener() {
+		
+			@Override
+			public void tableChanged(TableModelEvent e) {
+				if(e.getColumn() != -1){
+					int idSelected = (int) jTable1.getValueAt(jTable1.getSelectedRow(), 0);
+					boolean boxCheckd = (boolean)jTable1.getValueAt(jTable1.getSelectedRow(), 2);
+					if(boxCheckd && !dishID.contains(idSelected)){
+						dishID.add(idSelected);
+					} else if(!boxCheckd && dishID.contains(idSelected)){
+						for(Iterator<Integer> in = dishID.iterator(); in.hasNext();) {
+							Integer integer = in.next();
+							if (integer == (int) idSelected) {
+								in.remove();
+							}
+						}
+					}
+				}
+			}
+		
+	});
+	}
+	
+	public void updatePrice() {
+		
+		jLabel4.setText(price + " NOK");
+	}
 	public void updateTable() {
 		DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
 		model.setRowCount(0);
 		for (Dish ob : gui.getDishes(jTextField3.getText())) {
-			model.addRow(new Object[]{ob.getName(), Boolean.FALSE});
+			if(dishID.contains(ob.getID())){
+				model.addRow(new Object[]{ob.getID(), ob.getName(), Boolean.TRUE});
+			} else{
+				model.addRow(new Object[]{ob.getID(), ob.getName(), Boolean.FALSE});
+			}
+			
 		}
 		
 
@@ -90,14 +131,14 @@ public class Reg_menu extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Dish", "Included"
+                "Dish id", "Dish", "Included"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.Boolean.class
+                java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class
             };
             boolean[] canEdit = new boolean [] {
-                false, true
+                true, false, true
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -196,6 +237,28 @@ public class Reg_menu extends javax.swing.JPanel {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
 		// TODO add your handling code here:
+		try{
+			String menuName = jTextField1.getText();
+			String description = jTextField2.getText();
+			if(menuName.trim().length()<=0 && description.trim().length()<=0){
+				throw new IllegalArgumentException("The menu must contain a name and a description");
+			}
+			
+			if(menuName == null || menuName.trim().length() <=0){
+				throw new IllegalArgumentException("The menu must contain a name");
+			}
+			if(description.trim().length()<=0){
+				throw new IllegalArgumentException("The menu must contain a description");
+			}
+			if(dishID.size()<=0){
+				throw new IllegalArgumentException("The menu must contain atleast one dish");
+			}
+			Menu menu = new Menu(menuName, price, description);
+			gui.registerMenu(menu, dishID);
+		} catch (Exception e){
+			JOptionPane.showMessageDialog(null, e.getMessage());
+		}
+		
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
