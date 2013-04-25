@@ -57,9 +57,6 @@ public class PieChart1 extends JFrame {
             String menuName = s[1];
             result.setValue(menuName, sold);
         }
-        result.setValue("Linux", 30);
-        result.setValue("Mac", 20);
-        result.setValue("Windows", 51);
         return result;
         
     }
