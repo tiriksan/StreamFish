@@ -32,17 +32,17 @@ public class Reg_menu extends javax.swing.JPanel {
 		jTextField3.getDocument().addDocumentListener(new DocumentListener() {
 			@Override
 			public void insertUpdate(DocumentEvent e) {
-				throw new UnsupportedOperationException("Not supported yet.");
+				updateTable();
 			}
 
 			@Override
 			public void removeUpdate(DocumentEvent e) {
-				throw new UnsupportedOperationException("Not supported yet.");
+				updateTable();
 			}
 
 			@Override
 			public void changedUpdate(DocumentEvent e) {
-				throw new UnsupportedOperationException("Not supported yet.");
+				updateTable();
 			}
 		});
 	}
@@ -201,7 +201,7 @@ public class Reg_menu extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-		// TODO add your handling code here:
+		gui.byttVindu(this, new Storage(gui));
     }//GEN-LAST:event_jButton1ActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
