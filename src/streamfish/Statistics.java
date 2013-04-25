@@ -19,7 +19,7 @@ public class Statistics extends javax.swing.JPanel {
     /**
      * Creates new form Statistics
      */
-    public Statistics(GUI gui, ArrayList<String[]> tab) {
+    public Statistics(GUI gui) {
         this.tab = gui.getMenuSalesStats("2013", "2013", 5, true);
         this.gui = gui;
         initComponents();
