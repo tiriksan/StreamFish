@@ -975,19 +975,111 @@ public class StreamFish {
 		return -1;
 	}
 
-	public int removeExpiredOrders() {
+	public int setDeliveredOrders() {
 		Statement stm;
 		int succ;
 		try {
 			stm = con.createStatement();
-			succ = stm.executeUpdate("UPDATE orders SET status = 0 "
-					+ "WHERE delivery_date < CURRENT DATE;\n");
+			succ = stm.executeUpdate("UPDATE orders SET delivered = 1 "
+					+ "WHERE delivery_date < CURRENT DATE AND status = 1");
 			return succ;
 		} catch (SQLException ex) {
 			System.err.println(ex);
 		}
 		return -1;
 	}
+        
+        public Object[] getTotalRevenuePrEmployee() {
+            Statement stm;
+            ResultSet res;
+            Object[] obj;
+            int count = 0;
+            try {
+                stm = con.createStatement();
+                res = stm.executeQuery("SELECT COUNT(*) \"Revenue pr. salesperson\", username FROM menu\n" +
+                    "JOIN orders ON menu.MENU_ID = orders.MENU_ID\n" +
+                    "JOIN employees ON orders.EMPL_ID = employees.EMPL_ID\n" +
+                    "WHERE orders.DELIVERED = 1 GROUP BY username ORDER BY \"Revenue pr. salesperson\", username");
+		res.next();
+		int ant = res.getInt("count");
+		obj = new Object[ant];
+                res = stm.executeQuery("SELECT SUM(price) \"Revenue pr. salesperson\", username FROM menu\n" +
+                    "JOIN orders ON menu.MENU_ID = orders.MENU_ID\n" +
+                    "JOIN employees ON orders.EMPL_ID = employees.EMPL_ID\n" +
+                    "WHERE orders.DELIVERED = 1 GROUP BY username ORDER BY \"Revenue pr. salesperson\", username");
+                while (res.next()) {
+                    int revenue = res.getInt(0);
+                    String salesperson = res.getString(1);
+                    obj[count] = "Revenue; " + revenue + ", Salesperson: " + salesperson;
+                    count++;
+                }
+                return obj;
+            } catch (SQLException e) {
+                System.err.println(e);
+            }
+            return null;
+        }
+        
+        public Object[] getYearlyRevenuePrEmployee(int year) {
+            Statement stm;
+            ResultSet res;
+            Object[] obj;
+            int count = 0;
+            try {
+                stm = con.createStatement();
+                res = stm.executeQuery("SELECT SUM(price) \"Revenue pr. salesperson\", username FROM menu\n" +
+                    "JOIN orders ON menu.MENU_ID = orders.MENU_ID\n" +
+                    "JOIN employees ON orders.EMPL_ID = employees.EMPL_ID\n" +
+                    "WHERE orders.DELIVERED = 0 AND YEAR(delivery_date) = " + year +
+                    "GROUP BY username ORDER BY \"Revenue pr. salesperson\", username");
+		res.next();
+		int ant = res.getInt("count");
+		obj = new Object[ant];
+                res = stm.executeQuery("SELECT SUM(price) \"Revenue pr. salesperson\", username FROM menu\n" +
+                    "JOIN orders ON menu.MENU_ID = orders.MENU_ID\n" +
+                    "JOIN employees ON orders.EMPL_ID = employees.EMPL_ID\n" +
+                    "WHERE orders.DELIVERED = 0 AND YEAR(delivery_date) = " + year +
+                    "GROUP BY username ORDER BY \"Revenue pr. salesperson\", username;");
+                while (res.next()) {
+                    int revenue = res.getInt(0);
+                    String salesperson = res.getString(1);
+                    obj[count] = "Year: " + year + ", Revenue; " + revenue + ", Salesperson: " + salesperson;
+                    count++;
+                }
+                return obj;
+            } catch (SQLException e) {
+                System.err.println(e);
+            }
+            return null;
+        }
+        
+        public Object[] getYearlyRevenue(int year) {
+            Statement stm;
+            ResultSet res;
+            Object[] obj;
+            int count = 0;
+            try {
+                stm = con.createStatement();
+                res = stm.executeQuery("SELECT SUM(price) \"Revenue\" FROM orders\n" +
+                    "JOIN menu ON menu.MENU_ID = orders.MENU_ID\n" +
+                    "WHERE orders.DELIVERED = 0 AND YEAR(delivery_date) = " + year);
+		res.next();
+		int ant = res.getInt("count");
+		obj = new Object[ant];
+                res = stm.executeQuery("SELECT SUM(price) \"Revenue\" FROM orders\n" +
+                    "JOIN menu ON menu.MENU_ID = orders.MENU_ID\n" +
+                    "WHERE orders.DELIVERED = 0 AND YEAR(delivery_date) = " + year);
+                while (res.next()) {
+                    int revenue = res.getInt(0);
+                    obj[count] = "Year: " + year + ", Revenue; " + revenue;
+                    count++;
+                }
+                return obj;
+            } catch (SQLException e) {
+                System.err.println(e);
+            }
+            return null;
+        }
 
 	public int changeEmployeeStatus(Employee employee) {
 		Statement stm;
