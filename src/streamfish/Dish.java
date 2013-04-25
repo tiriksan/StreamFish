@@ -9,6 +9,7 @@ public class Dish {
         
         private String name;
         private int dishID;
+		private int price;
         
         public Dish(String name){
             this.name = name;
@@ -16,6 +17,11 @@ public class Dish {
         public Dish(String name, int dishID){
             this.name = name;
             this.dishID = dishID;
+        }
+		public Dish(String name, int dishID, int price){
+            this.name = name;
+            this.dishID = dishID;
+			this.price = price;
         }
         public Dish(int dishID, String name, String desc, ArrayList<Ingredient> ing){
             this.dishID = dishID;
@@ -33,4 +39,7 @@ public class Dish {
         public void setID(int newID){
             dishID = newID;
         }  
+		public int getPrice(){
+			return price;
+		}
 }

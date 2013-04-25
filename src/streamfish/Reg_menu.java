@@ -79,7 +79,11 @@ public class Reg_menu extends javax.swing.JPanel {
 	}
 	
 	public void updatePrice() {
-		
+		price = 0;
+		for(Integer in : dishID){
+			price += gui.getDish(in).getPrice();
+		}
+		System.out.println(price);
 		jLabel4.setText(price + " NOK");
 	}
 	public void updateTable() {
@@ -88,8 +92,10 @@ public class Reg_menu extends javax.swing.JPanel {
 		for (Dish ob : gui.getDishes(jTextField3.getText())) {
 			if(dishID.contains(ob.getID())){
 				model.addRow(new Object[]{ob.getID(), ob.getName(), Boolean.TRUE});
+				updatePrice();
 			} else{
 				model.addRow(new Object[]{ob.getID(), ob.getName(), Boolean.FALSE});
+				updatePrice();
 			}
 			
 		}

@@ -635,7 +635,27 @@ public class StreamFish {
 		return -1;
         }
         
-        
+    
+	public Dish getDish(int id){
+		Statement stm;
+		ResultSet res;
+		Dish dish;
+		
+		try{
+			stm = con.createStatement();
+			res = stm.executeQuery("Select * from DISH where dish_id = " + id);
+			int dishId = res.getInt("dish_id");
+			String dish_name = res.getString("dish_name");
+			int status = res.getInt("status");	//not in use yet?
+			int price = res.getInt("dish_price");
+			dish = new Dish(dish_name, dishId, price);
+			return dish;
+		} catch(SQLException e){
+			e.printStackTrace();
+		}
+		return null;
+	}	
+		
 	public Dish[] getDishes(String name) {
 
 		Statement stm;
