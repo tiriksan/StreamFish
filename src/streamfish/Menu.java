@@ -21,6 +21,12 @@ public class Menu {
 		this.description = description;
 	}
 
+	Menu(String menuName, int price, String description) {
+		this.menuName = menuName;
+		this.price = price;
+		this.description = description;
+	}
+
 	public int getMenuId() {
 		return menuId;
 	}

@@ -105,6 +105,9 @@ public class GUI extends JFrame implements WindowListener {
 		} 
 		return false;
 	}
+	void registerMenu(Menu menu, ArrayList<Integer> dishID) {
+		db.registerMenu(menu, dishID);
+	}
 
 	public Orderinfo[] getTodaysTasks(String sok) {
 		return db.getTodaysTasks(sok);

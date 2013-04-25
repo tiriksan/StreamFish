@@ -527,6 +527,36 @@ public class StreamFish {
 		
 		return null;
 	}
+	
+	public int registerMenu(Menu menu, ArrayList<Integer> dishID) {
+		Statement stm;
+		ResultSet res;
+		int succ;
+		try{
+			stm = con.createStatement();
+			succ = stm.executeUpdate("INSERT INTO MENU VALUES( DEFAULT, '" + menu.getMenuName() + "', " + menu.getPrice() + " , '" + menu.getDescription() + "', DEFAULT)");
+			res = stm.executeQuery("Select * from MENU order by \"MENU_ID\" DESC FETCH FIRST 1 ROWS ONLY");
+			int menuId = -1;
+			while(res.next()){
+				menuId = res.getInt("Menu_id");
+				System.out.println(menuId);
+			}
+			if(menuId != -1){
+				for(Integer i : dishID){
+					succ = stm.executeUpdate("INSERT INTO MENU_DISH VALUES(" + menuId +", "+ i);
+				}
+			}else{
+				throw new Exception("The menu ID does not excist");
+			}
+			return succ;
+		} catch(SQLException e){
+			e.printStackTrace();
+		} catch (Exception ex){
+			ex.printStackTrace();
+		}
+		
+		return -1;
+	}
 
 	public int registerSubscription(Subscription subscription, Order order) {
 		Statement stm;
