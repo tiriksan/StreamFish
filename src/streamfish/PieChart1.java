@@ -39,7 +39,7 @@ public class PieChart1 extends JFrame {
         // we put the chart into a panel
         ChartPanel chartPanel = new ChartPanel(chart);
         // default size
-        chartPanel.setPreferredSize(new java.awt.Dimension(500, 270));
+        chartPanel.setPreferredSize(new java.awt.Dimension(720, 480));
         // add it to our application
         setContentPane(chartPanel);
 
@@ -83,5 +83,12 @@ public class PieChart1 extends JFrame {
     }
     
     public static void main(String[] args) {
+        GUI gui = new GUI();
+        ArrayList<String[]> tab = gui.getMenuSalesStats("2013-01-01", "2013-04-30", 5, true);
+        PieChart1 pi = new PieChart1("StreamFish™", "Top 5 selling menus for interval 2013-01-01 - 2013-04-30", gui, tab);
+        PieDataset dataset = pi.createDataset();
+        JFreeChart chart = pi.createChart(dataset, "title");
+        pi.pack();
+        pi.setVisible(true);
     }
 } 
