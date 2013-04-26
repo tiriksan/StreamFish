@@ -27,13 +27,20 @@ public class PieChart extends JFrame {
   private static final long serialVersionUID = 1L;
   private GUI gui;
   private ArrayList<String[]> tab;
+  private PieDataset dataset;
 
-  public PieChart(String applicationTitle, String chartTitle, GUI gui, ArrayList<String[]> tab) {
+  public PieChart(String applicationTitle, String chartTitle, GUI gui, ArrayList<String[]> tab, int operation) {
         super(applicationTitle);
         this.gui = gui;
         this.tab = tab;
-        // This will create the dataset 
-        PieDataset dataset = createDataset();
+        switch(operation) {
+            case 0:
+                dataset = createDatasetMenu();
+                break;
+            case 1:
+                dataset = createDatasetEmployeeRevenue();
+                break;
+        }
         // based on the dataset we create the chart
         JFreeChart chart = createChart(dataset, chartTitle);
         // we put the chart into a panel
@@ -52,7 +59,7 @@ public class PieChart extends JFrame {
      * Creates a sample dataset 
      */
 
-    public PieDataset createDataset() {
+    public PieDataset createDatasetMenu() {
         DefaultPieDataset result = new DefaultPieDataset();
         for (String[] s : tab) {
             int sold = Integer.parseInt(s[1]);
@@ -60,7 +67,16 @@ public class PieChart extends JFrame {
             result.setValue(menuName, sold);
         }
         return result;
-        
+    }
+    
+    public PieDataset createDatasetEmployeeRevenue() {
+        DefaultPieDataset result = new DefaultPieDataset();
+        for (String[] s : tab) {
+            int revenue = Integer.parseInt(s[1]);
+            String employee = s[0];
+            result.setValue(employee, revenue);
+        }
+        return result;
     }
     
     
@@ -87,9 +103,12 @@ public class PieChart extends JFrame {
     public static void main(String[] args) {
         GUI gui = new GUI();
         ArrayList<String[]> tab = gui.getMenuSalesStats("2013-01-01", "2013-04-30", 5, true);
-        PieChart pi = new PieChart("StreamFish™", "Top 5 selling menus for interval 2013-01-01 - 2013-04-30", gui, tab);
-        PieDataset dataset = pi.createDataset();
-        JFreeChart chart = pi.createChart(dataset, "title");
+        PieChart pi = new PieChart("StreamFish™", "Top 5 selling menus for interval 2013-01-01 - 2013-04-30", gui, tab, 0);
+        pi.pack();
+        pi.setVisible(true);
+        
+        tab = gui.getTotalRevenuePrEmployee();
+        pi = new PieChart("StreamFish™", "Total revenue pr. employee", gui, tab, 1);
         pi.pack();
         pi.setVisible(true);
     }
