@@ -22,9 +22,11 @@ public class Statistics extends javax.swing.JPanel {
     public Statistics(GUI gui) {
         this.tab = gui.getMenuSalesStats("2013", "2013", 5, true);
         this.gui = gui;
+        gui.setTitle("stats n hoes");
         initComponents();
     }
 
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
