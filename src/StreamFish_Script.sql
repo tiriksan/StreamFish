@@ -97,7 +97,9 @@ category_id INTEGER
 
 CREATE TABLE dish_ingredients(
 dish_id INTEGER,
-ingredient_id INTEGER
+ingredient_id INTEGER,
+amount INTEGER NOT NULL,
+unit VARCHAR(10) NOT NULL
 );
 
 CREATE TABLE menu_dish(
