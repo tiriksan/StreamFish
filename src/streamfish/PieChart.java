@@ -42,6 +42,8 @@ public class PieChart extends JFrame {
         chartPanel.setPreferredSize(new java.awt.Dimension(720, 480));
         // add it to our application
         setContentPane(chartPanel);
+		this.pack();
+		this.setVisible(true);
 
     }
     

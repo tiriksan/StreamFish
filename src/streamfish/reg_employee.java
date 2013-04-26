@@ -134,8 +134,8 @@ public class reg_employee extends javax.swing.JPanel {
         try {
 			String username = jTextField1.getText().trim();
 			String password = jTextField2.getText().trim();
-                        byte usertype = Byte.valueOf((String)jComboBox1.getSelectedItem());
-	//		System.out.println(username);
+            byte usertype = Byte.parseByte((String)jComboBox1.getSelectedItem());
+			System.out.println(usertype);
 	//		if(password.length() == 0){
 	//			throw new IllegalArgumentException();
 	//		}
@@ -145,7 +145,8 @@ public class reg_employee extends javax.swing.JPanel {
 			
 			gui.byttVindu(this, new MainMenu(gui));
 		} catch (IllegalArgumentException e) {
-	//		JOptionPane.showMessageDialog(null, "password must contain atleast 4 characters.");
+			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "password must contain atleast 4 characters.");
 		}
     }//GEN-LAST:event_jButton1ActionPerformed
 

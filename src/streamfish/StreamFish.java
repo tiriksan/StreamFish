@@ -956,7 +956,7 @@ public class StreamFish {
 		try {
 			stm = con.createStatement();
 			int succ = stm.executeUpdate("insert into employees (USER_TYPE, USERNAME, PASSWORD, STATUS) "
-					+ "values('" + employee.getUsertype() + "', '" + check[0] + "', '" + check[1] + "', '" + 1 + "'");
+					+ "values(" + employee.getUsertype() + ", '" + check[0] + "', '" + check[1] + "', " + 1 + ")");
 			Opprydder.lukkSetning(stm);
 			return succ;
 		} catch (SQLException ex) {

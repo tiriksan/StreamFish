@@ -10,7 +10,7 @@ class Employee {
             throw new IllegalArgumentException("Employee username and password "
                     + "cannot be empty");
         }
-        if (username.length() > 30 || password.length() > 40 || password.length() < 13) {
+        if (username.length() > 30 || password.length() > 40 || password.length() < 4) {
             throw new IllegalArgumentException("Employee username cannot exceed "
                     + "30 letters. Password is not allowed to be less than 13 digits, and no more than 40");
         }
