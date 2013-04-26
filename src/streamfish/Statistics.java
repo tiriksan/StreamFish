@@ -101,11 +101,16 @@ public class Statistics extends javax.swing.JPanel {
     }
     
     private void tab1setup(){
+        DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
          if (employees != null && employees.length > 0) {
-            for (int i = 0; i < employees.length; i++) {
+           // for (int i = 0; i < employees.length; i++) {
+             for(Employee emp : employees){
+                 if(emp.getUsertype() == 2){
+                     model.addRow(new Object[]{emp.getEmplID(), emp.getUsername()});
+                 }
                 
-                DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
-                model.addRow(new Object[]{employees[i].getEmplID(), employees[i].getUsername()});
+                
+                
             }
         }
 
