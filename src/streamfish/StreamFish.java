@@ -644,6 +644,7 @@ public class StreamFish {
 		try{
 			stm = con.createStatement();
 			res = stm.executeQuery("Select * from DISH where dish_id = " + id);
+			res.next();
 			String dish_name = res.getString("dish_name");
 			int status = res.getInt("status");	//not in use yet?
 			int price = res.getInt("dish_price");

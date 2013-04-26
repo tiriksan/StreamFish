@@ -50,7 +50,8 @@ public class reg_employee extends javax.swing.JPanel {
 
         jLabel3.setText("Password");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "0", "1", "2" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Admin", "Salesperson", "Chef", "Nutrition expert", "CEO" }));
+        jComboBox1.setSelectedItem("Salesperson");
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox1ActionPerformed(evt);
@@ -92,7 +93,7 @@ public class reg_employee extends javax.swing.JPanel {
                                 .addComponent(jLabel2)
                                 .addGap(18, 18, 18)
                                 .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 53, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jButton2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -134,7 +135,8 @@ public class reg_employee extends javax.swing.JPanel {
         try {
 			String username = jTextField1.getText().trim();
 			String password = jTextField2.getText().trim();
-            byte usertype = Byte.parseByte((String)jComboBox1.getSelectedItem());
+			
+            byte usertype = Byte.parseByte(jComboBox1.getSelectedIndex()+"");
 			System.out.println(usertype);
 	//		if(password.length() == 0){
 	//			throw new IllegalArgumentException();
