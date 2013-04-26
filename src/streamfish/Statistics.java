@@ -1,6 +1,13 @@
 package streamfish;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.table.DefaultTableModel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.data.general.PieDataset;
 
@@ -14,18 +21,121 @@ import org.jfree.data.general.PieDataset;
  * @author NorC
  */
 public class Statistics extends javax.swing.JPanel {
+    private int emp_id = -1;
     private ArrayList<String[]> tab;
     private GUI gui;
+    private Employee[] employees;
     /**
      * Creates new form Statistics
      */
-    public Statistics(GUI gui) {
-        this.tab = gui.getMenuSalesStats("2013", "2013", 5, true);
+    public Statistics(final GUI gui) {
         this.gui = gui;
         gui.setTitle("stats n hoes");
         initComponents();
+        tab = gui.getMenuSalesStats("2013", "2013", 5, true);
+        employees = gui.getEmployee();
+        
+        tab1setup();
+        
+     /*  jTextField1.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                if (jTabbedPane1.getSelectedIndex() == 0) {
+                    employees = gui.getEmployee();
+                    DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
+                    model.setRowCount(0);
+                    if (employees != null && employees.length > 0) {
+                        for (int i = 0; i < employees.length; i++) {
+                            model.addRow(new Object[]{employees[i].getEmplID(), employees[i].getUsername()});
+                        }
+                    }
+                } 
+
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                if (jTabbedPane1.getSelectedIndex() == 0) {
+                    employees = gui.getEmployee();
+                    DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
+                    model.setRowCount(0);
+                    if (employees != null && employees.length > 0) {
+                        for (int i = 0; i < employees.length; i++) {
+                            model.addRow(new Object[]{employees[i].getEmplID(), employees[i].getUsername()});
+                        }
+                    }
+                } 
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                if (jTabbedPane1.getSelectedIndex() == 0) {
+                    employees = gui.getEmployee();
+                    DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
+                    model.setRowCount(0);
+                    if (employees != null && employees.length > 0) {
+                        for (int i = 0; i < employees.length; i++) {
+                            model.addRow(new Object[]{employees[i].getEmplID(), employees[i].getUsername()});
+                        }
+                    }
+                } 
+            }
+       });
+
+
+        jCheckBox1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (jTabbedPane1.getSelectedIndex() == 0) {
+                    employees = gui.getEmployee();
+                    DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
+                    model.setRowCount(0);
+                    if (employees != null && employees.length > 0) {
+                        for (int i = 0; i < employees.length; i++) {
+                            model.addRow(new Object[]{employees[i].getEmplID(), employees[i].getUsername()});
+                        }
+                    }
+                }
+            }
+        }); */
+    }
+    
+    private void tab1setup(){
+         if (employees != null && employees.length > 0) {
+            for (int i = 0; i < employees.length; i++) {
+                
+                DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
+                model.addRow(new Object[]{employees[i].getEmplID(), employees[i].getUsername()});
+            }
+        }
+
+        jTable2.getSelectionModel().addListSelectionListener(
+                new ListSelectionListener() {
+                    public void valueChanged(ListSelectionEvent event) {
+                        int viewRow = jTable2.getSelectedRow();
+                        if (!event.getValueIsAdjusting()) {
+                            try {
+                                emp_id = Integer.parseInt(jTable2.getValueAt(viewRow, 0).toString());
+                            } catch (Exception e) {
+                            }
+                        }
+                    }
+                });
+    }
+    
+     public void updt() {
+
+        employees = gui.getEmployee();
+        DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
+        model.setRowCount(0);
+        if (employees != null && employees.length > 0) {
+            for (int i = 0; i < employees.length; i++) {
+                model.addRow(new Object[]{employees[i].getEmplID(), employees[i].getUsername()});
+            }
+        }
     }
 
+   
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -54,6 +164,7 @@ public class Statistics extends javax.swing.JPanel {
         jTable3 = new javax.swing.JTable();
         jButton6 = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
+        jCheckBox1 = new javax.swing.JCheckBox();
 
         jButton1.setText("jButton1");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -80,13 +191,10 @@ public class Statistics extends javax.swing.JPanel {
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {},
-                {},
-                {},
-                {}
+
             },
             new String [] {
-
+                "Emp_id", "Username"
             }
         ));
         jScrollPane2.setViewportView(jTable2);
@@ -146,6 +254,8 @@ public class Statistics extends javax.swing.JPanel {
             }
         });
 
+        jCheckBox1.setText("jCheckBox1");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -178,11 +288,17 @@ public class Statistics extends javax.swing.JPanel {
                                     .addComponent(jButton5)))))
                     .addComponent(jButton6))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(108, 108, 108)
+                .addComponent(jCheckBox1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(43, 43, 43)
+                .addContainerGap()
+                .addComponent(jCheckBox1)
+                .addGap(10, 10, 10)
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -197,7 +313,7 @@ public class Statistics extends javax.swing.JPanel {
                     .addComponent(jButton4)
                     .addComponent(jButton5)
                     .addComponent(jLabel4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 67, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 70, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton6)
                     .addComponent(jButton7))
@@ -226,6 +342,7 @@ public class Statistics extends javax.swing.JPanel {
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
+    private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
