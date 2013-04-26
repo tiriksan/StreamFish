@@ -326,7 +326,7 @@ public class Statistics extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        new PieChart("ASDF", "PieChart", gui, tab);
+        new PieChart("ASDF", "PieChart", gui, tab, 0);
      //   gui.byttVindu(this, PieChart1("streamfish", "stats", gui, /*ArrayList<String[]>*/ tab));
     }//GEN-LAST:event_jButton1ActionPerformed
 

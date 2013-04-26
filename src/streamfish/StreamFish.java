@@ -245,10 +245,10 @@ public class StreamFish {
 		String[] check = {s};
 		check = removeUnwantedSymbols(check);
 		int teller = 0;
-                short aktiv = 1;
-                if (status) {
-                    aktiv = 0;
-                }
+		short aktiv = 1;
+		if (status) {
+			aktiv = 0;
+		}
 
 		try {
 			stm = con.createStatement();
@@ -333,13 +333,13 @@ public class StreamFish {
 		try {
 			stm = con.createStatement();
 
-			res = stm.executeQuery("select count(*) count from todaysTasks WHERE (UPPER(CUSTOMER_NAME) LIKE '" + sok.toUpperCase() +"%')");
+			res = stm.executeQuery("select count(*) count from todaysTasks WHERE (UPPER(CUSTOMER_NAME) LIKE '" + sok.toUpperCase() + "%')");
 			res.next();
 			int ant = res.getInt("count");
 			info = new Orderinfo[ant];
 			Opprydder.lukkResSet(res);
 
-			res = stm.executeQuery("select * from todaysTasks WHERE (upper(CUSTOMER_NAME) LIKE '" + sok.toUpperCase() +"%')");
+			res = stm.executeQuery("select * from todaysTasks WHERE (upper(CUSTOMER_NAME) LIKE '" + sok.toUpperCase() + "%')");
 
 			while (res.next()) {
 				int orderID = res.getInt(1);
@@ -364,8 +364,8 @@ public class StreamFish {
 		}
 		return null;
 	}
-        
-        public Orderinfo[] getTodaysTasks2(String sok) {
+
+	public Orderinfo[] getTodaysTasks2(String sok) {
 		Statement stm;
 		ResultSet res;
 		int count = 0;
@@ -374,13 +374,13 @@ public class StreamFish {
 		try {
 			stm = con.createStatement();
 
-			res = stm.executeQuery("select count(*) count from todaysTasks WHERE (UPPER(MENU_NAME) LIKE '" + sok.toUpperCase() +"%')");
+			res = stm.executeQuery("select count(*) count from todaysTasks WHERE (UPPER(MENU_NAME) LIKE '" + sok.toUpperCase() + "%')");
 			res.next();
 			int ant = res.getInt("count");
 			info = new Orderinfo[ant];
 			Opprydder.lukkResSet(res);
 
-			res = stm.executeQuery("select * from todaysTasks WHERE (upper(MENU_NAME) LIKE '" + sok.toUpperCase() +"%')");
+			res = stm.executeQuery("select * from todaysTasks WHERE (upper(MENU_NAME) LIKE '" + sok.toUpperCase() + "%')");
 
 			while (res.next()) {
 				int orderID = res.getInt(1);
@@ -462,12 +462,12 @@ public class StreamFish {
 		try {
 			stm = con.createStatement();
 			String[] check = {order.getDeliveryDate(), order.getAddress().getAdress()};
- 			check = removeUnwantedSymbols(check);
+			check = removeUnwantedSymbols(check);
 			int succ;
 			if (order.getSubId() > 0) {
 				succ = stm.executeUpdate("insert into orders (DELIVERY_DATE, ADDRESS, NR_PERSONS, EMPL_ID, MENU_ID,CUSTOMER_ID,DELIVERY_TIME,SUBSCRIPTION_ID) "
-					+ "values('" + check[0] + "' , '" + check[1] + "', " + order.getNrPersons() + ", " + order.getEmplId() + ", "
-					+ order.getMenuId() + " , " + order.getCustomerId() + " , '" + order.getDeliveryTime() + "', " + order.getSubId() + ")");
+						+ "values('" + check[0] + "' , '" + check[1] + "', " + order.getNrPersons() + ", " + order.getEmplId() + ", "
+						+ order.getMenuId() + " , " + order.getCustomerId() + " , '" + order.getDeliveryTime() + "', " + order.getSubId() + ")");
 			} else {
 				succ = stm.executeUpdate("insert into orders (DELIVERY_DATE, ADDRESS, NR_PERSONS, EMPL_ID, MENU_ID,CUSTOMER_ID,DELIVERY_TIME) "
 						+ "values('" + check[0] + "' , '" + check[1] + "', " + order.getNrPersons() + ", " + order.getEmplId() + ", "
@@ -480,8 +480,8 @@ public class StreamFish {
 		}
 		return -1;
 	}
-	
-	public Subscription[] getSubscriptions(String sok){
+
+	public Subscription[] getSubscriptions(String sok) {
 		Statement stm;
 		ResultSet res;
 		Subscription[] subscriptions;
@@ -512,8 +512,8 @@ public class StreamFish {
 				String to_date = res.getString("to_date");
 				String days = res.getString("days");
 				char status = res.getString("status").charAt(0);
-				
-				
+
+
 				subscriptions[teller] = new Subscription(subscription_id, duration, from_date, to_date, days, status);
 				teller++;
 			}
@@ -523,39 +523,39 @@ public class StreamFish {
 			ex.printStackTrace();
 		} catch (NumberFormatException e2) {
 		}
-		
-		
+
+
 		return null;
 	}
-	
+
 	public int registerMenu(Menu menu, ArrayList<Integer> dishID) {
 		Statement stm;
 		ResultSet res;
 		int succ;
-		try{
+		try {
 			stm = con.createStatement();
 			succ = stm.executeUpdate("INSERT INTO MENU VALUES( DEFAULT, '" + menu.getMenuName() + "', " + menu.getPrice() + " , '" + menu.getDescription() + "', DEFAULT)");
 			res = stm.executeQuery("Select * from MENU order by \"MENU_ID\" DESC FETCH FIRST 1 ROWS ONLY");
 			int menuId = -1;
-			while(res.next()){
+			while (res.next()) {
 				menuId = res.getInt("Menu_id");
 				System.out.println(menuId);
 			}
-			if(menuId != -1){
-				for(Integer i : dishID){
+			if (menuId != -1) {
+				for (Integer i : dishID) {
 					System.out.println(menuId + ", " + i);
-					succ = stm.executeUpdate("INSERT INTO MENU_DISH VALUES(" + menuId +", "+ i + ")");
+					succ = stm.executeUpdate("INSERT INTO MENU_DISH VALUES(" + menuId + ", " + i + ")");
 				}
-			}else{
+			} else {
 				throw new Exception("The menu ID does not excist");
 			}
 			return succ;
-		} catch(SQLException e){
+		} catch (SQLException e) {
 			e.printStackTrace();
-		} catch (Exception ex){
+		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
-		
+
 		return -1;
 	}
 
@@ -567,13 +567,13 @@ public class StreamFish {
 
 		try {
 			stm = con.createStatement();
-			succ = stm.executeUpdate("INSERT INTO SUBSCRIPTION VALUES(DEFAULT, " 
-					+ subscription.getDuration() +", '" 
-					+ subscription.getFrom_date() + "', '" 
+			succ = stm.executeUpdate("INSERT INTO SUBSCRIPTION VALUES(DEFAULT, "
+					+ subscription.getDuration() + ", '"
+					+ subscription.getFrom_date() + "', '"
 					+ subscription.getTo_date() + "', '"
 					+ subscription.getDays() + "', '"
 					+ subscription.getStatus() + "', "
-					+ order.getCustomerId()+ ")" );
+					+ order.getCustomerId() + ")");
 			res = stm.executeQuery("select * from subscription order by subscription_ID desc");
 			res.next();
 			subId = res.getInt("subscription_id");
@@ -594,7 +594,7 @@ public class StreamFish {
 							String date = TodaysDate.getADate(y - day);
 							order.setDate(date);
 							addOrder(order);
-							
+
 						}
 					}
 				} else if (i == (duration - 1)) {
@@ -621,9 +621,9 @@ public class StreamFish {
 		}
 		return -1;
 	}
-        
-        public int deleteSubscription(int subscription_id){
-            Statement stm;
+
+	public int deleteSubscription(int subscription_id) {
+		Statement stm;
 		try {
 			stm = con.createStatement();
 			int succ = stm.executeUpdate("delete from subscription where subscription_id = " + subscription_id);
@@ -633,15 +633,14 @@ public class StreamFish {
 			System.err.println(ex);
 		}
 		return -1;
-        }
-        
-    
-	public Dish getDish(int id){
+	}
+
+	public Dish getDish(int id) {
 		Statement stm;
 		ResultSet res;
 		Dish dish;
-		
-		try{
+
+		try {
 			stm = con.createStatement();
 			res = stm.executeQuery("Select * from DISH where dish_id = " + id);
 			res.next();
@@ -650,12 +649,12 @@ public class StreamFish {
 			int price = res.getInt("dish_price");
 			dish = new Dish(dish_name, id, price);
 			return dish;
-		} catch(SQLException e){
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return null;
-	}	
-		
+	}
+
 	public Dish[] getDishes(String name) {
 
 		Statement stm;
@@ -806,7 +805,7 @@ public class StreamFish {
 		}
 		return -1;
 	}
-    
+
 	public int updateIngredient(Ingredient ingToUpdate, Ingredient ing) {
 		Statement stm;
 		String[] check = {ing.getName(), ing.getExpDate()};
@@ -860,7 +859,6 @@ public class StreamFish {
 		}
 		return -1;
 	}
-        
 
 	public int changeCustomerStatus(Customer customer) {
 		Statement stm;
@@ -884,30 +882,30 @@ public class StreamFish {
 		}
 		return -1;
 	}
-        
-        public Order getOrder(Subscription subscription){
-            Statement stm;
-            ResultSet res;
-			int c_id =0;
-			int m_id =0;
-            try{
-                stm = con.createStatement();
-                res = stm.executeQuery("SELECT * FROM SUBSCRIPTION JOIN ORDERS ON ORDERS.SUBSCRIPTION_ID = SUBSCRIPTION.SUBSCRIPTION_ID where subscription.subscription_id = " + subscription.getSubscription_id());
-                while(res.next()){
-					c_id = res.getInt("customer_id");
-					m_id =  res.getInt("menu_id");
-				}
-                 
-                
-                Order orderFsub = new Order(c_id, m_id);
-                Opprydder.lukkResSet(res);
-                Opprydder.lukkSetning(stm);
-                return orderFsub;
-            }catch ( SQLException ex){
-                System.out.println(ex);
-            }
-            return null;
-        }
+
+	public Order getOrder(Subscription subscription) {
+		Statement stm;
+		ResultSet res;
+		int c_id = 0;
+		int m_id = 0;
+		try {
+			stm = con.createStatement();
+			res = stm.executeQuery("SELECT * FROM SUBSCRIPTION JOIN ORDERS ON ORDERS.SUBSCRIPTION_ID = SUBSCRIPTION.SUBSCRIPTION_ID where subscription.subscription_id = " + subscription.getSubscription_id());
+			while (res.next()) {
+				c_id = res.getInt("customer_id");
+				m_id = res.getInt("menu_id");
+			}
+
+
+			Order orderFsub = new Order(c_id, m_id);
+			Opprydder.lukkResSet(res);
+			Opprydder.lukkSetning(stm);
+			return orderFsub;
+		} catch (SQLException ex) {
+			System.out.println(ex);
+		}
+		return null;
+	}
 
 	public int updateCustomer(Customer customer) {
 		Statement stm;
@@ -1041,131 +1039,131 @@ public class StreamFish {
 		}
 		return -1;
 	}
-        
-        public ArrayList<String[]> getTotalRevenuePrEmployee() {
-            Statement stm;
-            ResultSet res;
-            ArrayList<String[]> obj = new ArrayList<String[]>();
-            try {
-                stm = con.createStatement();
-                res = stm.executeQuery("SELECT SUM(price) \"Revenue pr. salesperson\", username FROM menu\n" +
-                    "JOIN orders ON menu.MENU_ID = orders.MENU_ID\n" +
-                    "JOIN employees ON orders.EMPL_ID = employees.EMPL_ID\n" +
-                    "WHERE orders.DELIVERED = 1 GROUP BY username ORDER BY \"Revenue pr. salesperson\" DESC, username ASC");
-                while (res.next()) {
-                    int revenue = res.getInt(1);
-                    String salesperson = res.getString(2);
-                    obj.add(new String[] {salesperson, "" + revenue});
-                }
-                return obj;
-            } catch (SQLException e) {
-                System.err.println(e);
-            }
-            return null;
-        }
-        
-        public ArrayList<String[]> getMonthlyRevenuePrEmployee(int month) {
-            Statement stm;
-            ResultSet res;
-            ArrayList<String[]> obj = new ArrayList<String[]>();
-            try {
-                stm = con.createStatement();
-                res = stm.executeQuery("SELECT SUM(price) \"Revenue pr. salesperson\", username FROM menu\n" +
-                    "JOIN orders ON menu.MENU_ID = orders.MENU_ID\n" +
-                    "JOIN employees ON orders.EMPL_ID = employees.EMPL_ID\n" +
-                    "WHERE orders.DELIVERED = 0 AND MONTH(delivery_date) = " + month +
-                    "GROUP BY username ORDER BY \"Revenue pr. salesperson\" DESC, username ASC");
-                while (res.next()) {
-                    int revenue = res.getInt(1);
-                    String salesperson = res.getString(2);
-                    obj.add(new String[] {salesperson, ("" + revenue)});
-                }
-                return obj;
-            } catch (SQLException e) {
-                System.err.println(e);
-            }
-            return null;
-        }
-        
-        public ArrayList<String> getYearlyRevenue(int year) {
-            Statement stm;
-            ResultSet res;
-            ArrayList<String> obj = new ArrayList<String>();
-            try {
-                stm = con.createStatement();
-                res = stm.executeQuery("SELECT SUM(price) \"Revenue\" FROM orders\n" +
-                    "JOIN menu ON menu.MENU_ID = orders.MENU_ID\n" +
-                    "WHERE orders.DELIVERED = 1 AND YEAR(delivery_date) = " + year);
-                while (res.next()) {
-                    int revenue = res.getInt(1);
-                    obj.add("Year: " + year + ", Revenue; " + revenue);
-                }
-                return obj;
-            } catch (SQLException e) {
-                System.err.println(e);
-            }
-            return null;
-        }
-        
-        public ArrayList<String[]> getMenuSalesStats(String fromDate, String toDate, int ant, boolean top) {
-            Statement stm;
-            ResultSet res;
-            ArrayList<String[]> obj = new ArrayList<String[]>();
-            String[] check = {fromDate, toDate};
-            check = removeUnwantedSymbols(check);
-            try {
-                stm = con.createStatement();
-                if (top) {
-                    res = stm.executeQuery("SELECT menu_name, SUM(nr_persons) \"Sold\" FROM orders\n" +
-                    "JOIN menu ON menu.MENU_ID = orders.MENU_ID WHERE delivery_date >= '" + check[0] + "'\n" +
-                    "AND delivery_date <= '" + check[1] + "' AND orders.delivered = 1 GROUP BY menu_name ORDER BY \"Sold\" DESC"
-                    + " FETCH FIRST " + ant + " ROWS ONLY");
-                    while (res.next()) {
-                        String menuName = res.getString(1);
-                        int sold = res.getInt(2);
-                        obj.add(new String[] {menuName, ("" + sold)});
-                    }
-                    return obj;
-                } else {
-                    res = stm.executeQuery("SELECT menu_name, SUM(nr_persons) \"Sold\" FROM orders\n" +
-                        "JOIN menu ON menu.MENU_ID = orders.MENU_ID WHERE delivery_date >= '" + check[0] + "'\n" +
-                        "AND delivery_date <= '" + check[1] + "' AND orders.delivered = 1 GROUP BY menu_name ORDER BY \"Sold\" ASC"
-                        + " FETCH FIRST " + ant + " ROWS ONLY");
-                    while (res.next()) {
-                        String menuName = res.getString(1);
-                        int sold = res.getInt(2);
-                        obj.add(new String[] {menuName, ("" + sold)});
-                    }
-                    return obj;
-                }
-            } catch (SQLException e) {
-                System.err.println(e);
-            }
-            return null;
-        }
-        
-        public ArrayList<String[]> getMostSpendingCustomers(int ant) {
-            Statement stm;
-            ResultSet res;
-            ArrayList<String[]> obj = new ArrayList<String[]>();
-            try {
-                stm = con.createStatement();
-                res = stm.executeQuery("SELECT customer_name, SUM(price) \"Spent\" FROM customer\n" +
-                    "JOIN orders ON customer.CUSTOMER_ID = orders.CUSTOMER_ID\n" +
-                    "JOIN menu ON orders.MENU_ID = menu.MENU_ID\n" +
-                    "WHERE customer.status = 1 AND orders.DELIVERED = 1 AND \n" +
-                    "GROUP BY customer_name ORDER BY \"Spent\" DESC FETCH FIRST " + ant + " ROWS ONLY");
-                while (res.next()) {
-                    String customerName = res.getString(1);
-                    int spent = res.getInt(2);
-                    obj.add(new String[] {customerName, ("" + spent)});
-                }
-                return obj;
-            } catch (SQLException e) {
-                System.err.println(e);
-            }
-            return null;
-        }
+
+	public ArrayList<String[]> getTotalRevenuePrEmployee() {
+		Statement stm;
+		ResultSet res;
+		ArrayList<String[]> obj = new ArrayList<String[]>();
+		try {
+			stm = con.createStatement();
+			res = stm.executeQuery("SELECT SUM(price) \"Revenue pr. salesperson\", username FROM menu\n"
+					+ "JOIN orders ON menu.MENU_ID = orders.MENU_ID\n"
+					+ "JOIN employees ON orders.EMPL_ID = employees.EMPL_ID\n"
+					+ "WHERE orders.DELIVERED = 1 GROUP BY username ORDER BY \"Revenue pr. salesperson\" DESC, username ASC");
+			while (res.next()) {
+				int revenue = res.getInt(1);
+				String salesperson = res.getString(2);
+				obj.add(new String[]{salesperson, "" + revenue});
+			}
+			return obj;
+		} catch (SQLException e) {
+			System.err.println(e);
+		}
+		return null;
+	}
+
+	public ArrayList<String[]> getMonthlyRevenuePrEmployee(int month) {
+		Statement stm;
+		ResultSet res;
+		ArrayList<String[]> obj = new ArrayList<String[]>();
+		try {
+			stm = con.createStatement();
+			res = stm.executeQuery("SELECT SUM(price) \"Revenue pr. salesperson\", username FROM menu\n"
+					+ "JOIN orders ON menu.MENU_ID = orders.MENU_ID\n"
+					+ "JOIN employees ON orders.EMPL_ID = employees.EMPL_ID\n"
+					+ "WHERE orders.DELIVERED = 0 AND MONTH(delivery_date) = " + month
+					+ "GROUP BY username ORDER BY \"Revenue pr. salesperson\" DESC, username ASC");
+			while (res.next()) {
+				int revenue = res.getInt(1);
+				String salesperson = res.getString(2);
+				obj.add(new String[]{salesperson, ("" + revenue)});
+			}
+			return obj;
+		} catch (SQLException e) {
+			System.err.println(e);
+		}
+		return null;
+	}
+
+	public ArrayList<String> getYearlyRevenue(int year) {
+		Statement stm;
+		ResultSet res;
+		ArrayList<String> obj = new ArrayList<String>();
+		try {
+			stm = con.createStatement();
+			res = stm.executeQuery("SELECT SUM(price) \"Revenue\" FROM orders\n"
+					+ "JOIN menu ON menu.MENU_ID = orders.MENU_ID\n"
+					+ "WHERE orders.DELIVERED = 1 AND YEAR(delivery_date) = " + year);
+			while (res.next()) {
+				int revenue = res.getInt(1);
+				obj.add("Year: " + year + ", Revenue; " + revenue);
+			}
+			return obj;
+		} catch (SQLException e) {
+			System.err.println(e);
+		}
+		return null;
+	}
+
+	public ArrayList<String[]> getMenuSalesStats(String fromDate, String toDate, int ant, boolean top) {
+		Statement stm;
+		ResultSet res;
+		ArrayList<String[]> obj = new ArrayList<String[]>();
+		String[] check = {fromDate, toDate};
+		check = removeUnwantedSymbols(check);
+		try {
+			stm = con.createStatement();
+			if (top) {
+				res = stm.executeQuery("SELECT menu_name, SUM(nr_persons) \"Sold\" FROM orders\n"
+						+ "JOIN menu ON menu.MENU_ID = orders.MENU_ID WHERE delivery_date >= '" + check[0] + "'\n"
+						+ "AND delivery_date <= '" + check[1] + "' AND orders.delivered = 1 GROUP BY menu_name ORDER BY \"Sold\" DESC"
+						+ " FETCH FIRST " + ant + " ROWS ONLY");
+				while (res.next()) {
+					String menuName = res.getString(1);
+					int sold = res.getInt(2);
+					obj.add(new String[]{menuName, ("" + sold)});
+				}
+				return obj;
+			} else {
+				res = stm.executeQuery("SELECT menu_name, SUM(nr_persons) \"Sold\" FROM orders\n"
+						+ "JOIN menu ON menu.MENU_ID = orders.MENU_ID WHERE delivery_date >= '" + check[0] + "'\n"
+						+ "AND delivery_date <= '" + check[1] + "' AND orders.delivered = 1 GROUP BY menu_name ORDER BY \"Sold\" ASC"
+						+ " FETCH FIRST " + ant + " ROWS ONLY");
+				while (res.next()) {
+					String menuName = res.getString(1);
+					int sold = res.getInt(2);
+					obj.add(new String[]{menuName, ("" + sold)});
+				}
+				return obj;
+			}
+		} catch (SQLException e) {
+			System.err.println(e);
+		}
+		return null;
+	}
+
+	public ArrayList<String[]> getMostSpendingCustomers(int ant) {
+		Statement stm;
+		ResultSet res;
+		ArrayList<String[]> obj = new ArrayList<String[]>();
+		try {
+			stm = con.createStatement();
+			res = stm.executeQuery("SELECT customer_name, SUM(price) \"Spent\" FROM customer\n"
+					+ "JOIN orders ON customer.CUSTOMER_ID = orders.CUSTOMER_ID\n"
+					+ "JOIN menu ON orders.MENU_ID = menu.MENU_ID\n"
+					+ "WHERE customer.status = 1 AND orders.DELIVERED = 1 AND \n"
+					+ "GROUP BY customer_name ORDER BY \"Spent\" DESC FETCH FIRST " + ant + " ROWS ONLY");
+			while (res.next()) {
+				String customerName = res.getString(1);
+				int spent = res.getInt(2);
+				obj.add(new String[]{customerName, ("" + spent)});
+			}
+			return obj;
+		} catch (SQLException e) {
+			System.err.println(e);
+		}
+		return null;
+	}
 
 	public int changeEmployeeStatus(Employee employee) {
 		Statement stm;
