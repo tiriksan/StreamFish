@@ -4,6 +4,8 @@
  */
 package streamfish;
 
+import javax.swing.DefaultComboBoxModel;
+
 /**
  *
  * @author Sindre
@@ -13,10 +15,12 @@ public class RegDish extends javax.swing.JFrame {
     /**
      * Creates new form RegDish
      */
+    private DefaultComboBoxModel comboBox;
     private static GUI gui;
     private String buttonName;
     private Dish dishEdit;
-    
+    private Object[] ingredients;
+
     public RegDish(GUI gui, String buttonName) {
         this.gui = gui;
         this.buttonName = buttonName;
@@ -24,15 +28,28 @@ public class RegDish extends javax.swing.JFrame {
         this.setVisible(true);
         this.pack();
     }
+
     public RegDish(GUI gui, String buttonName, Dish dish) {
         this.gui = gui;
         this.buttonName = buttonName;
         this.dishEdit = dish;
         initComponents();
         jTextField1.setText(dish.getName());
-      
+
         this.setVisible(true);
         this.pack();
+
+        comboBox = (DefaultComboBoxModel) jComboBox1.getModel();
+        for (Object ing : ingredients) {
+            comboBox.addElement(ing);
+
+        }
+        tab1setup();
+
+    }
+    
+    public void tab1setup(){
+        
     }
 
     /**
@@ -77,6 +94,11 @@ public class RegDish extends javax.swing.JFrame {
         });
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
 
         jLabel3.setText("Add a ingredient:");
 
@@ -96,6 +118,7 @@ public class RegDish extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        jTable1.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(jTable1);
 
         jLabel4.setText("Price: ");
@@ -166,22 +189,23 @@ public class RegDish extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        if(buttonName.equals("Add")){
+        if (buttonName.equals("Add")) {
             String dishName = jTextField1.getText().trim();
-           
+
             Dish newDish = new Dish(dishName);
             gui.addDish(newDish);
             this.dispose();
-        }else{
-            javax.swing.JOptionPane.showMessageDialog(null,"Not yet implemented.");
+        } else {
+            javax.swing.JOptionPane.showMessageDialog(null, "Not yet implemented.");
             this.dispose();
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+    }//GEN-LAST:event_jComboBox1ActionPerformed
     /**
      * @param args the command line arguments
      */
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
