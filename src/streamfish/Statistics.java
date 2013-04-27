@@ -32,7 +32,6 @@ public class Statistics extends javax.swing.JPanel {
         this.gui = gui;
         gui.setTitle("stats n hoes");
         initComponents();
-        tab = gui.getMenuSalesStats("2013", "2013", 5, true);
         employees = gui.getEmployee();
         
         tab1setup();
@@ -146,7 +145,7 @@ public class Statistics extends javax.swing.JPanel {
             }
         });
 
-        jButton2.setText("jButton2");
+        jButton2.setText("Create Chart");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
