@@ -5,6 +5,10 @@
 package streamfish;
 
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.table.DefaultTableModel;
+import static javax.swing.JOptionPane.*;
 
 /**
  *
@@ -15,11 +19,12 @@ public class RegDish extends javax.swing.JFrame {
     /**
      * Creates new form RegDish
      */
+    private int ingredientNr = -1;
     private DefaultComboBoxModel comboBox;
     private static GUI gui;
     private String buttonName;
     private Dish dishEdit;
-    private Object[] ingredients;
+    private Ingredient[] ingredients;
 
     public RegDish(GUI gui, String buttonName) {
         this.gui = gui;
@@ -34,23 +39,60 @@ public class RegDish extends javax.swing.JFrame {
         this.buttonName = buttonName;
         this.dishEdit = dish;
         initComponents();
+        ingredients = gui.getIngredients("");
         jTextField1.setText(dish.getName());
 
         this.setVisible(true);
         this.pack();
 
-        comboBox = (DefaultComboBoxModel) jComboBox1.getModel();
-        for (Object ing : ingredients) {
-            comboBox.addElement(ing);
-
-        }
         tab1setup();
+        
+        comboBox = (DefaultComboBoxModel) jComboBox1.getModel();
+        for (Ingredient ing : ingredients) {
+            comboBox.addElement(ing);
+            System.out.println(ing);
+        }
+        
 
     }
     
     public void tab1setup(){
-        
+         if (ingredients != null && ingredients.length > 0) {
+            for (int i = 0; i < ingredients.length; i++) {
+                DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+				//System.out.println();
+                model.addRow(new Object[]{jComboBox1.getSelectedItem()});
+            }
+        }
+
+        jTable1.getSelectionModel().addListSelectionListener(
+                new ListSelectionListener() {
+					@Override
+                    public void valueChanged(ListSelectionEvent event) {
+                        int viewRow = jTable1.getSelectedRow();
+                        if (!event.getValueIsAdjusting()) {
+                            try {
+                                ingredientNr = Integer.parseInt(jTable1.getValueAt(viewRow, 0).toString());
+                            } catch (Exception e) {
+                            }
+                        }
+                    }
+                });
+              
     }
+    
+    public void updt() {
+
+        ingredients = gui.getIngredients((String)jComboBox1.getSelectedItem());
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        model.setRowCount(0);
+        if (ingredients != null && ingredients.length > 0) {
+            for (int i = 0; i < ingredients.length; i++) {
+                model.addRow(new Object[]{jComboBox1.getSelectedItem()});
+            }
+        }
+    }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -93,7 +135,7 @@ public class RegDish extends javax.swing.JFrame {
             }
         });
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox1.setModel(new DefaultComboBoxModel());
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox1ActionPerformed(evt);
@@ -196,7 +238,7 @@ public class RegDish extends javax.swing.JFrame {
             gui.addDish(newDish);
             this.dispose();
         } else {
-            javax.swing.JOptionPane.showMessageDialog(null, "Not yet implemented.");
+            showMessageDialog(null, "Something went wrong.");
             this.dispose();
         }
     }//GEN-LAST:event_jButton1ActionPerformed
