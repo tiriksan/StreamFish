@@ -44,7 +44,7 @@ public class Reg_ordre extends javax.swing.JPanel {
 
         this.CUSTID = custid;
         this.customer = gui.getCustomer(CUSTID);
-        menu = gui.getMenus();
+        menu = gui.getMenus("");
         address = gui.getAddress(CUSTID);
         addressPlus1 = new Object[address.length + 1];
         priceReduction = customer.getPriceReduction();
