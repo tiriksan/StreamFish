@@ -154,8 +154,8 @@ public class GUI extends JFrame implements WindowListener {
 		return db.getAddress(custid);
 	}
 
-	public Menu[] getMenus() {
-		return db.getMenus();
+	public Menu[] getMenus(String sok) {
+		return db.getMenus(sok);
 	}
 	
 	public Dish getDish(int id){

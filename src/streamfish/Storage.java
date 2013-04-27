@@ -20,9 +20,9 @@ public class Storage extends javax.swing.JPanel {
     private Ingredient[] ingredients;
     private Ingredient ingToBeEdited;
     private Orderinfo[] orderinfo;
-	private Menu[] menus;
+    private Menu[] menus;
     private int viewRow = -1;
-	private int selectMenu = -1;
+    private int selectMenu = -1;
 
     public Storage(final GUI gui) {
         this.gui = gui;
@@ -31,7 +31,7 @@ public class Storage extends javax.swing.JPanel {
 
         tab1setup();
         tab2setup();
-		tab3setup();
+        tab3setup();
 
         addListSelectListener();
         addDocumentListener();
@@ -75,6 +75,15 @@ public class Storage extends javax.swing.JPanel {
                             model.addRow(new Object[]{orderinfo[i].getMenu(), orderinfo[i].getNumberOfPersons(), orderinfo[i].getAddress()});
                         }
                     }
+                } else if (jTabbedPane1.getSelectedIndex() == 2) {
+                    menus = gui.getMenus(jTextField1.getText());
+                    DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+                    model.setRowCount(0);
+                    if (menus != null && menus.length > 0) {
+                        for (int i = 0; i < menus.length; i++) {
+                            model.addRow(new Object[]{menus[i].getMenuName(), menus[i].getPrice(), menus[i].getDescription()});
+                        }
+                    }
                 }
             }
 
@@ -98,6 +107,15 @@ public class Storage extends javax.swing.JPanel {
                             model.addRow(new Object[]{orderinfo[i].getMenu(), orderinfo[i].getNumberOfPersons(), orderinfo[i].getAddress()});
                         }
                     }
+                } else if (jTabbedPane1.getSelectedIndex() == 2) {
+                    menus = gui.getMenus(jTextField1.getText());
+                    DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+                    model.setRowCount(0);
+                    if (menus != null && menus.length > 0) {
+                        for (int i = 0; i < menus.length; i++) {
+                            model.addRow(new Object[]{menus[i].getMenuName(), menus[i].getPrice(), menus[i].getDescription()});
+                        }
+                    }
                 }
             }
 
@@ -119,6 +137,15 @@ public class Storage extends javax.swing.JPanel {
                     if (orderinfo != null && orderinfo.length > 0) {
                         for (int i = 0; i < orderinfo.length; i++) {
                             model.addRow(new Object[]{orderinfo[i].getMenu(), orderinfo[i].getNumberOfPersons(), orderinfo[i].getAddress()});
+                        }
+                    }
+                } else if (jTabbedPane1.getSelectedIndex() == 2) {
+                    menus = gui.getMenus(jTextField1.getText());
+                    DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+                    model.setRowCount(0);
+                    if (menus != null && menus.length > 0) {
+                        for (int i = 0; i < menus.length; i++) {
+                            model.addRow(new Object[]{menus[i].getMenuName(), menus[i].getPrice(), menus[i].getDescription()});
                         }
                     }
                 }
@@ -166,11 +193,11 @@ public class Storage extends javax.swing.JPanel {
                     }
                 });
     }
-	
-	private void tab3setup(){
-		menus = gui.getMenus();
-		
-		if (menus != null && menus.length > 0) {
+
+    private void tab3setup() {
+        menus = gui.getMenus("");
+
+        if (menus != null && menus.length > 0) {
             for (int i = 0; i < menus.length; i++) {
                 DefaultTableModel model = (DefaultTableModel) jTable3.getModel();
                 model.addRow(new Object[]{menus[i].getMenuName(), menus[i].getPrice(), menus[i].getDescription()});
@@ -187,7 +214,7 @@ public class Storage extends javax.swing.JPanel {
                         }
                     }
                 });
-	}
+    }
 
     public void update() {
         if (jTabbedPane1.getSelectedIndex() == 0) {
@@ -209,7 +236,14 @@ public class Storage extends javax.swing.JPanel {
                 }
             }
         } else if (jTabbedPane1.getSelectedIndex() == 2) {
-            menus = gui.getMenus();
+            menus = gui.getMenus(jTextField1.getText());
+            DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+            model.setRowCount(0);
+            if (menus != null && menus.length > 0) {
+                for (int i = 0; i < menus.length; i++) {
+                    model.addRow(new Object[]{menus[i].getMenuName(), menus[i].getPrice(), menus[i].getDescription()});
+                }
+            }
         }
     }
 
@@ -565,7 +599,7 @@ public class Storage extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-		gui.byttVindu(this, new Reg_menu(gui));
+        gui.byttVindu(this, new Reg_menu(gui));
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
@@ -575,7 +609,6 @@ public class Storage extends javax.swing.JPanel {
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton7ActionPerformed
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
