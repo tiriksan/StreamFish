@@ -37,67 +37,7 @@ public class Statistics extends javax.swing.JPanel {
         
         tab1setup();
         
-     /*  jTextField1.getDocument().addDocumentListener(new DocumentListener() {
-            @Override
-            public void insertUpdate(DocumentEvent e) {
-                if (jTabbedPane1.getSelectedIndex() == 0) {
-                    employees = gui.getEmployee();
-                    DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
-                    model.setRowCount(0);
-                    if (employees != null && employees.length > 0) {
-                        for (int i = 0; i < employees.length; i++) {
-                            model.addRow(new Object[]{employees[i].getEmplID(), employees[i].getUsername()});
-                        }
-                    }
-                } 
-
-            }
-
-            @Override
-            public void removeUpdate(DocumentEvent e) {
-                if (jTabbedPane1.getSelectedIndex() == 0) {
-                    employees = gui.getEmployee();
-                    DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
-                    model.setRowCount(0);
-                    if (employees != null && employees.length > 0) {
-                        for (int i = 0; i < employees.length; i++) {
-                            model.addRow(new Object[]{employees[i].getEmplID(), employees[i].getUsername()});
-                        }
-                    }
-                } 
-            }
-
-            @Override
-            public void changedUpdate(DocumentEvent e) {
-                if (jTabbedPane1.getSelectedIndex() == 0) {
-                    employees = gui.getEmployee();
-                    DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
-                    model.setRowCount(0);
-                    if (employees != null && employees.length > 0) {
-                        for (int i = 0; i < employees.length; i++) {
-                            model.addRow(new Object[]{employees[i].getEmplID(), employees[i].getUsername()});
-                        }
-                    }
-                } 
-            }
-       });
-
-
-        jCheckBox1.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (jTabbedPane1.getSelectedIndex() == 0) {
-                    employees = gui.getEmployee();
-                    DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
-                    model.setRowCount(0);
-                    if (employees != null && employees.length > 0) {
-                        for (int i = 0; i < employees.length; i++) {
-                            model.addRow(new Object[]{employees[i].getEmplID(), employees[i].getUsername()});
-                        }
-                    }
-                }
-            }
-        }); */
+    
     }
     
     private void tab1setup(){
@@ -121,6 +61,34 @@ public class Statistics extends javax.swing.JPanel {
                         if (!event.getValueIsAdjusting()) {
                             try {
                                 emp_id = Integer.parseInt(jTable2.getValueAt(viewRow, 0).toString());
+                            } catch (Exception e) {
+                            }
+                        }
+                    }
+                });
+    }
+    
+    public void tab2setup() {
+         DefaultTableModel model = (DefaultTableModel) jTable3.getModel();
+         if (employees != null && employees.length > 0) {
+           // for (int i = 0; i < employees.length; i++) {
+             for(Employee emp : employees){
+                 if(emp.getUsertype() == 1){
+                     model.addRow(new Object[]{emp.getEmplID(), emp.getUsername()});
+                 }
+                
+                
+                
+            }
+        }
+
+        jTable3.getSelectionModel().addListSelectionListener(
+                new ListSelectionListener() {
+                    public void valueChanged(ListSelectionEvent event) {
+                        int viewRow = jTable3.getSelectedRow();
+                        if (!event.getValueIsAdjusting()) {
+                            try {
+                                emp_id = Integer.parseInt(jTable3.getValueAt(viewRow, 0).toString());
                             } catch (Exception e) {
                             }
                         }
