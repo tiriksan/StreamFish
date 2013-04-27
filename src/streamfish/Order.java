@@ -137,7 +137,7 @@ public class Order {
         public String getCustomerName(GUI gui){
 			Customer[] customers = gui.getCustomers("", false);
 			for(Customer customer : customers){
-				if(customer.getCustomerID() == getCustomerId()){
+				if(customer.getCustomerID() == this.customerId){
 					return customer.getCustomerName();
 				}
 			}

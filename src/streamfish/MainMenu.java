@@ -6,12 +6,12 @@ package streamfish;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import static javax.swing.JOptionPane.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
-import static javax.swing.JOptionPane.*;
 
 /**
  *
@@ -146,12 +146,14 @@ public class MainMenu extends javax.swing.JPanel {
         if (customers != null && customers.length > 0) {
             for (int i = 0; i < customers.length; i++) {
                 DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+				System.out.println(customers[i].getCustomerID() + ", " + customers[i].getCustomerName());
                 model.addRow(new Object[]{customers[i].getCustomerID(), customers[i].getCustomerName(), customers[i].getPhoneNumber(), customers[i].isBusiness()});
             }
         }
 
         jTable1.getSelectionModel().addListSelectionListener(
                 new ListSelectionListener() {
+					@Override
                     public void valueChanged(ListSelectionEvent event) {
                         int viewRow = jTable1.getSelectedRow();
                         if (!event.getValueIsAdjusting()) {
@@ -177,6 +179,7 @@ public class MainMenu extends javax.swing.JPanel {
 
         jTable2.getSelectionModel().addListSelectionListener(
                 new ListSelectionListener() {
+					@Override
                     public void valueChanged(ListSelectionEvent event) {
 
                         if (!event.getValueIsAdjusting()) {
@@ -186,7 +189,7 @@ public class MainMenu extends javax.swing.JPanel {
                 });
     }
 
-    public void tab3setup() {
+    private void tab3setup() {
         subscriptions = gui.getSubscriptions(jTextField1.getText());
 
         if (subscriptions != null && subscriptions.length > 0) {
@@ -199,6 +202,7 @@ public class MainMenu extends javax.swing.JPanel {
 
         jTable3.getSelectionModel().addListSelectionListener(
                 new ListSelectionListener() {
+					@Override
                     public void valueChanged(ListSelectionEvent event) {
                         if (!event.getValueIsAdjusting()) {
                             viewRow = jTable3.getSelectedRow();

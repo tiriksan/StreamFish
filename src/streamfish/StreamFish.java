@@ -485,20 +485,12 @@ public class StreamFish {
 		Statement stm;
 		ResultSet res;
 		Subscription[] subscriptions;
+		ArrayList<Subscription> subs = new ArrayList<>();
 		String[] check = {sok};
 		check = removeUnwantedSymbols(check);
-		int teller = 0;
 
 		try {
 			stm = con.createStatement();
-			res = stm.executeQuery("select count(*) antall from sfdb.subscription "
-					+ "join sfdb.customer on subscription.customer_id = customer.customer_id "
-					+ "where (upper(customer_name) like '"
-					+ check[0].toUpperCase() + "%' or phone like '" + check[0] + "%')");
-			res.next();
-			int ant = res.getInt("antall");
-			subscriptions = new Subscription[ant];
-			Opprydder.lukkResSet(res);
 
 			res = stm.executeQuery("select * from sfdb.subscription "
 					+ "join sfdb.customer on subscription.customer_id = customer.customer_id "
@@ -513,10 +505,10 @@ public class StreamFish {
 				String days = res.getString("days");
 				char status = res.getString("status").charAt(0);
 
-
-				subscriptions[teller] = new Subscription(subscription_id, duration, from_date, to_date, days, status);
-				teller++;
+				subs.add(new Subscription(subscription_id, duration, from_date, to_date, days, status));
 			}
+
+			subscriptions = subs.toArray(new Subscription[subs.size()]);
 			return subscriptions;
 		} catch (SQLException ex) {
 			System.err.println(ex);
@@ -571,8 +563,8 @@ public class StreamFish {
 					+ subscription.getDuration() + ", '"
 					+ subscription.getFrom_date() + "', '"
 					+ subscription.getTo_date() + "', '"
-					+ subscription.getDays() + "', '"
-					+ subscription.getStatus() + "', "
+					+ subscription.getDays() + "', "
+					+ subscription.getStatus() + ", "
 					+ order.getCustomerId() + ")");
 			res = stm.executeQuery("select * from subscription order by subscription_ID desc");
 			res.next();
@@ -890,7 +882,9 @@ public class StreamFish {
 		int m_id = 0;
 		try {
 			stm = con.createStatement();
-			res = stm.executeQuery("SELECT * FROM SUBSCRIPTION JOIN ORDERS ON ORDERS.SUBSCRIPTION_ID = SUBSCRIPTION.SUBSCRIPTION_ID where subscription.subscription_id = " + subscription.getSubscription_id());
+			res = stm.executeQuery("SELECT * FROM SUBSCRIPTION "
+					+ "JOIN ORDERS ON ORDERS.SUBSCRIPTION_ID = SUBSCRIPTION.SUBSCRIPTION_ID "
+					+ "where subscription.subscription_id = " + subscription.getSubscription_id());
 			while (res.next()) {
 				c_id = res.getInt("customer_id");
 				m_id = res.getInt("menu_id");
