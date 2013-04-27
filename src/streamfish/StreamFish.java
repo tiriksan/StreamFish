@@ -125,7 +125,8 @@ public class StreamFish {
 				String ingredientName = res.getString("ingredient_name");
 				int amount = res.getInt("amount");
 				String expiryDate = res.getString("expiry_date");
-				ingredients[teller] = new Ingredient(ingredientID, ingredientName, amount, expiryDate);
+				String unit = res.getString("unit");
+				ingredients[teller] = new Ingredient(ingredientID, ingredientName, amount, expiryDate, unit);
 				teller++;
 			}
 			return ingredients;

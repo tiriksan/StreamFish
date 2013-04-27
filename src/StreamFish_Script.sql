@@ -43,6 +43,7 @@ CREATE TABLE ingredients(
 ingredient_id INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
 ingredient_name VARCHAR(50) NOT NULL,
 amount INTEGER DEFAULT 0,
+unit VARCHAR(10) NOT NULL,
 expiry_date DATE
 );
 
@@ -98,8 +99,7 @@ category_id INTEGER
 CREATE TABLE dish_ingredients(
 dish_id INTEGER,
 ingredient_id INTEGER,
-amount INTEGER NOT NULL,
-unit VARCHAR(10) NOT NULL
+amount INTEGER NOT NULL
 );
 
 CREATE TABLE menu_dish(
