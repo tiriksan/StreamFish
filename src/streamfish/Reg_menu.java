@@ -35,7 +35,7 @@ public class Reg_menu extends javax.swing.JPanel {
 		setupSearch();
 	}
 
-	public void setupSearch() {
+	private void setupSearch() {
 		jTextField3.getDocument().addDocumentListener(new DocumentListener() {
 			@Override
 			public void insertUpdate(DocumentEvent e) {
@@ -54,7 +54,7 @@ public class Reg_menu extends javax.swing.JPanel {
 		});
 	}
 	
-	public void tableCheckboxListener(){
+	private void tableCheckboxListener(){
 		jTable1.getModel().addTableModelListener(new TableModelListener() {
 		
 			@Override
@@ -79,14 +79,14 @@ public class Reg_menu extends javax.swing.JPanel {
 	});
 	}
 	
-	public void updatePrice() {
+	private void updatePrice() {
 		price = 0;
 		for(Integer in : dishID){
 			price += gui.getDish(in).getPrice();
 		}
 		jLabel4.setText(price + " NOK");
 	}
-	public void updateTable() {
+	private void updateTable() {
 		DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
 		model.setRowCount(0);
 		for (Dish ob : gui.getDishes(jTextField3.getText())) {
