@@ -139,7 +139,7 @@ public class Statistics extends javax.swing.JPanel {
         jButton7 = new javax.swing.JButton();
         jCheckBox1 = new javax.swing.JCheckBox();
 
-        jButton1.setText("jButton1");
+        jButton1.setText("Create chart");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -147,6 +147,11 @@ public class Statistics extends javax.swing.JPanel {
         });
 
         jButton2.setText("jButton2");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("jButton3");
 
@@ -180,7 +185,7 @@ public class Statistics extends javax.swing.JPanel {
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Kitchen", jPanel1);
@@ -208,7 +213,7 @@ public class Statistics extends javax.swing.JPanel {
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE)
+            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Sales", jPanel2);
@@ -296,13 +301,19 @@ public class Statistics extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        new PieChart("ASDF", "PieChart", gui, tab, 0);
-     //   gui.byttVindu(this, PieChart1("streamfish", "stats", gui, /*ArrayList<String[]>*/ tab));
+        new StatOps(gui);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         gui.byttVindu(this, new reg_employee(gui));
     }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        ArrayList<String[]> array = gui.getTotalRevenuePrEmployee();
+        PieChart pi = new PieChart("StreamFish™", "Total revenue pr. employee", gui, array, 1);
+        pi.pack();
+        pi.setVisible(true);
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
