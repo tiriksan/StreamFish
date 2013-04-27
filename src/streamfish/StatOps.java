@@ -195,8 +195,8 @@ public class StatOps extends javax.swing.JFrame {
             int toMonth = Integer.parseInt(toMonth1);
             int toDay = Integer.parseInt(toDay1);
 
-            if (fromYear > toYear || fromYear < toYear && fromMonth > toMonth
-                    || fromYear < toYear && fromMonth < toMonth && fromDay > toDay) {
+            if ((fromYear > toYear) || (fromYear <= toYear && fromMonth > toMonth)
+                    || (fromYear <= toYear && fromMonth <= toMonth && fromDay > toDay)) {
                 throw new IllegalArgumentException();
             }
             
@@ -207,9 +207,15 @@ public class StatOps extends javax.swing.JFrame {
             if (jRadioButton1.isSelected()) {
                 top = true;
             }
-
             ArrayList<String[]> tab = gui.getMenuSalesStats(fromDate, toDate, count, top);
-            PieChart pi = new PieChart("StreamFish™", "Top 5 selling menus for interval '" + fromDate + " - '" + toDate + "'", gui, tab, 0);
+            String description;
+            if (top) {
+                description = "Top";
+            } else {
+                description ="Least";
+            }
+            description += " " + count + " selling menus for interval " + fromDate + " - " + toDate;
+            PieChart pi = new PieChart("StreamFish™", description, gui, tab, 0);
             pi.pack();
             pi.setVisible(true);
             this.dispose();
