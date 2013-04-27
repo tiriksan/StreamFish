@@ -57,7 +57,7 @@ public class Storage extends javax.swing.JPanel {
         jTextField1.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
-                if (jTabbedPane1.getSelectedIndex() == 0) {
+                if (jTabbedPane1.getSelectedIndex() == 0) { //if tab 1 is selected
                     ingredients = gui.getIngredients(jTextField1.getText());
                     DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
                     model.setRowCount(0);
@@ -66,7 +66,7 @@ public class Storage extends javax.swing.JPanel {
                             model.addRow(new Object[]{ingredients[i].getID(), ingredients[i].getName(), ingredients[i].getAmount(), ingredients[i].getExpDate()});
                         }
                     }
-                } else if (jTabbedPane1.getSelectedIndex() == 1) {
+                } else if (jTabbedPane1.getSelectedIndex() == 1) {  //if tab 2 is selected
                     orderinfo = gui.getTodaysTasks2(jTextField1.getText());;
                     DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
                     model.setRowCount(0);
@@ -75,7 +75,7 @@ public class Storage extends javax.swing.JPanel {
                             model.addRow(new Object[]{orderinfo[i].getMenu(), orderinfo[i].getNumberOfPersons(), orderinfo[i].getAddress()});
                         }
                     }
-                } else if (jTabbedPane1.getSelectedIndex() == 2) {
+                } else if (jTabbedPane1.getSelectedIndex() == 2) {  //if tab 3 is selected
                     menus = gui.getMenus(jTextField1.getText());
                     DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
                     model.setRowCount(0);
