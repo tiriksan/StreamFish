@@ -91,20 +91,21 @@ public class Subscription {
     
     public String getMenuName(Order order, GUI gui){
         if(order != null) {
-        String menuName = order.getMenuName(gui);
-        return menuName;
+			String menuName = order.getMenuName(gui);
+			return menuName;
         }
         return null;
     }
     
     public String getCustomerName(Order order, GUI gui){
         if(order != null){
-        String customerName = order.getCustomerName(gui);
-        return customerName;
+			String customerName = order.getCustomerName(gui);
+			return customerName;
         }
         return null;
     }
     
+	@Override
     public String toString(){
         String text = "subscription_id:" + subscription_id + "\nduration " + duration + "\nfrom_date " + from_date + "\nto_date " + to_date + "\nstatus " + status;
         return text;

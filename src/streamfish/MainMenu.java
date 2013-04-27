@@ -146,7 +146,7 @@ public class MainMenu extends javax.swing.JPanel {
         if (customers != null && customers.length > 0) {
             for (int i = 0; i < customers.length; i++) {
                 DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-				System.out.println(customers[i].getCustomerID() + ", " + customers[i].getCustomerName());
+				
                 model.addRow(new Object[]{customers[i].getCustomerID(), customers[i].getCustomerName(), customers[i].getPhoneNumber(), customers[i].isBusiness()});
             }
         }
@@ -195,7 +195,12 @@ public class MainMenu extends javax.swing.JPanel {
         if (subscriptions != null && subscriptions.length > 0) {
             for (int i = 0; i < subscriptions.length; i++) {
                 DefaultTableModel model = (DefaultTableModel) jTable3.getModel();
-                model.addRow(new Object[]{subscriptions[i].getCustomerName(gui.getOrderfromSub(subscriptions[i]), gui), subscriptions[i].getDuration(), subscriptions[i].getDayofWeek(), subscriptions[i].getMenuName(gui.getOrderfromSub(subscriptions[i]), gui)});
+                model.addRow(new Object[]{
+					subscriptions[i].getCustomerName(gui.getOrderfromSub(subscriptions[i]), gui),
+					subscriptions[i].getDuration(),
+					subscriptions[i].getDayofWeek(),
+					subscriptions[i].getMenuName(gui.getOrderfromSub(subscriptions[i]), gui)
+				});
 
             }
         }
@@ -333,11 +338,11 @@ public class MainMenu extends javax.swing.JPanel {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jButton1)
-                        .addGap(16, 16, 16)
+                        .addGap(60, 60, 60)
                         .addComponent(jButton3)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton2)
-                        .addGap(0, 12, Short.MAX_VALUE))
+                        .addGap(58, 58, 58)
+                        .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(18, 18, 18))
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 473, Short.MAX_VALUE))
                 .addGap(0, 0, 0))
         );
@@ -351,7 +356,7 @@ public class MainMenu extends javax.swing.JPanel {
                     .addComponent(jButton1)
                     .addComponent(jButton2)
                     .addComponent(jButton3))
-                .addGap(0, 0, 0))
+                .addGap(14, 14, 14))
         );
 
         jTabbedPane1.addTab("Customers", jPanel1);

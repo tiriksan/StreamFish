@@ -34,7 +34,7 @@ public class StreamFish {
 		}
 	}
 
-	public Customer getCustomer(int i) {
+	public Customer getCustomer(int cust_id) {
 		Statement stm;
 		ResultSet res;
 		Customer customer;
@@ -42,7 +42,7 @@ public class StreamFish {
 		try {
 			stm = con.createStatement();
 
-			res = stm.executeQuery("select * from customer where customer_id = " + i);
+			res = stm.executeQuery("select * from customer where customer_id = " + cust_id);
 
 			while (res.next()) {
 				int customer_id = res.getInt("customer_id");
@@ -579,7 +579,7 @@ public class StreamFish {
 			//     subscription.getDays().compareTo(TodaysDate.getDay());
 			int day = TodaysDate.getDay();
 			int duration = subscription.getDuration() * 4;
-			for (int i = 0; i < duration; i++) {
+			for (int i = 0; i <= duration; i++) {
 				if (i == 0) {
 					for (int y = day; y < 7; y++) {
 						if (subscription.getDays().charAt(y) == '1') {
@@ -589,7 +589,7 @@ public class StreamFish {
 
 						}
 					}
-				} else if (i == (duration - 1)) {
+				} else if (i == (duration)) {
 					for (int k = 0; k <= day; k++) {
 						if (subscription.getDays().charAt(k) == '1') {
 							String date = TodaysDate.getADate(i * 7 - day + k);
@@ -890,8 +890,7 @@ public class StreamFish {
 				m_id = res.getInt("menu_id");
 			}
 
-
-			Order orderFsub = new Order(c_id, m_id);
+			Order orderFsub = new Order(m_id, c_id);
 			Opprydder.lukkResSet(res);
 			Opprydder.lukkSetning(stm);
 			return orderFsub;
