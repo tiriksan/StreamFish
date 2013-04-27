@@ -75,14 +75,14 @@ public class StreamFish {
 
 		try {
 			stm = con.createStatement();
-                        res = stm.executeQuery("SELECT COUNT (*) COUNT FROM getmenus WHERE (UPPER(MENU_NAME) LIKE '" + sok.toUpperCase() + "%')");
+                        res = stm.executeQuery("SELECT COUNT (*) COUNT FROM menu WHERE (UPPER(MENU_NAME) LIKE '" + sok.toUpperCase() + "%')");
 		//	res = stm.executeQuery("select count(*) antall from menu where menu.status = 1");
 			res.next();
 			int ant = res.getInt("COUNT");
 			menus = new Menu[ant];
 			Opprydder.lukkResSet(res);
 
-                        res = stm.executeQuery("SELECT * FROM getmenus WHERE (UPPER(MENU_NAME) LIKE '" + sok.toUpperCase() + "%')");
+                        res = stm.executeQuery("SELECT * FROM menu WHERE (UPPER(MENU_NAME) LIKE '" + sok.toUpperCase() + "%')");
 			//res = stm.executeQuery("select * from menu where menu.status = 1");
 			while (res.next()) {
 				int menuId = res.getInt("menu_id");
