@@ -161,6 +161,10 @@ public class GUI extends JFrame implements WindowListener {
 	public Dish getDish(int id){
 		return db.getDish(id);
 	}
+	
+	void addDishIng(Integer integer) {
+		throw new UnsupportedOperationException("Not yet implemented"); //TODO
+	}
         
 	public Employee getUserAuthorization(String username, String password) {
 		return db.userAuthorization(username, password);
@@ -255,6 +259,8 @@ public class GUI extends JFrame implements WindowListener {
 	@Override
 	public void windowDeactivated(WindowEvent e) {
 	}
+
+	
 
 	
 }
