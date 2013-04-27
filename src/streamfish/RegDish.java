@@ -4,6 +4,8 @@
  */
 package streamfish;
 
+import java.awt.HeadlessException;
+import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -25,6 +27,7 @@ public class RegDish extends javax.swing.JFrame {
     private String buttonName;
     private Dish dishEdit;
     private Ingredient[] ingredients;
+	private ArrayList<Integer> addingIngIDs = new ArrayList<> ();			//Ingredient IDs for the ingredients that is going to get added to a dish 
 
     public RegDish(GUI gui, String buttonName) {
         this.gui = gui;
@@ -80,7 +83,7 @@ public class RegDish extends javax.swing.JFrame {
         model.setRowCount(0);
         if (ingredients != null && ingredients.length > 0) {
             for (int i = 0; i < ingredients.length; i++) {
-                model.addRow(new Object[]{ingredients[i].getName(), Boolean.FALSE, 0, ingredients[i].getUnit()});
+                model.addRow(new Object[]{ingredients[i].getID(), ingredients[i].getName(), Boolean.FALSE, 0, ingredients[i].getUnit()});
             }
         }
     }
@@ -131,14 +134,14 @@ public class RegDish extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Ingredient", "Include", "Amount", "Unit"
+                "ID", "Ingredient", "Include", "Amount", "Unit"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.Boolean.class, java.lang.Integer.class, java.lang.Object.class
+                java.lang.Integer.class, java.lang.Object.class, java.lang.Boolean.class, java.lang.Integer.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                false, true, true, false
+                false, false, true, true, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -151,12 +154,14 @@ public class RegDish extends javax.swing.JFrame {
         });
         jTable1.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(jTable1);
-        jTable1.getColumnModel().getColumn(1).setResizable(false);
-        jTable1.getColumnModel().getColumn(1).setPreferredWidth(50);
+        jTable1.getColumnModel().getColumn(0).setResizable(false);
+        jTable1.getColumnModel().getColumn(0).setPreferredWidth(30);
         jTable1.getColumnModel().getColumn(2).setResizable(false);
         jTable1.getColumnModel().getColumn(2).setPreferredWidth(50);
         jTable1.getColumnModel().getColumn(3).setResizable(false);
         jTable1.getColumnModel().getColumn(3).setPreferredWidth(50);
+        jTable1.getColumnModel().getColumn(4).setResizable(false);
+        jTable1.getColumnModel().getColumn(4).setPreferredWidth(50);
 
         jLabel4.setText("Price: ");
 
@@ -225,16 +230,34 @@ public class RegDish extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        if (buttonName.equals("Add")) {
-            String dishName = jTextField1.getText().trim();
-
-            Dish newDish = new Dish(dishName);
-            gui.addDish(newDish);
-            this.dispose();
-        } else {
-            showMessageDialog(null, "Something went wrong.");
-            this.dispose();
-        }
+        try {
+			if (buttonName.equals("Add")) {
+				String dishName = jTextField1.getText().trim();
+				if(dishName.length()<=0){
+					throw new IllegalArgumentException("The dish must have a name.");
+				}
+				int price = Integer.parseInt(jTextField2.getText().trim());
+				
+				Dish newDish = new Dish(price, dishName);
+				for (int i = 0; i < jTable1.getModel().getRowCount(); i++) {
+					if (jTable1.getModel().getValueAt(i, 2).equals(Boolean.TRUE)) {
+						addingIngIDs.add((Integer) jTable1.getModel().getValueAt(i, 0));
+					}
+				}
+				if(addingIngIDs.size()<=0){
+					throw new IllegalArgumentException("The dish must contain atleast one ingredient");
+				}
+				gui.addDish(newDish);
+				this.dispose();
+			} else {
+				showMessageDialog(null, "Something went wrong.");
+				this.dispose();
+			}
+		} catch (NumberFormatException ex) {
+			showMessageDialog(null, "The price must consist of a number. \nPlease try again.", "Error", ERROR_MESSAGE);
+		} catch (IllegalArgumentException e){
+			showMessageDialog(null, e.getMessage(), "Error", ERROR_MESSAGE);
+		}
     }//GEN-LAST:event_jButton1ActionPerformed
     /**
      * @param args the command line arguments

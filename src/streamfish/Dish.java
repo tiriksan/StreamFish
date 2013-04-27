@@ -14,6 +14,10 @@ public class Dish {
         public Dish(String name){
             this.name = name;
         }
+		public Dish(int price, String name){
+			this.price = price;
+            this.name = name;
+        }
         public Dish(String name, int dishID){
             this.name = name;
             this.dishID = dishID;
