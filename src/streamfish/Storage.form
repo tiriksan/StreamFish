@@ -137,8 +137,8 @@
                       <Table columnCount="4" rowCount="0">
                         <Column editable="false" title="Ingredient ID" type="java.lang.Object"/>
                         <Column editable="false" title="Name" type="java.lang.Object"/>
-                        <Column editable="true" title="Amount" type="java.lang.Object"/>
-                        <Column editable="true" title="Expiry date" type="java.lang.Object"/>
+                        <Column editable="false" title="Amount" type="java.lang.Object"/>
+                        <Column editable="false" title="Expiry date" type="java.lang.Object"/>
                       </Table>
                     </Property>
                     <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
@@ -166,7 +166,7 @@
                       </TableColumnModel>
                     </Property>
                     <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
-                      <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
+                      <TableHeader reorderingAllowed="false" resizingAllowed="true"/>
                     </Property>
                   </Properties>
                 </Component>
