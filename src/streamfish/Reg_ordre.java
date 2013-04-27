@@ -168,7 +168,7 @@ public class Reg_ordre extends javax.swing.JPanel {
     }
 
     private void updateMenu() {
-        menu = gui.getMenus();
+        menu = gui.getMenus("");
         if (menu != null && menu.length > 0) {
             for (int i = 0; i < menu.length; i++) {
                 DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
