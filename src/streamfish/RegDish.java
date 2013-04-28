@@ -239,16 +239,21 @@ public class RegDish extends javax.swing.JFrame {
 				int price = Integer.parseInt(jTextField2.getText().trim());
 				
 				Dish newDish = new Dish(price, dishName);
-				for (int i = 0; i < jTable1.getModel().getRowCount(); i++) {
-					if (jTable1.getModel().getValueAt(i, 2).equals(Boolean.TRUE)) {
-						gui.addDishIng((Integer) jTable1.getModel().getValueAt(i, 0));
+				
+				if(addingIngIDs.size()<=0){
+					for (int i = 0; i < jTable1.getModel().getRowCount(); i++) {
+						if (jTable1.getModel().getValueAt(i, 2).equals(Boolean.TRUE)) {
+							addingIngIDs.add((Integer) jTable1.getModel().getValueAt(i, 0));
+						}
 					}
 				}
-				if(addingIngIDs.size()<=0){
-					throw new IllegalArgumentException("The dish must contain atleast one ingredient");
-				}
 				gui.addDish(newDish);
-				
+				int dishID = gui.getDish();
+				for (int i = 0; i < jTable1.getModel().getRowCount(); i++) {
+					if (jTable1.getModel().getValueAt(i, 2).equals(Boolean.TRUE)) {
+						gui.addDishIng(dishID, (Integer) jTable1.getModel().getValueAt(i, 0),(Integer) jTable1.getModel().getValueAt(i, 3));
+					}
+				}
 				
 				this.dispose();
 			} else {

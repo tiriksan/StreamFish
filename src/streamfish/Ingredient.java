@@ -25,6 +25,10 @@ public class Ingredient {
             this.expiryDate = expiryDate;
 			this.unit = unit;
         } 
+		public Ingredient(int ingID, int amount){
+			this.ingredientID = ingID;
+			this.amount = amount;
+		}
                 
         public int getID(){
             return ingredientID;

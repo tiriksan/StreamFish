@@ -2,6 +2,7 @@ package streamfish;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -628,6 +629,23 @@ public class StreamFish {
 		}
 		return -1;
 	}
+	
+	
+	public int getDish() {
+		Statement stm;
+		ResultSet res;
+		try {
+			stm = con.createStatement();
+			res = stm.executeQuery("Select * from DISH order by dish_id desc");
+			res.next();
+			int dish_id = res.getInt("DISH_ID");
+			return dish_id;
+			
+		} catch (SQLException e){
+			e.printStackTrace();
+		}
+		return -1;
+	}
 
 	public Dish getDish(int id) {
 		Statement stm;
@@ -689,8 +707,8 @@ public class StreamFish {
 			stm = con.createStatement();
 			String[] check = {dish.getName()};
 			check = removeUnwantedSymbols(check);
-			int succ = stm.executeUpdate("insert into dish (DISH_NAME, STATUS) "
-					+ "values('" + check[0] + "', 1)");
+			int succ = stm.executeUpdate("insert into dish (DISH_NAME, STATUS, DISH_PRICE) "
+					+ "values('" + check[0] + "', 1, " + dish.getPrice() + ")");
 			Opprydder.lukkSetning(stm);
 			return succ;
 		} catch (SQLException ex) {
@@ -900,6 +918,19 @@ public class StreamFish {
 			System.out.println(ex);
 		}
 		return null;
+	}
+	public int addDishIng(Integer dish_id, int ing_id, int amount) {
+		Statement stm;
+		
+		try{
+			stm = con.createStatement();
+			int succ = stm.executeUpdate("INSERT INTO DISH_INGREDIENTS VALUES(" + dish_id + ", " + ing_id + ", " + amount + ")");
+			Opprydder.lukkSetning(stm);
+			return succ;
+		} catch (SQLException ex){
+			ex.printStackTrace();
+		}
+		return -1;
 	}
 
 	public int updateCustomer(Customer customer) {
@@ -1195,4 +1226,8 @@ public class StreamFish {
 	public void close() {
 		Opprydder.lukkForbindelse(con);
 	}
+
+	
+
+	
 }
