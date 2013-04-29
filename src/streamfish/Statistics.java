@@ -10,6 +10,7 @@ import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.data.general.PieDataset;
+import static javax.swing.JOptionPane.*;
 
 /*
  * To change this template, choose Tools | Templates
@@ -315,9 +316,13 @@ public class Statistics extends javax.swing.JPanel {
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         int row = jTable2.getSelectedRow();
         int column = 0;
-        int index = Integer.parseInt("" + jTable2.getValueAt(row, column));
-        Employee emp = gui.getEmployee(index);
-        gui.byttVindu(this, new Edit_employee(gui, emp));
+        if (row == -1 || column == -1) {
+            showMessageDialog(null, "No employee is selected.");
+        } else {
+            int index = Integer.parseInt("" + jTable2.getValueAt(row, column));
+            Employee emp = gui.getEmployee(index);
+            gui.byttVindu(this, new Edit_employee(gui, emp));   
+        }
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
