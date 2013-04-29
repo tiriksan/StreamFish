@@ -5,6 +5,8 @@ import java.util.Calendar;
 import java.util.Locale;
 import java.util.TimeZone;
 
+import org.joda.time.*;
+
 /**
  *
  * @author NorC
@@ -21,6 +23,24 @@ public class TodaysDate {
         String dateNow = formatter.format(currentDate.getTime());
 
         return dateNow;
+    }
+    public static DateTime createDateTime(String date){
+        int year = Integer.parseInt(date.substring(0, 4));
+        System.out.println(year);
+        int month = Integer.parseInt(date.substring(5, 7));
+        System.out.println(month);
+        int day = Integer.parseInt(date.substring(8, 10));
+        System.out.println(day);
+        DateTime dateTime = new DateTime(year,month,day,0,0);
+        return dateTime;
+        
+    }
+    public static int diffDates(DateTime dateStart, DateTime dateStop){
+        
+        
+        Days d = Days.daysBetween(dateStart, dateStop);
+        int result = d.getDays();
+        return result;
     }
 	
 	public static String getADate(int days){
@@ -89,5 +109,9 @@ public class TodaysDate {
         System.out.println(cal.getTime());
         System.out.println(cal.get(Calendar.DAY_OF_WEEK_IN_MONTH));
         System.out.println(td.getDay());
+        DateTime date1 = new DateTime(2013, 04, 29,0,0);
+        DateTime date2 = new DateTime(2013, 05, 10,0,0);
+        System.out.println("Tester noe:");
+        System.out.println(createDateTime("2013-04-29"));
     }
 }

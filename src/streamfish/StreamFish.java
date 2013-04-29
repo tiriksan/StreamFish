@@ -828,6 +828,51 @@ public class StreamFish {
 		}
 		return -1;
 	}
+        public String checkDateIng(int daysCheck){
+            String result = "";
+            boolean foundIng = false;
+            Statement stm;
+            ResultSet res;
+            String[][] ingDates = new String[0][0];
+            
+            int teller = 0;
+                try { 
+			stm = con.createStatement();
+                        res = stm.executeQuery("select count(ingredient_id) as ant from ingredients");
+                        res.next();
+                        int ant = res.getInt("ant");
+                        
+                        ingDates = new String[ant][2];
+                        
+			res = stm.executeQuery("select ingredient_name, expiry_date from ingredients");
+			
+                        while(res.next()){
+                            ingDates[teller][0] = res.getString("ingredient_name");
+                            ingDates[teller][1] = res.getString("expiry_date");
+                            teller++;
+                        }
+                        
+                        for (int i = 0; i < ingDates.length; i++) {
+                            int daysTo = TodaysDate.diffDates((TodaysDate.createDateTime(TodaysDate.getDate())), (TodaysDate.createDateTime(ingDates[i][1])));
+                 
+                            if (daysTo <= daysCheck ) {
+                                result += ingDates[i][0]+" expires within "+daysCheck+" days.\n";
+                                foundIng = true;
+                            }
+                            if(!foundIng){
+                                result = "None ingredients expires within "+daysCheck+" days.";
+                            }
+                        
+                    }
+                        Opprydder.lukkResSet(res);
+                        Opprydder.lukkSetning(stm);
+			return result;
+
+		} catch (SQLException ex) {
+			System.err.println(ex);
+		}
+		return null;
+        }
         
 	public int deleteIngredient(Ingredient ing) {
 		Statement stm;
