@@ -183,6 +183,9 @@ public class GUI extends JFrame implements WindowListener {
         public String checkIngForDish(Dish dish){
             return db.checkIngForDish(dish);
         }
+        public String checkDateIng(int daysCheck){
+            return db.checkDateIng(daysCheck);
+        }
         public boolean addDish(Dish dish){
             if(db.addDish(dish) == 1){
                 return true;
