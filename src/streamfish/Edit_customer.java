@@ -102,7 +102,7 @@ public class Edit_customer extends javax.swing.JPanel {
 
         jLabel1.setText(KUNDENR+"");
 
-        jButton1.setText("Delete");
+        jButton1.setText("Set active/unactive");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
