@@ -80,4 +80,9 @@ class Employee {
         username = newUsername;
         return  true;
     }
+    
+    public String toString() {
+        String utskrift = "Username: " + getUsername() + "\nUsertype: " + getUsertype() + "\nEmpl_ID: " + getEmplID();
+        return utskrift;
+    }
 }

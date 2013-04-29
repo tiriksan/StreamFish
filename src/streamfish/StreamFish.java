@@ -326,6 +326,47 @@ public class StreamFish {
 		}
 		return null;
 	}
+        
+        	public Employee getEmployee(int indeks) {
+		Statement stm;
+		ResultSet res;
+		Employee employee;
+
+		try {
+			stm = con.createStatement();
+			res = stm.executeQuery("select empl_id, user_type, username, password from employees where empl_id = " + indeks);
+                        while (res.next()) {
+                            int emplID = res.getInt("empl_id");
+                            byte userType = res.getByte("user_type");
+                            String username = res.getString("username");
+                            String password = res.getString("password");
+                            employee = new Employee(emplID, userType, username, password);
+                            return employee;
+                        }            
+		} catch (SQLException ex) {
+			System.err.println(ex);
+			ex.printStackTrace();
+		}
+		return null;
+	}
+                
+        public int updateEmployee(Employee emp) {
+		Statement stm;
+		String[] check = {emp.getUsername()};
+		check = removeUnwantedSymbols(check);
+
+		try {
+			stm = con.createStatement();
+                        int succ = stm.executeUpdate("update employees set username = '" + check[0] + "', user_type = "
+                            + emp.getUsertype() + " where empl_id = " + emp.getEmplID());
+			Opprydder.lukkSetning(stm);
+			return succ;
+
+		} catch (SQLException ex) {
+			System.err.println(ex);
+		}
+		return -1;
+	}
 
 	public Orderinfo[] getTodaysTasks(String sok) {
 		Statement stm;

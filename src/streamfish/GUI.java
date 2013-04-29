@@ -131,8 +131,23 @@ public class GUI extends JFrame implements WindowListener {
         
         public boolean registerEmployee(Employee employee) {
             int suc = db.addEmployee(employee);
-            System.out.println(suc);
             if (suc > 0 ) {
+                return true;
+            }
+            return false;
+        }
+        
+        public boolean updateEmployee(Employee emp) {
+            int suc = db.updateEmployee(emp);
+            if (suc > 0) {
+                return true;
+            }
+            return false;
+        }
+        
+        public boolean changeEmployeeStatus(Employee emp) {
+            int suc = db.changeEmployeeStatus(emp);
+            if (suc == 1) {
                 return true;
             }
             return false;
@@ -141,6 +156,10 @@ public class GUI extends JFrame implements WindowListener {
 	public Employee[] getEmployee(){
 		return db.getEmployees();
 	}
+        
+        public Employee getEmployee(int index) {
+            return db.getEmployee(index);
+        }
 
 	public boolean changeOrderStatus(int orderID) {
 		int succ = db.changeOrderStatus(orderID);
