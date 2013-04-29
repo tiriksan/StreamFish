@@ -262,7 +262,7 @@ public class Storage extends javax.swing.JPanel {
                         .addComponent(jButton1)
                         .addGap(90, 90, 90)
                         .addComponent(jButton9)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(90, 90, 90)
                         .addComponent(jButton2)))
                 .addContainerGap())
         );
