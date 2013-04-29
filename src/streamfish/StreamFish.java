@@ -744,28 +744,21 @@ public class StreamFish {
 		String result = "";
 		Statement stm;
 		ResultSet res;
-		int[] ingInStock;
-		int[] ingNeeded;
-		int[] ingDiff;
+		ArrayList<Integer> ingInStock = new ArrayList<Integer>();
+		ArrayList<Integer> ingNeeded = new ArrayList<Integer>();
+                ArrayList<Integer> ingDiff = new ArrayList<Integer>();
 		boolean inStock = true;
 
 		int teller = 0;
 
 		try {
 			stm = con.createStatement();
-			res = stm.executeQuery("select count(*) antall from dish_ingredients where dish_id = " + dish.getID());
-			res.next();
-			int ant = res.getInt("antall");
-			ingNeeded = new int[ant];
-			ingInStock = new int[ant];
-			ingDiff = new int[ant];
-			Opprydder.lukkResSet(res);
-
+			
 			res = stm.executeQuery("select ingredients.amount from ingredients,dish_ingredients where ingredients.ingredient_id = dish_ingredients.ingredient_id");
 
 			while (res.next()) {
 				int amount = res.getInt("amount");
-				ingInStock[teller] = amount;
+				ingInStock.add(amount);
 				teller++;
 			}
 			Opprydder.lukkResSet(res);
@@ -775,16 +768,16 @@ public class StreamFish {
 
 			while (res.next()) {
 				int amount = res.getInt("amount");
-				ingNeeded[teller] = amount;
+				ingNeeded.add(amount);
 				teller++;
 			}
 			Opprydder.lukkResSet(res);
 
-			for (int i = 0; i < ant; i++) {
-				ingDiff[i] = ingInStock[i] - ingNeeded[i];
+			for (int i = 0; i < ingInStock.size(); i++) {
+				ingDiff.add(ingInStock.get(i)-ingNeeded.get(i));
 			}
-			for (int i = 0; i < ant; i++) {
-				if (ingDiff[i] < 0) {
+			for (int i = 0; i < ingDiff.size(); i++) {
+				if (ingDiff.get(i) < 0) {
 					inStock = false;
 				}
 			}
@@ -835,7 +828,7 @@ public class StreamFish {
 		}
 		return -1;
 	}
-
+        
 	public int deleteIngredient(Ingredient ing) {
 		Statement stm;
 		try {
