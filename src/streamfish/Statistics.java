@@ -39,14 +39,31 @@ public class Statistics extends javax.swing.JPanel {
     
     }
     
+    private String getUsertype(Byte usertype) {
+        switch(usertype) {
+            case 0:
+                return "Admin";
+            case 1:
+                return "Salesperson";
+            case 2:
+                return "Chef";
+            case 3:
+                return "Nutrition Expert";
+            case 4:
+                return "CEO";
+            case 5:
+                return "Owner";
+        }
+        return "Hacker";
+    }
+    
     private void tab1setup(){
         DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
          if (employees != null && employees.length > 0) {
            // for (int i = 0; i < employees.length; i++) {
              for(Employee emp : employees){
-                 if(emp.getUsertype() == 2){
-                     model.addRow(new Object[]{emp.getEmplID(), emp.getUsername()});
-                 }
+                model.addRow(new Object[]{emp.getEmplID(), emp.getUsername(), getUsertype(emp.getUsertype())});
+
                 
                 
                 
@@ -67,34 +84,6 @@ public class Statistics extends javax.swing.JPanel {
                 });
     }
     
-    public void tab2setup() {
-         DefaultTableModel model = (DefaultTableModel) jTable3.getModel();
-         if (employees != null && employees.length > 0) {
-           // for (int i = 0; i < employees.length; i++) {
-             for(Employee emp : employees){
-                 if(emp.getUsertype() == 1){
-                     model.addRow(new Object[]{emp.getEmplID(), emp.getUsername()});
-                 }
-                
-                
-                
-            }
-        }
-
-        jTable3.getSelectionModel().addListSelectionListener(
-                new ListSelectionListener() {
-                    public void valueChanged(ListSelectionEvent event) {
-                        int viewRow = jTable3.getSelectedRow();
-                        if (!event.getValueIsAdjusting()) {
-                            try {
-                                emp_id = Integer.parseInt(jTable3.getValueAt(viewRow, 0).toString());
-                            } catch (Exception e) {
-                            }
-                        }
-                    }
-                });
-    }
-    
      public void updt() {
 
         employees = gui.getEmployee();
@@ -102,7 +91,7 @@ public class Statistics extends javax.swing.JPanel {
         model.setRowCount(0);
         if (employees != null && employees.length > 0) {
             for (int i = 0; i < employees.length; i++) {
-                model.addRow(new Object[]{employees[i].getEmplID(), employees[i].getUsername()});
+                model.addRow(new Object[]{employees[i].getEmplID(), employees[i].getUsername(), getUsertype(employees[i].getUsertype())});
             }
         }
     }
@@ -131,9 +120,6 @@ public class Statistics extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
-        jPanel2 = new javax.swing.JPanel();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        jTable3 = new javax.swing.JTable();
         jButton6 = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
         jCheckBox1 = new javax.swing.JCheckBox();
@@ -178,51 +164,32 @@ public class Statistics extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Emp_id", "Username"
+                "Emp_id", "Username", "User type"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTable2.getTableHeader().setReorderingAllowed(false);
         jScrollPane2.setViewportView(jTable2);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 446, Short.MAX_VALUE)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 446, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 101, Short.MAX_VALUE)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 117, Short.MAX_VALUE)
         );
 
-        jTabbedPane1.addTab("Kitchen", jPanel1);
-
-        jTable3.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {},
-                {},
-                {},
-                {}
-            },
-            new String [] {
-
-            }
-        ));
-        jScrollPane3.setViewportView(jTable3);
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 461, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 101, Short.MAX_VALUE)
-        );
-
-        jTabbedPane1.addTab("Sales", jPanel2);
+        jTabbedPane1.addTab("Staff", jPanel1);
 
         jButton6.setText("Back");
         jButton6.addActionListener(new java.awt.event.ActionListener() {
@@ -289,8 +256,8 @@ public class Statistics extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(10, 10, 10)
                 .addComponent(jCheckBox1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
@@ -360,11 +327,8 @@ public class Statistics extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable2;
-    private javax.swing.JTable jTable3;
     // End of variables declaration//GEN-END:variables
 }
