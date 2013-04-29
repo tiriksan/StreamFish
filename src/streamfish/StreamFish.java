@@ -727,9 +727,9 @@ public class StreamFish {
 			res.next();
 			short status = res.getShort("status");
 			if (status == 1) {
-				succ = stm.executeUpdate("update dish set status =" + 0 + " where dish_id = " + dish.getID());
+				succ = stm.executeUpdate("update dish set status = 0 where dish_id = " + dish.getID());
 			} else {
-				succ = stm.executeUpdate("update dish set status =" + 1 + " where dish_id = " + dish.getID());
+				succ = stm.executeUpdate("update dish set status = 1 where dish_id = " + dish.getID());
 			}
 			Opprydder.lukkResSet(res);
 			Opprydder.lukkSetning(stm);
@@ -875,9 +875,9 @@ public class StreamFish {
 			res.next();
 			short status = res.getShort("status");
 			if (status == 1) {
-				succ = stm.executeUpdate("update customer set status =" + 0 + " where customer_id = " + customer.getCustomerID());
+				succ = stm.executeUpdate("update customer set status = 0 where customer_id = " + customer.getCustomerID());
 			} else {
-				succ = stm.executeUpdate("update customer set status =" + 1 + " where customer_id = " + customer.getCustomerID());
+				succ = stm.executeUpdate("update customer set status = 1 where customer_id = " + customer.getCustomerID());
 			}
 			Opprydder.lukkResSet(res);
 			Opprydder.lukkSetning(stm);
@@ -1009,9 +1009,9 @@ public class StreamFish {
 			res.next();
 			int status = Integer.parseInt(res.getString("status"));
 			if (status == 1) {
-				succ = stm.executeUpdate("update menu set status ='" + 0 + "' where menu_id = " + menu.getMenuId());
+				succ = stm.executeUpdate("update menu set status = 0 where menu_id = " + menu.getMenuId());
 			} else {
-				succ = stm.executeUpdate("update menu set status ='" + 1 + "' where menu_id = " + menu.getMenuId());
+				succ = stm.executeUpdate("update menu set status = 1 where menu_id = " + menu.getMenuId());
 			}
 			Opprydder.lukkResSet(res);
 			Opprydder.lukkSetning(stm);
@@ -1032,9 +1032,9 @@ public class StreamFish {
 			res.next();
 			int status = Integer.parseInt(res.getString("status"));
 			if (status == 1) {
-				succ = stm.executeUpdate("update orders set status ='" + 0 + "' where order_id = " + orderID);
+				succ = stm.executeUpdate("update orders set status = 0 where order_id = " + orderID);
 			} else {
-				succ = stm.executeUpdate("update orders set status ='" + 1 + "' where order_id = " + orderID);
+				succ = stm.executeUpdate("update orders set status = 1 where order_id = " + orderID);
 			}
 			Opprydder.lukkResSet(res);
 			Opprydder.lukkSetning(stm);
@@ -1194,9 +1194,9 @@ public class StreamFish {
 			res.next();
 			short status = res.getShort("status");
 			if (status == 1) {
-				succ = stm.executeUpdate("update employees set status =" + 0 + " where empl_id = " + employee.getEmplID());
+				succ = stm.executeUpdate("update employees set status = 0 where empl_id = " + employee.getEmplID());
 			} else {
-				succ = stm.executeUpdate("update employees set status =" + 1 + " where empl_id = " + employee.getEmplID());
+				succ = stm.executeUpdate("update employees set status = 1 where empl_id = " + employee.getEmplID());
 			}
 			Opprydder.lukkResSet(res);
 			Opprydder.lukkSetning(stm);
