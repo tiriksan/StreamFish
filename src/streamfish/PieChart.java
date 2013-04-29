@@ -40,6 +40,9 @@ public class PieChart extends JFrame {
             case 1:
                 dataset = createDatasetEmployeeRevenue();
                 break;
+            case 2:
+                dataset = createDatasetTopCustomers();
+                break;
         }
         // based on the dataset we create the chart
         JFreeChart chart = createChart(dataset, chartTitle);
@@ -75,6 +78,16 @@ public class PieChart extends JFrame {
             int revenue = Integer.parseInt(s[1]);
             String employee = s[0];
             result.setValue(employee, revenue);
+        }
+        return result;
+    }
+    
+    public PieDataset createDatasetTopCustomers() {
+        DefaultPieDataset result = new DefaultPieDataset();
+        for (String[] s : tab) {
+            int spent = Integer.parseInt(s[1]);
+            String name = s[0];
+            result.setValue(name, spent);
         }
         return result;
     }

@@ -1170,7 +1170,7 @@ public class StreamFish {
 			res = stm.executeQuery("SELECT customer_name, SUM(price) \"Spent\" FROM customer\n"
 					+ "JOIN orders ON customer.CUSTOMER_ID = orders.CUSTOMER_ID\n"
 					+ "JOIN menu ON orders.MENU_ID = menu.MENU_ID\n"
-					+ "WHERE customer.status = 1 AND orders.DELIVERED = 1 AND \n"
+					+ "WHERE customer.status = 1 AND orders.DELIVERED = 1 \n"
 					+ "GROUP BY customer_name ORDER BY \"Spent\" DESC FETCH FIRST " + ant + " ROWS ONLY");
 			while (res.next()) {
 				String customerName = res.getString(1);
