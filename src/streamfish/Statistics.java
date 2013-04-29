@@ -32,7 +32,7 @@ public class Statistics extends javax.swing.JPanel {
         this.gui = gui;
         gui.setTitle("Administration");
         initComponents();
-        employees = gui.getEmployee();
+        employees = gui.getEmployee(!jCheckBox1.isSelected());
         
         tab1setup();
         
@@ -86,7 +86,7 @@ public class Statistics extends javax.swing.JPanel {
     
      public void updt() {
 
-        employees = gui.getEmployee();
+        employees = gui.getEmployee(!jCheckBox1.isSelected());
         DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
         model.setRowCount(0);
         if (employees != null && employees.length > 0) {
@@ -205,6 +205,11 @@ public class Statistics extends javax.swing.JPanel {
         });
 
         jCheckBox1.setText("Show only inactive");
+        jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBox1ActionPerformed(evt);
+            }
+        });
 
         jLabel5.setText("Monthly sales");
 
@@ -314,6 +319,10 @@ public class Statistics extends javax.swing.JPanel {
         Employee emp = gui.getEmployee(index);
         gui.byttVindu(this, new Edit_employee(gui, emp));
     }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
+        updt();
+    }//GEN-LAST:event_jCheckBox1ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
