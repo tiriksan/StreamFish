@@ -711,7 +711,42 @@ public class StreamFish {
 		}
 		return null;
 	}
+        public int getDishIngAmount(int ingId, int dishId) {
+		Statement stm;
+		ResultSet res;
+		Dish dish;
+                int amount = 0;
 
+		try {
+			stm = con.createStatement();
+			res = stm.executeQuery("select * from DISH_INGREDIENTS where ingredient_id = " + ingId + " and dish_id = "+dishId);
+			
+                        boolean test = res.next();
+                        
+                        if(test){
+			amount = res.getInt("amount");
+                        }
+			return amount;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return -1;
+	}
+
+         public int updateDishIng(Ingredient ing, Dish dish, int amount) {
+		Statement stm;
+		
+		try {
+			stm = con.createStatement();
+			int succ = stm.executeUpdate("update DISH_INGREDIENTS set amount = "+amount+" where ingredient_id = "+ing.getID()+" and dish_id= "+dish.getID());
+			Opprydder.lukkSetning(stm);
+			return succ;
+
+		} catch (SQLException ex) {
+			System.err.println(ex);
+		}
+		return -1;
+	}
 	public Dish[] getDishes(String name) {
 
 		Statement stm;
@@ -736,7 +771,8 @@ public class StreamFish {
 			while (res.next()) {
 				int dishID = res.getInt("DISH_ID");
 				String dishName = res.getString("dish_name");
-				dishes[teller] = new Dish(dishName, dishID);
+                                int dishPrice = res.getInt("dish_price");
+				dishes[teller] = new Dish(dishName, dishID, dishPrice);
 				teller++;
 			}
 			return dishes;
@@ -756,6 +792,23 @@ public class StreamFish {
 					+ "values('" + check[0] + "', 1, " + dish.getPrice() + ")");
 			Opprydder.lukkSetning(stm);
 			return succ;
+		} catch (SQLException ex) {
+			System.err.println(ex);
+		}
+		return -1;
+	}
+        public int updateDish(Dish dishToUpdate, Dish dish) {
+		Statement stm;
+		String[] check = {dish.getName()};
+		check = removeUnwantedSymbols(check);
+
+		try {
+			stm = con.createStatement();
+			int succ = stm.executeUpdate("update dish set DISH_NAME ='" + check[0] + "', DISH_PRICE =" + dish.getPrice()
+					+ "where DISH_ID =" + dishToUpdate.getID());
+			Opprydder.lukkSetning(stm);
+			return succ;
+
 		} catch (SQLException ex) {
 			System.err.println(ex);
 		}

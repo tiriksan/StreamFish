@@ -46,8 +46,9 @@ public class RegDish extends javax.swing.JFrame {
         initComponents();
         ingredients = gui.getIngredients("");
         jTextField1.setText(dish.getName());
-		System.out.println(ingredients);
-		System.out.println("asdf");
+        jTextField2.setText(""+ dish.getPrice());
+        
+        
         this.setVisible(true);
         this.pack();
 
@@ -81,9 +82,23 @@ public class RegDish extends javax.swing.JFrame {
         ingredients = gui.getIngredients("");
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         model.setRowCount(0);
-        if (ingredients != null && ingredients.length > 0) {
+        if (ingredients != null && ingredients.length > 0 && !buttonName.equals("Edit")) {
             for (int i = 0; i < ingredients.length; i++) {
                 model.addRow(new Object[]{ingredients[i].getID(), ingredients[i].getName(), Boolean.FALSE, 0, ingredients[i].getUnit()});
+            }
+        }
+        if (ingredients != null && ingredients.length > 0 && buttonName.equals("Edit")) {
+            boolean included;
+            int amount;
+            
+            for (int i = 0; i < ingredients.length; i++) {
+               
+                if(gui.getDishIngAmount(ingredients[i].getID(),dishEdit.getID())>0){
+                    included = true;
+                }else{
+                    included = false;
+                }
+                model.addRow(new Object[]{ingredients[i].getID(), ingredients[i].getName(), included , gui.getDishIngAmount(ingredients[i].getID(),dishEdit.getID()), ingredients[i].getUnit()});
             }
         }
     }
@@ -256,10 +271,35 @@ public class RegDish extends javax.swing.JFrame {
 				}
 				
 				this.dispose();
-			} else {
-				showMessageDialog(null, "Something went wrong.");
+			} else if(buttonName.equals("Edit")) {
+                            String dishName = jTextField1.getText().trim();
+				if(dishName.length()<=0){
+					throw new IllegalArgumentException("The dish must have a name.");
+				}
+				int price = Integer.parseInt(jTextField2.getText().trim());
+				
+				Dish newDish = new Dish(price, dishName);
+				
+				if(addingIngIDs.size()<=0){
+					for (int i = 0; i < jTable1.getModel().getRowCount(); i++) {
+						if (jTable1.getModel().getValueAt(i, 2).equals(Boolean.TRUE)) {
+							addingIngIDs.add((Integer) jTable1.getModel().getValueAt(i, 0));
+						}
+					}
+				}
+				gui.updateDish(dishEdit, newDish);
+				int dishID = gui.getDish();
+				for (int i = 0; i < jTable1.getModel().getRowCount(); i++) {
+					if (jTable1.getModel().getValueAt(i, 2).equals(Boolean.TRUE)) {
+						gui.updateDishIng(ingredients[i], dishEdit, (Integer) jTable1.getModel().getValueAt(i, 3));
+					}
+				}
+				
 				this.dispose();
-			}
+			}else{
+                            showMessageDialog(null, "Something went wrong.");
+                            this.dispose();
+                        }
 		} catch (NumberFormatException ex) {
 			showMessageDialog(null, "The price must consist of a number. \nPlease try again.", "Error", ERROR_MESSAGE);
 		} catch (IllegalArgumentException e){

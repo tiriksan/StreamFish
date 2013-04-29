@@ -192,6 +192,9 @@ public class GUI extends JFrame implements WindowListener {
 		}
 		return false;
 	}
+        public int getDishIngAmount(int ingId, int dishId){
+            return db.getDishIngAmount(ingId, dishId);
+        }
         
 	public Employee getUserAuthorization(String username, String password) {
 		return db.userAuthorization(username, password);
@@ -232,6 +235,16 @@ public class GUI extends JFrame implements WindowListener {
 		}
 		return false;
 	}
+        public boolean updateDish(Dish dishToUpdate, Dish dish){
+            int succ = db.updateDish(dishToUpdate, dish);
+            if (succ ==1) {
+                return true;                
+            }
+            return false;
+        }
+       public int updateDishIng(Ingredient ing, Dish dish, int amount){
+           return db.updateDishIng(ing, dish, amount);
+       }
         
         public boolean setDeliveredOrders() {
             int succ = db.setDeliveredOrders();

@@ -21,7 +21,7 @@ public class DishOptions extends javax.swing.JPanel {
      */
     private GUI gui;
     private Dish[] dishes;
-    private Dish dishToBeChecked;
+    private Dish dishSelected;
 
     public DishOptions(GUI gui) {
         this.gui = gui;
@@ -31,7 +31,7 @@ public class DishOptions extends javax.swing.JPanel {
         if (dishes != null && dishes.length > 0) {
             for (int i = 0; i < dishes.length; i++) {
                 DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-                model.addRow(new Object[]{dishes[i].getID(), dishes[i].getName()});
+                model.addRow(new Object[]{dishes[i].getID(), dishes[i].getName(),dishes[i].getPrice()});
             }
         }
         addListSelectListener();
@@ -46,7 +46,7 @@ public class DishOptions extends javax.swing.JPanel {
 						int viewRow = jTable1.getSelectedRow();
 						if (!event.getValueIsAdjusting()) {
 							try {
-								dishToBeChecked = dishes[viewRow];
+								dishSelected = dishes[viewRow];
 							} catch (Exception e) {
 							}
 						}
@@ -62,7 +62,7 @@ public class DishOptions extends javax.swing.JPanel {
 				model.setRowCount(0);
 				if (dishes != null && dishes.length > 0) {
 					for (int i = 0; i < dishes.length; i++) {
-						model.addRow(new Object[]{dishes[i].getID(), dishes[i].getName()});
+						model.addRow(new Object[]{dishes[i].getID(), dishes[i].getName(),dishes[i].getPrice()});
 					}
 				}
 			}
@@ -74,7 +74,7 @@ public class DishOptions extends javax.swing.JPanel {
 				model.setRowCount(0);
 				if (dishes != null && dishes.length > 0) {
 					for (int i = 0; i < dishes.length; i++) {
-						model.addRow(new Object[]{dishes[i].getID(), dishes[i].getName()});
+						model.addRow(new Object[]{dishes[i].getID(), dishes[i].getName(), dishes[i].getPrice()});
 					}
 				}
 			}
@@ -86,7 +86,7 @@ public class DishOptions extends javax.swing.JPanel {
 				model.setRowCount(0);
 				if (dishes != null && dishes.length > 0) {
 					for (int i = 0; i < dishes.length; i++) {
-						model.addRow(new Object[]{dishes[i].getID(), dishes[i].getName()});
+						model.addRow(new Object[]{dishes[i].getID(), dishes[i].getName(),dishes[i].getPrice()});
 					}
 				}
 			}
@@ -99,7 +99,7 @@ public class DishOptions extends javax.swing.JPanel {
 		model.setRowCount(0);
 		if (dishes != null && dishes.length > 0) {
 			for (int i = 0; i < dishes.length; i++) {
-				model.addRow(new Object[]{dishes[i].getID(), dishes[i].getName()});
+				model.addRow(new Object[]{dishes[i].getID(), dishes[i].getName(), dishes[i].getPrice()});
 			}
 		}
 	}
@@ -126,11 +126,11 @@ public class DishOptions extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Dish ID", "Dish Name"
+                "Dish ID", "Dish Name", "Dish Price"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false
+                false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -163,6 +163,11 @@ public class DishOptions extends javax.swing.JPanel {
         });
 
         jButton3.setText("Edit");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -212,7 +217,7 @@ public class DishOptions extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        String outputMessage = gui.checkIngForDish(dishToBeChecked);
+        String outputMessage = gui.checkIngForDish(dishSelected);
         javax.swing.JOptionPane.showMessageDialog(null, outputMessage);
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -220,6 +225,11 @@ public class DishOptions extends javax.swing.JPanel {
         // TODO add your handling code here:
         new RegDish(gui, "Add");
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        new RegDish(gui, "Edit", dishSelected);
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
