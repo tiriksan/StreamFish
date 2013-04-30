@@ -180,10 +180,18 @@ public class GUI extends JFrame implements WindowListener {
 	public CustomerAddress[] getAddress(int custid) {
 		return db.getAddress(custid);
 	}
+        
+        public Menu[] getMenus() {
+            return db.getMenus();
+        }
 
-	public Menu[] getMenus(String sok) {
-		return db.getMenus(sok);
+	public Menu[] getMenus(String sok, boolean active) {
+		return db.getMenus(sok, active);
 	}
+        
+        public Menu getMenu(int menuID) {
+            return db.getMenu(menuID);
+        }
         
         public boolean changeMenuStatus(Menu menu) {
             int succ = db.changeMenuStatus(menu);

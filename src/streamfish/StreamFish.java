@@ -66,24 +66,30 @@ public class StreamFish {
 
 		return null;
 	}
-
-	public Menu[] getMenus(String sok) {
+        
+        	public Menu[] getMenus(String sok, boolean inaktiv) {
 
 		Statement stm;
 		ResultSet res;
 		Menu[] menus;
 		int teller = 0;
+                int active = 1;
+                if (inaktiv) {
+                    active = 0;
+                }
 
 		try {
 			stm = con.createStatement();
-                        res = stm.executeQuery("SELECT COUNT (*) COUNT FROM menu WHERE (UPPER(MENU_NAME) LIKE '" + sok.toUpperCase() + "%')");
+                        res = stm.executeQuery("SELECT COUNT (*) COUNT FROM menu WHERE (UPPER(MENU_NAME) LIKE '" + sok.toUpperCase() + "%') "
+                                + "AND status = " + active);
 		//	res = stm.executeQuery("select count(*) antall from menu where menu.status = 1");
 			res.next();
 			int ant = res.getInt("COUNT");
 			menus = new Menu[ant];
 			Opprydder.lukkResSet(res);
 
-                        res = stm.executeQuery("SELECT * FROM menu WHERE (UPPER(MENU_NAME) LIKE '" + sok.toUpperCase() + "%')");
+                        res = stm.executeQuery("SELECT * FROM menu WHERE (UPPER(MENU_NAME) LIKE '" + sok.toUpperCase() + "%') "
+                                + "AND status = " + active);
 			//res = stm.executeQuery("select * from menu where menu.status = 1");
 			while (res.next()) {
 				int menuId = res.getInt("menu_id");
@@ -95,6 +101,61 @@ public class StreamFish {
 				teller++;
 			}
 			return menus;
+		} catch (SQLException ex) {
+			ex.printStackTrace();
+		}
+		return null;
+	}
+
+	public Menu[] getMenus() {
+
+		Statement stm;
+		ResultSet res;
+		Menu[] menus;
+		int teller = 0;
+
+		try {
+			stm = con.createStatement();
+                        res = stm.executeQuery("SELECT COUNT (*) COUNT FROM menu where status = 1");
+			res.next();
+			int ant = res.getInt("COUNT");
+			menus = new Menu[ant];
+			Opprydder.lukkResSet(res);
+
+                        res = stm.executeQuery("SELECT * FROM menu WHERE status = 1");
+			while (res.next()) {
+				int menuId = res.getInt("menu_id");
+				String menuName = res.getString("menu_name");
+				int price = res.getInt("price");
+				String description = res.getString("description");
+				boolean busi = false;
+				menus[teller] = new Menu(menuId, menuName, price, description);
+				teller++;
+			}
+			return menus;
+		} catch (SQLException ex) {
+			ex.printStackTrace();
+		}
+		return null;
+	}
+        
+        public Menu getMenu(int menuID) {
+
+		Statement stm;
+		ResultSet res;
+		Menu menu;
+
+		try {
+			stm = con.createStatement();
+                        res = stm.executeQuery("SELECT * FROM menu WHERE menu_id = " + menuID);
+			while (res.next()) {
+				int menuId = res.getInt("menu_id");
+				String menuName = res.getString("menu_name");
+				int price = res.getInt("price");
+				String description = res.getString("description");
+				menu = new Menu(menuId, menuName, price, description);
+                                return menu;
+			}
 		} catch (SQLException ex) {
 			ex.printStackTrace();
 		}

@@ -114,12 +114,12 @@ public class Storage extends javax.swing.JPanel {
     }
 
     private void tab3setup() {
-        menus = gui.getMenus("");
+        menus = gui.getMenus("", jCheckBox1.isSelected());
 
         if (menus != null && menus.length > 0) {
             for (int i = 0; i < menus.length; i++) {
                 DefaultTableModel model = (DefaultTableModel) jTable3.getModel();
-                model.addRow(new Object[]{menus[i].getMenuName(), menus[i].getPrice(), menus[i].getDescription()});
+                model.addRow(new Object[]{menus[i].getMenuId(), menus[i].getMenuName(), menus[i].getPrice(), menus[i].getDescription()});
 
             }
         }
@@ -155,12 +155,12 @@ public class Storage extends javax.swing.JPanel {
                 }
             }
         } else if (jTabbedPane1.getSelectedIndex() == 2) {
-            menus = gui.getMenus(jTextField1.getText());
+            menus = gui.getMenus(jTextField1.getText(), jCheckBox1.isSelected());
             DefaultTableModel model = (DefaultTableModel) jTable3.getModel();
             model.setRowCount(0);
             if (menus != null && menus.length > 0) {
                 for (int i = 0; i < menus.length; i++) {
-                    model.addRow(new Object[]{menus[i].getMenuName(), menus[i].getPrice(), menus[i].getDescription()});
+                    model.addRow(new Object[]{menus[i].getMenuId(), menus[i].getMenuName(), menus[i].getPrice(), menus[i].getDescription()});
                 }
             }
         }
@@ -192,6 +192,7 @@ public class Storage extends javax.swing.JPanel {
         jButton8 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
         jButton10 = new javax.swing.JButton();
+        jCheckBox1 = new javax.swing.JCheckBox();
 
         jLabel1.setText("Search:");
 
@@ -333,11 +334,11 @@ public class Storage extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Menu name", "Price", "Description"
+                "Menu ID", "Menu name", "Price", "Description"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -407,6 +408,13 @@ public class Storage extends javax.swing.JPanel {
             }
         });
 
+        jCheckBox1.setText("Show only inactive menus");
+        jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBox1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -417,6 +425,8 @@ public class Storage extends javax.swing.JPanel {
                     .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jButton3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jCheckBox1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -434,7 +444,8 @@ public class Storage extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1)
-                    .addComponent(jButton3))
+                    .addComponent(jButton3)
+                    .addComponent(jCheckBox1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
@@ -546,7 +557,19 @@ public class Storage extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-     
+        int row = jTable3.getSelectedRow();
+        int column = 0;
+        if (row == -1 || column == -1) {
+            showMessageDialog(null, "No menu is selected.", "Remove menu", ERROR_MESSAGE);
+        } else {
+            int menuID = Integer.parseInt("" + jTable3.getValueAt(row, column));
+            Menu menu = gui.getMenu(menuID);
+            if (gui.changeMenuStatus(menu)) {
+                update();
+            } else {
+                System.err.println("Could not remove menu.");
+            }
+        }
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
@@ -563,6 +586,10 @@ public class Storage extends javax.swing.JPanel {
         new Change_password(gui);
     }//GEN-LAST:event_jButton10ActionPerformed
 
+    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
+        update();
+    }//GEN-LAST:event_jCheckBox1ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
@@ -574,6 +601,7 @@ public class Storage extends javax.swing.JPanel {
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
+    private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
