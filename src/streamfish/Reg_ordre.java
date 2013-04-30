@@ -16,6 +16,7 @@ import javax.swing.event.ChangeListener;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
+import static javax.swing.JOptionPane.*;
 
 /**
  *
@@ -582,28 +583,34 @@ public class Reg_ordre extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        if (jTabbedPane1.getSelectedIndex() == 0) {
-            antPers = Integer.parseInt(jSpinner1.getValue().toString());
+        if (selMenu != null) {
+            if (jTabbedPane1.getSelectedIndex() == 0) {
+                antPers = Integer.parseInt(jSpinner1.getValue().toString());
 
-            String date = (String) jComboBox2.getSelectedItem() + "-" + (String) jComboBox3.getSelectedItem() + "-" + (String) jComboBox4.getSelectedItem();
-            String time = (String) jComboBox5.getSelectedItem() + ":" + (String) jComboBox6.getSelectedItem();
-            CustomerAddress orderAddress = (CustomerAddress) jComboBox1.getSelectedItem();
-            Order order = new Order(selMenu.getMenuId(), CUSTID, gui.employee_id, antPers, date, time, orderAddress);
-            gui.registerOrder(order);
-            gui.byttVindu(this, new MainMenu(gui));
+                String date = (String) jComboBox2.getSelectedItem() + "-" + (String) jComboBox3.getSelectedItem() + "-" + (String) jComboBox4.getSelectedItem();
+                String time = (String) jComboBox5.getSelectedItem() + ":" + (String) jComboBox6.getSelectedItem();
+                CustomerAddress orderAddress = (CustomerAddress) jComboBox1.getSelectedItem();
+                Order order = new Order(selMenu.getMenuId(), CUSTID, gui.employee_id, antPers, date, time, orderAddress);
+                if (gui.registerOrder(order)) {
+                    gui.byttVindu(this, new MainMenu(gui));
+                } else {
+                    showMessageDialog(null, "Cannot register orders past todays date.", "Order registration", ERROR_MESSAGE);
+                }
+                
+            } else {
+                antPers = Integer.parseInt(jSpinner2.getValue().toString());
+                String time = (String) jComboBox9.getSelectedItem() + ":" + (String) jComboBox8.getSelectedItem();
+                CustomerAddress orderAddress = (CustomerAddress) jComboBox1.getSelectedItem();
+                Order order = new Order(selMenu.getMenuId(), CUSTID, gui.employee_id, antPers, time, orderAddress);
+                String durr = (String) jComboBox7.getSelectedItem();
+                String days = getDays();
+                int duration = Integer.parseInt(durr.substring(0, 2).trim());
+                gui.registrerSubscription(new Subscription(duration, TodaysDate.getDate(), TodaysDate.getADateAddMonth(duration), days, '1'), order);
+                gui.byttVindu(this, new MainMenu(gui));
+            }
         } else {
-            antPers = Integer.parseInt(jSpinner2.getValue().toString());
-            String time = (String) jComboBox9.getSelectedItem() + ":" + (String) jComboBox8.getSelectedItem();
-            CustomerAddress orderAddress = (CustomerAddress) jComboBox1.getSelectedItem();
-            Order order = new Order(selMenu.getMenuId(), CUSTID, gui.employee_id, antPers, time, orderAddress);
-            String durr = (String) jComboBox7.getSelectedItem();
-            String days = getDays();
-            int duration = Integer.parseInt(durr.substring(0, 2).trim());
-            gui.registrerSubscription(new Subscription(duration, TodaysDate.getDate(), TodaysDate.getADateAddMonth(duration), days, '1'), order);
-            gui.byttVindu(this, new MainMenu(gui));
+            showMessageDialog(null, "No menu is selected.");
         }
-
-        //jtoggle
 
     }//GEN-LAST:event_jButton2ActionPerformed
 
