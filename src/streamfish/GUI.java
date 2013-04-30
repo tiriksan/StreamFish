@@ -184,6 +184,14 @@ public class GUI extends JFrame implements WindowListener {
 	public Menu[] getMenus(String sok) {
 		return db.getMenus(sok);
 	}
+        
+        public boolean changeMenuStatus(Menu menu) {
+            int succ = db.changeMenuStatus(menu);
+            if (succ == 1) {
+                return true;
+            }
+            return false;
+        }
 	
 	public int getDish() {
 		return db.getDish();
