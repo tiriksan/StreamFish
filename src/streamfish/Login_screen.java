@@ -118,14 +118,20 @@ public class Login_screen extends javax.swing.JPanel {
             switch(emp.getUsertype()){
                 case 0 :
                     gui.byttVindu(this, new MainMenu(gui));
-                break;
+                    break;
                     
                 case 1 : 
                     gui.byttVindu(this, new MainMenu(gui));
-                break;
+                    break;
                 case 2:
                     gui.byttVindu(this, new Storage(gui));
-                break;
+                    break;
+                case 3:
+                    gui.byttVindu(this, new Statistics(gui));
+                    break;
+                case 4:
+                    gui.byttVindu(this, new Statistics(gui));
+                    break;
                 default:
                 break;
             }
