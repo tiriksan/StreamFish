@@ -50,7 +50,7 @@ public class MainMenu extends javax.swing.JPanel {
                     model.setRowCount(0);
                     if (customers != null && customers.length > 0) {
                         for (int i = 0; i < customers.length; i++) {
-                            model.addRow(new Object[]{customers[i].getCustomerID(), customers[i].getCustomerName(), customers[i].getPhoneNumber(), customers[i].isBusiness()});
+                            model.addRow(new Object[]{customers[i].getCustomerID(), customers[i].getCustomerName(), customers[i].getPhoneNumber(), isBusiness(customers[i].isBusiness())});
                         }
                     }
                 } else if (jTabbedPane1.getSelectedIndex() == 1) {
@@ -74,7 +74,7 @@ public class MainMenu extends javax.swing.JPanel {
                     model.setRowCount(0);
                     if (customers != null && customers.length > 0) {
                         for (int i = 0; i < customers.length; i++) {
-                            model.addRow(new Object[]{customers[i].getCustomerID(), customers[i].getCustomerName(), customers[i].getPhoneNumber(), customers[i].isBusiness()});
+                            model.addRow(new Object[]{customers[i].getCustomerID(), customers[i].getCustomerName(), customers[i].getPhoneNumber(), isBusiness(customers[i].isBusiness())});
                         }
                     }
                 } else if (jTabbedPane1.getSelectedIndex() == 1) {
@@ -97,7 +97,7 @@ public class MainMenu extends javax.swing.JPanel {
                     model.setRowCount(0);
                     if (customers != null && customers.length > 0) {
                         for (int i = 0; i < customers.length; i++) {
-                            model.addRow(new Object[]{customers[i].getCustomerID(), customers[i].getCustomerName(), customers[i].getPhoneNumber(), customers[i].isBusiness()});
+                            model.addRow(new Object[]{customers[i].getCustomerID(), customers[i].getCustomerName(), customers[i].getPhoneNumber(), isBusiness(customers[i].isBusiness())});
                         }
                     }
                 } else if (jTabbedPane1.getSelectedIndex() == 1) {
@@ -123,7 +123,7 @@ public class MainMenu extends javax.swing.JPanel {
                     model.setRowCount(0);
                     if (customers != null && customers.length > 0) {
                         for (int i = 0; i < customers.length; i++) {
-                            model.addRow(new Object[]{customers[i].getCustomerID(), customers[i].getCustomerName(), customers[i].getPhoneNumber(), customers[i].isBusiness()});
+                            model.addRow(new Object[]{customers[i].getCustomerID(), customers[i].getCustomerName(), customers[i].getPhoneNumber(), isBusiness(customers[i].isBusiness())});
                         }
                     }
                 } else if (jTabbedPane1.getSelectedIndex() == 1) {
@@ -141,13 +141,20 @@ public class MainMenu extends javax.swing.JPanel {
 
 
     }
+    
+    private String isBusiness(boolean business) {
+        if (business) {
+            return "Yes";
+        }
+        return "No";
+    }
 
     private void tab1setup() {
         if (customers != null && customers.length > 0) {
             for (int i = 0; i < customers.length; i++) {
                 DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
 				
-                model.addRow(new Object[]{customers[i].getCustomerID(), customers[i].getCustomerName(), customers[i].getPhoneNumber(), customers[i].isBusiness()});
+                model.addRow(new Object[]{customers[i].getCustomerID(), customers[i].getCustomerName(), customers[i].getPhoneNumber(), isBusiness(customers[i].isBusiness())});
             }
         }
 
@@ -223,7 +230,7 @@ public class MainMenu extends javax.swing.JPanel {
         model.setRowCount(0);
         if (customers != null && customers.length > 0) {
             for (int i = 0; i < customers.length; i++) {
-                model.addRow(new Object[]{customers[i].getCustomerID(), customers[i].getCustomerName(), customers[i].getPhoneNumber(), customers[i].isBusiness()});
+                model.addRow(new Object[]{customers[i].getCustomerID(), customers[i].getCustomerName(), customers[i].getPhoneNumber(), isBusiness(customers[i].isBusiness())});
             }
         }
     }

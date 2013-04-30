@@ -185,8 +185,8 @@ public class GUI extends JFrame implements WindowListener {
             return db.getMenus();
         }
 
-	public Menu[] getMenus(String sok, boolean active) {
-		return db.getMenus(sok, active);
+	public Menu[] getMenus(String sok, boolean inactive) {
+		return db.getMenus(sok, inactive);
 	}
         
         public Menu getMenu(int menuID) {

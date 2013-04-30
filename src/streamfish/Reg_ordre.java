@@ -44,7 +44,7 @@ public class Reg_ordre extends javax.swing.JPanel {
 
         this.CUSTID = custid;
         this.customer = gui.getCustomer(CUSTID);
-        menu = gui.getMenus("", true);
+        menu = gui.getMenus("", false);
         address = gui.getAddress(CUSTID);
         addressPlus1 = new Object[address.length + 1];
         priceReduction = customer.getPriceReduction();
@@ -168,7 +168,7 @@ public class Reg_ordre extends javax.swing.JPanel {
     }
 
     private void updateMenu() {
-        menu = gui.getMenus("", true);
+        menu = gui.getMenus("", false);
         if (menu != null && menu.length > 0) {
             for (int i = 0; i < menu.length; i++) {
                 DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
