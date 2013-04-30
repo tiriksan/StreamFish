@@ -139,7 +139,15 @@ public class GUI extends JFrame implements WindowListener {
         
         public boolean updateEmployee(Employee emp) {
             int suc = db.updateEmployee(emp);
-            if (suc > 0) {
+            if (suc == 1) {
+                return true;
+            }
+            return false;
+        }
+        
+        public boolean changePassword(Employee emp) {
+            int suc = db.changePassword(emp);
+            if (suc == 1) {
                 return true;
             }
             return false;

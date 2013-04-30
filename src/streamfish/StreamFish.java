@@ -371,6 +371,22 @@ public class StreamFish {
 		}
 		return -1;
 	}
+        
+        public int changePassword(Employee emp) {
+            Statement stm;
+            String[] check = {emp.getPassword()};
+            check = removeUnwantedSymbols(check);
+            
+            try {
+                stm = con.createStatement();
+                int succ = stm.executeUpdate("update employees set password = '" + check[0] + "' where empl_id = " + emp.getEmplID());
+                Opprydder.lukkSetning(stm);
+                return succ;
+            } catch (SQLException e) {
+                System.err.println(e);
+            }
+            return -1;
+        }
 
 	public Orderinfo[] getTodaysTasks(String sok) {
 		Statement stm;
