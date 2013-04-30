@@ -24,6 +24,45 @@ public class TodaysDate {
 
         return dateNow;
     }
+    
+    public int isDateValid(String date) {
+        String today = getDate();
+        
+        today = today.replaceAll("-", "");
+        date = date.replaceAll("-", "");
+        
+        String todayYear = today.substring(0, 4);
+        String todayMonth = today.substring(4, 6);
+        String todayDay = today.substring(6, today.length());
+        String deliveryYear = date.substring(0, 4);
+        String deliveryMonth = date.substring(4, 6);
+        String deliveryDay = date.substring(6, date.length());
+        
+        if (todayMonth.startsWith("0")) {
+            todayMonth = todayMonth.substring(1);
+        } else if (todayDay.startsWith("0")) {
+            todayDay = todayDay.substring(1);
+        } else if (deliveryMonth.startsWith("0")) {
+            deliveryMonth = deliveryMonth.substring(1);
+        } else if (deliveryDay.startsWith("0")) {
+            deliveryDay = deliveryDay.substring(1);
+        }
+        
+        today = todayYear + todayMonth + todayDay;
+        date = deliveryYear + deliveryMonth + deliveryDay;
+        
+        int todayInt = Integer.parseInt(today);
+        int dateInt = Integer.parseInt(date);
+        
+        if (todayInt > dateInt) {
+            return -1;      // Not acceptable
+        }
+        if (today.equals(date)) {
+            return 0;       // Can be accepted by user-verification
+        }
+        return 1;           // Accepted
+    }
+    
     public static DateTime createDateTime(String date){
         int year = Integer.parseInt(date.substring(0, 4));
         System.out.println(year);
@@ -103,15 +142,16 @@ public class TodaysDate {
 //            System.out.println(tz);
 //        }
         TodaysDate td = new TodaysDate();
-        System.out.println(Calendar.DAY_OF_WEEK_IN_MONTH);
-        System.out.println(td.getDateDB());
-        Calendar cal = Calendar.getInstance();
-        System.out.println(cal.getTime());
-        System.out.println(cal.get(Calendar.DAY_OF_WEEK_IN_MONTH));
-        System.out.println(td.getDay());
-        DateTime date1 = new DateTime(2013, 04, 29,0,0);
-        DateTime date2 = new DateTime(2013, 05, 10,0,0);
-        System.out.println("Tester noe:");
-        System.out.println(createDateTime("2013-04-29"));
+//        System.out.println(Calendar.DAY_OF_WEEK_IN_MONTH);
+//        System.out.println(td.getDateDB());
+//        Calendar cal = Calendar.getInstance();
+//        System.out.println(cal.getTime());
+//        System.out.println(cal.get(Calendar.DAY_OF_WEEK_IN_MONTH));
+//        System.out.println(td.getDay());
+//        DateTime date1 = new DateTime(2013, 04, 29,0,0);
+//        DateTime date2 = new DateTime(2013, 05, 10,0,0);
+//        System.out.println("Tester noe:");
+//        System.out.println(createDateTime("2013-04-29"));
+        td.isDateValid("2013-4-30");
     }
 }

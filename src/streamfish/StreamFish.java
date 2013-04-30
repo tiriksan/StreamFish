@@ -9,6 +9,7 @@ import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.ArrayList;
+import static javax.swing.JOptionPane.*;
 
 /**
  *
@@ -589,7 +590,18 @@ public class StreamFish {
 	public int addOrder(Order order) {
 		Statement stm;
 		try {
+                        TodaysDate date = new TodaysDate();
+                        String deliveryDay = order.getDeliveryDate();
 			stm = con.createStatement();
+                        if (date.isDateValid(deliveryDay) == 0) {
+                            int answer = showConfirmDialog(null, "This is an order for todays date\nAre you sure you want to continue?", "Are you sure?", YES_NO_OPTION, WARNING_MESSAGE);
+                            if (answer == NO_OPTION) {
+                                showMessageDialog(null, "Registration aborted.");
+                                return -1;
+                            }
+                        } else if (date.isDateValid(deliveryDay) == -1) {
+                            return -1;
+                        }
 			String[] check = {order.getDeliveryDate(), order.getAddress().getAdress()};
 			check = removeUnwantedSymbols(check);
 			int succ;
