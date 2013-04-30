@@ -63,6 +63,15 @@ public class TodaysDate {
         return 1;           // Accepted
     }
     
+    public int getCurrentYear() {
+        TimeZone tz = TimeZone.getTimeZone("Europe/Oslo");
+        Calendar currentDate = Calendar.getInstance(tz, Locale.ENGLISH); //Get the current date
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy"); //format it as per your requirement
+        String dateNow = formatter.format(currentDate.getTime());
+        int year = Integer.parseInt(dateNow);
+        return year;
+    }
+    
     public static DateTime createDateTime(String date){
         int year = Integer.parseInt(date.substring(0, 4));
         System.out.println(year);
@@ -142,16 +151,16 @@ public class TodaysDate {
 //            System.out.println(tz);
 //        }
         TodaysDate td = new TodaysDate();
-//        System.out.println(Calendar.DAY_OF_WEEK_IN_MONTH);
-//        System.out.println(td.getDateDB());
-//        Calendar cal = Calendar.getInstance();
-//        System.out.println(cal.getTime());
-//        System.out.println(cal.get(Calendar.DAY_OF_WEEK_IN_MONTH));
-//        System.out.println(td.getDay());
-//        DateTime date1 = new DateTime(2013, 04, 29,0,0);
-//        DateTime date2 = new DateTime(2013, 05, 10,0,0);
-//        System.out.println("Tester noe:");
-//        System.out.println(createDateTime("2013-04-29"));
+        System.out.println(Calendar.DAY_OF_WEEK_IN_MONTH);
+        System.out.println(td.getDateDB());
+        Calendar cal = Calendar.getInstance();
+        System.out.println(cal.getTime());
+        System.out.println(cal.get(Calendar.DAY_OF_WEEK_IN_MONTH));
+        System.out.println(td.getDay());
+        DateTime date1 = new DateTime(2013, 04, 29,0,0);
+        DateTime date2 = new DateTime(2013, 05, 10,0,0);
+        System.out.println("Tester noe:");
+        System.out.println(createDateTime("2013-04-29"));
         td.isDateValid("2013-4-30");
     }
 }

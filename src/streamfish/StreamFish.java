@@ -1326,7 +1326,7 @@ public class StreamFish {
 			res = stm.executeQuery("SELECT SUM(price) \"Revenue pr. salesperson\", username FROM menu\n"
 					+ "JOIN orders ON menu.MENU_ID = orders.MENU_ID\n"
 					+ "JOIN employees ON orders.EMPL_ID = employees.EMPL_ID\n"
-					+ "WHERE orders.DELIVERED = 1 AND MONTH(delivery_date) = " + month
+					+ "WHERE orders.DELIVERED = 1 AND orders.status = 1 AND MONTH(delivery_date) = " + month
 					+ " GROUP BY username ORDER BY \"Revenue pr. salesperson\" DESC, username ASC");
 			while (res.next()) {
 				int revenue = res.getInt(1);
@@ -1340,20 +1340,20 @@ public class StreamFish {
 		return null;
 	}
 
-	public ArrayList<String> getYearlyRevenue(int year) {
+	public String getYearlyRevenue(int year) {
 		Statement stm;
 		ResultSet res;
-		ArrayList<String> obj = new ArrayList<String>();
+		String obj;
 		try {
 			stm = con.createStatement();
 			res = stm.executeQuery("SELECT SUM(price) \"Revenue\" FROM orders\n"
 					+ "JOIN menu ON menu.MENU_ID = orders.MENU_ID\n"
-					+ "WHERE orders.DELIVERED = 1 AND YEAR(delivery_date) = " + year);
+					+ "WHERE orders.DELIVERED = 1 AND orders.status = 1 AND YEAR(delivery_date) = " + year);
 			while (res.next()) {
-				int revenue = res.getInt(1);
-				obj.add("Year: " + year + ", Revenue; " + revenue);
+                            int revenue = res.getInt(1);
+                            obj = "" + revenue;
+                            return obj;
 			}
-			return obj;
 		} catch (SQLException e) {
 			System.err.println(e);
 		}

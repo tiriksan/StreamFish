@@ -293,6 +293,10 @@ public class GUI extends JFrame implements WindowListener {
         public ArrayList<String[]> getMostSpendingCustomers(int ant) {
             return db.getMostSpendingCustomers(ant);
         }
+        
+        public String getYearlyRevenue(int year) {
+            return db.getYearlyRevenue(year);
+        }
 
 	public static void main(String[] args) {
 		new GUI();
