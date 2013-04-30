@@ -303,6 +303,7 @@ public class MainMenu extends javax.swing.JPanel {
         });
         jTable1.setMaximumSize(new java.awt.Dimension(300, 64));
         jTable1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jTable1.getTableHeader().setReorderingAllowed(false);
         jScrollPane2.setViewportView(jTable1);
         jTable1.getColumnModel().getColumn(0).setResizable(false);
         jTable1.getColumnModel().getColumn(1).setResizable(false);
@@ -342,7 +343,7 @@ public class MainMenu extends javax.swing.JPanel {
                         .addGap(60, 60, 60)
                         .addComponent(jButton3)
                         .addGap(58, 58, 58)
-                        .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 197, Short.MAX_VALUE)
                         .addGap(18, 18, 18))
                     .addComponent(jScrollPane2))
                 .addGap(0, 0, 0))
@@ -378,6 +379,7 @@ public class MainMenu extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
+        jTable2.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(jTable2);
 
         jButton4.setText("Get info");
@@ -415,6 +417,7 @@ public class MainMenu extends javax.swing.JPanel {
                 "Customer", "Duration", "Day", "Menu name"
             }
         ));
+        jTable3.getTableHeader().setReorderingAllowed(false);
         jScrollPane3.setViewportView(jTable3);
 
         jButton7.setText("Delete subscription");
