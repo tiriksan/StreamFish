@@ -148,6 +148,7 @@ public class Edit_customer extends javax.swing.JPanel {
                 "Delivery Date", "Delivery Hour", "Menu name", "Salesperson"
             }
         ));
+        jTable1.getTableHeader().setReorderingAllowed(false);
         jScrollPane2.setViewportView(jTable1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
