@@ -221,11 +221,8 @@
                           <Component id="jComboBox5" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jComboBox6" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-<<<<<<< HEAD
                       <EmptySpace pref="45" max="32767" attributes="0"/>
-=======
                       <EmptySpace pref="20" max="32767" attributes="0"/>
->>>>>>> Kan nå slette menyer
                   </Group>
               </Group>
             </DimensionLayout>
@@ -462,11 +459,8 @@
                           <Component id="jComboBox8" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jComboBox9" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-<<<<<<< HEAD
                       <EmptySpace pref="28" max="32767" attributes="0"/>
-=======
-                      <EmptySpace max="32767" attributes="0"/>
->>>>>>> Kan nå slette menyer
+
                   </Group>
               </Group>
             </DimensionLayout>

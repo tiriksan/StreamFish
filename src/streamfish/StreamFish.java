@@ -51,13 +51,14 @@ public class StreamFish {
 				String customer_name = res.getString("customer_name");
 				String phone = res.getString("phone");
 				byte business = res.getByte("business");
+				int priceReduction = res.getInt("price_reduction");
 				boolean busi;
 				if (business == 0) {
 					busi = false;
 				} else {
 					busi = true;
 				}
-				customer = new Customer(customer_id, customer_name, phone, busi);
+				customer = new Customer(customer_id, customer_name, phone, busi, priceReduction);
 				return customer;
 			}
 
@@ -332,11 +333,12 @@ public class StreamFish {
 				String customerName = res.getString("customer_name");
 				String phone = res.getString("phone");
 				int business = Integer.parseInt(res.getString("business"));
+				int priceReduction = res.getInt("price_reduction");
 				boolean busi = false;
 				if (business == 1) {
 					busi = true;
 				}
-				customers[teller] = new Customer(customerId, customerName, phone, busi);
+				customers[teller] = new Customer(customerId, customerName, phone, busi, priceReduction);
 				teller++;
 			}
 			return customers;

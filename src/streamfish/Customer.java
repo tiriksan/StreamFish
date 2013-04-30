@@ -9,7 +9,7 @@ public class Customer {
 	private String phone;
 	private boolean business = false;
 
-	public Customer(int customer_id, String customerName, String phone, boolean business) {
+	public Customer(int customer_id, String customerName, String phone, boolean business, int priceReduction) {
 		if (customerName == null || customerName.trim().equals("")) {
 			throw new IllegalArgumentException("Customer's name is required.");
 		}
@@ -17,6 +17,7 @@ public class Customer {
 		this.customerName = customerName;
 		this.phone = phone;
 		this.business = business;
+		this.priceReduction = priceReduction;
 	}
 
 	public Customer(String customerName, String phone, boolean business, int priceReduction) {
@@ -100,7 +101,7 @@ public class Customer {
 	public static void main(String[] args) {
 		Customer priv1 = new Customer(1, "Håkon Jarle Hassel", "92881009");
 		Customer priv2 = new Customer(2, "Per Persen", "10120455");
-		Customer bedr1 = new Customer(3, "Evry", "99778866", true);
+		Customer bedr1 = new Customer(3, "Evry", "99778866", true, 10);
 
 		System.out.println(priv1);
 		System.out.println(bedr1);
