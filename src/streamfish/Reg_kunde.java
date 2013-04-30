@@ -5,6 +5,8 @@
 package streamfish;
 
 import javax.swing.JOptionPane;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 /**
  *
@@ -20,6 +22,17 @@ public class Reg_kunde extends javax.swing.JPanel {
 	public Reg_kunde(GUI gui) {
 		this.gui = gui;
 		initComponents();
+		jSliderListener();
+	}
+	
+	private void jSliderListener(){
+		jSlider1.addChangeListener(new ChangeListener() {
+
+			@Override
+			public void stateChanged(ChangeEvent e) {
+				jLabel7.setText(jSlider1.getValue() + "%");
+			}
+		});
 	}
 
 	/**
@@ -85,6 +98,8 @@ public class Reg_kunde extends javax.swing.JPanel {
         jSlider1.setValue(0);
         jSlider1.setEnabled(false);
 
+        jLabel7.setText(jSlider1.getValue() + "%");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -119,9 +134,9 @@ public class Reg_kunde extends javax.swing.JPanel {
                                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel6)
-                        .addGap(24, 24, 24)
+                        .addGap(18, 18, 18)
                         .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(16, 16, 16)
                         .addComponent(jSlider1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
         layout.setVerticalGroup(
@@ -150,11 +165,11 @@ public class Reg_kunde extends javax.swing.JPanel {
                     .addComponent(jCheckBox1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel6)
-                        .addComponent(jLabel7))
-                    .addComponent(jSlider1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(jSlider1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2))
@@ -172,12 +187,13 @@ public class Reg_kunde extends javax.swing.JPanel {
 			String customername = jTextField1.getText().trim();
 			String phone = jTextField2.getText();
 			boolean isBusiness = jCheckBox1.isSelected();
+			int priceReduction = jSlider1.getValue();
 			
 			if(phone.length() != 8){
 				throw new IllegalArgumentException();
 			}
 			
-			Customer newCustomer = new Customer(customername, phone, isBusiness);
+			Customer newCustomer = new Customer(customername, phone, isBusiness,priceReduction);
 			gui.registerCustomer(newCustomer);
 			
 			CustomerAddress address = new CustomerAddress(jTextField3.getText(), jTextField4.getText(), jTextField5.getText(), gui.getCustomers(customername, false)[0].getCustomerID());
@@ -191,8 +207,10 @@ public class Reg_kunde extends javax.swing.JPanel {
     private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
         if (jCheckBox1.isSelected()) {
             jSlider1.setEnabled(true);
+			jSlider1.setValue(10);
         } else {
             jSlider1.setEnabled(false);
+			jSlider1.setValue(0);
         }
     }//GEN-LAST:event_jCheckBox1ActionPerformed
 

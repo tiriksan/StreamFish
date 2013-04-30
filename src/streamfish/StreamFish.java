@@ -1090,8 +1090,8 @@ public class StreamFish {
 
 		try {
 			stm = con.createStatement();
-			int succ = stm.executeUpdate("insert into customer (CUSTOMER_NAME, PHONE, BUSINESS)"
-					+ " values('" + check[0] + "' , '" + customer.getPhoneNumber() + "', " + isbusiness + ")");
+			int succ = stm.executeUpdate("insert into customer (CUSTOMER_NAME, PHONE, BUSINESS, PRICE_REDUCTION)"
+					+ " values('" + check[0] + "' , '" + customer.getPhoneNumber() + "', " + isbusiness + ", " + customer.getPriceReduction() +")");
 			Opprydder.lukkSetning(stm);
 			return succ;
 

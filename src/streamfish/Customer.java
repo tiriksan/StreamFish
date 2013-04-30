@@ -3,7 +3,7 @@ package streamfish;
 public class Customer {
 
 	private int CUSTOMER_ID;
-	private double priceReduction;
+	private int priceReduction = 0;
 	private double percentageReduction = 1.0;
 	private String customerName;
 	private String phone;
@@ -19,7 +19,7 @@ public class Customer {
 		this.business = business;
 	}
 
-	public Customer(String customerName, String phone, boolean business) {
+	public Customer(String customerName, String phone, boolean business, int priceReduction) {
 		if (customerName == null || customerName.trim().equals("")) {
 			throw new IllegalArgumentException("Customer's name is required.");
 		}
@@ -27,6 +27,7 @@ public class Customer {
 		this.customerName = customerName;
 		this.phone = phone;
 		this.business = business;
+		this.priceReduction = priceReduction;
 	}
 
 	public Customer(int customer_id, String customerName, String phone) {
@@ -54,8 +55,7 @@ public class Customer {
 		return business;
 	}
 
-	public double getPriceReduction() {
-		priceReduction = (business) ? percentageReduction : 1.0;
+	public int getPriceReduction() {
 		return priceReduction;
 	}
         
