@@ -348,7 +348,7 @@ public class StreamFish {
 	}
 
 	public Employee userAuthorization(String username, String password) {
-		for (Employee emp : getEmployees(true)) {
+		for (Employee emp : getEmployees("", true)) {
 			if (emp.login(username, password)) {
 				return emp;
 			}
@@ -356,10 +356,12 @@ public class StreamFish {
 		return null;
 	}
 
-	public Employee[] getEmployees(boolean aktiv) {
+	public Employee[] getEmployees(String sok, boolean aktiv) {
 		Statement stm;
 		ResultSet res;
 		Employee[] employees;
+                String[] check = {sok};
+                check = removeUnwantedSymbols(check);
 		int teller = 0;
                 int active = 1;
                 if (!aktiv) {
@@ -368,13 +370,15 @@ public class StreamFish {
 
 		try {
 			stm = con.createStatement();
-			res = stm.executeQuery("select count(*) antall from employees where employees.status = " + active);
+			res = stm.executeQuery("select count(*) antall from employees where (upper(username) like '" + 
+                                check[0].toUpperCase() + "%') and status = " + active);
 			res.next();
 			int ant = res.getInt("antall");
 			employees = new Employee[ant];
 			Opprydder.lukkResSet(res);
 
-			res = stm.executeQuery("select empl_id, user_type, username, password from employees where employees.status = " + active);
+			res = stm.executeQuery("select empl_id, user_type, username, password from employees where (upper(username) like '" +
+                                check[0].toUpperCase() + "%') and status = " + active);
 
 			while (res.next()) {
 				int emplID = res.getInt("empl_id");

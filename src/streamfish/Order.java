@@ -115,7 +115,7 @@ public class Order {
 	}
         
         public String getEmpName(GUI gui){
-            Employee [] employee = gui.getEmployee(true);
+            Employee [] employee = gui.getEmployees("", true);
             for (Employee emp : employee) {
                 if(emp.getEmplID() == getEmplId()){
                     return emp.getUsername();

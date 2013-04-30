@@ -161,8 +161,8 @@ public class GUI extends JFrame implements WindowListener {
             return false;
         }
         
-	public Employee[] getEmployee(boolean active){
-		return db.getEmployees(active);
+	public Employee[] getEmployees(String s, boolean active){
+		return db.getEmployees(s, active);
 	}
         
         public Employee getEmployee(int index) {
