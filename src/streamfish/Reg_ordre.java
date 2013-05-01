@@ -35,6 +35,7 @@ public class Reg_ordre extends javax.swing.JPanel {
     private Menu selMenu;
     private int antPers;
     private double priceReduction = 0;
+    private int subDays;
 
     /**
      * Creates new form Reg_kunde
@@ -68,6 +69,7 @@ public class Reg_ordre extends javax.swing.JPanel {
                 String durr = (String) jComboBox7.getSelectedItem();
                 int duration = Integer.parseInt(durr.substring(0, 2).trim());
                 jLabel10.setText(updateReduction(duration)+"%");
+                jLabel7.setText(updatePrice()+",-");
             }
         
          });
@@ -129,6 +131,9 @@ public class Reg_ordre extends javax.swing.JPanel {
 
     private double updateReduction(int i) {
             switch (i) {
+                case 0:
+                    priceReduction = customer.getPriceReduction();
+                    break;
                 case 1:
                     priceReduction = 5;
                     break;
@@ -146,10 +151,21 @@ public class Reg_ordre extends javax.swing.JPanel {
     }
 
     private double updatePrice() {
-        if (selMenu != null) {
+        if(jTabbedPane1.getSelectedIndex()== 0){
+            if (selMenu != null) {
             double price = selMenu.getPrice() * antPers -((selMenu.getPrice() * antPers)*customer.getPercentageReduction());
             return price;
-        }
+            }
+        }else{
+            if (selMenu != null) {
+            String durr = (String) jComboBox7.getSelectedItem();
+            int totalSubDays = subDays*(Integer.parseInt(durr.substring(0, 2).trim())*4);
+            double priceReductionDouble = priceReduction;
+            priceReductionDouble /= 100;
+            double price = selMenu.getPrice() * antPers * totalSubDays -((selMenu.getPrice() * antPers*totalSubDays)*priceReductionDouble);
+            return price;      
+        }  
+    }
         return 0;
     }
 
@@ -190,6 +206,18 @@ public class Reg_ordre extends javax.swing.JPanel {
             }
         });
 
+    }
+    public void update(){
+        updateMenu();
+        if (jTabbedPane1.getSelectedIndex() == 0) {
+            jLabel10.setText(updateReduction(0)+"%");
+        }else{
+            String durr = (String) jComboBox7.getSelectedItem();
+            int choice= (Integer.parseInt(durr.substring(0, 2).trim()));
+            jLabel10.setText(updateReduction(choice)+"%");
+        }
+        
+        jLabel7.setText(updatePrice()+",-");
     }
 
     private String getDays() {
@@ -312,6 +340,12 @@ public class Reg_ordre extends javax.swing.JPanel {
 
         jLabel10.setText("TODO" + " %");
 
+        jTabbedPane1.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jTabbedPane1StateChanged(evt);
+            }
+        });
+
         jLabel2.setText("Delivery date: (yyyy-mm-dd)");
         jLabel2.setToolTipText("");
 
@@ -359,7 +393,7 @@ public class Reg_ordre extends javax.swing.JPanel {
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel6)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 114, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 121, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
@@ -381,24 +415,59 @@ public class Reg_ordre extends javax.swing.JPanel {
                     .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jComboBox5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jComboBox6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(45, Short.MAX_VALUE))
+                .addContainerGap(44, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Normal order", jPanel1);
 
         jToggleButton1.setText("Mon");
+        jToggleButton1.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jToggleButton1StateChanged(evt);
+            }
+        });
 
         jToggleButton2.setText("Tue");
+        jToggleButton2.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jToggleButton2StateChanged(evt);
+            }
+        });
 
         jToggleButton3.setText("Wed");
+        jToggleButton3.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jToggleButton3StateChanged(evt);
+            }
+        });
 
         jToggleButton4.setText("Thu");
+        jToggleButton4.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jToggleButton4StateChanged(evt);
+            }
+        });
 
         jToggleButton5.setText("Fri");
+        jToggleButton5.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jToggleButton5StateChanged(evt);
+            }
+        });
 
         jToggleButton6.setText("Sat");
+        jToggleButton6.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jToggleButton6StateChanged(evt);
+            }
+        });
 
         jToggleButton7.setText("Sun");
+        jToggleButton7.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jToggleButton7StateChanged(evt);
+            }
+        });
 
         jComboBox7.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1 Month", "3 Months", "6 Months", "12 Months" }));
         jComboBox7.addActionListener(new java.awt.event.ActionListener() {
@@ -410,6 +479,11 @@ public class Reg_ordre extends javax.swing.JPanel {
         jLabel11.setText("Duration");
 
         jSpinner2.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(1), Integer.valueOf(1), null, Integer.valueOf(1)));
+        jSpinner2.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jSpinner2StateChanged(evt);
+            }
+        });
 
         jComboBox8.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00", "15", "30", "45" }));
 
@@ -437,7 +511,7 @@ public class Reg_ordre extends javax.swing.JPanel {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel11)
                             .addComponent(jComboBox7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 123, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 130, Short.MAX_VALUE)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jSpinner2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel13, javax.swing.GroupLayout.Alignment.TRAILING)))
@@ -480,7 +554,7 @@ public class Reg_ordre extends javax.swing.JPanel {
                     .addComponent(jSpinner2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jComboBox8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jComboBox9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addContainerGap(27, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Subscription", jPanel2);
@@ -635,6 +709,87 @@ public class Reg_ordre extends javax.swing.JPanel {
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox1ActionPerformed
+
+    private void jTabbedPane1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jTabbedPane1StateChanged
+        // TODO add your handling code here:
+        update();
+    }//GEN-LAST:event_jTabbedPane1StateChanged
+
+    private void jToggleButton1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jToggleButton1StateChanged
+        // TODO add your handling code here:
+        if(jToggleButton1.getModel().isSelected()){
+            subDays +=1;
+        }else{
+            subDays -=1;
+        }
+        update();
+    }//GEN-LAST:event_jToggleButton1StateChanged
+
+    private void jToggleButton2StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jToggleButton2StateChanged
+        // TODO add your handling code here:'if(jToggleButton7.getModel().isSelected()){
+          if(jToggleButton2.getModel().isSelected()){
+            subDays +=1;
+        }else{
+            subDays -=1;
+        }
+          update();
+    }//GEN-LAST:event_jToggleButton2StateChanged
+
+    private void jToggleButton3StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jToggleButton3StateChanged
+        // TODO add your handling code here:
+         if(jToggleButton3.getModel().isSelected()){
+            subDays +=1;
+        }else{
+            subDays -=1;
+        }
+         update();
+    }//GEN-LAST:event_jToggleButton3StateChanged
+
+    private void jToggleButton4StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jToggleButton4StateChanged
+        // TODO add your handling code here:
+         if(jToggleButton4.getModel().isSelected()){
+            subDays +=1;
+        }else{
+            subDays -=1;
+        }
+         update();
+    }//GEN-LAST:event_jToggleButton4StateChanged
+
+    private void jToggleButton5StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jToggleButton5StateChanged
+        // TODO add your handling code here:
+         if(jToggleButton5.getModel().isSelected()){
+            subDays +=1;
+        }else{
+            subDays -=1;
+        }
+         update();
+    }//GEN-LAST:event_jToggleButton5StateChanged
+
+    private void jToggleButton6StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jToggleButton6StateChanged
+        // TODO add your handling code here:
+         if(jToggleButton6.getModel().isSelected()){
+            subDays +=1;
+        }else{
+            subDays -=1;
+        }
+         update();
+    }//GEN-LAST:event_jToggleButton6StateChanged
+
+    private void jToggleButton7StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jToggleButton7StateChanged
+        // TODO add your handling code here:
+         if(jToggleButton7.getModel().isSelected()){
+            subDays +=1;
+        }else{
+            subDays -=1;
+        }
+         update();
+    }//GEN-LAST:event_jToggleButton7StateChanged
+
+    private void jSpinner2StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSpinner2StateChanged
+        // TODO add your handling code here:
+        antPers = (int)jSpinner2.getModel().getValue();
+        update();
+    }//GEN-LAST:event_jSpinner2StateChanged
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
