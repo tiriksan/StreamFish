@@ -127,7 +127,7 @@ public class Login_screen extends javax.swing.JPanel {
                     gui.byttVindu(this, new Storage(gui));
                     break;
                 case 3:
-                    gui.byttVindu(this, new Statistics(gui));
+                    gui.byttVindu(this, new Storage(gui));
                     break;
                 case 4:
                     gui.byttVindu(this, new Statistics(gui));

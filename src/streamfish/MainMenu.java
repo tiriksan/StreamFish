@@ -331,7 +331,7 @@ public class MainMenu extends javax.swing.JPanel {
             }
         });
 
-        jButton3.setText("Edit customer");
+        jButton3.setText("Info/edit customer");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
@@ -350,7 +350,7 @@ public class MainMenu extends javax.swing.JPanel {
                         .addGap(60, 60, 60)
                         .addComponent(jButton3)
                         .addGap(58, 58, 58)
-                        .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 197, Short.MAX_VALUE)
+                        .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 262, Short.MAX_VALUE)
                         .addGap(18, 18, 18))
                     .addComponent(jScrollPane2))
                 .addGap(0, 0, 0))
@@ -400,7 +400,7 @@ public class MainMenu extends javax.swing.JPanel {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 563, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 652, Short.MAX_VALUE)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(150, 150, 150)
                 .addComponent(jButton4)
@@ -438,9 +438,9 @@ public class MainMenu extends javax.swing.JPanel {
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 563, Short.MAX_VALUE)
+            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 652, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(175, Short.MAX_VALUE)
+                .addContainerGap(352, Short.MAX_VALUE)
                 .addComponent(jButton7)
                 .addGap(175, 175, 175))
         );
@@ -463,7 +463,7 @@ public class MainMenu extends javax.swing.JPanel {
 
         jLabel2.setText(TodaysDate.getDate());
 
-        jButton8.setText("Statistics");
+        jButton8.setText("Administration");
         jButton8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton8ActionPerformed(evt);
