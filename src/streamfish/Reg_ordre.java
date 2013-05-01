@@ -672,8 +672,14 @@ public class Reg_ordre extends javax.swing.JPanel {
                 if(day.length() == 1){
                     day = "0"+day;
                 }
+                System.out.println("ny runde");
                 int priceOriginal = selMenu.getPrice();
-                int priceWithReduction = Integer.parseInt(jLabel7.getText());
+                String getContent = jLabel7.getText();
+                getContent = getContent.replaceAll(",-", "");
+                System.out.println(getContent);
+                double priceWithReductionDouble = Double.parseDouble(getContent);
+                int priceWithReduction = (int) priceWithReductionDouble;
+                System.out.println(priceWithReduction);
                 selMenu.setPrice(priceWithReduction);
                 String date = year + "-" + month + "-" + day;
                 String time = (String) jComboBox5.getSelectedItem() + ":" + (String) jComboBox6.getSelectedItem();
