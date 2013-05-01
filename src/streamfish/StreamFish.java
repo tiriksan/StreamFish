@@ -1467,13 +1467,13 @@ public class StreamFish {
 
     public int updateIngredient(Ingredient ingToUpdate, Ingredient ing) {
         Statement stm;
-        String[] check = {ing.getName(), ing.getExpDate()};
+        String[] check = {ing.getName(), ing.getExpDate(), ing.getUnit()};
         check = removeUnwantedSymbols(check);
 
         try {
             stm = con.createStatement();
             int succ = stm.executeUpdate("update ingredients set INGREDIENT_NAME ='" + check[0] + "', AMOUNT =" + ing.getAmount()
-                    + ", EXPIRY_DATE ='" + check[1] + "' where INGREDIENT_ID =" + ingToUpdate.getID());
+                    + ", UNIT = '" + check[2] + "', EXPIRY_DATE ='" + check[1] + "' where INGREDIENT_ID =" + ingToUpdate.getID());
             Opprydder.lukkSetning(stm);
             return succ;
 
