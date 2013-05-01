@@ -242,6 +242,9 @@ public class GUI extends JFrame implements WindowListener {
         public int deleteSubscription(int id){
             return db.deleteSubscription(id);
         }
+        //public int changeOrderSubStatus(int orderID, int subID){
+           // return db.changeOrderSubStatus(orderID, subID);
+        //}
 
 	public Ingredient[] getIngredients(String name) {
 		return db.getIngredients(name);

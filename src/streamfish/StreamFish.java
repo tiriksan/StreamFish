@@ -1011,6 +1011,31 @@ public class StreamFish {
         }
         return null;
     }
+    public ArrayList<Order> getOrderForSub(Subscription subscription) {
+        Statement stm;
+        ResultSet res;
+        ArrayList<Order> orderFsub = new ArrayList();
+        int c_id = 0;
+        int m_id = 0;
+        try {
+            stm = con.createStatement();
+            res = stm.executeQuery("SELECT * FROM SUBSCRIPTION "
+                    + "JOIN ORDERS ON ORDERS.SUBSCRIPTION_ID = SUBSCRIPTION.SUBSCRIPTION_ID "
+                    + "where subscription.subscription_id = " + subscription.getSubscription_id());
+            while (res.next()) {
+                c_id = res.getInt("customer_id");
+                m_id = res.getInt("menu_id");
+                Order newOrder = new Order(m_id, c_id);
+                orderFsub.add(newOrder);
+            }
+            Opprydder.lukkResSet(res);
+            Opprydder.lukkSetning(stm);
+            return orderFsub;
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+        return null;
+    }
 
     public Orderinfo[] getOrderinfo(int orderID) {
         Statement stm;

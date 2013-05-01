@@ -544,6 +544,8 @@ public class SalesMain extends javax.swing.JPanel {
         // TODO add your handling code here:
           int subID = (int) jTable3.getModel().getValueAt(jTable3.getSelectedRow(), 4);
           gui.deleteSubscription(subID);
+          
+          gui.getOrderfromSub(null); // må ta inn subscription, må lage getSubscription metode
           updateSubscription();
     }//GEN-LAST:event_jButton7ActionPerformed
 
