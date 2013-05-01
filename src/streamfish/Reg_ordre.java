@@ -56,7 +56,7 @@ public class Reg_ordre extends javax.swing.JPanel {
         addressPlus1[address.length] = new String("Add new address");
         initComponents();
         antPers = Integer.parseInt(jSpinner1.getValue().toString());
-        jLabel10.setText(customer.getPercentageReduction() + " %");
+        jLabel10.setText(customer.getPriceReduction() + " %");
         jLabel7.setText(updatePrice() + ",-");
         jLabel1.setText("Kundenr: " + CUSTID);
         updateMenu();
@@ -147,7 +147,7 @@ public class Reg_ordre extends javax.swing.JPanel {
 
     private double updatePrice() {
         if (selMenu != null) {
-            double price = selMenu.getPrice() * antPers * priceReduction;
+            double price = selMenu.getPrice() * antPers -((selMenu.getPrice() * antPers)*customer.getPercentageReduction());
             return price;
         }
         return 0;
