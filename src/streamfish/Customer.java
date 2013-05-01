@@ -61,7 +61,7 @@ public class Customer {
 	}
         
         public double getPercentageReduction() {
-            double reduction = (100 - (100 * getPriceReduction()));
+            double reduction = (100 * getPriceReduction());
             return reduction;
         }
 

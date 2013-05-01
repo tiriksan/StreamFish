@@ -586,8 +586,18 @@ public class Reg_ordre extends javax.swing.JPanel {
         if (selMenu != null) {
             if (jTabbedPane1.getSelectedIndex() == 0) {
                 antPers = Integer.parseInt(jSpinner1.getValue().toString());
-
-                String date = (String) jComboBox2.getSelectedItem() + "-" + (String) jComboBox3.getSelectedItem() + "-" + (String) jComboBox4.getSelectedItem();
+                
+                String year = (String)jComboBox2.getSelectedItem();
+                String month = (String)jComboBox3.getSelectedItem();
+                String day = (String) jComboBox4.getSelectedItem();
+                if(month.length() == 1){
+                    month = "0"+month;
+                }
+                if(day.length() == 1){
+                    day = "0"+day;
+                }
+                
+                String date = year + "-" + month + "-" + day;
                 String time = (String) jComboBox5.getSelectedItem() + ":" + (String) jComboBox6.getSelectedItem();
                 CustomerAddress orderAddress = (CustomerAddress) jComboBox1.getSelectedItem();
                 Order order = new Order(selMenu.getMenuId(), CUSTID, gui.employee_id, antPers, date, time, orderAddress);
