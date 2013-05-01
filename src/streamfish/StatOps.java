@@ -195,8 +195,8 @@ public class StatOps extends javax.swing.JFrame {
             int toMonth = Integer.parseInt(toMonth1);
             int toDay = Integer.parseInt(toDay1);
 
-            if ((fromYear > toYear) || (fromYear <= toYear && fromMonth > toMonth)
-                    || (fromYear <= toYear && fromMonth <= toMonth && fromDay > toDay)) {
+            if ((fromYear > toYear) || (fromYear >= toYear && fromMonth > toMonth)
+                    || (fromYear >= toYear && fromMonth >= toMonth && fromDay > toDay)) {
                 throw new IllegalArgumentException();
             }
             
