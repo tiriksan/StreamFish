@@ -206,7 +206,8 @@ public class MainMenu extends javax.swing.JPanel {
 					subscriptions[i].getCustomerName(gui.getOrderfromSub(subscriptions[i]), gui),
 					subscriptions[i].getDuration(),
 					subscriptions[i].getDayofWeek(),
-					subscriptions[i].getMenuName(gui.getOrderfromSub(subscriptions[i]), gui)
+					subscriptions[i].getMenuName(gui.getOrderfromSub(subscriptions[i]), gui),
+                                        subscriptions[i].getSubscription_id()
 				});
 
             }
@@ -246,7 +247,23 @@ public class MainMenu extends javax.swing.JPanel {
             }
         }
     }
+    public void updateSubscription(){
+        subscriptions = gui.getSubscriptions("");
+        DefaultTableModel model = (DefaultTableModel) jTable3.getModel();
+        model.setRowCount(0);
+        if (subscriptions != null && subscriptions.length > 0) {
+            for (int i = 0; i < subscriptions.length; i++) {
+               model.addRow(new Object[]{
+					subscriptions[i].getCustomerName(gui.getOrderfromSub(subscriptions[i]), gui),
+					subscriptions[i].getDuration(),
+					subscriptions[i].getDayofWeek(),
+					subscriptions[i].getMenuName(gui.getOrderfromSub(subscriptions[i]), gui),
+                                        subscriptions[i].getSubscription_id()
+				});
 
+            }
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -350,7 +367,7 @@ public class MainMenu extends javax.swing.JPanel {
                         .addGap(60, 60, 60)
                         .addComponent(jButton3)
                         .addGap(58, 58, 58)
-                        .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 262, Short.MAX_VALUE)
+                        .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 266, Short.MAX_VALUE)
                         .addGap(18, 18, 18))
                     .addComponent(jScrollPane2))
                 .addGap(0, 0, 0))
@@ -421,9 +438,17 @@ public class MainMenu extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Customer", "Duration", "Day", "Menu name"
+                "Customer", "Duration", "Day", "Menu name", "Subscription ID"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, true
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jTable3.getTableHeader().setReorderingAllowed(false);
         jScrollPane3.setViewportView(jTable3);
 
@@ -567,9 +592,9 @@ public class MainMenu extends javax.swing.JPanel {
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         // TODO add your handling code here:
-          Subscription sub = (Subscription) jTable3.getModel().getValueAt(jTable3.getSelectedRow(), 0);
-          gui.deleteSubscription(sub.getSubscription_id());
-          updtTodaysTasks();
+          int subID = (int) jTable3.getModel().getValueAt(jTable3.getSelectedRow(), 4);
+          gui.deleteSubscription(subID);
+          updateSubscription();
 		
     }//GEN-LAST:event_jButton7ActionPerformed
 
