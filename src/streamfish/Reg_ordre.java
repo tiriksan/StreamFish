@@ -135,16 +135,16 @@ public class Reg_ordre extends javax.swing.JPanel {
                     priceReduction = customer.getPriceReduction();
                     break;
                 case 1:
-                    priceReduction = 5;
+                    priceReduction = 5 + customer.getPriceReduction();
                     break;
                 case 3:
-                    priceReduction = 10;
+                    priceReduction = 10 + customer.getPriceReduction();
                     break; 
                 case 6:
-                    priceReduction = 20;
+                    priceReduction = 20  + customer.getPriceReduction();
                     break;
                 case 12:
-                    priceReduction = 30;
+                    priceReduction =  30  + customer.getPriceReduction();
                     break;
         }
         return priceReduction;
@@ -210,8 +210,10 @@ public class Reg_ordre extends javax.swing.JPanel {
     public void update(){
         updateMenu();
         if (jTabbedPane1.getSelectedIndex() == 0) {
+            antPers = (int) jSpinner1.getModel().getValue();
             jLabel10.setText(updateReduction(0)+"%");
         }else{
+            antPers = (int) jSpinner2.getModel().getValue();
             String durr = (String) jComboBox7.getSelectedItem();
             int choice= (Integer.parseInt(durr.substring(0, 2).trim()));
             jLabel10.setText(updateReduction(choice)+"%");
