@@ -155,7 +155,6 @@ public class RegIngredient extends javax.swing.JFrame {
             int amount = Integer.parseInt(jTextField2.getText());
             String expiryDate = jTextField3.getText().trim();
             String unit = (String) jComboBox1.getSelectedItem();
-            System.out.println(unit);
             Ingredient newIngredient = new Ingredient(ingredientName, amount, expiryDate, unit);
             gui.updateIngredient(ingEdit, newIngredient);
             this.dispose();
