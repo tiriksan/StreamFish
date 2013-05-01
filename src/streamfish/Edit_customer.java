@@ -311,7 +311,8 @@ public class Edit_customer extends javax.swing.JPanel {
 		if(jCheckBox1.isSelected()){
 			jSlider1.setEnabled(true);
 		}else{
-			jSlider1.setEnabled(true);
+			jSlider1.setEnabled(false);
+			jSlider1.setValue(0);
 		}
     }//GEN-LAST:event_jCheckBox1ActionPerformed
 
