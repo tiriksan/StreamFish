@@ -310,7 +310,28 @@ public class StreamFish {
         }
         return -1;
     }
-
+ public int changeOrderFromSubStatus(int orderID, int subID) {
+        Statement stm;
+        ResultSet res;
+        int succ;
+        try {
+            stm = con.createStatement();
+            res = stm.executeQuery("select status from orders where order_id = " + orderID+ " and subscription_id = "+ subID);
+            res.next();
+            int status = Integer.parseInt(res.getString("status"));
+            if (status == 1) {
+                succ = stm.executeUpdate("update orders set status = 0 where order_id = " + orderID+ " and subscription_id = "+ subID);
+            } else {
+                succ = stm.executeUpdate("update orders set status = 1 where order_id = " + orderID+ " and subscription_id = "+ subID);
+            }
+            Opprydder.lukkResSet(res);
+            Opprydder.lukkSetning(stm);
+            return succ;
+        } catch (SQLException ex) {
+            System.err.println(ex);
+        }
+        return -1;
+    }
     public int changePassword(Employee emp) {
         Statement stm;
         String[] check = {emp.getPassword()};
@@ -1121,6 +1142,42 @@ public class StreamFish {
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
+        return null;
+    }
+    public Subscription getSubscription(int subID) {
+        Statement stm;
+        ResultSet res;
+        Subscription subscription;
+        int subscription_id = 0;
+        int duration = 0;
+        String from_date = "";
+        String to_date = "";
+        String days = "";
+        char status = 'a';
+
+        try {
+            stm = con.createStatement();
+
+            res = stm.executeQuery("select * from subscription "
+                    + "where subscription_id = "+subID);
+            while (res.next()) {
+                subscription_id = res.getInt("subscription_id");
+                duration = res.getInt("duration");
+                from_date = res.getString("from_date");
+                to_date = res.getString("to_date");
+                days = res.getString("days");
+                status = res.getString("status").charAt(0);
+            }
+
+            subscription = new Subscription(subscription_id, duration, from_date, to_date, days, status);
+            return subscription;
+        } catch (SQLException ex) {
+            System.err.println(ex);
+            ex.printStackTrace();
+        } catch (NumberFormatException e2) {
+        }
+
+
         return null;
     }
 

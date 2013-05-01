@@ -121,10 +121,16 @@ public class GUI extends JFrame implements WindowListener {
         public Order getOrderfromSub(Subscription subscription){
             return db.getOrder(subscription);
         }
+        public ArrayList<Order> getOrdersFormSub(Subscription subscription){
+            return db.getOrderForSub(subscription);
+        }
 
 	public Order[] getOrders(Customer customer) {
 		return db.getOrder(customer);
 	}
+        public Subscription getSubscription(int subID){
+            return db.getSubscription(subID);
+        }
 	public Subscription[] getSubscriptions(String text) {
 		return db.getSubscriptions(text);
 	}
@@ -176,6 +182,9 @@ public class GUI extends JFrame implements WindowListener {
 		}
 		return false;
 	}
+        public int changeOrderFromSubStatus(int orderID, int subID){
+            return db.changeOrderFromSubStatus(orderID, subID);
+        }
 
 	public CustomerAddress[] getAddress(int custid) {
 		return db.getAddress(custid);

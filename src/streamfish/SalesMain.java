@@ -6,6 +6,7 @@ package streamfish;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import static javax.swing.JOptionPane.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
@@ -544,8 +545,11 @@ public class SalesMain extends javax.swing.JPanel {
         // TODO add your handling code here:
           int subID = (int) jTable3.getModel().getValueAt(jTable3.getSelectedRow(), 4);
           gui.deleteSubscription(subID);
-          
-          gui.getOrderfromSub(null); // må ta inn subscription, må lage getSubscription metode
+          Subscription sub = gui.getSubscription(subID);
+          ArrayList<Order> orders = gui.getOrdersFormSub(sub);
+          for (int i = 0; i < orders.size(); i++) {
+            gui.changeOrderFromSubStatus(orders.get(i).getOrderId(), subID);
+        }
           updateSubscription();
     }//GEN-LAST:event_jButton7ActionPerformed
 
