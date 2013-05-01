@@ -38,6 +38,9 @@ public class Menu {
 	public int getPrice() {
 		return price;
 	}
+        public void setPrice(int newPrice){
+            price = newPrice;
+        }
 
 	public String getDescription() {
 		return description;
