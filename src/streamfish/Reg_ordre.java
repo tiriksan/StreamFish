@@ -655,7 +655,11 @@ public class Reg_ordre extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        gui.byttVindu(this, new MainMenu(gui));
+         if(gui.getEmployee(gui.employee_id).getUsertype() == 1){
+                gui.byttVindu(this, new SalesMain(gui));
+         }else{
+                gui.byttVindu(this, new MainMenu(gui));
+         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -687,7 +691,11 @@ public class Reg_ordre extends javax.swing.JPanel {
                 Order order = new Order(selMenu.getMenuId(), CUSTID, gui.employee_id, antPers, date, time, orderAddress);
                 selMenu.setPrice(priceOriginal);
                 if (gui.registerOrder(order)) {
-                    gui.byttVindu(this, new MainMenu(gui));
+                     if(gui.getEmployee(gui.employee_id).getUsertype() == 1){
+                         gui.byttVindu(this, new SalesMain(gui));
+                    }else{
+                         gui.byttVindu(this, new MainMenu(gui));
+                    }
                 } else {
                     showMessageDialog(null, "Cannot register orders past todays date.", "Order registration", ERROR_MESSAGE);
                 }
@@ -701,7 +709,12 @@ public class Reg_ordre extends javax.swing.JPanel {
                 String days = getDays();
                 int duration = Integer.parseInt(durr.substring(0, 2).trim());
                 gui.registrerSubscription(new Subscription(duration, TodaysDate.getDate(), TodaysDate.getADateAddMonth(duration), days, '1'), order);
-                gui.byttVindu(this, new MainMenu(gui));
+                if(gui.getEmployee(gui.employee_id).getUsertype() == 1){
+                    gui.byttVindu(this, new SalesMain(gui));
+                }else{
+                    gui.byttVindu(this, new MainMenu(gui));
+                }
+                
             }
         } else {
             showMessageDialog(null, "No menu is selected.");

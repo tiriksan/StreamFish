@@ -278,7 +278,11 @@ public class Edit_customer extends javax.swing.JPanel {
         Customer newCustomer = new Customer(KUNDENR, jTextField1.getText(), jTextField2.getText(), jCheckBox1.isSelected(), jSlider1.getValue());
 
         gui.updateCustomer(newCustomer);
-        gui.byttVindu(this, new MainMenu(gui));
+         if(gui.getEmployee(gui.employee_id).getUsertype() == 1){
+                    gui.byttVindu(this, new SalesMain(gui));
+         }else{
+                    gui.byttVindu(this, new MainMenu(gui));
+         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -288,7 +292,11 @@ public class Edit_customer extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        gui.byttVindu(this, new MainMenu(gui));
+         if(gui.getEmployee(gui.employee_id).getUsertype() == 1){
+                    gui.byttVindu(this, new SalesMain(gui));
+         }else{
+                    gui.byttVindu(this, new MainMenu(gui));
+         }
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed

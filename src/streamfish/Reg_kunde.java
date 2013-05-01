@@ -178,7 +178,11 @@ public class Reg_kunde extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-		gui.byttVindu(this, new MainMenu(gui));
+		 if(gui.getEmployee(gui.employee_id).getUsertype() == 1){
+                    gui.byttVindu(this, new SalesMain(gui));
+                }else{
+                    gui.byttVindu(this, new MainMenu(gui));
+                }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -198,7 +202,11 @@ public class Reg_kunde extends javax.swing.JPanel {
 			
 			CustomerAddress address = new CustomerAddress(jTextField3.getText(), jTextField4.getText(), jTextField5.getText(), gui.getCustomers(customername, false)[0].getCustomerID());
 			gui.addCustomerAddress(address);
-			gui.byttVindu(this, new MainMenu(gui));
+			 if(gui.getEmployee(gui.employee_id).getUsertype() == 1){
+                            gui.byttVindu(this, new SalesMain(gui));
+                        }else{
+                            gui.byttVindu(this, new MainMenu(gui));
+                        }
 		} catch (IllegalArgumentException e) {
 			JOptionPane.showMessageDialog(null, "The phone number must contain 8 numbers.");
 		}

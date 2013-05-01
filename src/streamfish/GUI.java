@@ -238,6 +238,10 @@ public class GUI extends JFrame implements WindowListener {
             }
             return false ;
         }
+        
+        public int deleteSubscription(int id){
+            return db.deleteSubscription(id);
+        }
 
 	public Ingredient[] getIngredients(String name) {
 		return db.getIngredients(name);

@@ -567,7 +567,9 @@ public class MainMenu extends javax.swing.JPanel {
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         // TODO add your handling code here:
-		jTable3.getModel().getValueAt(jTable3.getSelectedRow(), 0);
+          Subscription sub = (Subscription) jTable3.getModel().getValueAt(jTable3.getSelectedRow(), 0);
+          gui.deleteSubscription(sub.getSubscription_id());
+          updtTodaysTasks();
 		
     }//GEN-LAST:event_jButton7ActionPerformed
 
