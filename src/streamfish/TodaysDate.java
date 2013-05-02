@@ -74,11 +74,8 @@ public class TodaysDate {
     
     public static DateTime createDateTime(String date){
         int year = Integer.parseInt(date.substring(0, 4));
-        System.out.println(year);
         int month = Integer.parseInt(date.substring(5, 7));
-        System.out.println(month);
         int day = Integer.parseInt(date.substring(8, 10));
-        System.out.println(day);
         DateTime dateTime = new DateTime(year,month,day,0,0);
         return dateTime;
         
