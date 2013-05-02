@@ -1381,7 +1381,6 @@ public class StreamFish {
             }
             if (menuId != -1) {
                 for (Integer i : dishID) {
-                    System.out.println(menuId + ", " + i);
                     succ = stm.executeUpdate("INSERT INTO MENU_DISH VALUES(" + menuId + ", " + i + ")");
                 }
             } else {
@@ -1583,6 +1582,25 @@ public class StreamFish {
         }
         return -1;
     }
+	
+	public int updateMenu(int menuId, Menu menu, ArrayList<Integer> dishID) {
+		Statement stm;
+		String[] check = {menu.getMenuName(), menu.getDescription()};
+		check = removeUnwantedSymbols(check);
+		
+		try{
+			stm = con.createStatement();
+			int succ = stm.executeUpdate("update menu set menu_name = '" + check[0] + "', price = " + menu.getPrice() + ", description = '" + check[1] +"' where menu_id = " + menuId);
+			succ = stm.executeUpdate("delete from menu_dish WHERE menu_id = " + menuId);
+			for(Integer i : dishID){
+				succ = stm.executeUpdate("INSERT INTO MENU_DISH VALUES(" + menuId + ", " + i + ")");
+			}
+			return succ;
+		} catch( SQLException ex){
+			ex.printStackTrace();
+		}
+		return -1;
+	}
 
     /**
      * * AUTHORIZATION **

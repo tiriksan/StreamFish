@@ -78,6 +78,7 @@ public class Reg_menu extends javax.swing.JPanel {
 		for(int i = 0; i< tableData.length; i++){
 			for(Dish dish:dishes){
 				if((int)tableData[i][0] == dish.getID()){
+					dishID.add(dish.getID());
 					jTable1.setValueAt(Boolean.TRUE, i, 2);
 				}
 			}
@@ -305,7 +306,7 @@ public class Reg_menu extends javax.swing.JPanel {
 			}
 			Menu menu = new Menu(menuName, price, description);
 			if(edit){
-				//gui.updateMenu(preMenu.getMenuId(), menu, dishID);
+				gui.updateMenu(preMenu.getMenuId(), menu, dishID);
 			}else{
 				gui.registerMenu(menu, dishID);
 			}
