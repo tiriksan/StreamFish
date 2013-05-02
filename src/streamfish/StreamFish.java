@@ -461,18 +461,6 @@ public class StreamFish {
     /**
      * * DELETE METHODS **
      */
-    public int deleteIngredient(Ingredient ing) {
-        Statement stm;
-        try {
-            stm = con.createStatement();
-            int succ = stm.executeUpdate("delete from INGREDIENTS where INGREDIENT_ID = " + ing.getID());
-            Opprydder.lukkSetning(stm);
-            return succ;
-        } catch (SQLException ex) {
-            System.err.println(ex);
-        }
-        return -1;
-    }
 
     public int deleteSubscription(int subscription_id) {
         Statement stm;
