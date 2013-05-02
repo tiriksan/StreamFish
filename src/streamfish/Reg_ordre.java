@@ -672,20 +672,12 @@ public class Reg_ordre extends javax.swing.JPanel {
                 String year = (String)jComboBox2.getSelectedItem();
                 String month = (String)jComboBox3.getSelectedItem();
                 String day = (String) jComboBox4.getSelectedItem();
-                if(month.length() == 1){
-                    month = "0"+month;
-                }
-                if(day.length() == 1){
-                    day = "0"+day;
-                }
-                System.out.println("ny runde");
+               
                 int priceOriginal = selMenu.getPrice();
                 String getContent = jLabel7.getText();
                 getContent = getContent.replaceAll(",-", "");
-                System.out.println(getContent);
                 double priceWithReductionDouble = Double.parseDouble(getContent);
                 int priceWithReduction = (int) priceWithReductionDouble;
-                System.out.println(priceWithReduction);
                 selMenu.setPrice(priceWithReduction);
                 String date = year + "-" + month + "-" + day;
                 String time = (String) jComboBox5.getSelectedItem() + ":" + (String) jComboBox6.getSelectedItem();
@@ -699,7 +691,7 @@ public class Reg_ordre extends javax.swing.JPanel {
                          gui.byttVindu(this, new MainMenu(gui));
                     }
                 } else {
-                    showMessageDialog(null, "Cannot register orders past todays date.", "Order registration", ERROR_MESSAGE);
+                    showMessageDialog(null, "Cannot register orders before todays date.", "Order registration", ERROR_MESSAGE);
                 }
                 
             } else {

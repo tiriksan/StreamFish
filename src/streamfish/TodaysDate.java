@@ -30,7 +30,7 @@ public class TodaysDate {
         
         today = today.replaceAll("-", "");
         date = date.replaceAll("-", "");
-       
+   
         String todayYear = today.substring(0, 4);
         String todayMonth = today.substring(4, 6);
         String todayDay = today.substring(6, today.length());
