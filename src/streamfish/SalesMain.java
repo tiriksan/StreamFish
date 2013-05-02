@@ -299,7 +299,7 @@ public class SalesMain extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Custome ID", "Customer name", "Phone", "Business"
+                "Customer ID", "Customer name", "Phone", "Business"
             }
         ) {
             boolean[] canEdit = new boolean [] {

@@ -315,7 +315,7 @@ public class MainMenu extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Customer_id", "Customer name", "Phone", "Business"
+                "Customer ID", "Customer name", "Phone", "Business"
             }
         ) {
             boolean[] canEdit = new boolean [] {
