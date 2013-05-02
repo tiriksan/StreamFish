@@ -136,10 +136,6 @@ public class Reg_employee extends javax.swing.JPanel {
 			String password = jTextField2.getText().trim();
 			
             byte usertype = Byte.parseByte(jComboBox1.getSelectedIndex()+"");
-			System.out.println(usertype);
-	//		if(password.length() == 0){
-	//			throw new IllegalArgumentException();
-	//		}
 			
 			Employee newEmp = new Employee(usertype, username, password);
 			gui.registerEmployee(newEmp);
