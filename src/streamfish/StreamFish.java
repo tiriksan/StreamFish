@@ -670,14 +670,14 @@ public class StreamFish {
         try {
             stm = con.createStatement();
             res = stm.executeQuery("select count(*) antall from dish where (upper(dish_name) like '"
-                    + check[0].toUpperCase() + "%')");
+                    + check[0].toUpperCase() + "%' and status = 1)");
             res.next();
             int ant = res.getInt("antall");
             dishes = new Dish[ant];
             Opprydder.lukkResSet(res);
 
             res = stm.executeQuery("select * from dish where (upper(dish_name) like '"
-                    + check[0].toUpperCase() + "%')");
+                    + check[0].toUpperCase() + "%') and status = 1");
 
             while (res.next()) {
                 int dishID = res.getInt("DISH_ID");

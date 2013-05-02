@@ -234,7 +234,10 @@ public class GUI extends JFrame implements WindowListener {
         public int getDishIngAmount(int ingId, int dishId){
             return db.getDishIngAmount(ingId, dishId);
         }
-        
+    
+	public int changeDishStatus(Dish dish){
+		return db.changeDishStatus(dish);
+	}
 	public Employee getUserAuthorization(String username, String password) {
 		return db.userAuthorization(username, password);
 	}

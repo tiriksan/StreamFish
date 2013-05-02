@@ -21,6 +21,7 @@ public class Reg_kunde extends javax.swing.JPanel {
 	 */
 	public Reg_kunde(GUI gui) {
 		this.gui = gui;
+		gui.setTitle("Register customer");
 		initComponents();
 		jSliderListener();
 	}
