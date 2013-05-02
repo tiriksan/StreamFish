@@ -40,11 +40,14 @@ public class TodaysDate {
         
         if (todayMonth.startsWith("0")) {
             todayMonth = todayMonth.substring(1);
-        } else if (todayDay.startsWith("0")) {
+        }
+        if (todayDay.startsWith("0")) {
             todayDay = todayDay.substring(1);
-        } else if (deliveryMonth.startsWith("0")) {
+        }
+        if (deliveryMonth.startsWith("0")) {
             deliveryMonth = deliveryMonth.substring(1);
-        } else if (deliveryDay.startsWith("0")) {
+        }
+        if (deliveryDay.startsWith("0")) {
             deliveryDay = deliveryDay.substring(1);
         }
         
@@ -53,6 +56,8 @@ public class TodaysDate {
         
         int todayInt = Integer.parseInt(today);
         int dateInt = Integer.parseInt(date);
+        System.out.println(todayInt);
+        System.out.println(dateInt);
         
         if (todayInt > dateInt) {
             return -1;      // Not acceptable

@@ -167,7 +167,7 @@ public class StreamFish {
                 int answer = showConfirmDialog(null, "This is an order for todays date\nAre you sure you want to continue?", "Are you sure?", YES_NO_OPTION, WARNING_MESSAGE);
                 if (answer == NO_OPTION) {
                     showMessageDialog(null, "Registration aborted.");
-                    return -1;
+                    return 1;
                 }
             } else if (date.isDateValid(deliveryDay) == -1) {
                 return -1;
