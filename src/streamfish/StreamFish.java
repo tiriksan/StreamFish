@@ -2,7 +2,6 @@ package streamfish;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -925,6 +924,26 @@ public class StreamFish {
         }
         return null;
     }
+	
+	public ArrayList<Dish> getDishFromMenu(Menu menu){
+		ArrayList<Dish> dishes = new ArrayList<>();
+		Statement stm;
+        ResultSet res;
+		try{
+			stm = con.createStatement();
+			res = stm.executeQuery("select * from menu_dish where menu_id = " + menu.getMenuId());
+			while(res.next()){
+				int dish_id = res.getInt("dish_id");
+				Dish dish = getDish(dish_id);
+				dishes.add(dish);
+			}
+			return dishes;
+		}catch (SQLException e){
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
 
     public ArrayList<String[]> getMonthlyRevenuePrEmployee(int month) {
         Statement stm;

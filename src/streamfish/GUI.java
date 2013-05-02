@@ -201,6 +201,9 @@ public class GUI extends JFrame implements WindowListener {
         public Menu getMenu(int menuID) {
             return db.getMenu(menuID);
         }
+	public ArrayList<Dish> getDishFromMenu(Menu menu){
+		return db.getDishFromMenu(menu);
+	}
         
         public boolean changeMenuStatus(Menu menu) {
             int succ = db.changeMenuStatus(menu);

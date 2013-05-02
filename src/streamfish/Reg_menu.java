@@ -7,6 +7,7 @@ package streamfish;
 import java.util.ArrayList;
 import java.util.Iterator;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.event.TableModelEvent;
@@ -25,6 +26,8 @@ public class Reg_menu extends javax.swing.JPanel {
 	private GUI gui;
 	private ArrayList<Integer> dishID = new ArrayList<Integer>();
 	private int price = 0;
+	private boolean edit = false;
+	private Menu preMenu;
 	
 	public Reg_menu(GUI gui) {
 		this.gui = gui;
@@ -33,6 +36,21 @@ public class Reg_menu extends javax.swing.JPanel {
 		tableCheckboxListener();
 		updateTable();
 		setupSearch();
+	}
+	public Reg_menu(GUI gui, Menu menu){
+		this.gui = gui;
+		this.preMenu = menu;
+		edit = true;
+		initComponents();
+		jLabel4.setText(price + " NOK");
+		tableCheckboxListener();
+		updateTable();
+		setupSearch();
+		jTextField1.setText(menu.getMenuName());
+		jTextField2.setText(menu.getDescription());
+		jButton2.setText("Update");
+		menuDishTable();
+		updatePrice();
 	}
 
 	private void setupSearch() {
@@ -54,12 +72,37 @@ public class Reg_menu extends javax.swing.JPanel {
 		});
 	}
 	
+	private void menuDishTable(){
+		ArrayList<Dish> dishes = gui.getDishFromMenu(preMenu);
+		Object[][] tableData = getTableData(jTable1);
+		for(int i = 0; i< tableData.length; i++){
+			for(Dish dish:dishes){
+				if((int)tableData[i][0] == dish.getID()){
+					jTable1.setValueAt(Boolean.TRUE, i, 2);
+				}
+			}
+		}
+	}
+	
+	private Object[][] getTableData(JTable table){
+		DefaultTableModel dtm = (DefaultTableModel) table.getModel();
+		int nRow = dtm.getRowCount();
+		int nCol = dtm.getColumnCount();
+		Object[][] tableData = new Object[nRow][nCol];
+		for (int i = 0 ; i < nRow ; i++){
+			for (int j = 0 ; j < nCol ; j++){
+				tableData[i][j] = dtm.getValueAt(i,j);
+			}
+		}
+		return tableData;
+	}
+	
 	private void tableCheckboxListener(){
 		jTable1.getModel().addTableModelListener(new TableModelListener() {
 		
 			@Override
 			public void tableChanged(TableModelEvent e) {
-				if(e.getColumn() != -1){
+				if(e.getColumn() != -1 && jTable1.getSelectedRow() != -1){
 					int idSelected = (int) jTable1.getValueAt(jTable1.getSelectedRow(), 0);
 					boolean boxCheckd = (boolean)jTable1.getValueAt(jTable1.getSelectedRow(), 2);
 					if(boxCheckd && !dishID.contains(idSelected)){
@@ -141,7 +184,7 @@ public class Reg_menu extends javax.swing.JPanel {
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class
+                java.lang.Integer.class, java.lang.Object.class, java.lang.Boolean.class
             };
             boolean[] canEdit = new boolean [] {
                 true, false, true
@@ -261,7 +304,11 @@ public class Reg_menu extends javax.swing.JPanel {
 				throw new IllegalArgumentException("The menu must contain atleast one dish");
 			}
 			Menu menu = new Menu(menuName, price, description);
-			gui.registerMenu(menu, dishID);
+			if(edit){
+				//gui.updateMenu(preMenu.getMenuId(), menu, dishID);
+			}else{
+				gui.registerMenu(menu, dishID);
+			}
 			gui.byttVindu(this, new Storage(gui));
 		} catch (Exception e){
 			JOptionPane.showMessageDialog(null, e.getMessage());

@@ -337,9 +337,16 @@ public class Storage extends javax.swing.JPanel {
                 "Menu ID", "Menu name", "Price", "Description"
             }
         ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
+            };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false
             };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
@@ -575,8 +582,17 @@ public class Storage extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        // TODO add your handling code here:
-        showMessageDialog(null, "Not yet implemented.");
+		try{
+			int menuId = (int)jTable3.getValueAt(jTable3.getSelectedRow(), 0);
+			if(menuId == -1){
+				throw new IllegalArgumentException("Please select a menu to edit.");
+			}
+			Menu selectedMenu = gui.getMenu(menuId);
+			gui.byttVindu(this, new Reg_menu(gui, selectedMenu));
+			
+		} catch(IllegalArgumentException e){
+			showMessageDialog(null, e.getMessage(), "Edit menu", ERROR_MESSAGE);
+		}
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
