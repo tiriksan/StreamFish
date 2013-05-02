@@ -26,7 +26,7 @@ public class GUI extends JFrame implements WindowListener {
 		//MainMenu mainMenu = new MainMenu(this);
 
 		panels.add(login);
-		panels.add(new MainMenu(this));
+//		panels.add(new MainMenu(this));
 		add(login);
 		login.setVisible(true);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
