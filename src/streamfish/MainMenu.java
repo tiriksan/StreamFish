@@ -6,6 +6,7 @@ package streamfish;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import static javax.swing.JOptionPane.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
@@ -452,7 +453,7 @@ public class MainMenu extends javax.swing.JPanel {
         jTable3.getTableHeader().setReorderingAllowed(false);
         jScrollPane3.setViewportView(jTable3);
 
-        jButton7.setText("Delete subscription");
+        jButton7.setText("Cancel subscription");
         jButton7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton7ActionPerformed(evt);
@@ -464,10 +465,9 @@ public class MainMenu extends javax.swing.JPanel {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 652, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(352, Short.MAX_VALUE)
-                .addComponent(jButton7)
-                .addGap(175, 175, 175))
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jButton7))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -594,8 +594,12 @@ public class MainMenu extends javax.swing.JPanel {
         // TODO add your handling code here:
           int subID = (int) jTable3.getModel().getValueAt(jTable3.getSelectedRow(), 4);
           gui.deleteSubscription(subID);
+          Subscription sub = gui.getSubscription(subID);
+          ArrayList<Order> orders = gui.getOrdersFormSub(sub);
+          for (int i = 0; i < orders.size(); i++) {
+            gui.changeOrderFromSubStatus(orders.get(i).getOrderId(), subID);
+        }
           updateSubscription();
-		
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
