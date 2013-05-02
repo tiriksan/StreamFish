@@ -56,8 +56,6 @@ public class TodaysDate {
         
         int todayInt = Integer.parseInt(today);
         int dateInt = Integer.parseInt(date);
-        System.out.println(todayInt);
-        System.out.println(dateInt);
         
         if (todayInt > dateInt) {
             return -1;      // Not acceptable
@@ -148,10 +146,6 @@ public class TodaysDate {
     }
 
     public static void main(String[] args) {
-//        String[] timezones = TimeZone.getAvailableIDs();
-//        for (String tz : timezones) {
-//            System.out.println(tz);
-//        }
         TodaysDate td = new TodaysDate();
         System.out.println(Calendar.DAY_OF_WEEK_IN_MONTH);
         System.out.println(td.getDateDB());

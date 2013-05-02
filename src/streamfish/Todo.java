@@ -37,7 +37,6 @@ public class Todo extends javax.swing.JFrame {
 
                         if (!event.getValueIsAdjusting()) {
                             viewRow = jTable1.getSelectedRow();
-                            //System.out.println(viewRow);
                         }
                     }
                 });

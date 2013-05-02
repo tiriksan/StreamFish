@@ -1365,7 +1365,6 @@ public class StreamFish {
             int menuId = -1;
             while (res.next()) {
                 menuId = res.getInt("Menu_id");
-                System.out.println(menuId);
             }
             if (menuId != -1) {
                 for (Integer i : dishID) {

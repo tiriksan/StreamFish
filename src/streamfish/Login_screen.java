@@ -15,8 +15,6 @@ public class Login_screen extends javax.swing.JPanel {
         gui.setTitle("Login");
         gui.setDeliveredOrders();
         initComponents();
-        jTextField1.setText("norc");
-        jPasswordField1.setText("passord");
 		gui.getRootPane().setDefaultButton(jButton2);
     }
 
